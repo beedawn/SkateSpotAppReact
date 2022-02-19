@@ -35,7 +35,7 @@ export default function LoginForm() {
     }
   };
   return (
-    <div style={{marginTop: "10rem"}}>
+    <div >
       <div >
         <input
           editable="true"
