@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { styles } from "./Styles";
 import { auth } from "../firebase-config";
 import { onAuthStateChanged, updateProfile, signOut } from "firebase/auth";
 import { Button } from 'reactstrap';
@@ -10,9 +9,7 @@ import AuthContext from "../context/AuthContext";
 export default function DisplayNameSetup() {
   const { user, setUser } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");
-  const logout = async () => {
-    await signOut(auth);
-  };
+
   const updateDisplayName = async () => {
     try{
       const update = {
