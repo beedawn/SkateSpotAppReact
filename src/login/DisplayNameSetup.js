@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { styles } from "./Styles";
 import { auth } from "../firebase-config";
 import { onAuthStateChanged, updateProfile, signOut } from "firebase/auth";
+import { Button } from 'reactstrap';
 
 import AuthContext from "../context/AuthContext";
 
@@ -42,7 +43,7 @@ export default function DisplayNameSetup() {
       
       <div>
         
-        <button onClick={() => {updateDisplayName(); window.location.reload(false);}} >Submit</button>
+        <Button color="primary" onClick={() => {updateDisplayName(); window.location.reload(false);}} >Submit</Button>
         </div>
       
       </div>

@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
+import {Button} from "reactstrap";
 
 export default function LoginForm() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -34,8 +35,8 @@ export default function LoginForm() {
     }
   };
   return (
-    <div>
-      <div>
+    <div style={{marginTop: "10rem"}}>
+      <div >
         <input
           editable="true"
           
@@ -43,7 +44,7 @@ export default function LoginForm() {
           onChange={event =>setLoginEmail(event.target.value)}
         />
       </div>
-      <div>
+      <div style={{marginTop: "1rem"}}>
         <input
           editable="true"
           type="password"
@@ -53,9 +54,9 @@ export default function LoginForm() {
           }}
         />
       </div>
-      <div>
-        <button onClick={register} >Sign Up </button>
-        <button onClick={login} > Login </button>
+      <div style={{marginTop: "1rem"}}>
+        <Button color="primary" onClick={register} >Sign Up </Button>
+        <Button color="primary" onClick={login} > Login </Button>
       </div>
       </div>
   );

@@ -7,6 +7,8 @@ import AuthContext from "../context/AuthContext";
 import LoginForm from "./LoginForm";
 import DisplayNameSetup from "./DisplayNameSetup";
 
+import {Button} from 'reactstrap';
+
 export default function Login() {
   const { user, setUser } = useContext(AuthContext);
 
@@ -30,7 +32,7 @@ export default function Login() {
         <div>
         <Home/>
         <div >
-          <button onClick={logout} >Log Out </button>
+          <Button color="primary" onClick={logout} >Log Out </Button>
         </div>
       </div>
     );
