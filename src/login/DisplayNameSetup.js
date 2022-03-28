@@ -23,6 +23,7 @@ export default function DisplayNameSetup() {
        
         console.log(user);
       }
+      
         catch(error){console.log(error.message);}
         
       };
@@ -40,7 +41,7 @@ export default function DisplayNameSetup() {
       
       <div>
         
-        <Button color="primary" onClick={() => {updateDisplayName(); window.location.reload(false);}} >Submit</Button>
+        <Button color="primary" onClick={() => {updateDisplayName();}} >Submit</Button>
         </div>
       
       </div>

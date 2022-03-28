@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
   Navbar,
@@ -15,8 +15,25 @@ import {
   NavbarText,
 } from "reactstrap";
 
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase-config";
+import AuthContext from "../context/AuthContext";
+
+
+
+
+
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, setUser } = useContext(AuthContext);
+
+onAuthStateChanged(auth, (currentUser) => {
+   setUser(currentUser);
+});
+
+const logout = async () => {
+await signOut(auth);
+};
 
   const toggle = () => setIsOpen(!isOpen);
   return (
@@ -44,7 +61,7 @@ export default function NavBar() {
               <NavLink href="/">Account</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/">Login</NavLink>
+            <Button color="primary" onClick={logout} >Log Out </Button>
             </NavItem>
           </Nav>
         </Collapse>

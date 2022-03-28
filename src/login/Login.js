@@ -16,9 +16,7 @@ export default function Login() {
        setUser(currentUser);
   });
 
-  const logout = async () => {
-    await signOut(auth);
-  };
+ 
   if (!user) {
     return <LoginForm />;
   }
@@ -31,9 +29,6 @@ export default function Login() {
     return (
         <div>
         <Home/>
-        <div >
-          <Button color="primary" onClick={logout} >Log Out </Button>
-        </div>
       </div>
     );
   }
