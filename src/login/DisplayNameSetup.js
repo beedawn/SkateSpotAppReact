@@ -22,11 +22,16 @@ export default function DisplayNameSetup() {
         setUser(currentUser);})
        
         console.log(user);
+        
       }
       
         catch(error){console.log(error.message);}
         
       };
+      const refreshPage = async () => {
+        await updateDisplayName();
+        window.location.reload(true);
+      }
     return (
     <div>
       <div>
@@ -41,7 +46,9 @@ export default function DisplayNameSetup() {
       
       <div>
         
-        <Button color="primary" onClick={() => {updateDisplayName();}} >Submit</Button>
+        <Button color="primary" onClick={() => {updateDisplayName()}}>Submit</Button>
+        <Button color="primary" onClick={() => {refreshPage();}}>Next</Button>
+        
         </div>
       
       </div>
