@@ -4,8 +4,10 @@ import { auth } from "../firebase-config";
 import Home from "../Home";
 import AuthContext from "../context/AuthContext";
 
-import LoginForm from "./LoginForm";
-import DisplayNameSetup from "./DisplayNameSetup";
+import LoginForm from "../login/LoginForm";
+import DisplayNameSetup from "../login/DisplayNameSetup";
+
+import {Button} from 'reactstrap';
 
 export default function Login() {
   const { user, setUser } = useContext(AuthContext);

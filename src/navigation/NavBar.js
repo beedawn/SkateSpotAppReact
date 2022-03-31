@@ -51,7 +51,7 @@ await signOut(auth);
   </Button>
             </NavItem>
             <NavItem>
-              <NavLink href="/components/">Spots</NavLink>
+              <NavLink href="/spots">Spots</NavLink>
             </NavItem>
             
           </Nav>
