@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
-import Home from "../Home";
+import Home from "../HomeRouter";
 import AuthContext from "../context/AuthContext";
 import loading from "../images/Loading_icon.gif"
 

@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import NavBar from "./navigation/NavBar";
-import AuthContext from "./context/AuthContext";
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
 import Spots from "./routes/Spots";
 import Dashboard from "./routes/Dashboard";
-import Main from "./Main";
+
+import AddSpot from "./routes/AddSpot";
+import Account from "./routes/Account";
 
 export default function Home() {
   
@@ -17,6 +17,7 @@ export default function Home() {
   
   <Route path="/" element={<Dashboard />} />
   <Route path="/spots" element={<Spots />} />
-  
+  <Route path ="/addspot" element={<AddSpot />} /> 
+  <Route path="/account" element={<Account />} />
 </Routes></div>);
 }

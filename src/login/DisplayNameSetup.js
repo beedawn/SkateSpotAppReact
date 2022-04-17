@@ -14,7 +14,7 @@ export default function DisplayNameSetup() {
     try{
       const update = {
         displayName: displayName,
-        photoURL: "test"
+        photoURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png"
       };
       
        updateProfile(auth.currentUser, update);

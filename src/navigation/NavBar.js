@@ -43,23 +43,24 @@ await signOut(auth);
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
-          <NavItem>
+          <NavItem><NavLink href="/addspot">
             <Button
     color="primary"
   >
     Add Spot
   </Button>
+  </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/spots">Spots</NavLink>
             </NavItem>
-            
+            <NavItem>
+              <NavLink href="/account">Account</NavLink>
+            </NavItem>
           </Nav>
           <Nav navbar>
            
-            <NavItem>
-              <NavLink href="/">Account</NavLink>
-            </NavItem>
+           
             <NavItem>
             <Button color="primary" onClick={logout} >Log Out </Button>
             </NavItem>
