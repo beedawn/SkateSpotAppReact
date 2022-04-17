@@ -4,7 +4,7 @@ import { auth } from "../firebase-config";
 import Home from "../Home";
 import AuthContext from "../context/AuthContext";
 
-import LoginForm from "../login/LoginForm";
+
 import DisplayNameSetup from "../login/DisplayNameSetup";
 
 import {Button} from 'reactstrap';
@@ -25,7 +25,8 @@ export default function Login() {
     
       
     </div>)
-  } if(user.displayName) {
+  } if(user.displayName) {\
+    console.log(user);
     return (
         <div>
         <Home/>
@@ -33,6 +34,7 @@ export default function Login() {
     );
   }
   else {
-    return <LoginForm />;
+    console.log(user);
+    // return <LoginForm />;
   }
 }
