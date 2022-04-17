@@ -21,26 +21,29 @@ export default function Login() {
 
 
   if(user===null) {
-    console.log(user)
+    //returns Login Form to prompt user to sign in, checks if user is null if you use !user to check the logic breaks
     return <LoginForm />;
      
    }
   if(user.displayName) {
-    
+    //Takes user to Dashboard
     return (
         <div>
+          
         <Home/>
       </div>
     );
   }
 if(user.displayName===null){
-    console.log(user.displayName)
+    //Asks user to set up display name, then moves them to Dashboard once completed.
     return(<div> <div><DisplayNameSetup/></div>
     
       
     </div>)
      }
-else{return(
+else{
+  //returns loading animation
+  return(
   <div><img src={loading}  alt="Loading" /></div>
 )}
 }
