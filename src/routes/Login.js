@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
 import Home from "../Home";
@@ -16,10 +16,10 @@ export default function Login() {
        setUser(currentUser);
   });
 
+
+
+
  
-  if (!user) {
-    return <LoginForm />;
-  }
   if(!user.displayName){
     return(<div> <div><DisplayNameSetup/></div>
     
@@ -31,5 +31,8 @@ export default function Login() {
         <Home/>
       </div>
     );
+  }
+  else {
+    return <LoginForm />;
   }
 }

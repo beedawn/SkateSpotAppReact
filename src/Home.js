@@ -11,7 +11,7 @@ import Dashboard from "./routes/Dashboard";
 import Main from "./Main";
 
 export default function Home() {
-  const { user } = useContext(AuthContext);
+  
 
   return (<div><NavBar /> <Routes>
   
