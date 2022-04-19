@@ -59,8 +59,6 @@ await signOut(auth);
             </NavItem>
           </Nav>
           <Nav navbar>
-           
-           
             <NavItem>
             <Button color="primary" onClick={logout} >Log Out </Button>
             </NavItem>

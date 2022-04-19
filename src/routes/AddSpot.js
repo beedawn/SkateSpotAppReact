@@ -1,18 +1,16 @@
 
 
   import React, { useState } from "react";
-  import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-  } from "firebase/auth";
-  import { auth } from "../firebase-config";
   import {Button} from "reactstrap";
-  import { doc, setDoc } from "firebase/firestore"; 
-  
+  import { collection, doc, addDoc } from "firebase/firestore"; 
+
 export default function AddSpot() {
-    // const newSpot = async() =>{
-    //     await setDoc(doc(db, "spots", ))
-    // }
+ const [data, setData] = useState();
+  const db = collection();
+    const newSpot = async() =>{
+         const docRef = await addDoc(doc(db, "spots", data));
+         console.log ("Document written with ID:" , docRef.id);
+     }
     return (
       <div style={{ padding: "1rem 0"}}>
         <h2>Add a Spot</h2>
@@ -20,7 +18,10 @@ export default function AddSpot() {
         <input
           editable="true"
           placeholder="Spot Name"
+          onChange={(event)=> {
+            setData(event.target.value);
           
+          }}
         />
       </div>
       <div style={{marginTop: "1rem"}}>
@@ -33,7 +34,7 @@ export default function AddSpot() {
       </div>
       <div style={{marginTop: "1rem"}}>
         <Button color="primary"  > Cancel </Button>
-        <Button color="primary" > Submit </Button>
+        <Button color="primary" onClick={() => {newSpot();}}> Submit </Button>
       </div>
       </div>
     );
