@@ -10,17 +10,15 @@ export default function AddSpot() {
  const [spotLocation, setSpotLocation] = useState("");
  const [spotName, setSpotName] = useState("");
 const [spotDescription, setSpotDescription] = useState("");
+const [ submit, setSubmit]= useState("false");
 
-
- const handleNew = async () => {
-    // const name = prompt("Enter a spot name");
-    // const location = prompt("Enter a spot location");
-
+ const handleNewSpot = async () => {
    const collectionRef = collection(db,"spots");
    const payload = { name: spotName, location: spotLocation, description:spotDescription};
   await addDoc(collectionRef, payload);
-
+setSubmit("true");
  }
+ if(submit){
     return (
       <div style={{ padding: "1rem 0"}}>
         <h2>Add a Spot</h2>
@@ -28,18 +26,14 @@ const [spotDescription, setSpotDescription] = useState("");
         <input
           editable="true"
           placeholder="Spot Name"
-          
           onChange={event =>setSpotName(event.target.value)}
-         
         />
       </div>
       <div style={{marginTop: "1rem"}}>
         <input
           editable="true"
           placeholder="Spot Location"
-          
           onChange={event =>setSpotLocation(event.target.value)}
-         
         />
       </div>
       <div style={{marginTop: "1rem"}}>
@@ -51,11 +45,14 @@ const [spotDescription, setSpotDescription] = useState("");
         />
       </div>
       <div style={{marginTop: "1rem"}}>
-        <Button color="primary"  > Cancel </Button>
-        <Button color="primary" onClick={handleNew}> Submit </Button>
+        <Button color="primary" > Cancel </Button>
+        <Button color="primary" onClick={handleNewSpot}> Submit </Button>
       </div>
       </div>
     );
-  }
+  } else{
+    
+  }}
+ 
 
 

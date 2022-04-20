@@ -1,6 +1,8 @@
 import { onSnapshot, collection } from "firebase/firestore";
 import React, {useEffect, useState} from "react";
 import {db} from "../firebase-config";
+import loading from "../images/Loading_icon.gif"
+
 export default function Spots() {
   //need to add query to db to pull all spots?  
 
@@ -16,7 +18,7 @@ export default function Spots() {
     return unsub;
   })
 
-
+if(spots.length !== 0){
   return (
       <div style={{ padding: "1rem 0" }}>
 
@@ -32,4 +34,14 @@ export default function Spots() {
         ))}
       </div>
     );
-  }
+  }else{
+    return(
+  <div style={{ padding: "1rem 0" }}>
+
+        
+  <h2>Spots</h2>
+  <div><img src={loading}  alt="Loading" /></div>
+  <p>Loading...</p>
+  </div>
+)
+  }}
