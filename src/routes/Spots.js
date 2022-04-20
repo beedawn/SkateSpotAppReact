@@ -27,7 +27,7 @@ export default function Spots() {
           <h4>{spot.name}</h4>
           <h5>{spot.location}</h5>
           <div><p>Image of the spot</p></div>
-          <p>Info About the Spot</p>
+          <p>{spot.description}</p>
           </div>
         ))}
       </div>

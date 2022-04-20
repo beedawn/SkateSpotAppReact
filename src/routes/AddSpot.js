@@ -2,15 +2,25 @@
 
   import React, { useState } from "react";
   import {Button} from "reactstrap";
-  import { collection, doc, addDoc } from "firebase/firestore"; 
+  import { collection, addDoc } from "firebase/firestore"; 
+  import {db} from "../firebase-config";
+  import { useNavigate } from 'react-router-dom';
 
 export default function AddSpot() {
- const [data, setData] = useState();
-  const db = collection();
-    const newSpot = async() =>{
-         const docRef = await addDoc(doc(db, "spots", data));
-         console.log ("Document written with ID:" , docRef.id);
-     }
+ const [spotLocation, setSpotLocation] = useState("");
+ const [spotName, setSpotName] = useState("");
+const [spotDescription, setSpotDescription] = useState("");
+
+
+ const handleNew = async () => {
+    // const name = prompt("Enter a spot name");
+    // const location = prompt("Enter a spot location");
+
+   const collectionRef = collection(db,"spots");
+   const payload = { name: spotName, location: spotLocation, description:spotDescription};
+  await addDoc(collectionRef, payload);
+
+ }
     return (
       <div style={{ padding: "1rem 0"}}>
         <h2>Add a Spot</h2>
@@ -18,10 +28,18 @@ export default function AddSpot() {
         <input
           editable="true"
           placeholder="Spot Name"
-          onChange={(event)=> {
-            setData(event.target.value);
           
-          }}
+          onChange={event =>setSpotName(event.target.value)}
+         
+        />
+      </div>
+      <div style={{marginTop: "1rem"}}>
+        <input
+          editable="true"
+          placeholder="Spot Location"
+          
+          onChange={event =>setSpotLocation(event.target.value)}
+         
         />
       </div>
       <div style={{marginTop: "1rem"}}>
@@ -29,12 +47,12 @@ export default function AddSpot() {
           editable="true"
           placeholder="Description"
             height="50"
-          
+            onChange={event =>setSpotDescription(event.target.value)}
         />
       </div>
       <div style={{marginTop: "1rem"}}>
         <Button color="primary"  > Cancel </Button>
-        <Button color="primary" onClick={() => {newSpot();}}> Submit </Button>
+        <Button color="primary" onClick={handleNew}> Submit </Button>
       </div>
       </div>
     );
