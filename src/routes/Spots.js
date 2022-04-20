@@ -9,7 +9,8 @@ export default function Spots() {
 
   useEffect(
     () => {
-    const unsub = onSnapshot(collection(db, "spots"),(snapshot)=>{ setSpots(snapshot.docs.map((doc) => doc.data()));
+    const unsub = onSnapshot(collection(db, "spots"),(snapshot)=>{ setSpots(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}))
+      );
 });
 
     return unsub;
@@ -22,7 +23,7 @@ export default function Spots() {
         
         <h2>Spots</h2>
         {spots.map((spot) => (
-          <div>
+          <div key={spot.id}>
           <h4>{spot.name}</h4>
           <h5>{spot.location}</h5>
           <div><p>Image of the spot</p></div>
