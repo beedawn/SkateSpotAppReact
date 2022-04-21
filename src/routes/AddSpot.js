@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Button } from "reactstrap";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
-import { useNavigate } from "react-router-dom";
+import Spots from "./Spots";
 
 export default function AddSpot() {
   const [spotLocation, setSpotLocation] = useState("");
   const [spotName, setSpotName] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
-  const [submit, setSubmit] = useState("false");
+  
 
   const handleNewSpot = async () => {
     const collectionRef = collection(db, "spots");
@@ -18,9 +18,15 @@ export default function AddSpot() {
       description: spotDescription,
     };
     await addDoc(collectionRef, payload);
-    setSubmit("true");
+    refreshPage();
   };
-  if (submit) {
+ 
+  
+  const refreshPage = async () => {
+    
+    window.location.reload(true);
+  };
+    
     return (
       <div style={{ padding: "1rem 0" }}>
         <h2>Add a Spot</h2>
@@ -47,7 +53,7 @@ export default function AddSpot() {
           />
         </div>
         <div style={{ marginTop: "1rem" }}>
-          <Button color="primary"> Cancel </Button>
+          <Button color="primary" onClick={() => {refreshPage()}}> Cancel </Button>
           <Button color="primary" onClick={handleNewSpot}>
             {" "}
             Submit{" "}
@@ -55,6 +61,5 @@ export default function AddSpot() {
         </div>
       </div>
     );
-  } else {
-  }
-}
+  } 
+

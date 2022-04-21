@@ -4,6 +4,7 @@ import { db } from "../firebase-config";
 import loading from "../images/Loading_icon.gif";
 
 export default function Spots() {
+  
   const [spots, setSpots] = useState([]);
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
