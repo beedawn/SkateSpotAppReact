@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "reactstrap";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
-import Spots from "./Spots";
+import AuthContext from "../context/AuthContext";
 
 export default function AddSpot() {
+  const { user } = useContext(AuthContext);
   const [spotLocation, setSpotLocation] = useState("");
   const [spotName, setSpotName] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
@@ -16,6 +17,7 @@ export default function AddSpot() {
       name: spotName,
       location: spotLocation,
       description: spotDescription,
+      admin:user.email
     };
     await addDoc(collectionRef, payload);
     refreshPage();
