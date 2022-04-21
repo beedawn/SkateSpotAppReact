@@ -14,16 +14,16 @@ export default function Spots() {
 
   if (spots.length !== 0) {
     return (
-      <div style={{ padding: "1rem 0" }}>
-        <h2>Spots</h2>
+      <div>
+       <div style={{padding:"1rem"}}> <h2>Spots</h2></div>
         {spots.map((spot) => (
-          <div key={spot.id}>
-            <h4>{spot.name}</h4>
-            <h5>{spot.location}</h5>
-            <div>
-              <p>Image of the spot</p>
+          <div style={{padding:"1rem 0"}}>
+            <div key={spot.id}>
+              <h4>{spot.name}</h4>
+              <h5>{spot.location}</h5>
+              <div>{/* <p>Image of the spot</p> */}</div>
+              <p>{spot.description}</p>
             </div>
-            <p>{spot.description}</p>
           </div>
         ))}
       </div>
