@@ -3,7 +3,6 @@ import AuthContext from "../context/AuthContext";
 
 export default function Account() {
   const { user } = useContext(AuthContext);
-  console.log(user);
   return (
     <div style={{ padding: "1rem 0" }}>
       <h2>Account Info</h2>

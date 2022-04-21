@@ -20,7 +20,7 @@ export default function Spots() {
        <div style={{padding:"1rem"}}> <h2>Spots</h2></div>
         {spots.map((spot) => (
           <div style={{padding:"1rem 0"}}>
-            {console.log(spot.admin)}
+           
             <div key={spot.id}>
             
               <h4>{spot.name}</h4>
