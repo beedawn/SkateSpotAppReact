@@ -1,9 +1,6 @@
 import React from "react";
 import NavBar from "./navigation/NavBar";
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Spots from "./routes/Spots";
 import Dashboard from "./routes/Dashboard";
 
@@ -11,13 +8,15 @@ import AddSpot from "./routes/AddSpot";
 import Account from "./routes/Account";
 
 export default function Home() {
-  
-
-  return (<div><NavBar /> <Routes>
-  
-  <Route path="/" element={<Dashboard />} />
-  <Route path="/spots" element={<Spots />} />
-  <Route path ="/addspot" element={<AddSpot />} /> 
-  <Route path="/account" element={<Account />} />
-</Routes></div>);
+  return (
+    <div>
+      <NavBar />{" "}
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/spots" element={<Spots />} />
+        <Route path="/addspot" element={<AddSpot />} />
+        <Route path="/account" element={<Account />} />
+      </Routes>
+    </div>
+  );
 }

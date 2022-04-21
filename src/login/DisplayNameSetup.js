@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase-config";
 import { onAuthStateChanged, updateProfile, signOut } from "firebase/auth";
-import { Button } from 'reactstrap';
+import { Button } from "reactstrap";
 
 import AuthContext from "../context/AuthContext";
-
 
 export default function DisplayNameSetup() {
   //Need to add a way to verify DisplayName isn't already used?
@@ -13,28 +12,28 @@ export default function DisplayNameSetup() {
   const [displayName, setDisplayName] = useState("");
 
   const updateDisplayName = async () => {
-    try{
+    try {
       const update = {
         displayName: displayName,
-        photoURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png"
+        photoURL:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png",
       };
-      
-       updateProfile(auth.currentUser, update);
-       onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);})
-       
-        console.log(user);
-        
-      }
-      
-        catch(error){console.log(error.message);}
-        
-      };
-      const refreshPage = async () => {
-        await updateDisplayName();
-        window.location.reload(true);
-      }
-    return (
+
+      updateProfile(auth.currentUser, update);
+      onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+      });
+
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const refreshPage = async () => {
+    await updateDisplayName();
+    window.location.reload(true);
+  };
+  return (
     <div>
       <div>
         <input
@@ -45,17 +44,25 @@ export default function DisplayNameSetup() {
           }}
         />
       </div>
-      
-      <div>
-        
-        <Button color="primary" onClick={() => {updateDisplayName()}}>Submit</Button>
-        <Button color="primary" onClick={() => {refreshPage();}}>Next</Button>
-        
-        </div>
-      
-      </div>
-  );
-        }
-   
-      
 
+      <div>
+        <Button
+          color="primary"
+          onClick={() => {
+            updateDisplayName();
+          }}
+        >
+          Submit
+        </Button>
+        <Button
+          color="primary"
+          onClick={() => {
+            refreshPage();
+          }}
+        >
+          Next
+        </Button>
+      </div>
+    </div>
+  );
+}

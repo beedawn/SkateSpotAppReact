@@ -19,21 +19,17 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 
-
-
-
-
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, setUser } = useContext(AuthContext);
 
-onAuthStateChanged(auth, (currentUser) => {
-   setUser(currentUser);
-});
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
 
-const logout = async () => {
-await signOut(auth);
-};
+  const logout = async () => {
+    await signOut(auth);
+  };
 
   const toggle = () => setIsOpen(!isOpen);
   return (
@@ -43,13 +39,10 @@ await signOut(auth);
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
-          <NavItem><NavLink href="/addspot">
-            <Button
-    color="primary"
-  >
-    Add Spot
-  </Button>
-  </NavLink>
+            <NavItem>
+              <NavLink href="/addspot">
+                <Button color="primary">Add Spot</Button>
+              </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/spots">Spots</NavLink>
@@ -60,7 +53,9 @@ await signOut(auth);
           </Nav>
           <Nav navbar>
             <NavItem>
-            <Button color="primary" onClick={logout} >Log Out </Button>
+              <Button color="primary" onClick={logout}>
+                Log Out{" "}
+              </Button>
             </NavItem>
           </Nav>
         </Collapse>
