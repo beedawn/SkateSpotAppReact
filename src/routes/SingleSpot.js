@@ -46,6 +46,7 @@ export default function SingleSpot() {
               </div>
             </div>
           ))}
+          <div><a href="/spots/">Back to Spots</a></div>
         </div>
       );
           }
