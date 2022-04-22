@@ -24,7 +24,7 @@ export default function Spots() {
            
             <div key={spot.id}>
             
-              <h4>{spot.name}</h4>
+              <Link to={'/spot/' + spot.id}>{spot.name}</Link>
               <h5>{spot.location}</h5>
               <div>{user.email===spot.admin ? <Button color="primary" onClick={() => {}}> Edit </Button> : <p></p>}</div>
               <p>{spot.description}</p>
