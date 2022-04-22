@@ -27,7 +27,7 @@ export default function Home() {
           }
         />
 
-<Route path="/spot/:s" render={(props) => <SingleSpot spotId={props.match.params.s} />} />
+<Route path="/spot/:spot" render={(props) => (<SingleSpot spotId={props} />)} />
       </Routes>
     </div>
   );

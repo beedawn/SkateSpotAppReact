@@ -7,10 +7,10 @@ import { Button } from "reactstrap";
 
 
 export function SingleSpot(props) {
-    console.log("hello");
-    const { user } = useContext(AuthContext);
   const thisSpot = props.spotId;
-console.log(props()))
+    const { user } = useContext(AuthContext);
+  
+console.log(props)
   const [spots, setSpots] = useState([]);
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
@@ -21,10 +21,12 @@ console.log(props()))
 
  // filter products
   const filteredProduct = spots.filter(function (el) {
+    
     return el.id === thisSpot;
   });
 
   if (filteredProduct.length === 0) {
+    
     return <div>404 Error - Not Found</div>;
   }
 
