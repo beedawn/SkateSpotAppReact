@@ -3,14 +3,14 @@ import AuthContext from "../context/AuthContext";
 import { db } from "../firebase-config";
 import { onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
+import { useParams } from 'react-router-dom';
 
 
-
-export function SingleSpot(props) {
-  const thisSpot = props.spotId;
+export default function SingleSpot() {
+  const { spot } = useParams();
     const { user } = useContext(AuthContext);
-  
-console.log(props)
+  console.log(spot)
+
   const [spots, setSpots] = useState([]);
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
@@ -22,7 +22,7 @@ console.log(props)
  // filter products
   const filteredProduct = spots.filter(function (el) {
     
-    return el.id === thisSpot;
+    return el.id === spot;
   });
 
   if (filteredProduct.length === 0) {

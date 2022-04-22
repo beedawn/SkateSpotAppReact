@@ -6,7 +6,7 @@ import Dashboard from "./routes/Dashboard";
 
 import AddSpot from "./routes/AddSpot";
 import Account from "./routes/Account";
-import {SingleSpot} from "./routes/SingleSpot"
+import SingleSpot from "./routes/SingleSpot"
 export default function Home() {
 
   return (
@@ -18,17 +18,14 @@ export default function Home() {
         <Route path="/addspot" element={<AddSpot />} />
         <Route path="/account" element={<Account />} />
          <Route
-          path="/spot/:s" element={
-          // render={(props) => ( 
-           <SingleSpot
-              // spotid={props.match.params.s}
+          path="/spot/:spot" element={<SingleSpot
+               
             />
-          // {/* ) */}
+        
           }
         />
 
-<Route path="/spot/:spot" render={(props) => (<SingleSpot spotId={props} />)} />
-      </Routes>
+ </Routes>
     </div>
   );
 }
