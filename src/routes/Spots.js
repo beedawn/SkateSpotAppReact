@@ -4,6 +4,7 @@ import { db } from "../firebase-config";
 import loading from "../images/Loading_icon.gif";
 import AuthContext from "../context/AuthContext";
 import { Button } from "reactstrap";
+import {Link} from 'react-router-dom';
 export default function Spots() {
   const { user } = useContext(AuthContext);
   const [spots, setSpots] = useState([]);
