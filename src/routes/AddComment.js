@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Button } from "reactstrap";
+import { Button, Card, CardHeader, CardBody, CardTitle, CardText } from "reactstrap";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
+import  "../styles/style.css";
+
 
 export default function AddComment() {
   const { spot } = useParams();
@@ -11,6 +13,18 @@ export default function AddComment() {
 
   const [userComment, setUserComment] = useState("");
   const [userTitle, setUserTitle] = useState("");
+
+  const allInputs = {imgUrl:''};
+  const [imageAsFile, setImageAsFile] = useState("");
+  const[imageAsUrl, setImageAsUrl] = useState(allInputs);
+
+  console.log(imageAsFile)
+  const handleImageAsFile = (e) => {
+       const image = e.target.files[0]
+       setImageAsFile(imageFile => (image))
+   }
+ 
+
 
   const handleNewComment = async () => {
     const collectionRef = collection(db, "comments");
@@ -20,6 +34,7 @@ export default function AddComment() {
       title: userTitle,
       comment: userComment,
       admin: user.email,
+      image:[{...imageAsFile}]
     };
     await addDoc(collectionRef, payload);
     refreshPage();
@@ -30,8 +45,21 @@ export default function AddComment() {
   };
 
   return (
-    <div style={{ padding: "1rem 0" }}>
-      <h2>Add a Comment</h2>
+    <div style={{ padding: "1rem 0", width:"500px", margin:"auto"}}>
+        <Card>
+      <CardHeader>Add a Comment  <div style={{display:"inline", marginLeft:"55%"}}>
+          {" "}
+          <Button
+            color="primary"
+            onClick={() => {
+              refreshPage();
+            }}
+          >
+            {" "}
+            Close
+            {" "}
+          </Button>
+        </div></CardHeader>
 
       <div>
         <input
@@ -39,11 +67,12 @@ export default function AddComment() {
           placeholder="Title of Comment"
           onChange={(event) => setUserTitle(event.target.value)}
         />
+        
       </div>
       {userTitle ? (
         <p></p>
       ) : (
-        <span style={{ color: "red" }}>Please enter a Title</span>
+        <span className="errorSpan">Please enter a Title</span>
       )}
       <div style={{ marginTop: "1rem" }}>
         <textarea
@@ -56,8 +85,10 @@ export default function AddComment() {
       {userComment ? (
         <p></p>
       ) : (
-        <span style={{ color: "red" }}>Please enter a Comment</span>
+        <span className="errorSpan">Please enter a Comment</span>
       )}
+      <input type="file" accept=".png, .jpg, .jpeg" onChange={handleImageAsFile}/>
+      <button>Upload</button>
       <div style={{ marginTop: "1rem" }}>
         <div>
           {" "}
@@ -72,19 +103,11 @@ export default function AddComment() {
             </p>
           )}
         </div>
-        <div>
-          {" "}
-          <Button
-            color="primary"
-            onClick={() => {
-              refreshPage();
-            }}
-          >
-            {" "}
-            Cancel{" "}
-          </Button>
-        </div>
+       
+        
       </div>
+      </Card>
     </div>
+    
   );
 }

@@ -4,7 +4,7 @@ import AuthContext from "../context/AuthContext";
 export default function Account() {
   const { user } = useContext(AuthContext);
   return (
-    <div style={{ padding: "1rem 0" }}>
+    <div className="globalTopMargin">
       <h2>Account Info</h2>
       <p>Username: {user.displayName}</p>
       <p>Email: {user.email}</p>

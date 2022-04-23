@@ -1,10 +1,12 @@
 import { onSnapshot, collection, doc, getDocs } from "firebase/firestore";
+import {getStorage, ref} from "firebase/storage";
 import React, { useEffect, useState, useContext } from "react";
 import { db } from "../firebase-config";
 import loading from "../images/Loading_icon.gif";
 import AuthContext from "../context/AuthContext";
 import { Button, Card, CardHeader, CardBody, CardTitle, CardText } from "reactstrap";
 import { Link } from "react-router-dom";
+import  "../styles/style.css";
 
 import { useParams } from "react-router-dom";
 export default function Comment() {
@@ -25,7 +27,7 @@ export default function Comment() {
       console.log(spot);
     return (
       <div>
-        <div style={{ padding: "1rem" }}>
+        <div className="globalTopMargin">
           {" "}
           </div>
           
@@ -44,7 +46,7 @@ export default function Comment() {
                 ) : (
                   <p></p>
                 )}
-            <CardTitle style={{fontSize:'14px'}}> Posted By: {comment.name}</CardTitle>
+            
               <p></p>
               <CardText style={{fontSize:'12px'}}>
                   
@@ -57,6 +59,7 @@ export default function Comment() {
               </div>
             </div>
           </div>
+          <CardTitle style={{fontSize:'10px'}}> Posted By: {comment.name}</CardTitle>
           </Card>
         ))}
       </div></div>

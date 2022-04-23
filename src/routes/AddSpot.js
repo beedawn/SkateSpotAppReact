@@ -27,7 +27,7 @@ export default function AddSpot() {
   };
 
   return (
-    <div style={{ padding: "1rem 0" }}>
+    <div className="globalTopMargin">
       <h2>Add a Spot</h2>
       <div>
         <input

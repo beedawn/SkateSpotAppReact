@@ -3,9 +3,17 @@ import React, { useEffect, useState, useContext } from "react";
 import { db } from "../firebase-config";
 import loading from "../images/Loading_icon.gif";
 import AuthContext from "../context/AuthContext";
-import { Button } from "reactstrap";
-import {Link} from 'react-router-dom';
-import Comment from '../comments/Comment';
+
+import { Link } from "react-router-dom";
+import Comment from "../comments/Comment";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardText,
+} from "reactstrap";
 
 export default function Spots() {
   const { user } = useContext(AuthContext);
@@ -17,28 +25,49 @@ export default function Spots() {
     return unsub;
   }, []);
 
- 
-
   if (spots.length !== 0) {
     return (
       <div>
-       <div style={{padding:"1rem"}}> <h2>Spots</h2></div>
+        <div className="globalTopMargin">
+          {" "}
+          <h2>Spots</h2>
+        </div>
         {spots.map((spot) => (
-          <div style={{padding:"1rem 0"}}>
-           
-            <div key={spot.id}>
-            
-              <Link to={'/spot/' + spot.id }>{spot.name}</Link>
-              <Link to={'/spot/' + spot.id+ '/addComment/'}>Add a Comment</Link>
-              <h5>{spot.location}</h5>
-              <div>{user.email===spot.admin ? <Button color="primary" onClick={() => {}}> Edit </Button> : <p></p>}</div>
-              
-              <p>{spot.description}</p>
-              
-            </div>
+          <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }}>
+            <Card>
+              <div key={spot.id}>
+                <CardHeader>
+                  <Link to={"/spot/" + spot.id}>{spot.name}</Link>
+                </CardHeader>
+                <div
+                  style={{
+                    display: "block",
+                    marginRight: "70%",
+                    marginTop: "10px",
+                  }}
+                >
+                  {user.email === spot.admin ? (
+                    <Button color="primary" onClick={() => {}}>
+                      {" "}
+                      Edit{" "}
+                    </Button>
+                  ) : (
+                    <p></p>
+                  )}{" "}
+                  <div style={{marginTop:"10px"}}>
+                  <Link to={"/spot/" + spot.id + "/addComment/"}>
+                    <Button>Comment</Button>
+                  </Link>
+                  </div>
+                </div>
+
+                <h6>{spot.location}</h6>
+
+                <p>{spot.description}</p>
+              </div>
+            </Card>
           </div>
         ))}
-       
       </div>
     );
   } else {

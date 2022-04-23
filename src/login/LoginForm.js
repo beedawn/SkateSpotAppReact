@@ -43,7 +43,7 @@ export default function LoginForm() {
           onChange={(event) => setLoginEmail(event.target.value)}
         />
       </div>
-      <div style={{ marginTop: "1rem" }}>
+      <div className="globalTopMargin">
         <input
           editable="true"
           type="password"
