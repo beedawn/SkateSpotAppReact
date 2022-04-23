@@ -4,9 +4,10 @@ import React, { useEffect, useState, useContext } from "react";
 import { db } from "../firebase-config";
 import loading from "../images/Loading_icon.gif";
 import AuthContext from "../context/AuthContext";
-import { Button, Card, CardHeader, CardBody, CardTitle, CardText } from "reactstrap";
+import { Button, Card, CardHeader, CardBody, CardTitle, CardText, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import  "../styles/style.css";
+
 
 import { useParams } from "react-router-dom";
 export default function Comment() {

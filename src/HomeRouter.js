@@ -9,6 +9,7 @@ import Account from "./routes/Account";
 import SingleSpot from "./routes/SingleSpot"
 import AddComment from "./routes/AddComment";
 import Comment from "../src/comments/Comment";
+import EditSpot from "./routes/EditSpot";
 export default function Home() {
 
   return (
@@ -32,7 +33,13 @@ export default function Home() {
            
              }
            />
-
+           
+           <Route path="spot/:spot/edit" element={<EditSpot
+               
+               />
+           
+             }
+           />
 <Route path="spot/:spot/Comments" element={<Comment
                
                />

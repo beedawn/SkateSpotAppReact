@@ -5,12 +5,14 @@ import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import  "../styles/style.css";
-
+import {getStorage, ref, uploadBytes } from "firebase/storage";
+import { Input } from "reactstrap";
 
 export default function AddComment() {
+    const storage = getStorage();
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
-
+const storageRef = ref(storage, spot );
   const [userComment, setUserComment] = useState("");
   const [userTitle, setUserTitle] = useState("");
 
@@ -20,8 +22,9 @@ export default function AddComment() {
 
   console.log(imageAsFile)
   const handleImageAsFile = (e) => {
-       const image = e.target.files[0]
-       setImageAsFile(imageFile => (image))
+       const image = e.target.files[0];
+       uploadBytes(storageRef, image).then((snapshot => {console.log ('Uploaded a blob or file!')}))
+       
    }
  
 
@@ -34,7 +37,7 @@ export default function AddComment() {
       title: userTitle,
       comment: userComment,
       admin: user.email,
-      image:[{...imageAsFile}]
+      
     };
     await addDoc(collectionRef, payload);
     refreshPage();
@@ -62,7 +65,7 @@ export default function AddComment() {
         </div></CardHeader>
 
       <div>
-        <input
+        <Input
           editable="true"
           placeholder="Title of Comment"
           onChange={(event) => setUserTitle(event.target.value)}
@@ -75,10 +78,10 @@ export default function AddComment() {
         <span className="errorSpan">Please enter a Title</span>
       )}
       <div style={{ marginTop: "1rem" }}>
-        <textarea
+        <Input
           editable="true"
           placeholder="Comment"
-          height="50"
+          type="textarea"
           onChange={(event) => setUserComment(event.target.value)}
         />
       </div>
@@ -87,7 +90,7 @@ export default function AddComment() {
       ) : (
         <span className="errorSpan">Please enter a Comment</span>
       )}
-      <input type="file" accept=".png, .jpg, .jpeg" onChange={handleImageAsFile}/>
+      <input type="file" accept=".png, .jpg, .jpeg" onChange={(e) => handleImageAsFile(e.target.files[0])}/>
       <button>Upload</button>
       <div style={{ marginTop: "1rem" }}>
         <div>

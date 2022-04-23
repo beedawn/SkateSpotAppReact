@@ -5,7 +5,7 @@ import { onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
 import { useParams } from 'react-router-dom';
 import Comment from "../comments/Comment";
-
+import { Link } from "react-router-dom";
 
 export default function SingleSpot() {
   const { spot } = useParams();
@@ -42,7 +42,7 @@ export default function SingleSpot() {
               
                 <h4>{spot.name}</h4>
                 <h5>{spot.location}</h5>
-                <div>{user.email===spot.admin ? <Button color="primary" onClick={() => {}}> Edit </Button> : <p></p>}</div>
+                <div>{user.email===spot.admin ? <Link to ={"/spot/" + spot.id +"/edit"}><Button color="primary" onClick={() => {}}> Edit </Button></Link> : <p></p>}</div>
                 <p>{spot.description}</p>
               </div>
             </div>

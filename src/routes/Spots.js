@@ -1,11 +1,11 @@
-import { onSnapshot, collection, doc, getDocs } from "firebase/firestore";
+import { onSnapshot, collection, doc, getDocs, setDoc } from "firebase/firestore";
 import React, { useEffect, useState, useContext } from "react";
 import { db } from "../firebase-config";
 import loading from "../images/Loading_icon.gif";
 import AuthContext from "../context/AuthContext";
 
 import { Link } from "react-router-dom";
-import Comment from "../comments/Comment";
+
 import {
   Button,
   Card,
@@ -47,10 +47,10 @@ export default function Spots() {
                   }}
                 >
                   {user.email === spot.admin ? (
-                    <Button color="primary" onClick={() => {}}>
+                    <Link to ={"/spot/" + spot.id +"/edit"}> <Button color="primary">
                       {" "}
                       Edit{" "}
-                    </Button>
+                    </Button></Link>
                   ) : (
                     <p></p>
                   )}{" "}
