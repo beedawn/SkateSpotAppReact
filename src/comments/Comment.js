@@ -1,13 +1,20 @@
 import { onSnapshot, collection, doc, getDocs } from "firebase/firestore";
-import {getStorage, ref} from "firebase/storage";
+import { getStorage, ref } from "firebase/storage";
 import React, { useEffect, useState, useContext } from "react";
 import { db } from "../firebase-config";
 import loading from "../images/Loading_icon.gif";
 import AuthContext from "../context/AuthContext";
-import { Button, Card, CardHeader, CardBody, CardTitle, CardText, Input } from "reactstrap";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardText,
+  Input,
+} from "reactstrap";
 import { Link } from "react-router-dom";
-import  "../styles/style.css";
-
+import "../styles/style.css";
 
 import { useParams } from "react-router-dom";
 export default function Comment() {
@@ -25,45 +32,50 @@ export default function Comment() {
     return comment.spot === spot;
   });
   if (comments.length !== 0) {
-      console.log(spot);
+    console.log(spot);
     return (
       <div>
-        <div className="globalTopMargin">
-          {" "}
-          </div>
-          
-          <h4>Comments</h4>
-          <Link to={'/spot/' + spot + '/addComment/'}>Add a Comment</Link>
-          <div style={{width:'400px', margin: '0 auto'}}>
-        {filteredComments.map((comment) => (
-            <Card className="mt-5"><CardHeader>{comment.title}</CardHeader>
-          <div style={{ padding: "1rem 0" }}>
-            <div key={comment.id}>
-            {user.email === comment.admin ? (
-                  <Link to={'/spot/'+ spot + '/Comments/' + comment.id}><Button style={{marginRight:'325px', marginTop:'-5px'}} color="primary" onClick={() => {}} >
-                    {" "}
-                    Edit{" "}
-                  </Button></Link>
-                ) : (
-                  <p></p>
-                )}
-            
-              <p></p>
-              <CardText style={{fontSize:'12px'}}>
-                  
-                <p>{comment.comment}</p>
-              </CardText>
-           
+        <div className="globalTopMargin"> </div>
 
-              <div>
-              
+        <h4>Comments</h4>
+        <Link to={"/spot/" + spot + "/addComment/"}>Add a Comment</Link>
+        <div style={{ width: "400px", margin: "0 auto" }}>
+          {filteredComments.map((comment) => (
+            <Card className="mt-5">
+              <CardHeader>{comment.title}</CardHeader>
+              <div style={{ padding: "1rem 0" }}>
+                <div key={comment.id}>
+                  {user.email === comment.admin ? (
+                    <Link to={"/spot/" + spot + "/Comments/" + comment.id}>
+                      <Button
+                        style={{ marginRight: "325px", marginTop: "-5px" }}
+                        color="primary"
+                        onClick={() => {}}
+                      >
+                        {" "}
+                        Edit{" "}
+                      </Button>
+                    </Link>
+                  ) : (
+                    <p></p>
+                  )}
+
+                  <p></p>
+                  <CardText style={{ fontSize: "12px" }}>
+                    <p>{comment.comment}</p>
+                  </CardText>
+
+                  <div></div>
+                </div>
               </div>
-            </div>
-          </div>
-          <CardTitle style={{fontSize:'10px'}}> Posted By: {comment.name}</CardTitle>
-          </Card>
-        ))}
-      </div></div>
+              <CardTitle style={{ fontSize: "10px" }}>
+                {" "}
+                Posted By: {comment.name}
+              </CardTitle>
+            </Card>
+          ))}
+        </div>
+      </div>
     );
   } else {
     return (

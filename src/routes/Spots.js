@@ -1,4 +1,10 @@
-import { onSnapshot, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import {
+  onSnapshot,
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import React, { useEffect, useState, useContext } from "react";
 import { db } from "../firebase-config";
 import loading from "../images/Loading_icon.gif";
@@ -47,17 +53,17 @@ export default function Spots() {
                   }}
                 >
                   {user.email === spot.admin ? (
-                    <Link to ={"/spot/" + spot.id +"/edit"}> <Button color="primary">
+                    <Link to={"/spot/" + spot.id + "/edit"}>
                       {" "}
-                      Edit{" "}
-                    </Button></Link>
+                      <Button color="primary"> Edit </Button>
+                    </Link>
                   ) : (
                     <p></p>
                   )}{" "}
-                  <div style={{marginTop:"10px"}}>
-                  <Link to={"/spot/" + spot.id + "/addComment/"}>
-                    <Button>Comment</Button>
-                  </Link>
+                  <div style={{ marginTop: "10px" }}>
+                    <Link to={"/spot/" + spot.id + "/addComment/"}>
+                      <Button>Comment</Button>
+                    </Link>
                   </div>
                 </div>
 
