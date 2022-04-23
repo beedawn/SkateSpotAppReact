@@ -7,6 +7,8 @@ import Dashboard from "./routes/Dashboard";
 import AddSpot from "./routes/AddSpot";
 import Account from "./routes/Account";
 import SingleSpot from "./routes/SingleSpot"
+import AddComment from "./routes/AddComment";
+import Comment from "../src/comments/Comment";
 export default function Home() {
 
   return (
@@ -24,6 +26,19 @@ export default function Home() {
         
           }
         />
+        <Route path="spot/:spot/addComment" element={<AddComment
+               
+               />
+           
+             }
+           />
+
+<Route path="spot/:spot/Comments" element={<Comment
+               
+               />
+           
+             }
+           />
 
  </Routes>
     </div>

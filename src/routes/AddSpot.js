@@ -26,7 +26,7 @@ export default function AddSpot() {
   
   const refreshPage = async () => {
     
-    window.location.reload(true);
+    window.location.replace('/spots');
   };
     
     return (

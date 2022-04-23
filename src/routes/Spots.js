@@ -5,6 +5,8 @@ import loading from "../images/Loading_icon.gif";
 import AuthContext from "../context/AuthContext";
 import { Button } from "reactstrap";
 import {Link} from 'react-router-dom';
+import Comment from '../comments/Comment';
+
 export default function Spots() {
   const { user } = useContext(AuthContext);
   const [spots, setSpots] = useState([]);
@@ -15,6 +17,8 @@ export default function Spots() {
     return unsub;
   }, []);
 
+ 
+
   if (spots.length !== 0) {
     return (
       <div>
@@ -24,13 +28,17 @@ export default function Spots() {
            
             <div key={spot.id}>
             
-              <Link to={'/spot/' + spot.id}>{spot.name}</Link>
+              <Link to={'/spot/' + spot.id }>{spot.name}</Link>
+              <Link to={'/spot/' + spot.id+ '/addComment/'}>Add a Comment</Link>
               <h5>{spot.location}</h5>
               <div>{user.email===spot.admin ? <Button color="primary" onClick={() => {}}> Edit </Button> : <p></p>}</div>
+              
               <p>{spot.description}</p>
+              
             </div>
           </div>
         ))}
+       
       </div>
     );
   } else {

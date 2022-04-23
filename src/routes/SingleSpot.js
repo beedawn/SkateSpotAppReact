@@ -4,6 +4,7 @@ import { db } from "../firebase-config";
 import { onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
 import { useParams } from 'react-router-dom';
+import Comment from "../comments/Comment";
 
 
 export default function SingleSpot() {
@@ -46,6 +47,7 @@ export default function SingleSpot() {
               </div>
             </div>
           ))}
+          <Comment />
           <div><a href="/spots/">Back to Spots</a></div>
         </div>
       );
