@@ -20,7 +20,7 @@ export default function Comment() {
     return unsub;
   }, []);
 
-  const { spot } = useParams();
+  const { spot, id } = useParams();
   const filteredComments = comments.filter(function (comment) {
     return comment.spot === spot;
   });
@@ -40,10 +40,10 @@ export default function Comment() {
           <div style={{ padding: "1rem 0" }}>
             <div key={comment.id}>
             {user.email === comment.admin ? (
-                  <Button style={{marginRight:'325px', marginTop:'-5px'}} color="primary" onClick={() => {}} >
+                  <Link to={'/spot/'+ spot + '/Comments/' + comment.id}><Button style={{marginRight:'325px', marginTop:'-5px'}} color="primary" onClick={() => {}} >
                     {" "}
                     Edit{" "}
-                  </Button>
+                  </Button></Link>
                 ) : (
                   <p></p>
                 )}

@@ -10,6 +10,7 @@ import SingleSpot from "./routes/SingleSpot"
 import AddComment from "./routes/AddComment";
 import Comment from "../src/comments/Comment";
 import EditSpot from "./routes/EditSpot";
+import EditComment from "./routes/EditComment";
 export default function Home() {
 
   return (
@@ -41,6 +42,12 @@ export default function Home() {
              }
            />
 <Route path="spot/:spot/Comments" element={<Comment
+               
+               />
+           
+             }
+           />
+           <Route path="spot/:spot/Comments/:id" element={<EditComment
                
                />
            
