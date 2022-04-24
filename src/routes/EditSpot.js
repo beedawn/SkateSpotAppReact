@@ -6,7 +6,7 @@ import {
   onSnapshot,
   collection,
 } from "firebase/firestore";
-
+import { Link } from "react-router-dom";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
@@ -119,6 +119,11 @@ export default function EditSpot() {
               {" "}
               Cancel{" "}
             </Button>
+
+            <Link to={"/spot/" + spot + "/delete"}>
+                   <Button color="danger" className="adminButtonsEach" onClick={()=>{}}>Delete</Button>
+                   
+                   </Link>
           </div>
         </div>
       </div>
