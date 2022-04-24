@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Button,
   Card,
@@ -8,12 +8,14 @@ import {
   CardText,
 } from "reactstrap";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import "../styles/style.css";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, listAll, list, getDownloadURL } from "firebase/storage";
 import { Input } from "reactstrap";
+import {v4} from "uuid";
+
 
 export default function AddComment() {
   const storage = getStorage();
@@ -21,7 +23,20 @@ export default function AddComment() {
   const { user } = useContext(AuthContext);
   const [userComment, setUserComment] = useState("");
   const [userTitle, setUserTitle] = useState("");
+  const [imageUpload, setImageUpload] = useState(null);
+ const [imageList, setImageList] = useState([]);
+const imageListRef = ref(storage, ('images/' + spot + '/'));
+    useEffect(() =>{
+ listAll(imageListRef).then((response)=>{
+        response.items.forEach((item)=> {
+            getDownloadURL(item).then((url) => {
+                setImageList((prev)=> [...prev, url]);
+            })
+        })
 
+
+ })
+    },[]);
 
   const handleNewComment = async () => {
     const collectionRef = collection(db, "comments");
@@ -42,6 +57,11 @@ export default function AddComment() {
       }
   }
   const handleUpload = () => {
+   if(imageUpload == null) return;
+   const imageRef = ref(storage, `images/${spot}/${v4() }`);
+   uploadBytes(imageRef, imageUpload).then(()=>{
+    alert("Image Uploaded");
+   })
 
   };
 
@@ -96,7 +116,7 @@ export default function AddComment() {
         <Input
           type="file"
           accept=".png, .jpg, .jpeg"
-          onChange={handleChange}
+          onChange={(event)=> {setImageUpload(event.target.files[0])}}
         />
         <button onClick={handleUpload}>Upload</button>
         <div style={{ marginTop: "1rem" }}>
@@ -115,6 +135,9 @@ export default function AddComment() {
           </div>
         </div>
       </Card>
+      {imageList.map((url)=>{
+          return <img src={url} style={{height:"200px"}}/>
+      })}
     </div>
   );
 }

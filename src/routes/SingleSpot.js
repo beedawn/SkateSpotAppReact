@@ -1,25 +1,38 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthContext";
-import { db } from "../firebase-config";
+import { db, storage } from "../firebase-config";
+import { getStorage, ref, uploadBytes, listAll, list, getDownloadURL } from "firebase/storage";
 import { onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
 
+
 export default function SingleSpot() {
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
   console.log(spot);
-
+  const [imageList, setImageList] = useState([]);
+  const imageListRef = ref(storage, ('images/' + spot + '/'));
   const [spots, setSpots] = useState([]);
   useEffect(() => {
+    listAll(imageListRef).then((response)=>{
+      response.items.forEach((item)=> {
+          getDownloadURL(item).then((url) => {
+              setImageList((prev)=> [...prev, url]);
+          })
+      })
+
+
+})
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
   }, []);
 
+      
   // filter products
   const filteredProduct = spots.filter(function (el) {
     return el.id === spot;
@@ -38,7 +51,9 @@ export default function SingleSpot() {
       {filteredProduct.map((spot) => (
         <div style={{ padding: "1rem 0" }}>
           <div key={spot.id}>
-         
+          {imageList.map((url)=>{
+          return <img src={url} style={{height:"200px"}}/>
+      })}
                
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
