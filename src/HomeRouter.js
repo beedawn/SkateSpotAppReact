@@ -13,6 +13,7 @@ import EditSpot from "./routes/EditSpot";
 import EditComment from "./routes/EditComment";
 import DeleteComment from "./routes/DeleteComment";
 import DeleteSpot from "./routes/DeleteSpot";
+import DisplayNameSetup from "./login/DisplayNameSetup";
 export default function Home() {
 
   return (
@@ -31,6 +32,12 @@ export default function Home() {
           }
         />
         <Route path="spot/:spot/addComment" element={<AddComment
+               
+               />
+           
+             }
+           />
+               <Route path="edit" element={<DisplayNameSetup
                
                />
            

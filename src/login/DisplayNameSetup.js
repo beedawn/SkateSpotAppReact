@@ -14,6 +14,7 @@ export default function DisplayNameSetup() {
   const updateDisplayName = async () => {
     try {
       const update = {
+        ...user,
         displayName: displayName,
         photoURL:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png",
@@ -32,8 +33,8 @@ export default function DisplayNameSetup() {
     refreshPage();
   };
   const refreshPage = async () => {
-    
-     window.location.reload(true);
+    await updateDisplayName();
+   window.location.replace("/");
   };
   return (
     <div>
