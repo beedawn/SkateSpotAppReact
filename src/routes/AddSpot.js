@@ -8,8 +8,13 @@ import { Input } from "reactstrap";
 import "../styles/style.css";
 import {v4} from "uuid";
 import { useParams } from "react-router-dom";
+import useGeolocation from 'react-hook-geolocation';
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
+
 
 export default function AddSpot() {
+
+  const geolocation = useGeolocation();
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
   const [spotLocation, setSpotLocation] = useState("");
@@ -44,6 +49,24 @@ export default function AddSpot() {
 
   return (
     <div className="globalTopMargin">
+
+{ !geolocation.error
+    ? (
+      <ul>
+        <li>Latitude:          {geolocation.latitude}</li>
+        <li>Longitude:         {geolocation.longitude}</li>
+        <li>Location accuracy: {geolocation.accuracy}</li>
+        <li>Altitude:          {geolocation.altitude}</li>
+        <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
+        <li>Heading:           {geolocation.heading}</li>
+        <li>Speed:             {geolocation.speed}</li>
+        <li>Timestamp:         {geolocation.timestamp}</li>
+      </ul>
+    )
+    : (
+      <p>No geolocation, sorry.</p>
+    )}
+      
       <h2>Add a Spot</h2>
       <div>
         <Input
