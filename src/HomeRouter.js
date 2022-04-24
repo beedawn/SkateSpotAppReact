@@ -14,6 +14,7 @@ import EditComment from "./routes/EditComment";
 import DeleteComment from "./routes/DeleteComment";
 import DeleteSpot from "./routes/DeleteSpot";
 import DisplayNameSetup from "./login/DisplayNameSetup";
+import ImageUpload from "./routes/ImageUpload";
 export default function Home() {
 
   return (
@@ -76,7 +77,12 @@ export default function Home() {
            
              }
            />
-
+<Route path="spot/:spot/upload" element={<ImageUpload
+               
+               />
+           
+             }
+           />
 
  </Routes>
     </div>

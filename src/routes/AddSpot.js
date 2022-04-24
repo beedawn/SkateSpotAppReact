@@ -18,6 +18,7 @@ export default function AddSpot() {
   const [imageUpload, setImageUpload] = useState(null);
 
   const handleNewSpot = async () => {
+    await handleUpload();
     const collectionRef = collection(db, "spots");
     const payload = {
       name: spotName,
@@ -87,7 +88,7 @@ export default function AddSpot() {
           accept=".png, .jpg, .jpeg"
           onChange={(event)=> {setImageUpload(event.target.files[0])}}
         />
-        <button onClick={handleUpload}>Upload</button>
+     
       <div style={{ marginTop: "1rem" }}>
         <div>
           {spotName && spotLocation && spotDescription ? (
