@@ -30,7 +30,7 @@ export default function DisplayNameSetup() {
     } catch (error) {
       console.log(error.message);
     }
-    refreshPage();
+    
   };
   const refreshPage = async () => {
     await updateDisplayName();
@@ -52,7 +52,7 @@ export default function DisplayNameSetup() {
         <Button
           color="primary"
           onClick={() => {
-            updateDisplayName();
+            refreshPage();
           }}
         >
           Submit
