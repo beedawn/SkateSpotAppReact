@@ -19,21 +19,9 @@ export default function AddComment() {
   const storage = getStorage();
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
-  const storageRef = ref(storage, spot);
   const [userComment, setUserComment] = useState("");
   const [userTitle, setUserTitle] = useState("");
 
-  const allInputs = { imgUrl: "" };
-  const [imageAsFile, setImageAsFile] = useState("");
-  const [imageAsUrl, setImageAsUrl] = useState(allInputs);
-
-  console.log(imageAsFile);
-  const handleImageAsFile = (e) => {
-    const image = e.target.files[0];
-    uploadBytes(storageRef, image).then((snapshot) => {
-      console.log("Uploaded a blob or file!");
-    });
-  };
 
   const handleNewComment = async () => {
     const collectionRef = collection(db, "comments");

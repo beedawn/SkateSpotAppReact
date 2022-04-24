@@ -45,17 +45,22 @@ export default function Comment() {
               <CardHeader>{comment.title}</CardHeader>
               <div style={{ padding: "1rem 0" }}>
                 <div key={comment.id}>
-                  {user.email === comment.admin ? (
+                  {user.email === comment.admin ? (<div className="adminButtons">
                     <Link to={"/spot/" + spot + "/Comments/" + comment.id}>
-                      <Button
-                        style={{ marginRight: "325px", marginTop: "-5px" }}
+                      <Button 
+                        
                         color="primary"
                         onClick={() => {}}
                       >
                         {" "}
                         Edit{" "}
                       </Button>
+
                     </Link>
+                    <Link to={"/spot/" + spot + "/Comments/" + comment.id+ "/delete"}>
+                    <Button color="danger" className="adminButtonsEach" onClick={()=>{}}>Delete</Button>
+                    
+                    </Link></div>
                   ) : (
                     <p></p>
                   )}

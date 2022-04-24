@@ -56,9 +56,10 @@ export default function SingleSpot() {
           </div>
         </div>
       ))}
+      <a href="/spots/">Back to Spots</a>
       <Comment />
       <div>
-        <a href="/spots/">Back to Spots</a>
+      <a href="/spots/">Back to Spots</a>
       </div>
     </div>
   );

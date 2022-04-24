@@ -3,9 +3,9 @@ import { Button } from "reactstrap";
 import {
   doc,
   setDoc,
-  getDoc,
+  
   onSnapshot,
-  collection,
+  collection, deleteDoc
 } from "firebase/firestore";
 
 import { storage } from "../firebase-config";
@@ -19,9 +19,8 @@ import "../styles/style.css";
 export default function EditComment() {
   const { id, spot } = useParams();
   const { user } = useContext(AuthContext);
-  const [userTitle, setUserTitle] = useState("");
-  const [userComment, setUserComment] = useState("");
 
+const [agree, setAgree ] = useState("");
 
 
   const [spots, setSpots] = useState([]);
@@ -36,20 +35,14 @@ export default function EditComment() {
     return el.id === id;
   });
 
-  const handleEdit = async (id) => {
-    console.log(user);
+  const handleDelete = async (id) =>{
     const docRef = doc(db, "comments", id);
-    const payload = {
-      title: userTitle,
-      comment: userComment,
-      admin: user.email,
-      spot: spot,
-      name: user.displayName,
-    };
-    console.log(docRef);
-    await setDoc(docRef, payload);
+
+    await deleteDoc(docRef);
     refreshPage();
-  };
+  }
+
+  
 
   const refreshPage = async () => {
     window.location.replace("/spot/"+ spot);
@@ -62,39 +55,34 @@ export default function EditComment() {
         <h2>Edit a Comment</h2>
         {filteredProduct.map((id) => (
           <div className="globalTopMargin">
-            <Input
-              placeholder={id.title}
-              onChange={(event) => setUserTitle(event.target.value)}
-            />
+            <p> {id.title}</p>
+             
           </div>
         ))}
 
-        {userTitle ? (
-          <p></p>
-        ) : (
-          <span className="errorSpan">Please enter Spotname</span>
-        )}
+       
 
         {filteredProduct.map((id) => (
           <div style={{ marginTop: "1rem" }}>
-            <Input
-              editable="true"
-              placeholder={id.comment}
-              type="textarea"
-              onChange={(event) => setUserComment(event.target.value)}
-            />
+            <p> {id.comment}</p>
+             
           </div>
         ))}
-        {userComment ? (
-          <p></p>
-        ) : (
-          <span className="errorSpan">Please enter Description</span>
-        )}
+
+
+          <div className="globalTopMargin">
+            <Input
+              placeholder="Are you sure? (yes)" 
+              onChange={(event) => setAgree(event.target.value)}
+            />
+          </div>
+       
+        
         <div style={{ marginTop: "1rem" }}>
           <div>
-            {userTitle && userComment ? (
-              <Button color="primary" onClick={() => handleEdit(id)}>
-                Submit
+            {agree ? (
+              <Button color="danger" onClick={() => handleDelete(id)}>
+                Delete
               </Button>
             ) : (
               <p>

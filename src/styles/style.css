@@ -6,3 +6,15 @@
 }
 .globalTopMargin
 { padding: 1rem 0; }
+
+.adminButtons{
+     margin-right: 0px;
+     margin-top: 5px;
+     display:inline;
+    
+
+
+}
+.adminButtonsEach{
+     margin-left:50px;
+}
