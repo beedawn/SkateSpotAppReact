@@ -14,6 +14,7 @@ import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
+import "../styles/style.css";
 
 export default function EditComment() {
   const { id, spot } = useParams();
@@ -73,7 +74,7 @@ export default function EditComment() {
         {userTitle ? (
           <p></p>
         ) : (
-          <span style={{ color: "red" }}>Please enter Spotname</span>
+          <span className="errorSpan">Please enter Spotname</span>
         )}
 
         {filteredProduct.map((id) => (
@@ -89,7 +90,7 @@ export default function EditComment() {
         {userComment ? (
           <p></p>
         ) : (
-          <span style={{ color: "red" }}>Please enter Description</span>
+          <span className="errorSpan">Please enter Description</span>
         )}
         <div style={{ marginTop: "1rem" }}>
           <div>

@@ -3,7 +3,6 @@ import { Button } from "reactstrap";
 import {
   doc,
   setDoc,
-  getDoc,
   onSnapshot,
   collection,
 } from "firebase/firestore";
@@ -12,6 +11,7 @@ import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
+import "../styles/style.css";
 
 export default function EditSpot() {
   const { spot } = useParams();
@@ -40,7 +40,6 @@ export default function EditSpot() {
       description: spotDescription,
       admin: user.email,
     };
-    console.log(docRef);
     await setDoc(docRef, payload);
     refreshPage();
   };
@@ -66,7 +65,7 @@ export default function EditSpot() {
         {spotName ? (
           <p></p>
         ) : (
-          <span style={{ color: "red" }}>Please enter Spotname</span>
+          <span className="errorSpan">Please enter Spotname</span>
         )}
         {filteredProduct.map((spot) => (
           <div style={{ marginTop: "1rem" }}>
@@ -80,7 +79,7 @@ export default function EditSpot() {
         {spotLocation ? (
           <p></p>
         ) : (
-          <span style={{ color: "red" }}>Please enter Location</span>
+          <span className="errorSpan">Please enter Location</span>
         )}
         {filteredProduct.map((spot) => (
           <div style={{ marginTop: "1rem" }}>
@@ -95,7 +94,7 @@ export default function EditSpot() {
         {spotDescription ? (
           <p></p>
         ) : (
-          <span style={{ color: "red" }}>Please enter Description</span>
+          <span className="errorSpan">Please enter Description</span>
         )}
         <div style={{ marginTop: "1rem" }}>
           <div>

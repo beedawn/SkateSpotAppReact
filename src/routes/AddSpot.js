@@ -4,6 +4,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { Input } from "reactstrap";
+import "../styles/style.css";
 
 export default function AddSpot() {
   const { user } = useContext(AuthContext);
@@ -40,7 +41,7 @@ export default function AddSpot() {
       {spotName ? (
         <p></p>
       ) : (
-        <span style={{ color: "red" }}>Please enter Spotname</span>
+        <span className="errorSpan">Please enter Spotname</span>
       )}
       <div style={{ marginTop: "1rem" }}>
         <Input
@@ -52,7 +53,7 @@ export default function AddSpot() {
       {spotLocation ? (
         <p></p>
       ) : (
-        <span style={{ color: "red" }}>Please enter Location</span>
+        <span className="errorSpan">Please enter Location</span>
       )}
       <div style={{ marginTop: "1rem" }}>
         <Input
@@ -65,7 +66,7 @@ export default function AddSpot() {
       {spotDescription ? (
         <p></p>
       ) : (
-        <span style={{ color: "red" }}>Please enter Description</span>
+        <span className="errorSpan">Please enter Description</span>
       )}
       <div style={{ marginTop: "1rem" }}>
         <div>
