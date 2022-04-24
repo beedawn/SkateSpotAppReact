@@ -22,16 +22,18 @@ export default function DisplayNameSetup() {
       updateProfile(auth.currentUser, update);
       onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
+        
       });
 
       console.log(user);
     } catch (error) {
       console.log(error.message);
     }
+    refreshPage();
   };
   const refreshPage = async () => {
-    await updateDisplayName();
-    window.location.reload(true);
+    
+     window.location.reload(true);
   };
   return (
     <div>
@@ -54,14 +56,7 @@ export default function DisplayNameSetup() {
         >
           Submit
         </Button>
-        <Button
-          color="primary"
-          onClick={() => {
-            refreshPage();
-          }}
-        >
-          Next
-        </Button>
+       
       </div>
     </div>
   );
