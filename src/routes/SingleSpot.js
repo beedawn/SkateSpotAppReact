@@ -38,16 +38,24 @@ export default function SingleSpot() {
       {filteredProduct.map((spot) => (
         <div style={{ padding: "1rem 0" }}>
           <div key={spot.id}>
+         
+               
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
             <div>
               {user.email === spot.admin ? (
+                <div>
                 <Link to={"/spot/" + spot.id + "/edit"}>
                   <Button color="primary" onClick={() => {}}>
                     {" "}
                     Edit{" "}
                   </Button>
                 </Link>
+                   <Link to={"/spot/" + spot.id + "/delete"}>
+                   <Button color="danger" className="adminButtonsEach" onClick={()=>{}}>Delete</Button>
+                   
+                   </Link>
+                   </div>
               ) : (
                 <p></p>
               )}

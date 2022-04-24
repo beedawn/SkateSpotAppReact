@@ -12,6 +12,7 @@ import Comment from "../src/comments/Comment";
 import EditSpot from "./routes/EditSpot";
 import EditComment from "./routes/EditComment";
 import DeleteComment from "./routes/DeleteComment";
+import DeleteSpot from "./routes/DeleteSpot";
 export default function Home() {
 
   return (
@@ -56,6 +57,13 @@ export default function Home() {
            />
 
 <Route path="spot/:spot/Comments/:id/delete" element={<DeleteComment
+               
+               />
+           
+             }
+           />
+
+<Route path="spot/:spot/delete" element={<DeleteSpot
                
                />
            

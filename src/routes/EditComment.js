@@ -7,6 +7,7 @@ import {
   onSnapshot,
   collection,
 } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 import { storage } from "../firebase-config";
 
@@ -83,7 +84,18 @@ export default function EditComment() {
               type="textarea"
               onChange={(event) => setUserComment(event.target.value)}
             />
+
+<div>
+          <Link to={"/spot/" + spot + "/Comments/" + id.id+ "/delete"}><Button
+              color="danger"
+             
+            >
+              {" "}
+              Delete{" "}
+            </Button></Link>
           </div>
+          </div>
+          
         ))}
         {userComment ? (
           <p></p>
@@ -114,6 +126,7 @@ export default function EditComment() {
               Cancel{" "}
             </Button>
           </div>
+         
         </div>
       </div>
     );
