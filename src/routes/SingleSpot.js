@@ -70,6 +70,10 @@ export default function SingleSpot() {
                    <Button color="danger" className="adminButtonsEach" onClick={()=>{}}>Delete</Button>
                    
                    </Link>
+                   <Link to={"/spot/" + spot.id + "/upload"}>
+                   <Button color="success" className="adminButtonsEach" onClick={()=>{}}>Upload</Button>
+                   
+                   </Link>
                    </div>
               ) : (
                 <p></p>

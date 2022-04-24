@@ -37,6 +37,7 @@ export default function AddComment() {
       comment: userComment,
       admin: user.email,
     };
+    await handleUpload();
     await addDoc(collectionRef, payload);
     refreshPage();
   };
@@ -44,9 +45,9 @@ export default function AddComment() {
   
   const handleUpload = () => {
    if(imageUpload == null) return;
-   const imageRef = ref(storage, `images/${spot}/${v4() }`);
+   const imageRef = ref(storage, `images/${spot}/${v4()}`);
    uploadBytes(imageRef, imageUpload).then(()=>{
-    alert("Image Uploaded");
+   console.log("Image Uploaded.");
    })
 
   };
@@ -104,7 +105,7 @@ export default function AddComment() {
           accept=".png, .jpg, .jpeg"
           onChange={(event)=> {setImageUpload(event.target.files[0])}}
         />
-        <button onClick={handleUpload}>Upload</button>
+        
         <div style={{ marginTop: "1rem" }}>
           <div>
             {" "}

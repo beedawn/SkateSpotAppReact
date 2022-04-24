@@ -65,6 +65,12 @@ export default function Spots() {
                       <Button>Comment</Button>
                     </Link>
                   </div>
+                  <div style={{ marginTop: "10px" }}>
+                  <Link to={"/spot/" + spot.id + "/upload"}>
+                   <Button color="success" onClick={()=>{}}>Upload</Button>
+                   
+                   </Link>
+                   </div>
                 </div>
 
                 <h6>{spot.location}</h6>
