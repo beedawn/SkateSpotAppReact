@@ -1,16 +1,21 @@
 import React, { useState, useContext } from "react";
 import { Button } from "reactstrap";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
+import { getStorage, ref, uploadBytes, listAll, list, getDownloadURL } from "firebase/storage";
 import { Input } from "reactstrap";
 import "../styles/style.css";
+import {v4} from "uuid";
+import { useParams } from "react-router-dom";
 
 export default function AddSpot() {
+  const { spot } = useParams();
   const { user } = useContext(AuthContext);
   const [spotLocation, setSpotLocation] = useState("");
   const [spotName, setSpotName] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
+  const [imageUpload, setImageUpload] = useState(null);
 
   const handleNewSpot = async () => {
     const collectionRef = collection(db, "spots");
@@ -27,6 +32,14 @@ export default function AddSpot() {
   const refreshPage = async () => {
     window.location.replace("/spots");
   };
+  const handleUpload = () => {
+    if(imageUpload == null) return;
+    const imageRef = ref(storage, `images/${spot}/${v4() }`);
+    uploadBytes(imageRef, imageUpload).then(()=>{
+     alert("Image Uploaded");
+    })
+ 
+   };
 
   return (
     <div className="globalTopMargin">
@@ -68,6 +81,13 @@ export default function AddSpot() {
       ) : (
         <span className="errorSpan">Please enter Description</span>
       )}
+
+<Input
+          type="file"
+          accept=".png, .jpg, .jpeg"
+          onChange={(event)=> {setImageUpload(event.target.files[0])}}
+        />
+        <button onClick={handleUpload}>Upload</button>
       <div style={{ marginTop: "1rem" }}>
         <div>
           {spotName && spotLocation && spotDescription ? (

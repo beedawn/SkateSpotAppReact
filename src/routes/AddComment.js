@@ -24,19 +24,9 @@ export default function AddComment() {
   const [userComment, setUserComment] = useState("");
   const [userTitle, setUserTitle] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
- const [imageList, setImageList] = useState([]);
-const imageListRef = ref(storage, ('images/' + spot + '/'));
-    useEffect(() =>{
- listAll(imageListRef).then((response)=>{
-        response.items.forEach((item)=> {
-            getDownloadURL(item).then((url) => {
-                setImageList((prev)=> [...prev, url]);
-            })
-        })
 
 
- })
-    },[]);
+
 
   const handleNewComment = async () => {
     const collectionRef = collection(db, "comments");
@@ -51,11 +41,7 @@ const imageListRef = ref(storage, ('images/' + spot + '/'));
     refreshPage();
   };
 
-  const handleChange = e => {
-      if(e.target.files[0]){
-
-      }
-  }
+  
   const handleUpload = () => {
    if(imageUpload == null) return;
    const imageRef = ref(storage, `images/${spot}/${v4() }`);
@@ -135,9 +121,7 @@ const imageListRef = ref(storage, ('images/' + spot + '/'));
           </div>
         </div>
       </Card>
-      {imageList.map((url)=>{
-          return <img src={url} style={{height:"200px"}}/>
-      })}
+     
     </div>
   );
 }
