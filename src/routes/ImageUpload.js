@@ -36,6 +36,7 @@ const [check, setCheck] =useState("true");
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
+        <h2> Spot {spot}</h2><h3> Image Upload</h3>
             <Input
           type="file"
           accept=".png, .jpg, .jpeg"
