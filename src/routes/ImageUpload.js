@@ -84,7 +84,7 @@ const handleEdit = async (id) => {
      
  console.log(imageList);
  console.log(vkey)
-    //  window.location.replace(`/spot/${spot}/`);
+     window.location.replace(`/spot/${spot}/`);
     });
    
   };
