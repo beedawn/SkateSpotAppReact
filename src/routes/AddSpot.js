@@ -32,11 +32,11 @@ export default function AddSpot() {
       admin: user.email,
     };
     await addDoc(collectionRef, payload);
-    refreshPage();
+    uploadPage();
   };
 
-  const refreshPage = async () => {
-    window.location.replace("/spots");
+  const uploadPage = async () => {
+    window.location.replace("/spots/");
   };
   const handleUpload = () => {
     if(imageUpload == null) return;
@@ -106,12 +106,7 @@ export default function AddSpot() {
         <span className="errorSpan">Please enter Description</span>
       )}
 
-<Input
-          type="file"
-          accept=".png, .jpg, .jpeg"
-          onChange={(event)=> {setImageUpload(event.target.files[0])}}
-        />
-     
+
       <div style={{ marginTop: "1rem" }}>
         <div>
           {spotName && spotLocation && spotDescription ? (
@@ -129,7 +124,7 @@ export default function AddSpot() {
           <Button
             color="primary"
             onClick={() => {
-              refreshPage();
+              uploadPage();
             }}
           >
             {" "}

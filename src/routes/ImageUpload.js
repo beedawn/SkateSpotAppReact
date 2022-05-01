@@ -77,9 +77,10 @@ const handleEdit = async (id) => {
     //  }
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/${spot}/${vkey}`);
-    handleEdit(spot);
+   
     uploadBytes(imageRef, imageUpload).then(() => {
       console.log("Image Uploaded");
+      console.log(vkey);
      
  console.log(imageList);
  console.log(vkey)

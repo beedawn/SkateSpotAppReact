@@ -34,7 +34,7 @@ export default function SingleSpot() {
 
       
   // filter products
-  const filteredProduct = spots.filter(function (el) {
+  const filteredProduct = spots.filter((el) => {
     return el.id === spot;
   });
 
