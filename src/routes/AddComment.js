@@ -1,21 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  CardText,
-} from "reactstrap";
+import React, { useState, useContext } from "react";
+import { Button, Card, CardHeader } from "reactstrap";
 import { collection, addDoc } from "firebase/firestore";
-import { db, storage } from "../firebase-config";
+import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import "../styles/style.css";
-import { getStorage, ref, uploadBytes, listAll, list, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Input } from "reactstrap";
-import {v4} from "uuid";
-
+import { v4 } from "uuid";
 
 export default function AddComment() {
   const storage = getStorage();
@@ -24,9 +16,6 @@ export default function AddComment() {
   const [userComment, setUserComment] = useState("");
   const [userTitle, setUserTitle] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
-
-
-
 
   const handleNewComment = async () => {
     const collectionRef = collection(db, "comments");
@@ -42,14 +31,12 @@ export default function AddComment() {
     refreshPage();
   };
 
-  
   const handleUpload = () => {
-   if(imageUpload == null) return;
-   const imageRef = ref(storage, `images/${spot}/${v4()}`);
-   uploadBytes(imageRef, imageUpload).then(()=>{
-   console.log("Image Uploaded.");
-   })
-
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/${spot}/${v4()}`);
+    uploadBytes(imageRef, imageUpload).then(() => {
+      console.log("Image Uploaded.");
+    });
   };
 
   const refreshPage = async () => {
@@ -103,9 +90,11 @@ export default function AddComment() {
         <Input
           type="file"
           accept=".png, .jpg, .jpeg"
-          onChange={(event)=> {setImageUpload(event.target.files[0])}}
+          onChange={(event) => {
+            setImageUpload(event.target.files[0]);
+          }}
         />
-        
+
         <div style={{ marginTop: "1rem" }}>
           <div>
             {" "}
@@ -122,7 +111,6 @@ export default function AddComment() {
           </div>
         </div>
       </Card>
-     
     </div>
   );
 }

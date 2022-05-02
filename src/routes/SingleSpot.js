@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { db, storage } from "../firebase-config";
-import { getStorage, ref, uploadBytes, listAll, list, getDownloadURL } from "firebase/storage";
+import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
@@ -23,7 +23,7 @@ export default function SingleSpot() {
               setImageList((prev)=> [...prev, url]);
           })
       })
-
+      
 
 })
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
@@ -33,25 +33,26 @@ export default function SingleSpot() {
   }, []);
 
       
-  // filter products
-  const filteredProduct = spots.filter((el) => {
+  // filter spot
+  const filteredSpot = spots.filter((el) => {
     return el.id === spot;
   });
 
-  if (filteredProduct.length === 0) {
+  if (filteredSpot.length === 0) {
     return <div>404 Error - Not Found</div>;
   }
-
+  console.log(imageList)
   return (
     <div>
       <div style={{ padding: "1rem" }}>
         {" "}
         <h2>Spots</h2>
       </div>
-      {filteredProduct.map((spot) => (
+      {filteredSpot.map((spot) => (
         <div style={{ padding: "1rem 0" }}>
           <div key={spot.id}>
           {imageList.map((url)=>{
+              console.log(url)
           return <img src={url} style={{height:"200px"}}/>
       })}
                
