@@ -52,8 +52,10 @@ export default function Spots() {
           {" "}
           <h2>Spots</h2>
         </div>
-        {console.log(imageList)}
-        {spot ? (<div>text</div>):(<div>fail</div>)}{spots.map((spot) => (
+        {/* {console.log(imageList)}
+        {spot ? (<div>text</div>):(<div>fail</div>)} */}
+        
+        {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }}>
             <Card>
               <div key={spot.id}>
@@ -67,9 +69,9 @@ export default function Spots() {
                     marginTop: "10px",
                   }}
                 >
-                      {imageList.map((url)=>{
+                      {/* {imageList.map((url)=>{
           return <div>{url} </div>
-      })}
+      })} */}
                   {user.email === spot.admin ? (
                     <Link to={"/spot/" + spot.id + "/edit"}>
                       {" "}
