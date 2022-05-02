@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { db, storage } from "../firebase-config";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
-import { onSnapshot, collection } from "firebase/firestore";
+import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
@@ -26,13 +26,26 @@ export default function SingleSpot() {
       
 
 })
+
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
   }, []);
 
-      
+  const handleEdit = async (id, url) => {
+    const docRef = doc(db, "spots", id);
+    console.log(docRef.name)
+    const payload = {
+      name: docRef.name,
+      location: docRef.location,
+      description: docRef.description,
+      admin: user.email,
+      images:[...docRef.images, {url}]
+    };
+    await setDoc(docRef, payload);
+    
+  };
   // filter spot
   const filteredSpot = spots.filter((el) => {
     return el.id === spot;
@@ -53,8 +66,13 @@ export default function SingleSpot() {
           <div key={spot.id}>
           {imageList.map((url)=>{
               console.log(url)
-          return <img src={url} style={{height:"200px"}}/>
-      })}
+              
+          return <Button onClick={()=>{handleEdit(spot.id, url)} }>Hi</Button>
+      })}  {imageList.map((url)=>{
+    
+        <img src={url} style={{height:"200px"}}/>
+    
+})}
                
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
@@ -80,6 +98,7 @@ export default function SingleSpot() {
                 <p></p>
               )}
             </div>
+            
             <p>{spot.description}</p>
           </div>
         </div>

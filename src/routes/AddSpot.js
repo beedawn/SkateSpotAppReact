@@ -30,6 +30,7 @@ export default function AddSpot() {
       location: spotLocation,
       description: spotDescription,
       admin: user.email,
+      images:[]
     };
     await addDoc(collectionRef, payload);
     uploadPage();
