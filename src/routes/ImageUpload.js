@@ -65,7 +65,7 @@ export default function ImageUpload() {
 
       console.log(imageList);
       console.log(vkey);
-      window.location.replace(`/spot/${spot}/`);
+      window.location.replace(`/spot/${spot}/uploadConfirm`);
     });
   };
   const imageSpot = imageList.filter((image) => {

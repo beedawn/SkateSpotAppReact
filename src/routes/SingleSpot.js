@@ -41,23 +41,7 @@ export default function SingleSpot() {
   const filteredSpot = spots.filter((el) => {
     return el.id === spot;
   });
-  const handleEdit = async (id, url) => {
-    const docRef = doc(db, "spots", id);
-    console.log(docRef)
-
-  
-    
-    const payload = {
-      name: filteredSpot[0].name,
-      location: filteredSpot[0].location,
-      description: filteredSpot[0].description,
-      id: filteredSpot[0].id,
-      admin: filteredSpot[0].admin,
-      images:[...filteredSpot[0].images, {url}]
-    };
-    await setDoc(docRef, payload);
-  
-  };
+ 
 
 
   if (filteredSpot.length === 0) {
@@ -76,12 +60,12 @@ export default function SingleSpot() {
           <div key={spot.id}>
           {/* {
       })}  */}
-       {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> <img src={image.url} style={{height:"200px"}}/>) :(<div></div>)
+       {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> <img src={image} style={{height:"200px"}}/>) :(<div></div>)
     
         
     
 }
-               
+               {console.log(spot)}
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
             <div>

@@ -49,67 +49,58 @@ imageList.map((url)=> handleEdit(spot.id, url))
       description: filteredSpot[0].description,
       id: filteredSpot[0].id,
       admin: filteredSpot[0].admin,
-      images:[...filteredSpot[0].images, {url}]
+      images:[...filteredSpot[0].images, ...imageList ]
     };
     await setDoc(docRef, payload);
   
+
+    window.location.replace(`/spot/${spot}`);
   };
 
 
   if (filteredSpot.length === 0) {
     return <div>404 Error - Not Found</div>;
   }
-  
-  console.log(filteredSpot[0].images.map((image)=> console.log(image.url)))
+
   return (
     <div>
       <div style={{ padding: "1rem" }}>
         {" "}
-        <h2>Spots</h2>
+        <h2>Confirm Image Upload</h2>
       </div>
       {filteredSpot.map((spot) => (
         <div style={{ padding: "1rem 0" }}>
+             
           <div key={spot.id}>
-         {imageList.map((url)=> handleEdit(spot.id, url))}
-       {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> <img src={image.url} style={{height:"200px"}}/>) :(<div></div>)
+          <h4>{spot.name}</h4>
+              
     
-        
-    
-}
+       {filteredSpot[0].images ? (<div><img src={imageList[imageList.length-1] } style={{height:"200px"}}/></div>) :(<div></div>)  }
+       
                
-            <h4>{spot.name}</h4>
-            <h5>{spot.location}</h5>
+           
+            
             <div>
               </div>
             <div>
-              {user.email === spot.admin ? (
+           
                 <div>
-                <Link to={"/spot/" + spot.id + "/edit"}>
-                  <Button color="primary" onClick={() => {}}>
+              
+                  <Button color="primary" onClick={() => handleEdit(spot.id)}>
                     {" "}
-                    Edit{" "}
+                    Confirm Upload{" "}
                   </Button>
-                </Link>
-                   <Link to={"/spot/" + spot.id + "/delete"}>
-                   <Button color="danger" className="adminButtonsEach" onClick={()=>{}}>Delete</Button>
+             
                    
-                   </Link>
-                   <Link to={"/spot/" + spot.id + "/upload"}>
-                   <Button color="success" className="adminButtonsEach" onClick={()=>{}}>Upload</Button>
-                   
-                   </Link>
                    </div>
-              ) : (
-                <p></p>
-              )}
-            </div>
             
-            <p>{spot.description}</p>
+          
+            </div>
+     
           </div>
         </div>
       ))}
-      <a href="/spots/">Back to Spots</a>
-      <Comment />
+   
       <div>
       <a href="/spots/">Back to Spots</a>
       </div>

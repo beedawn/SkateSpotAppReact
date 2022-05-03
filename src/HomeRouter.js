@@ -15,6 +15,7 @@ import DeleteComment from "./routes/DeleteComment";
 import DeleteSpot from "./routes/DeleteSpot";
 import DisplayNameSetup from "./login/DisplayNameSetup";
 import ImageUpload from "./routes/ImageUpload";
+import ImageUploadConfirm from "./routes/ImageUploadConfirm";
 export default function Home() {
 
   return (
@@ -78,6 +79,12 @@ export default function Home() {
              }
            />
 <Route path="spot/:spot/upload" element={<ImageUpload
+               
+               />
+           
+             }
+           />
+           <Route path="spot/:spot/uploadConfirm" element={<ImageUploadConfirm
                
                />
            
