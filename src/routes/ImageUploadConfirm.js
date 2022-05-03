@@ -106,7 +106,7 @@ export default function ImageUploadConfirm() {
       ))}
    
       <div>
-      <a href="/spots/">Back to Spots</a>
+      <a href={`/spot/${spot}`}>Back to Spot</a>
       </div>
     </div>
   );
