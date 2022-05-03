@@ -21,40 +21,50 @@ export default function SingleSpot() {
       response.items.forEach((item)=> {
           getDownloadURL(item).then((url) => {
               setImageList((prev)=> [...prev, url]);
+             
           })
       })
       
 
 })
 
+imageList.map((url)=> handleEdit(spot.id, url))
+
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
-  }, []);
 
-  const handleEdit = async (id, url) => {
-    const docRef = doc(db, "spots", id);
-    console.log(docRef.name)
-    const payload = {
-      name: docRef.name,
-      location: docRef.location,
-      description: docRef.description,
-      admin: user.email,
-      images:[...docRef.images, {url}]
-    };
-    await setDoc(docRef, payload);
-    
-  };
+
+  }, []);
   // filter spot
   const filteredSpot = spots.filter((el) => {
     return el.id === spot;
   });
+  const handleEdit = async (id, url) => {
+    const docRef = doc(db, "spots", id);
+    console.log(docRef)
+
+  
+    
+    const payload = {
+      name: filteredSpot[0].name,
+      location: filteredSpot[0].location,
+      description: filteredSpot[0].description,
+      id: filteredSpot[0].id,
+      admin: filteredSpot[0].admin,
+      images:[...filteredSpot[0].images, {url}]
+    };
+    await setDoc(docRef, payload);
+  
+  };
+
 
   if (filteredSpot.length === 0) {
     return <div>404 Error - Not Found</div>;
   }
-  console.log(imageList)
+  
+  console.log(filteredSpot[0].images.map((image)=> console.log(image.url)))
   return (
     <div>
       <div style={{ padding: "1rem" }}>
@@ -64,18 +74,18 @@ export default function SingleSpot() {
       {filteredSpot.map((spot) => (
         <div style={{ padding: "1rem 0" }}>
           <div key={spot.id}>
-          {imageList.map((url)=>{
-              console.log(url)
-              
-          return <Button onClick={()=>{handleEdit(spot.id, url)} }>Hi</Button>
-      })}  {imageList.map((url)=>{
+          {/* {
+      })}  */}
+       {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> <img src={image.url} style={{height:"200px"}}/>) :(<div></div>)
     
-        <img src={url} style={{height:"200px"}}/>
+        
     
-})}
+}
                
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
+            <div>
+              </div>
             <div>
               {user.email === spot.admin ? (
                 <div>
