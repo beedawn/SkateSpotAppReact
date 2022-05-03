@@ -43,10 +43,8 @@ export default function ImageUploadConfirm() {
   });
   const handleEdit = async (id, url) => {
     const docRef = doc(db, "spots", id);
-    if(filteredSpot[0].images[0].includes(imageList[imageList.length-1])){
-      window.location.replace(`/spot/${spot}`);
-    }
-    else{
+    console.log(filteredSpot)
+  
     const payload = {
       name: filteredSpot[0].name,
       location: filteredSpot[0].location,
@@ -59,7 +57,8 @@ export default function ImageUploadConfirm() {
     await setDoc(docRef, payload);
   
   
-     window.location.replace(`/spot/${spot}`);}
+     window.location.replace(`/spot/${spot}`);
+    
   };
 
 
@@ -80,7 +79,7 @@ export default function ImageUploadConfirm() {
           <h4>{spot.name}</h4>
               
     
-       {filteredSpot[0].images ? (<div><img src={imageList[imageList.length-1] } style={{height:"200px"}}/></div>) :(<div></div>)  }
+       <div><img alt={imageList[imageList.length-1]} src={imageList[imageList.length-1] } style={{height:"200px"}}/></div>
        
                
            
