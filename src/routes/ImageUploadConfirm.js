@@ -9,7 +9,7 @@ import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
 
 
-export default function SingleSpot() {
+export default function ImageUploadConfirm() {
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
   console.log(spot);
@@ -28,7 +28,7 @@ export default function SingleSpot() {
 
 })
 
-
+imageList.map((url)=> handleEdit(spot.id, url))
 
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -43,10 +43,6 @@ export default function SingleSpot() {
   });
   const handleEdit = async (id, url) => {
     const docRef = doc(db, "spots", id);
-    console.log(docRef)
-
-  
-    
     const payload = {
       name: filteredSpot[0].name,
       location: filteredSpot[0].location,
@@ -74,8 +70,7 @@ export default function SingleSpot() {
       {filteredSpot.map((spot) => (
         <div style={{ padding: "1rem 0" }}>
           <div key={spot.id}>
-          {/* {
-      })}  */}
+         {imageList.map((url)=> handleEdit(spot.id, url))}
        {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> <img src={image.url} style={{height:"200px"}}/>) :(<div></div>)
     
         
