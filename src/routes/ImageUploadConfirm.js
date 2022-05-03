@@ -28,7 +28,7 @@ export default function ImageUploadConfirm() {
 
 })
 
-imageList.map((url)=> handleEdit(spot.id, url))
+
 
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -43,6 +43,10 @@ imageList.map((url)=> handleEdit(spot.id, url))
   });
   const handleEdit = async (id, url) => {
     const docRef = doc(db, "spots", id);
+    if(filteredSpot[0].images[0].includes(imageList[imageList.length-1])){
+      window.location.replace(`/spot/${spot}`);
+    }
+    else{
     const payload = {
       name: filteredSpot[0].name,
       location: filteredSpot[0].location,
@@ -51,10 +55,11 @@ imageList.map((url)=> handleEdit(spot.id, url))
       admin: filteredSpot[0].admin,
       images:[...filteredSpot[0].images, ...imageList ]
     };
+    console.log(filteredSpot[0].images)
     await setDoc(docRef, payload);
   
-
-    window.location.replace(`/spot/${spot}`);
+  
+     window.location.replace(`/spot/${spot}`);}
   };
 
 
