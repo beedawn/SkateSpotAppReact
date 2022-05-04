@@ -59,14 +59,14 @@ export default function SingleSpot() {
         <div style={{ padding: "1rem 0" }}>
           <div key={spot.id}>
           {console.log()}
-       {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> {return(<div>{console.log(image)}<img src={image.url} style={{height:"200px"}}/><p>Posted By:{image.displayName}</p></div>)}) :(<div></div>)}
+       {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> {return(<div>{console.log(image)}<img src={image.url} style={{height:"200px"}}/><p>Posted By: {image.displayName} on {image.time}</p></div>)}) :(<div></div>)}
                {console.log(spot)}
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
             <div>
               </div>
             <div>
-              {user.email === spot.admin ? (
+              {user.email === spot.admin.email ? (
                 <div>
                 <Link to={"/spot/" + spot.id + "/edit"}>
                   <Button color="primary" onClick={() => {}}>

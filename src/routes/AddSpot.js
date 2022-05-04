@@ -25,12 +25,15 @@ export default function AddSpot() {
   const handleNewSpot = async () => {
     await handleUpload();
     const collectionRef = collection(db, "spots");
+    const date = new Date(Date.now());
     const payload = {
       name: spotName,
       location: spotLocation,
       description: spotDescription,
-      admin: user.email,
-      images:[]
+      admin: {email: user.email, name:user.displayName},
+
+      images:[],
+      time: date.toString()
     };
     await addDoc(collectionRef, payload);
     uploadPage();

@@ -75,7 +75,8 @@ export default function Comment() {
               </div>
               <CardTitle style={{ fontSize: "10px" }}>
                 {" "}
-                Posted By: {comment.name}
+                Posted By: {comment.name} on {comment.time};
+                {console.log(comment)}
               </CardTitle>
             </Card>
           ))}
@@ -86,10 +87,8 @@ export default function Comment() {
     return (
       <div style={{ padding: "1rem 0" }}>
         <h2>Comments</h2>
-        <div>
-          <img src={loading} alt="Loading" />
-        </div>
-        <p>Loading...</p>
+       
+        <Link to={"/spot/" + spot + "/addComment/"}>Add a Comment</Link>
       </div>
     );
   }

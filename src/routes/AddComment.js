@@ -19,14 +19,16 @@ export default function AddComment() {
 
   const handleNewComment = async () => {
     const collectionRef = collection(db, "comments");
+    const date = new Date(Date.now());
     const payload = {
       spot: spot,
       name: user.displayName,
       title: userTitle,
       comment: userComment,
       admin: user.email,
+      time: date.toString()
     };
-    await handleUpload();
+    
     await addDoc(collectionRef, payload);
     refreshPage();
   };

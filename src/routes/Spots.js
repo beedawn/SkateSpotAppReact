@@ -66,7 +66,7 @@ export default function Spots() {
                   {/* {imageList.map((url)=>{
           return <div>{url} </div>
       })} */}
-                  {user.email === spot.admin ? (
+                  {user.email === spot.admin.email ? (
                     <Link to={"/spot/" + spot.id + "/edit"}>
                       {" "}
                       <Button color="primary"> Edit </Button>
@@ -90,6 +90,7 @@ export default function Spots() {
 
                 <h6>{spot.location}</h6>
                 <p>{spot.description}</p>
+                <p>Posted By {spot.admin.name} on {spot.time}</p>
               </div>
             </Card>
           </div>
