@@ -8,7 +8,7 @@ import AddSpot from "./routes/AddSpot";
 import Account from "./routes/Account";
 import SingleSpot from "./routes/SingleSpot"
 import AddComment from "./routes/AddComment";
-import Comment from "../src/comments/Comment";
+import Comment from "./comments/Comment";
 import EditSpot from "./routes/EditSpot";
 import EditComment from "./routes/EditComment";
 import DeleteComment from "./routes/DeleteComment";

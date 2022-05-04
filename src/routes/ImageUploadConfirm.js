@@ -44,14 +44,18 @@ export default function ImageUploadConfirm() {
   const handleEdit = async (id, url) => {
     const docRef = doc(db, "spots", id);
     console.log(filteredSpot)
-  
+  const arrayImg = [...filteredSpot[0].images];
+  arrayImg.push({displayName: user.displayName, 
+    url: imageList[imageList.length-1]}
+    );
+    console.log(arrayImg)
     const payload = {
       name: filteredSpot[0].name,
       location: filteredSpot[0].location,
       description: filteredSpot[0].description,
       id: filteredSpot[0].id,
       admin: filteredSpot[0].admin,
-      images:[...filteredSpot[0].images, ...imageList ]
+      images:[...arrayImg ]
     };
     console.log(filteredSpot[0].images)
     await setDoc(docRef, payload);

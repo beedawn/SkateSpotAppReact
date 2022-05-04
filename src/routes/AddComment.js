@@ -87,13 +87,7 @@ export default function AddComment() {
         ) : (
           <span className="errorSpan">Please enter a Comment</span>
         )}
-        <Input
-          type="file"
-          accept=".png, .jpg, .jpeg"
-          onChange={(event) => {
-            setImageUpload(event.target.files[0]);
-          }}
-        />
+   
 
         <div style={{ marginTop: "1rem" }}>
           <div>

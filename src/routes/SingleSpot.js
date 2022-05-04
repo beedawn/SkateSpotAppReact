@@ -48,7 +48,7 @@ export default function SingleSpot() {
     return <div>404 Error - Not Found</div>;
   }
   
-  console.log(filteredSpot[0].images.map((image)=> console.log(image.url)))
+  // console.log(filteredSpot[0].images.map((image)=> console.log(image.url)))
   return (
     <div>
       <div style={{ padding: "1rem" }}>
@@ -58,13 +58,8 @@ export default function SingleSpot() {
       {filteredSpot.map((spot) => (
         <div style={{ padding: "1rem 0" }}>
           <div key={spot.id}>
-          {/* {
-      })}  */}
-       {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> <img src={image} style={{height:"200px"}}/>) :(<div></div>)
-    
-        
-    
-}
+          {console.log()}
+       {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> {return(<div>{console.log(image)}<img src={image.url} style={{height:"200px"}}/><p>Posted By:{image.displayName}</p></div>)}) :(<div></div>)}
                {console.log(spot)}
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
