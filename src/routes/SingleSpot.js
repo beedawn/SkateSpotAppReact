@@ -7,6 +7,7 @@ import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
+import SpotPics from "./SpotPics";
 
 
 export default function SingleSpot() {
@@ -53,16 +54,16 @@ export default function SingleSpot() {
     <div>
       <div style={{ padding: "1rem" }}>
         {" "}
-        <h2>Spots</h2>
+        <h2>Spot</h2>
       </div>
+      <SpotPics />
       {filteredSpot.map((spot) => (
         <div>
           <div key={spot.id}>
             <div>Originally posted by {spot.admin.name} on {spot.timePosted}</div>
             <div>{spot.edited === true ? (<>Edited by {spot.admin.name} on {spot.time} </>):(<></>)} <>by</> {spot.admin.name}</div>
           {console.log()}
-       {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> {return(<div>{console.log(image)}<img src={image.url} style={{height:"200px"}}/><p>Posted By: {image.displayName} on {image.time}</p></div>)}) :(<div></div>)}
-               {console.log(spot)}
+       
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
             <div>

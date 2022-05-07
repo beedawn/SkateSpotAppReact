@@ -85,7 +85,7 @@ export default function Home() {
            
              }
            />
-           <Route path="spot/:spot/uploadConfirm" element={<ImageUploadConfirm
+           <Route path="spot/:spot/uploadConfirm/:id" element={<ImageUploadConfirm
                
                />
            

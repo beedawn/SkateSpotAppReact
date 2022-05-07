@@ -2,11 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
 import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { Link } from "react-router-dom";
-import { db } from "../firebase-config";
+import { ref, listAll, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import "../styles/style.css";
+import SpotPics from "./SpotPics";
 
 export default function EditSpot() {
   const { spot } = useParams();
@@ -36,6 +38,7 @@ export default function EditSpot() {
       description: spotDescription,
       admin: { email: user.email, name: user.displayName },
       time: date.toString(),
+      images: filteredSpots[0].images,
       timePosted:filteredSpots[0].timePosted,
       edited: true,
     };
@@ -54,6 +57,7 @@ export default function EditSpot() {
       
       <div className="globalTopMargin">
         <h2>Edit a Spot</h2>
+        <SpotPics />
         {filteredSpots.map((spot) => (
           <div className="globalTopMargin">
             <Input

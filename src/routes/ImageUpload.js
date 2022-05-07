@@ -60,12 +60,7 @@ export default function ImageUpload() {
     const imageRef = ref(storage, `images/${spot}/${vkey}`);
 
     uploadBytes(imageRef, imageUpload).then(() => {
-      console.log("Image Uploaded");
-      console.log(vkey);
-
-      console.log(imageList);
-      console.log(vkey);
-      window.location.replace(`/spot/${spot}/uploadConfirm`);
+      window.location.replace(`/spot/${spot}/uploadConfirm/${vkey}`);
     });
   };
   const imageSpot = imageList.filter((image) => {

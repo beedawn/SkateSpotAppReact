@@ -9,7 +9,7 @@ import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
 
 export default function ImageUploadConfirm() {
-  const { spot } = useParams();
+  const { spot, id } = useParams();
   const { user } = useContext(AuthContext);
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/" + spot + "/");
@@ -37,7 +37,8 @@ export default function ImageUploadConfirm() {
     const date = new Date(Date.now());
     array.push({
       displayName: user.displayName,
-
+      id: id,
+      spot:spot,
       url: imageList[imageList.length - 1],
       time: date.toString(),
     });
@@ -72,7 +73,7 @@ export default function ImageUploadConfirm() {
       images: imageArrayHandler(filteredSpot),
       time: date.toString(),
       timePosted:filteredSpot[0].timePosted,
-      edited:false
+      edited:filteredSpot[0].edited
     };
 
     await setDoc(docRef, payload);
