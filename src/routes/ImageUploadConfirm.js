@@ -8,69 +8,79 @@ import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
 
-
 export default function ImageUploadConfirm() {
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
-  console.log(spot);
   const [imageList, setImageList] = useState([]);
-  const imageListRef = ref(storage, ('images/' + spot + '/'));
+  const imageListRef = ref(storage, "images/" + spot + "/");
   const [spots, setSpots] = useState([]);
   useEffect(() => {
-    listAll(imageListRef).then((response)=>{
-      response.items.forEach((item)=> {
-          getDownloadURL(item).then((url) => {
-              setImageList((prev)=> [...prev, url]);
-             
-          })
-      })
-      
-
-})
-
-
+    listAll(imageListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setImageList((prev) => [...prev, url]);
+        });
+      });
+    });
 
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
-
-
   }, []);
   // filter spot
   const filteredSpot = spots.filter((el) => {
     return el.id === spot;
   });
+
+  const arrayPush = (array) => {
+    const date = new Date(Date.now());
+    array.push({
+      displayName: user.displayName,
+
+      url: imageList[imageList.length - 1],
+      time: date.toString(),
+    });
+    return array
+  }
+  const imageArrayHandler= (filteredSpot) => {
+    
+    if(filteredSpot[0].images){
+      const arrayImg = [...filteredSpot[0].images];
+   
+     
+      return arrayPush(arrayImg);
+    }else{
+      const arrayImg = [];
+      
+      return arrayPush(arrayImg);
+    }
+  }
+
   const handleEdit = async (id, url) => {
     const docRef = doc(db, "spots", id);
-    console.log(filteredSpot)
+    console.log(filteredSpot);
     const date = new Date(Date.now());
-  const arrayImg = [...filteredSpot[0].images];
-  arrayImg.push({displayName: user.displayName, 
 
-    url: imageList[imageList.length-1], 
-    time: date.toString()}
-    );
-    console.log(arrayImg)
-
+  
     const payload = {
       name: filteredSpot[0].name,
       location: filteredSpot[0].location,
       description: filteredSpot[0].description,
       id: filteredSpot[0].id,
       admin: filteredSpot[0].admin,
-      images:[...arrayImg ],
-   
+      images: imageArrayHandler(filteredSpot),
+      time: date.toString(),
+      timePosted:filteredSpot[0].timePosted,
+      edited:false
     };
-    console.log(filteredSpot[0].images)
+
     await setDoc(docRef, payload);
-  
-  
-     window.location.replace(`/spot/${spot}`);
-    
+
+    window.location.replace(`/spot/${spot}`);
   };
 
-
+  console.log(filteredSpot[0]);
   if (filteredSpot.length === 0) {
     return <div>404 Error - Not Found</div>;
   }
@@ -83,39 +93,32 @@ export default function ImageUploadConfirm() {
       </div>
       {filteredSpot.map((spot) => (
         <div style={{ padding: "1rem 0" }}>
-             
           <div key={spot.id}>
-          <h4>{spot.name}</h4>
-              
-    
-       <div><img alt={imageList[imageList.length-1]} src={imageList[imageList.length-1] } style={{height:"200px"}}/></div>
-       
-               
-           
-            
+            <h4>{spot.name}</h4>
+
             <div>
-              </div>
-            <div>
-           
-                <div>
-              
-                  <Button color="primary" onClick={() => handleEdit(spot.id)}>
-                    {" "}
-                    Confirm Upload{" "}
-                  </Button>
-             
-                   
-                   </div>
-            
-          
+              <img
+                alt={imageList[imageList.length - 1]}
+                src={imageList[imageList.length - 1]}
+                style={{ height: "200px" }}
+              />
             </div>
-     
+
+            <div></div>
+            <div>
+              <div>
+                <Button color="primary" onClick={() => handleEdit(spot.id)}>
+                  {" "}
+                  Confirm Upload{" "}
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       ))}
-   
+
       <div>
-      <a href={`/spot/${spot}`}>Back to Spot</a>
+        <a href={`/spot/${spot}`}>Back to Spot</a>
       </div>
     </div>
   );

@@ -34,6 +34,11 @@ export default function Spots() {
         });
       });
     });
+
+    onSnapshot(collection(db, "comments"), (snapshot) => {
+      setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+     });
+
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -41,10 +46,8 @@ export default function Spots() {
  
     return unsub;
 
-    // const unsub1 = onSnapshot(collection(db, "comments"), (snapshot) => {
-    //   setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    // });
-    // return unsub1;
+  
+
 
   }, []);
 
@@ -100,7 +103,8 @@ export default function Spots() {
 
                 <h6>{spot.location}</h6>
                 <p>{spot.description}</p>
-                <p>{spot.edited === true ? (<>Posted</>) : (<>Edited</>)} By {spot.admin.name} on {spot.time}</p>
+                {/* <p>{ filteredComments = comments.filter((comment) => {return comment.spot === spot.id}}</p> */}
+                <p>{spot.edited === true ? (<>Edited on {spot.time} by {spot.admin.name}</>):(<></>)} </p><p>Posted By {spot.admin.name} on {spot.timePosted}</p>
               </div>
             </Card>
           </div>

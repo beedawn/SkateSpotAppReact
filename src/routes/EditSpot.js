@@ -36,6 +36,7 @@ export default function EditSpot() {
       description: spotDescription,
       admin: { email: user.email, name: user.displayName },
       time: date.toString(),
+      timePosted:filteredSpots[0].timePosted,
       edited: true,
     };
     await setDoc(docRef, payload);
@@ -45,10 +46,12 @@ export default function EditSpot() {
   const refreshPage = async () => {
     window.location.replace("/spots");
   };
+
   if (filteredSpots.length === 0) {
     return <div> 404 Error - Not Found</div>;
   } else {
     return (
+      
       <div className="globalTopMargin">
         <h2>Edit a Spot</h2>
         {filteredSpots.map((spot) => (

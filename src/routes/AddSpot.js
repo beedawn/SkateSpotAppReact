@@ -31,9 +31,9 @@ export default function AddSpot() {
       location: spotLocation,
       description: spotDescription,
       admin: {email: user.email, name:user.displayName},
-
       images:[],
       time: date.toString(),
+      timePosted: date.toString(),
       edited:false
     };
     await addDoc(collectionRef, payload);
