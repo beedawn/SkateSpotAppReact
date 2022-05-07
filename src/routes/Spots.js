@@ -51,7 +51,7 @@ export default function Spots() {
 
   }, []);
 
-
+console.log(comments)
   if (spots.length !== 0) {
  
     return (
@@ -103,7 +103,11 @@ export default function Spots() {
 
                 <h6>{spot.location}</h6>
                 <p>{spot.description}</p>
-                {/* <p>{ filteredComments = comments.filter((comment) => {return comment.spot === spot.id}}</p> */}
+                {console.log(spot.id)}
+                {console.log(comments[0].spot)}
+                {console.log(comments.filter((cmt)=>cmt.spot===spot.id).length)}
+                <p>{comments.filter((cmt)=>cmt.spot===spot.id).length} Comments</p>
+                
                 <p>{spot.edited === true ? (<>Edited on {spot.time} by {spot.admin.name}</>):(<></>)} </p><p>Posted By {spot.admin.name} on {spot.timePosted}</p>
               </div>
             </Card>
