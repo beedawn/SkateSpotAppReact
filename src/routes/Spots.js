@@ -25,6 +25,7 @@ export default function Spots() {
   const imageListRef = ref(storage, "images/" + spot + "/");
   const { user } = useContext(AuthContext);
   const [spots, setSpots] = useState([]);
+  const [comments, setComments ] = useState([]);
   useEffect(() => {
     listAll(imageListRef).then((response) => {
       response.items.forEach((item) => {
@@ -36,10 +37,20 @@ export default function Spots() {
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
+
+ 
     return unsub;
+
+    // const unsub1 = onSnapshot(collection(db, "comments"), (snapshot) => {
+    //   setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    // });
+    // return unsub1;
+
   }, []);
 
+
   if (spots.length !== 0) {
+ 
     return (
       <div>
         <div className="globalTopMargin">
@@ -50,6 +61,7 @@ export default function Spots() {
         {spot ? (<div>text</div>):(<div>fail</div>)} */}
 
         {spots.map((spot) => (
+       
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }}>
             <Card>
               <div key={spot.id}>
@@ -63,9 +75,7 @@ export default function Spots() {
                     marginTop: "10px",
                   }}
                 >
-                  {/* {imageList.map((url)=>{
-          return <div>{url} </div>
-      })} */}
+                 
                   {user.email === spot.admin.email ? (
                     <Link to={"/spot/" + spot.id + "/edit"}>
                       {" "}
@@ -90,7 +100,7 @@ export default function Spots() {
 
                 <h6>{spot.location}</h6>
                 <p>{spot.description}</p>
-                <p>Posted By {spot.admin.name} on {spot.time}</p>
+                <p>{spot.edited === true ? (<>Posted</>) : (<>Edited</>)} By {spot.admin.name} on {spot.time}</p>
               </div>
             </Card>
           </div>

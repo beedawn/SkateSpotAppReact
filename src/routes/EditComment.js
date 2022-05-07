@@ -40,12 +40,14 @@ export default function EditComment() {
   const handleEdit = async (id) => {
     console.log(user);
     const docRef = doc(db, "comments", id);
+    const date = new Date(Date.now());
     const payload = {
       title: userTitle,
       comment: userComment,
       admin: user.email,
       spot: spot,
       name: user.displayName,
+      time: date.toString()
     };
     console.log(docRef);
     await setDoc(docRef, payload);

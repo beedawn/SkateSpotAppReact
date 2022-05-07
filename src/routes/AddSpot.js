@@ -33,7 +33,8 @@ export default function AddSpot() {
       admin: {email: user.email, name:user.displayName},
 
       images:[],
-      time: date.toString()
+      time: date.toString(),
+      edited:false
     };
     await addDoc(collectionRef, payload);
     uploadPage();
@@ -87,7 +88,7 @@ export default function AddSpot() {
       <div style={{ marginTop: "1rem" }}>
         <Input
           editable="true"
-          placeholder="Spot Location"
+          placeholder="Spot Location" 
           onChange={(event) => setSpotLocation(event.target.value)}
         />
       </div>

@@ -26,20 +26,14 @@ export default function AddComment() {
       title: userTitle,
       comment: userComment,
       admin: user.email,
-      time: date.toString()
+      time: date.toString(),
+      edited: false
     };
     
     await addDoc(collectionRef, payload);
     refreshPage();
   };
 
-  const handleUpload = () => {
-    if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/${spot}/${v4()}`);
-    uploadBytes(imageRef, imageUpload).then(() => {
-      console.log("Image Uploaded.");
-    });
-  };
 
   const refreshPage = async () => {
     window.location.replace("/spot/" + spot + "/");

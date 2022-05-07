@@ -29,11 +29,14 @@ export default function EditSpot() {
 
   const handleEdit = async (id) => {
     const docRef = doc(db, "spots", id);
+    const date = new Date(Date.now());
     const payload = {
       name: spotName,
       location: spotLocation,
       description: spotDescription,
-      admin: user.email,
+      admin: { email: user.email, name: user.displayName },
+      time: date.toString(),
+      edited: true,
     };
     await setDoc(docRef, payload);
     refreshPage();
@@ -51,7 +54,7 @@ export default function EditSpot() {
         {filteredSpots.map((spot) => (
           <div className="globalTopMargin">
             <Input
-              placeholder={spot.name}
+              defaultValue={spot.name}
               onChange={(event) => setSpotName(event.target.value)}
             />
           </div>
@@ -65,7 +68,7 @@ export default function EditSpot() {
           <div style={{ marginTop: "1rem" }}>
             <Input
               editable="true"
-              placeholder={spot.location}
+              defaultValue={spot.location}
               onChange={(event) => setSpotLocation(event.target.value)}
             />
           </div>
@@ -79,7 +82,7 @@ export default function EditSpot() {
           <div style={{ marginTop: "1rem" }}>
             <Input
               editable="true"
-              placeholder={spot.description}
+              defaultValue={spot.description}
               type="textarea"
               onChange={(event) => setSpotDescription(event.target.value)}
             />
