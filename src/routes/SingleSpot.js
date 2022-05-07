@@ -59,7 +59,7 @@ export default function SingleSpot() {
         <div>
           <div key={spot.id}>
             <div>Originally posted by {spot.admin.name} on {spot.timePosted}</div>
-            <div>{spot.edited === true ? (<>Edited</>):(<>Posted</>)} <>by</> {spot.admin.name} <>on</> {spot.time} </div>
+            <div>{spot.edited === true ? (<>Edited by {spot.admin.name} on {spot.time} </>):(<></>)} <>by</> {spot.admin.name}</div>
           {console.log()}
        {filteredSpot[0].images ? filteredSpot[0].images.map((image)=> {return(<div>{console.log(image)}<img src={image.url} style={{height:"200px"}}/><p>Posted By: {image.displayName} on {image.time}</p></div>)}) :(<div></div>)}
                {console.log(spot)}
