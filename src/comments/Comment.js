@@ -45,22 +45,32 @@ export default function Comment() {
               <CardHeader>{comment.title}</CardHeader>
               <div style={{ padding: "1rem 0" }}>
                 <div key={comment.id}>
-                  {user.email === comment.admin ? (<div className="adminButtons">
-                    <Link to={"/spot/" + spot + "/Comments/" + comment.id}>
-                      <Button 
-                        
-                        color="primary"
-                        onClick={() => {}}
+                  {user.email === comment.admin ? (
+                    <div className="adminButtons">
+                      <Link to={"/spot/" + spot + "/Comments/" + comment.id}>
+                        <Button color="primary" onClick={() => {}}>
+                          {" "}
+                          Edit{" "}
+                        </Button>
+                      </Link>
+                      <Link
+                        to={
+                          "/spot/" +
+                          spot +
+                          "/Comments/" +
+                          comment.id +
+                          "/delete"
+                        }
                       >
-                        {" "}
-                        Edit{" "}
-                      </Button>
-
-                    </Link>
-                    <Link to={"/spot/" + spot + "/Comments/" + comment.id+ "/delete"}>
-                    <Button color="danger" className="adminButtonsEach" onClick={()=>{}}>Delete</Button>
-                    
-                    </Link></div>
+                        <Button
+                          color="danger"
+                          className="adminButtonsEach"
+                          onClick={() => {}}
+                        >
+                          Delete
+                        </Button>
+                      </Link>
+                    </div>
                   ) : (
                     <p></p>
                   )}
@@ -87,7 +97,7 @@ export default function Comment() {
     return (
       <div style={{ padding: "1rem 0" }}>
         <h2>Comments</h2>
-       
+
         <Link to={"/spot/" + spot + "/addComment/"}>Add a Comment</Link>
       </div>
     );

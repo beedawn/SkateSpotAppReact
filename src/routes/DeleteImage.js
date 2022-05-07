@@ -15,7 +15,8 @@ import {
   uploadBytes,
   listAll,
   list,
-  getDownloadURL, deleteObject
+  getDownloadURL,
+  deleteObject,
 } from "firebase/storage";
 import { Input } from "reactstrap";
 import "../styles/style.css";
@@ -52,26 +53,27 @@ export default function DeleteImage() {
   const filteredSpot = spots.filter((el) => {
     return el.id === spot;
   });
- 
 
   const handleDelete = () => {
     const imageRef = ref(storage, `images/${spot}/${id}`);
 
-  deleteObject(imageRef).then(()=>{
-      //file deleted successfully!
-  }).catch((error)=>{
-      console.log(error);
-  })
+    deleteObject(imageRef)
+      .then(() => {
+        //file deleted successfully!
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const imageSpot = imageList.filter((image) => {
     return image.search(vkey);
   });
-// console.log(filteredSpot[0].images)
-//   const imgArr = filteredSpot[0].images;
-//  const imgArr2 = imgArr.filter((el)=>el.spot===spot);
-//   const imgObjUpArray = filteredSpot[0];
+  // console.log(filteredSpot[0].images)
+  //   const imgArr = filteredSpot[0].images;
+  //  const imgArr2 = imgArr.filter((el)=>el.spot===spot);
+  //   const imgObjUpArray = filteredSpot[0];
 
-// imgObjUpArray.images.map((img)=>console.log(img.url));
+  // imgObjUpArray.images.map((img)=>console.log(img.url));
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
@@ -82,9 +84,8 @@ export default function DeleteImage() {
         {console.log(filteredSpot[0])}
         {/* {filteredSpot[0].images.map((image)=>{return (<img alt="Spot Pictures" src={image.url} />)})}  */}
       </div>
-     
+
       <div style={{ marginTop: "1rem" }}>
-       
         <Button color="danger" onClick={handleDelete}>
           Delete
         </Button>

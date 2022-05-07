@@ -27,13 +27,12 @@ export default function AddComment() {
       comment: userComment,
       admin: user.email,
       time: date.toString(),
-      edited: false
+      edited: false,
     };
-    
+
     await addDoc(collectionRef, payload);
     refreshPage();
   };
-
 
   const refreshPage = async () => {
     window.location.replace("/spot/" + spot + "/");
@@ -83,7 +82,6 @@ export default function AddComment() {
         ) : (
           <span className="errorSpan">Please enter a Comment</span>
         )}
-   
 
         <div style={{ marginTop: "1rem" }}>
           <div>
