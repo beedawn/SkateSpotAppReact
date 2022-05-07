@@ -54,7 +54,7 @@ export default function DeleteImage() {
   });
  
 
-  const handleUpload = () => {
+  const handleDelete = () => {
     const imageRef = ref(storage, `images/${spot}/${id}`);
 
   deleteObject(imageRef).then(()=>{
@@ -66,6 +66,9 @@ export default function DeleteImage() {
   const imageSpot = imageList.filter((image) => {
     return image.search(vkey);
   });
+// console.log(filteredSpot[0].images)
+//   const imgArr = filteredSpot[0].images;
+//  const imgArr2 = imgArr.filter((el)=>el.spot===spot);
 //   const imgObjUpArray = filteredSpot[0];
 
 // imgObjUpArray.images.map((img)=>console.log(img.url));
@@ -74,12 +77,15 @@ export default function DeleteImage() {
       <div style={{ marginTop: "1rem" }}>
         <h2> Spot {spot}</h2>
         <h3> Image Deletion</h3>
+        {/* {console.log(imageList)} */}
+        {/* {imgArr2.map((string)=>(<div><img alt="Spot Pics" src={string.spot}/></div>))} */}
+        {console.log(filteredSpot[0])}
         {/* {filteredSpot[0].images.map((image)=>{return (<img alt="Spot Pictures" src={image.url} />)})}  */}
       </div>
      
       <div style={{ marginTop: "1rem" }}>
        
-        <Button color="danger" onClick={handleUpload}>
+        <Button color="danger" onClick={handleDelete}>
           Delete
         </Button>
       </div>
