@@ -88,8 +88,8 @@ export default function Spots() {
                   comments.filter((cmt) => cmt.spot === spot.id).length
                 )}
                 <p>
-                  {comments.filter((cmt) => cmt.spot === spot.id).length}{" "}
-                  Comments
+                  {comments.filter((cmt) => cmt.spot === spot.id).length > 0 ? (`${comments.filter((cmt) => cmt.spot === spot.id).length} Comments`) :(<></>)}{" "}
+                  
                 </p>
 
                 <p>
