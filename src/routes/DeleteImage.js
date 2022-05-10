@@ -55,8 +55,12 @@ export default function DeleteImage() {
   });
 
   const handleDelete = () => {
+    
     const imageRef = ref(storage, `images/${spot}/${id}`);
-
+    const imageFilter = filteredSpot[0].images.filter((el)=>{return el.id !== id})
+    console.log(imageFilter)
+    setImageList(imageFilter)
+    
     deleteObject(imageRef)
       .then(() => {
         //file deleted successfully!
@@ -65,26 +69,15 @@ export default function DeleteImage() {
         console.log(error);
       });
   };
-  const imageSpot = imageList.filter((image) => {
-    return image.search(vkey);
-  });
-  // console.log(filteredSpot[0].images)
-  //   const imgArr = filteredSpot[0].images;
-  //  const imgArr2 = imgArr.filter((el)=>el.spot===spot);
-  //   const imgObjUpArray = filteredSpot[0];
+  
 
-  // imgObjUpArray.images.map((img)=>console.log(img.url));
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
         <h2> Spot {spot}</h2>
         <h3> Image Deletion</h3>
-        {/* {console.log(imageList)} */}
-        {/* {imgArr2.map((string)=>(<div><img alt="Spot Pics" src={string.spot}/></div>))} */}
         {console.log(filteredSpot[0])}
-        {/* {filteredSpot[0].images.map((image)=>{return (<img alt="Spot Pictures" src={image.url} />)})}  */}
       </div>
-
       <div style={{ marginTop: "1rem" }}>
         <Button color="danger" onClick={handleDelete}>
           Delete
