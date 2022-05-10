@@ -34,7 +34,7 @@ export default function AddSpot() {
       images:[],
       time: date.toString(),
       timePosted: date.toString(),
-      edited:false
+      edited:false,
     };
     await addDoc(collectionRef, payload);
     uploadPage();

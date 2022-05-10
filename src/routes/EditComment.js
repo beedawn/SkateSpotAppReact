@@ -66,7 +66,7 @@ export default function EditComment() {
         {filteredProduct.map((id) => (
           <div className="globalTopMargin">
             <Input
-              placeholder={id.title}
+              defaultValue={id.title}
               onChange={(event) => setUserTitle(event.target.value)}
             />
           </div>
@@ -82,7 +82,7 @@ export default function EditComment() {
           <div style={{ marginTop: "1rem" }}>
             <Input
               editable="true"
-              placeholder={id.comment}
+              defaultValue={id.comment}
               type="textarea"
               onChange={(event) => setUserComment(event.target.value)}
             />
