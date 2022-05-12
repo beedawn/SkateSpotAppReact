@@ -38,32 +38,29 @@ export default function ImageUploadConfirm() {
     array.push({
       displayName: user.displayName,
       id: id,
-      spot:spot,
+      spot: spot,
       url: imageList[imageList.length - 1],
       time: date.toString(),
     });
-    return array
-  }
-  const imageArrayHandler= (filteredSpot) => {
-    
-    if(filteredSpot[0].images){
+    return array;
+  };
+  const imageArrayHandler = (filteredSpot) => {
+    if (filteredSpot[0].images) {
       const arrayImg = [...filteredSpot[0].images];
-   
-     
+
       return arrayPush(arrayImg);
-    }else{
+    } else {
       const arrayImg = [];
-      
+
       return arrayPush(arrayImg);
     }
-  }
+  };
 
   const handleEdit = async (id, url) => {
     const docRef = doc(db, "spots", id);
     console.log(filteredSpot);
     const date = new Date(Date.now());
 
-  
     const payload = {
       name: filteredSpot[0].name,
       location: filteredSpot[0].location,
@@ -72,12 +69,11 @@ export default function ImageUploadConfirm() {
       admin: filteredSpot[0].admin,
       images: imageArrayHandler(filteredSpot),
       time: date.toString(),
-      timePosted:filteredSpot[0].timePosted,
-      edited:filteredSpot[0].edited
+      timePosted: filteredSpot[0].timePosted,
+      edited: filteredSpot[0].edited,
     };
 
     await setDoc(docRef, payload);
-
     window.location.replace(`/spot/${spot}`);
   };
 
@@ -89,14 +85,12 @@ export default function ImageUploadConfirm() {
   return (
     <div>
       <div style={{ padding: "1rem" }}>
-        {" "}
         <h2>Confirm Image Upload</h2>
       </div>
       {filteredSpot.map((spot) => (
         <div style={{ padding: "1rem 0" }}>
           <div key={spot.id}>
             <h4>{spot.name}</h4>
-
             <div>
               <img
                 alt={imageList[imageList.length - 1]}
@@ -104,8 +98,6 @@ export default function ImageUploadConfirm() {
                 style={{ height: "200px" }}
               />
             </div>
-
-            <div></div>
             <div>
               <div>
                 <Button color="primary" onClick={() => handleEdit(spot.id)}>

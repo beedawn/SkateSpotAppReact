@@ -35,7 +35,6 @@ export default function Spots() {
     return unsub;
   }, []);
 
-  console.log(comments);
   if (spots.length !== 0) {
     return (
       <div>
@@ -82,16 +81,15 @@ export default function Spots() {
 
                 <h6>{spot.location}</h6>
                 <p>{spot.description}</p>
-                {console.log(spot.id)}
-                {console.log(comments[0].spot)}
-                {console.log(
-                  comments.filter((cmt) => cmt.spot === spot.id).length
-                )}
                 <p>
-                  {comments.filter((cmt) => cmt.spot === spot.id).length > 0 ? (`${comments.filter((cmt) => cmt.spot === spot.id).length} Comments`) :(<></>)}{" "}
-                  
+                  {comments.filter((cmt) => cmt.spot === spot.id).length > 0 ? (
+                    `${
+                      comments.filter((cmt) => cmt.spot === spot.id).length
+                    } Comments`
+                  ) : (
+                    <></>
+                  )}{" "}
                 </p>
-
                 <p>
                   {spot.edited === true ? (
                     <>

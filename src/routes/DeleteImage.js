@@ -49,18 +49,18 @@ export default function DeleteImage() {
   });
 
   const refreshPage = async () => {
-    window.location.replace("/spot/" + spot );
+    window.location.replace("/spot/" + spot);
   };
 
   //  const imagePreview = filteredSpot[0].images.filter((el)=>{return el.id === id}).url;
   const handleDelete = async () => {
-    
     const imageRef = ref(storage, `images/${spot}/${id}`);
-    const imageFilter = filteredSpot[0].images.filter((el)=>{return el.id !== id})
-    
-    console.log(imageFilter)
+    const imageFilter = filteredSpot[0].images.filter((el) => {
+      return el.id !== id;
+    });
 
-   
+    console.log(imageFilter);
+
     const docRef = doc(db, "spots", spot);
     const payload = {
       name: filteredSpot[0].name,
@@ -72,9 +72,9 @@ export default function DeleteImage() {
       timePosted: filteredSpot[0].timePosted,
       edited: filteredSpot[0].edited,
     };
-    console.log(payload)
+    console.log(payload);
     await setDoc(docRef, payload);
-    
+
     deleteObject(imageRef)
       .then(() => {
         refreshPage();
@@ -84,9 +84,7 @@ export default function DeleteImage() {
       });
   };
 
-
   return (
-    
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
         <h2> Spot {spot}</h2>

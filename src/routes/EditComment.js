@@ -23,8 +23,6 @@ export default function EditComment() {
   const [userTitle, setUserTitle] = useState("");
   const [userComment, setUserComment] = useState("");
 
-
-
   const [spots, setSpots] = useState([]);
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "comments"), (snapshot) => {
@@ -47,7 +45,7 @@ export default function EditComment() {
       admin: user.email,
       spot: spot,
       name: user.displayName,
-      time: date.toString()
+      time: date.toString(),
     };
     console.log(docRef);
     await setDoc(docRef, payload);
@@ -55,7 +53,7 @@ export default function EditComment() {
   };
 
   const refreshPage = async () => {
-    window.location.replace("/spot/"+ spot);
+    window.location.replace("/spot/" + spot);
   };
   if (filteredProduct.length === 0) {
     return <div> 404 Error - Not Found</div>;
@@ -87,17 +85,12 @@ export default function EditComment() {
               onChange={(event) => setUserComment(event.target.value)}
             />
 
-<div>
-          <Link to={"/spot/" + spot + "/Comments/" + id.id+ "/delete"}><Button
-              color="danger"
-             
-            >
-              {" "}
-              Delete{" "}
-            </Button></Link>
+            <div>
+              <Link to={"/spot/" + spot + "/Comments/" + id.id + "/delete"}>
+                <Button color="danger"> Delete </Button>
+              </Link>
+            </div>
           </div>
-          </div>
-          
         ))}
         {userComment ? (
           <p></p>
@@ -128,7 +121,6 @@ export default function EditComment() {
               Cancel{" "}
             </Button>
           </div>
-         
         </div>
       </div>
     );
