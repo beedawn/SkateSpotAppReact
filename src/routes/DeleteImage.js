@@ -48,7 +48,11 @@ export default function DeleteImage() {
     return el.id === spot;
   });
 
-   const imagePreview = filteredSpot[0].images.filter((el)=>{return el.id === id});
+  const refreshPage = async () => {
+    window.location.replace("/spot/" + spot );
+  };
+
+  //  const imagePreview = filteredSpot[0].images.filter((el)=>{return el.id === id}).url;
   const handleDelete = async () => {
     
     const imageRef = ref(storage, `images/${spot}/${id}`);
@@ -73,7 +77,7 @@ export default function DeleteImage() {
     
     deleteObject(imageRef)
       .then(() => {
-        //file deleted successfully!
+        refreshPage();
       })
       .catch((error) => {
         console.log(error);
@@ -87,7 +91,7 @@ export default function DeleteImage() {
       <div style={{ marginTop: "1rem" }}>
         <h2> Spot {spot}</h2>
         <h3> Image Deletion</h3>
-        <img src={imagePreview[0].url} style={{height:"200px"}} />
+        {/* <img src={imagePreview[0].url} style={{height:"200px"}} /> */}
       </div>
       <div style={{ marginTop: "1rem" }}>
         <Button color="danger" onClick={handleDelete}>
