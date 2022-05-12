@@ -73,7 +73,7 @@ export default function DeleteImage() {
       edited: filteredSpot[0].edited,
     };
     console.log(payload)
-    setDoc(docRef, payload);
+    await setDoc(docRef, payload);
     
     deleteObject(imageRef)
       .then(() => {
