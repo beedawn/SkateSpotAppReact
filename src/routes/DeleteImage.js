@@ -18,22 +18,16 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
-import { Input } from "reactstrap";
+
 import "../styles/style.css";
-import { v4 } from "uuid";
+
 import { useParams } from "react-router-dom";
 
 export default function DeleteImage() {
   const { spot, id } = useParams();
-  const { user } = useContext(AuthContext);
-  const vkey = v4();
-
-  const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/" + spot + "/");
-
-  const [imageUpload, setImageUpload] = useState(null);
-  const [check, setCheck] = useState("true");
   const [spots, setSpots] = useState([]);
+  const [imageList, setImageList] = useState([]);
 
   useEffect(() => {
     listAll(imageListRef).then((response) => {
@@ -54,12 +48,28 @@ export default function DeleteImage() {
     return el.id === spot;
   });
 
-  const handleDelete = () => {
+   const imagePreview = filteredSpot[0].images.filter((el)=>{return el.id === id});
+  const handleDelete = async () => {
     
     const imageRef = ref(storage, `images/${spot}/${id}`);
     const imageFilter = filteredSpot[0].images.filter((el)=>{return el.id !== id})
+    
     console.log(imageFilter)
-    setImageList(imageFilter)
+
+   
+    const docRef = doc(db, "spots", spot);
+    const payload = {
+      name: filteredSpot[0].name,
+      location: filteredSpot[0].location,
+      description: filteredSpot[0].description,
+      admin: filteredSpot[0].admin,
+      time: filteredSpot[0].time,
+      images: imageFilter,
+      timePosted: filteredSpot[0].timePosted,
+      edited: filteredSpot[0].edited,
+    };
+    console.log(payload)
+    setDoc(docRef, payload);
     
     deleteObject(imageRef)
       .then(() => {
@@ -69,14 +79,15 @@ export default function DeleteImage() {
         console.log(error);
       });
   };
-  
+
 
   return (
+    
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
         <h2> Spot {spot}</h2>
         <h3> Image Deletion</h3>
-        {console.log(filteredSpot[0])}
+        <img src={imagePreview[0].url} style={{height:"200px"}} />
       </div>
       <div style={{ marginTop: "1rem" }}>
         <Button color="danger" onClick={handleDelete}>
