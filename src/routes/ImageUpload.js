@@ -2,21 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
 import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
-import {
-  onSnapshot,
-  collection,
-  doc,
-  getDocs,
-  setDoc,
-} from "firebase/firestore";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  listAll,
-  list,
-  getDownloadURL,
-} from "firebase/storage";
+import { onSnapshot, collection } from "firebase/firestore";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { Input } from "reactstrap";
 import "../styles/style.css";
 import { v4 } from "uuid";
@@ -24,9 +11,7 @@ import { useParams } from "react-router-dom";
 
 export default function ImageUpload() {
   const { spot } = useParams();
-  const { user } = useContext(AuthContext);
   const vkey = v4();
-
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/" + spot + "/");
 
@@ -66,7 +51,6 @@ export default function ImageUpload() {
   const imageSpot = imageList.filter((image) => {
     return image.search(vkey);
   });
-
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>

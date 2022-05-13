@@ -3,14 +3,10 @@ import { Button } from "reactstrap";
 import {
   doc,
   setDoc,
-  getDoc,
   onSnapshot,
   collection,
 } from "firebase/firestore";
 import { Link } from "react-router-dom";
-
-import { storage } from "../firebase-config";
-
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
@@ -48,7 +44,6 @@ export default function EditComment() {
       name: user.displayName,
       time: date.toString(),
     };
-    console.log(docRef);
     await setDoc(docRef, payload);
     refreshPage(spot);
   };
@@ -68,13 +63,11 @@ export default function EditComment() {
             />
           </div>
         ))}
-
         {userTitle ? (
           <p></p>
         ) : (
           <span className="errorSpan">Please enter Spotname</span>
         )}
-
         {filteredProduct.map((id) => (
           <div style={{ marginTop: "1rem" }}>
             <Input
@@ -83,7 +76,6 @@ export default function EditComment() {
               type="textarea"
               onChange={(event) => setUserComment(event.target.value)}
             />
-
             <div>
               <Link to={"/spot/" + spot + "/Comments/" + id.id + "/delete"}>
                 <Button color="danger"> Delete </Button>

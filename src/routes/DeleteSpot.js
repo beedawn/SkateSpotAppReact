@@ -2,14 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
 import {
   doc,
-  setDoc,
   onSnapshot,
   collection,
   deleteDoc,
 } from "firebase/firestore";
-
-import { storage } from "../firebase-config";
-
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
@@ -42,7 +38,6 @@ export default function DeleteComment() {
     refreshPage();
   };
 
-
   if (filteredProduct.length === 0) {
     return <div> 404 Error - Not Found</div>;
   } else {
@@ -64,7 +59,6 @@ export default function DeleteComment() {
             onChange={(event) => setAgree(event.target.value)}
           />
         </div>
-
         <div style={{ marginTop: "1rem" }}>
           <div>
             {agree ? (

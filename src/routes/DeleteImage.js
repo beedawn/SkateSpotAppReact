@@ -1,27 +1,21 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
 import { db, storage } from "../firebase-config";
-import AuthContext from "../context/AuthContext";
 import {
   onSnapshot,
   collection,
   doc,
-  getDocs,
+
   setDoc,
 } from "firebase/firestore";
 import {
-  getStorage,
   ref,
-  uploadBytes,
   listAll,
-  list,
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
 import { refreshPage } from "../functions/Refresh";
-
 import "../styles/style.css";
-
 import { useParams } from "react-router-dom";
 
 export default function DeleteImage() {
@@ -49,16 +43,11 @@ export default function DeleteImage() {
     return el.id === spot;
   });
 
-  
-
-  //  const imagePreview = filteredSpot[0].images.filter((el)=>{return el.id === id}).url;
   const handleDelete = async () => {
     const imageRef = ref(storage, `images/${spot}/${id}`);
     const imageFilter = filteredSpot[0].images.filter((el) => {
       return el.id !== id;
     });
-
-    console.log(imageFilter);
 
     const docRef = doc(db, "spots", spot);
     const payload = {

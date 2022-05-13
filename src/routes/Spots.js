@@ -1,7 +1,6 @@
 import { onSnapshot, collection } from "firebase/firestore";
 import React, { useEffect, useState, useContext } from "react";
 import { db, storage } from "../firebase-config";
-import loading from "../images/Loading_icon.gif";
 import AuthContext from "../context/AuthContext";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { useParams } from "react-router-dom";
@@ -17,7 +16,7 @@ export default function Spots() {
   const { user } = useContext(AuthContext);
   const [spots, setSpots] = useState([]);
   const [comments, setComments] = useState([]);
-  
+
   useEffect(() => {
     listAll(imageListRef).then((response) => {
       response.items.forEach((item) => {
@@ -43,7 +42,7 @@ export default function Spots() {
       <div>
         <div className="globalTopMargin">
           <h2>Spots</h2>
-          <Maps spot={spots}/>
+          <Maps spot={spots} />
         </div>
         {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }}>
@@ -80,7 +79,6 @@ export default function Spots() {
                     </Link>
                   </div>
                 </div>
-
                 <h6>{spot.location}</h6>
                 <p>{spot.description}</p>
                 <p>

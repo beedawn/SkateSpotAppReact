@@ -5,8 +5,6 @@ import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
-import Comment from "../comments/Comment";
-import { Link } from "react-router-dom";
 import { refreshPage } from "../functions/Refresh";
 
 export default function ImageUploadConfirm() {
@@ -48,20 +46,16 @@ export default function ImageUploadConfirm() {
   const imageArrayHandler = (filteredSpot) => {
     if (filteredSpot[0].images) {
       const arrayImg = [...filteredSpot[0].images];
-
       return arrayPush(arrayImg);
     } else {
       const arrayImg = [];
-
       return arrayPush(arrayImg);
     }
   };
-
   const handleEdit = async (id, url) => {
     const docRef = doc(db, "spots", id);
     console.log(filteredSpot);
     const date = new Date(Date.now());
-
     const payload = {
       name: filteredSpot[0].name,
       location: filteredSpot[0].location,
@@ -71,8 +65,8 @@ export default function ImageUploadConfirm() {
       images: imageArrayHandler(filteredSpot),
       time: date.toString(),
       timePosted: filteredSpot[0].timePosted,
-      lat:filteredSpot[0].lat,
-      long:filteredSpot[0].long,
+      lat: filteredSpot[0].lat,
+      long: filteredSpot[0].long,
       edited: filteredSpot[0].edited,
     };
 
@@ -80,11 +74,9 @@ export default function ImageUploadConfirm() {
     refreshPage(spot);
   };
 
-  console.log(filteredSpot[0]);
   if (filteredSpot.length === 0) {
     return <div>404 Error - Not Found</div>;
   }
-
   return (
     <div>
       <div style={{ padding: "1rem" }}>
@@ -112,7 +104,6 @@ export default function ImageUploadConfirm() {
           </div>
         </div>
       ))}
-
       <div>
         <a href={`/spot/${spot}`}>Back to Spot</a>
       </div>

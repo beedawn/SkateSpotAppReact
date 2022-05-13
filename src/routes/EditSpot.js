@@ -2,8 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
 import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { Link } from "react-router-dom";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
-import { db, storage } from "../firebase-config";
+import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
@@ -40,22 +39,19 @@ export default function EditSpot() {
       admin: { email: user.email, name: user.displayName },
       time: date.toString(),
       images: filteredSpots[0].images,
-      timePosted:filteredSpots[0].timePosted,
-      lat:filteredSpots[0].lat,
-      long:filteredSpots[0].long,
+      timePosted: filteredSpots[0].timePosted,
+      lat: filteredSpots[0].lat,
+      long: filteredSpots[0].long,
       edited: true,
     };
     await setDoc(docRef, payload);
     refreshPage();
   };
 
-
-
   if (filteredSpots.length === 0) {
     return <div> 404 Error - Not Found</div>;
   } else {
     return (
-      
       <div className="globalTopMargin">
         <h2>Edit a Spot</h2>
         <SpotPics />
@@ -124,7 +120,6 @@ export default function EditSpot() {
               {" "}
               Cancel{" "}
             </Button>
-
             <Link to={"/spot/" + spot + "/delete"}>
               <Button
                 color="danger"

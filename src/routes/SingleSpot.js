@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { db, storage } from "../firebase-config";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
-import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
+import { onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
@@ -13,7 +13,6 @@ import Maps from "./Maps";
 export default function SingleSpot() {
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
-  console.log(spot);
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/" + spot + "/");
   const [spots, setSpots] = useState([]);
@@ -47,10 +46,9 @@ export default function SingleSpot() {
         <h2>Spot</h2>
       </div>
       <SpotPics />
-      <Maps spot={filteredSpot}/>
+      <Maps spot={filteredSpot} />
       {filteredSpot.map((spot) => (
         <div>
-          
           <div key={spot.id}>
             <div>
               Originally posted by {spot.admin.name} on {spot.timePosted}
@@ -62,11 +60,8 @@ export default function SingleSpot() {
                 </>
               ) : (
                 <></>
-              )}{" "}
-              <>by</> {spot.admin.name}
+              )}
             </div>
-            {console.log()}
-
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
             <div></div>
@@ -102,7 +97,6 @@ export default function SingleSpot() {
                 <p></p>
               )}
             </div>
-
             <p>{spot.description}</p>
           </div>
         </div>
