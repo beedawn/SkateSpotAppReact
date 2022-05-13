@@ -7,6 +7,7 @@ import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button, Card, CardHeader } from "reactstrap";
+import Maps from "./Maps";
 
 export default function Spots() {
   const { spot } = useParams();
@@ -15,6 +16,7 @@ export default function Spots() {
   const { user } = useContext(AuthContext);
   const [spots, setSpots] = useState([]);
   const [comments, setComments] = useState([]);
+  
   useEffect(() => {
     listAll(imageListRef).then((response) => {
       response.items.forEach((item) => {
@@ -39,10 +41,9 @@ export default function Spots() {
     return (
       <div>
         <div className="globalTopMargin">
-          {" "}
-          <h2>Spots </h2>
+          <h2>Spots</h2>
+          <Maps />
         </div>
-
         {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }}>
             <Card>

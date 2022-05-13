@@ -40,6 +40,8 @@ export default function EditSpot() {
       time: date.toString(),
       images: filteredSpots[0].images,
       timePosted:filteredSpots[0].timePosted,
+      lat:filteredSpots[0].lat,
+      long:filteredSpots[0].long,
       edited: true,
     };
     await setDoc(docRef, payload);

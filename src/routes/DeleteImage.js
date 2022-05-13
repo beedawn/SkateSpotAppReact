@@ -70,6 +70,8 @@ export default function DeleteImage() {
       time: filteredSpot[0].time,
       images: imageFilter,
       timePosted: filteredSpot[0].timePosted,
+      lat:filteredSpot[0].lat,
+      long:filteredSpot[0].long,
       edited: filteredSpot[0].edited,
     };
     console.log(payload);

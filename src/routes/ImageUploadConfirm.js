@@ -70,6 +70,8 @@ export default function ImageUploadConfirm() {
       images: imageArrayHandler(filteredSpot),
       time: date.toString(),
       timePosted: filteredSpot[0].timePosted,
+      lat:filteredSpot[0].lat,
+      long:filteredSpot[0].long,
       edited: filteredSpot[0].edited,
     };
 

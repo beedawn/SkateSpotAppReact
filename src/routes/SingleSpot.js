@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
 import SpotPics from "./SpotPics";
+import Maps from "./Maps";
 
 export default function SingleSpot() {
   const { spot } = useParams();
@@ -47,8 +48,10 @@ export default function SingleSpot() {
         <h2>Spot</h2>
       </div>
       <SpotPics />
+      <Maps lat={filteredSpot[0].lat}  long={filteredSpot[0].long}/>
       {filteredSpot.map((spot) => (
         <div>
+          
           <div key={spot.id}>
             <div>
               Originally posted by {spot.admin.name} on {spot.timePosted}

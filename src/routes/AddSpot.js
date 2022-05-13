@@ -9,7 +9,7 @@ import "../styles/style.css";
 import {v4} from "uuid";
 import { useParams } from "react-router-dom";
 import useGeolocation from 'react-hook-geolocation';
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import Maps from './Maps';
 
 
 export default function AddSpot() {
@@ -34,6 +34,8 @@ export default function AddSpot() {
       images:[],
       time: date.toString(),
       timePosted: date.toString(),
+      lat:geolocation.latitude,
+      long:geolocation.longitude,
       edited:false,
     };
     await addDoc(collectionRef, payload);
@@ -73,6 +75,7 @@ export default function AddSpot() {
     )}
       
       <h2>Add a Spot</h2>
+      <Maps />
       <div>
         <Input
           editable="true"
