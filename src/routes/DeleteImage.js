@@ -51,16 +51,8 @@ export default function DeleteImage() {
 
     const docRef = doc(db, "spots", spot);
     const payload = {
-      name: filteredSpot[0].name,
-      location: filteredSpot[0].location,
-      description: filteredSpot[0].description,
-      admin: filteredSpot[0].admin,
-      time: filteredSpot[0].time,
+      ...filteredSpot[0],
       images: imageFilter,
-      timePosted: filteredSpot[0].timePosted,
-      lat:filteredSpot[0].lat,
-      long:filteredSpot[0].long,
-      edited: filteredSpot[0].edited,
     };
     console.log(payload);
     await setDoc(docRef, payload);
