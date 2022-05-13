@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import useGeolocation from 'react-hook-geolocation';
 import Maps from './Maps';
 import Geocode from "react-geocode";
+import { refreshPage } from "../functions/Refresh";
 
 
 export default function AddSpot() {
@@ -65,12 +66,10 @@ console.log(geo);
       edited:false,
     };
     await addDoc(collectionRef, payload);
-    uploadPage();
+    refreshPage();
   };
 
-  const uploadPage = async () => {
-    window.location.replace("/spots/");
-  };
+
 
     function handleChange (e){
      const value = e.target.value;
@@ -154,7 +153,7 @@ console.log(geo);
           <Button
             color="primary"
             onClick={() => {
-              uploadPage();
+              refreshPage();
             }}
           >
             {" "}

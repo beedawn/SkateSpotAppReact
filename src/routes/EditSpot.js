@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import "../styles/style.css";
 import SpotPics from "./SpotPics";
+import { refreshPage } from "../functions/Refresh";
 
 export default function EditSpot() {
   const { spot } = useParams();
@@ -48,9 +49,7 @@ export default function EditSpot() {
     refreshPage();
   };
 
-  const refreshPage = async () => {
-    window.location.replace("/spots");
-  };
+
 
   if (filteredSpots.length === 0) {
     return <div> 404 Error - Not Found</div>;

@@ -7,6 +7,7 @@ import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
+import { refreshPage } from "../functions/Refresh";
 
 export default function ImageUploadConfirm() {
   const { spot, id } = useParams();
@@ -76,7 +77,7 @@ export default function ImageUploadConfirm() {
     };
 
     await setDoc(docRef, payload);
-    window.location.replace(`/spot/${spot}`);
+    refreshPage(spot);
   };
 
   console.log(filteredSpot[0]);

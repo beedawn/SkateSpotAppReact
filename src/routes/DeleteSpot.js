@@ -15,6 +15,7 @@ import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import "../styles/style.css";
+import { refreshPage } from "../functions/Refresh";
 
 export default function DeleteComment() {
   const { spot } = useParams();
@@ -41,9 +42,7 @@ export default function DeleteComment() {
     refreshPage();
   };
 
-  const refreshPage = async () => {
-    window.location.replace("/spots/");
-  };
+
   if (filteredProduct.length === 0) {
     return <div> 404 Error - Not Found</div>;
   } else {

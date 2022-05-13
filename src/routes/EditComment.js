@@ -16,6 +16,7 @@ import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import "../styles/style.css";
+import { refreshPage } from "../functions/Refresh";
 
 export default function EditComment() {
   const { id, spot } = useParams();
@@ -49,12 +50,10 @@ export default function EditComment() {
     };
     console.log(docRef);
     await setDoc(docRef, payload);
-    refreshPage();
+    refreshPage(spot);
   };
 
-  const refreshPage = async () => {
-    window.location.replace("/spot/" + spot);
-  };
+
   if (filteredProduct.length === 0) {
     return <div> 404 Error - Not Found</div>;
   } else {
@@ -114,7 +113,7 @@ export default function EditComment() {
             <Button
               color="primary"
               onClick={() => {
-                refreshPage();
+                refreshPage(spot);
               }}
             >
               {" "}

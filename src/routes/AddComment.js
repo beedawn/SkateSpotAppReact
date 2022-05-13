@@ -8,6 +8,7 @@ import "../styles/style.css";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Input } from "reactstrap";
 import { v4 } from "uuid";
+import { refreshPage } from "../functions/Refresh";
 
 export default function AddComment() {
   const storage = getStorage();
@@ -31,12 +32,9 @@ export default function AddComment() {
     };
 
     await addDoc(collectionRef, payload);
-    refreshPage();
+    refreshPage(spot);
   };
 
-  const refreshPage = async () => {
-    window.location.replace("/spot/" + spot + "/");
-  };
 
   return (
     <div style={{ padding: "1rem 0", width: "500px", margin: "auto" }}>
@@ -48,7 +46,7 @@ export default function AddComment() {
             <Button
               color="primary"
               onClick={() => {
-                refreshPage();
+                refreshPage(spot);
               }}
             >
               {" "}

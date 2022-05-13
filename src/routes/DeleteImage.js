@@ -18,6 +18,7 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
+import { refreshPage } from "../functions/Refresh";
 
 import "../styles/style.css";
 
@@ -48,9 +49,7 @@ export default function DeleteImage() {
     return el.id === spot;
   });
 
-  const refreshPage = async () => {
-    window.location.replace("/spot/" + spot);
-  };
+  
 
   //  const imagePreview = filteredSpot[0].images.filter((el)=>{return el.id === id}).url;
   const handleDelete = async () => {
@@ -79,7 +78,7 @@ export default function DeleteImage() {
 
     deleteObject(imageRef)
       .then(() => {
-        refreshPage();
+        refreshPage(spot);
       })
       .catch((error) => {
         console.log(error);

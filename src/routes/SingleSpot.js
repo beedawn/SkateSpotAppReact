@@ -40,7 +40,6 @@ export default function SingleSpot() {
     return <div>404 Error - Not Found</div>;
   }
 
-  // console.log(filteredSpot[0].images.map((image)=> console.log(image.url)))
   return (
     <div>
       <div style={{ padding: "1rem" }}>

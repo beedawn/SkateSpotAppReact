@@ -15,6 +15,7 @@ import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import "../styles/style.css";
+import { refreshPage } from "../functions/Refresh";
 
 export default function DeleteComment() {
   const { id, spot } = useParams();
@@ -38,12 +39,10 @@ export default function DeleteComment() {
     const docRef = doc(db, "comments", id);
 
     await deleteDoc(docRef);
-    refreshPage();
+    refreshPage(spot);
   };
 
-  const refreshPage = async () => {
-    window.location.replace("/spot/" + spot);
-  };
+ 
   if (filteredProduct.length === 0) {
     return <div> 404 Error - Not Found</div>;
   } else {
@@ -87,7 +86,7 @@ export default function DeleteComment() {
             <Button
               color="primary"
               onClick={() => {
-                refreshPage();
+                refreshPage(spot);
               }}
             >
               {" "}

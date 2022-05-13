@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button, Card, CardHeader } from "reactstrap";
 import Maps from "./Maps";
+import Loading from "../graphics/Loading";
 
 export default function Spots() {
   const { spot } = useParams();
@@ -113,10 +114,7 @@ export default function Spots() {
     return (
       <div style={{ padding: "1rem 0" }}>
         <h2>Spots</h2>
-        <div>
-          <img src={loading} alt="Loading" />
-        </div>
-        <p>Loading...</p>
+        <Loading />
       </div>
     );
   }

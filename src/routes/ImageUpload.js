@@ -82,7 +82,7 @@ export default function ImageUpload() {
       </div>
       {console.log(imageSpot[0])}
       <div style={{ marginTop: "1rem" }}>
-        {check ? <div>File too large!</div> : <p></p>}
+        {/* {check ? <div>File too large!</div> : <p></p>} */}
         <Button color="primary" onClick={handleUpload}>
           Submit
         </Button>
