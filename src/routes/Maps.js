@@ -13,8 +13,7 @@ const containerStyle = {
 
 
 export default function Maps(props) {
-  const lat = props.lat;
-  const long = props.long;
+  const spot = props.spot
   
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -23,8 +22,8 @@ export default function Maps(props) {
 
  
   const center = {
-    lat: lat,
-    lng: long,
+    lat: spot[0].lat,
+    lng: spot[0].long,
   };
 
 
@@ -42,7 +41,7 @@ export default function Maps(props) {
   }, []);
 
   return isLoaded ? (
-    <div>{console.log(apiKey)}
+    <div>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -51,13 +50,15 @@ export default function Maps(props) {
         onUnmount={onUnmount}
       >
         {/* Child components, such as markers, info windows, etc. */}
+        {spot.map((spot)=>(
+          
         <Marker
-          position={center}
+          position={{lat:spot.lat, lng:spot.long}}
           title={"Pizza"}
           onClick={() => {
-            alert(center.lat);
+            alert(spot.lat);
           }}
-        />
+        />))}
         <></>
       </GoogleMap>
     </div>

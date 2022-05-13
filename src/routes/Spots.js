@@ -42,7 +42,7 @@ export default function Spots() {
       <div>
         <div className="globalTopMargin">
           <h2>Spots</h2>
-          <Maps />
+          <Maps spot={spots}/>
         </div>
         {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }}>

@@ -48,7 +48,7 @@ export default function SingleSpot() {
         <h2>Spot</h2>
       </div>
       <SpotPics />
-      <Maps lat={filteredSpot[0].lat}  long={filteredSpot[0].long}/>
+      <Maps spot={filteredSpot}/>
       {filteredSpot.map((spot) => (
         <div>
           

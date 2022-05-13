@@ -10,6 +10,7 @@ import {v4} from "uuid";
 import { useParams } from "react-router-dom";
 import useGeolocation from 'react-hook-geolocation';
 import Maps from './Maps';
+import Geocode from "react-geocode";
 
 
 export default function AddSpot() {
@@ -18,30 +19,50 @@ export default function AddSpot() {
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
   const [spotLocation, setSpotLocation] = useState("");
+  const [spotAddress, setSpotAddress] = useState("");
+  const [spotCity, setSpotCity] = useState("");
   const [spotName, setSpotName] = useState("");
+  const [geo, setGeo] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
 
+  const apiKey = process.env.REACT_APP_GOOGLE_MAPS;
+  Geocode.setApiKey(apiKey);
+  Geocode.setLanguage("en");
+  Geocode.setRegion("es");
+  
+  Geocode.fromAddress(spotAddress + " " + spotCity).then(
+    (response) => {
+      const { lat, lng } = response.results[0].geometry.location;
+      setGeo({lat:lat, lng:lng});
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+
+
   const handleNewSpot = async () => {
     await handleUpload();
+    setSpotLocation(spotAddress.concat ( " " + spotCity))
     const collectionRef = collection(db, "spots");
     const date = new Date(Date.now());
     const payload = {
       name: spotName,
-      location: spotLocation,
+      location: spotAddress + " " + spotCity,
       description: spotDescription,
       admin: {email: user.email, name:user.displayName},
       images:[],
       time: date.toString(),
       timePosted: date.toString(),
-      lat:geolocation.latitude,
-      long:geolocation.longitude,
+      lat:geo.lat,
+      long:geo.long,
       edited:false,
     };
     await addDoc(collectionRef, payload);
     uploadPage();
   };
-
+console.log(spotAddress + " " + spotCity);
   const uploadPage = async () => {
     window.location.replace("/spots/");
   };
@@ -56,26 +77,8 @@ export default function AddSpot() {
 
   return (
     <div className="globalTopMargin">
-
-{ !geolocation.error
-    ? (
-      <ul>
-        <li>Latitude:          {geolocation.latitude}</li>
-        <li>Longitude:         {geolocation.longitude}</li>
-        <li>Location accuracy: {geolocation.accuracy}</li>
-        <li>Altitude:          {geolocation.altitude}</li>
-        <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
-        <li>Heading:           {geolocation.heading}</li>
-        <li>Speed:             {geolocation.speed}</li>
-        <li>Timestamp:         {geolocation.timestamp}</li>
-      </ul>
-    )
-    : (
-      <p>No geolocation, sorry.</p>
-    )}
-      
       <h2>Add a Spot</h2>
-      <Maps />
+      <Maps spot={[{lat:geolocation.latitude,long:geolocation.longitude}]} />
       <div>
         <Input
           editable="true"
@@ -91,14 +94,26 @@ export default function AddSpot() {
       <div style={{ marginTop: "1rem" }}>
         <Input
           editable="true"
-          placeholder="Spot Location" 
-          onChange={(event) => setSpotLocation(event.target.value)}
+          placeholder="Spot Address" 
+          onChange={(event) => setSpotAddress(event.target.value)}
         />
       </div>
-      {spotLocation ? (
+      {spotAddress ? (
         <p></p>
       ) : (
-        <span className="errorSpan">Please enter Location</span>
+        <span className="errorSpan">Please enter Address</span>
+      )}
+        <div style={{ marginTop: "1rem" }}>
+        <Input
+          editable="true"
+          placeholder="Spot City" 
+          onChange={(event) => setSpotCity(event.target.value)}
+        />
+      </div>
+      {spotCity ? (
+        <p></p>
+      ) : (
+        <span className="errorSpan">Please enter City</span>
       )}
       <div style={{ marginTop: "1rem" }}>
         <Input
@@ -117,7 +132,7 @@ export default function AddSpot() {
 
       <div style={{ marginTop: "1rem" }}>
         <div>
-          {spotName && spotLocation && spotDescription ? (
+          {spotName  && spotDescription ? (
             <Button color="primary" onClick={handleNewSpot}>
               Submit
             </Button>
