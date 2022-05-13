@@ -34,7 +34,7 @@ export default function AddSpot() {
   Geocode.fromAddress(spotAddress + " " + spotCity).then(
     (response) => {
       const { lat, lng } = response.results[0].geometry.location;
-      setGeo({lat:lat, lng:lng});
+      console.log(lat, lng);
     },
     (error) => {
       console.error(error);
@@ -44,7 +44,7 @@ export default function AddSpot() {
 
   const handleNewSpot = async () => {
     await handleUpload();
-    setSpotLocation(spotAddress.concat ( " " + spotCity))
+    
     const collectionRef = collection(db, "spots");
     const date = new Date(Date.now());
     const payload = {
@@ -55,14 +55,14 @@ export default function AddSpot() {
       images:[],
       time: date.toString(),
       timePosted: date.toString(),
-      lat:geo.lat,
-      long:geo.long,
+      lat:geolocation.latitude,
+      long:geolocation.longitude,
       edited:false,
     };
     await addDoc(collectionRef, payload);
     uploadPage();
   };
-console.log(spotAddress + " " + spotCity);
+
   const uploadPage = async () => {
     window.location.replace("/spots/");
   };
@@ -95,7 +95,7 @@ console.log(spotAddress + " " + spotCity);
         <Input
           editable="true"
           placeholder="Spot Address" 
-          onChange={(event) => setSpotAddress(event.target.value)}
+          onFocusOut={(event) => setSpotAddress(event.target.value)}
         />
       </div>
       {spotAddress ? (
@@ -107,7 +107,7 @@ console.log(spotAddress + " " + spotCity);
         <Input
           editable="true"
           placeholder="Spot City" 
-          onChange={(event) => setSpotCity(event.target.value)}
+          onFocusOut={(event) => setSpotCity(event.target.value)}
         />
       </div>
       {spotCity ? (

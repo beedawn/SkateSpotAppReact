@@ -53,6 +53,7 @@ export default function Maps(props) {
         {spot.map((spot)=>(
           
         <Marker
+        key={spot.id}
           position={{lat:spot.lat, lng:spot.long}}
           title={"Pizza"}
           onClick={() => {
