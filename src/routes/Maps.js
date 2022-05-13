@@ -39,31 +39,53 @@ export default function Maps(props) {
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
   }, []);
-
-  return isLoaded ? (
+console.log(spot)
+  return isLoaded ? (spot[0].name ? (
     <div>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={12}
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={12}
+      
+      onUnmount={onUnmount}
+    >
+      {/* Child components, such as markers, info windows, etc. */}
+      {spot.map((spot)=>(
         
-        onUnmount={onUnmount}
-      >
-        {/* Child components, such as markers, info windows, etc. */}
-        {spot.map((spot)=>(
-          
-        <Marker
-        key={spot.id}
-          position={{lat:spot.lat, lng:spot.long}}
-          title={"Pizza"}
-          onClick={() => {
-            alert(spot.lat);
-          }}
-        />))}
-        <></>
-      </GoogleMap>
-    </div>
+      <Marker
+      key={spot.id}
+        position={{lat:spot.lat, lng:spot.long}}
+        title={"Pizza"}
+        onClick={() => {
+          alert(spot.lat);
+        }}
+      />))}
+      <></>
+    </GoogleMap>
+  </div>
   ) : (
-    <></>
-  );
+    <div>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={12}
+      
+      onUnmount={onUnmount}
+    >
+      {/* Child components, such as markers, info windows, etc. */}
+      {spot.map((spot)=>(
+        
+      <Marker
+      key={spot.id}
+        position={{lat:spot.lat, lng:spot.long}}
+        title={"Pizza"}
+        draggable
+        onClick={() => {
+          alert(spot.lat);
+        }}
+      />))}
+      <></>
+    </GoogleMap>
+  </div>
+  )):(<></>);
 }

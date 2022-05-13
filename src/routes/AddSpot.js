@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage } from "../firebase-config";
@@ -31,19 +31,24 @@ export default function AddSpot() {
   Geocode.setLanguage("en");
   Geocode.setRegion("es");
   
-  Geocode.fromAddress(spotAddress + " " + spotCity).then(
+
+
+ function fetchLocation() { Geocode.fromAddress(spotLocation.address + " " + spotLocation.city).then(
     (response) => {
-      const { lat, lng } = response.results[0].geometry.location;
-      console.log(lat, lng);
+      const location = response.results[0].geometry.location;
+      setGeo(location)
+      
+      
     },
     (error) => {
       console.error(error);
     }
-  );
-
+    
+  );}
+console.log(geo);
 
   const handleNewSpot = async () => {
-    await handleUpload();
+    
     
     const collectionRef = collection(db, "spots");
     const date = new Date(Date.now());
@@ -55,8 +60,8 @@ export default function AddSpot() {
       images:[],
       time: date.toString(),
       timePosted: date.toString(),
-      lat:geolocation.latitude,
-      long:geolocation.longitude,
+      lat:geo.lat,
+      long:geo.lng,
       edited:false,
     };
     await addDoc(collectionRef, payload);
@@ -66,14 +71,14 @@ export default function AddSpot() {
   const uploadPage = async () => {
     window.location.replace("/spots/");
   };
-  const handleUpload = () => {
-    if(imageUpload == null) return;
-    const imageRef = ref(storage, `images/${spot}/${v4() }`);
-    uploadBytes(imageRef, imageUpload).then(()=>{
-     alert("Image Uploaded");
-    })
- 
-   };
+
+    function handleChange (e){
+     const value = e.target.value;
+     setSpotLocation({
+       ...spotLocation, [e.target.name]: value
+     });
+     fetchLocation()
+   }
 
   return (
     <div className="globalTopMargin">
@@ -94,8 +99,9 @@ export default function AddSpot() {
       <div style={{ marginTop: "1rem" }}>
         <Input
           editable="true"
+          name="address"
           placeholder="Spot Address" 
-          onFocusOut={(event) => setSpotAddress(event.target.value)}
+          onChange={handleChange}
         />
       </div>
       {spotAddress ? (
@@ -106,8 +112,9 @@ export default function AddSpot() {
         <div style={{ marginTop: "1rem" }}>
         <Input
           editable="true"
+          name="city"
           placeholder="Spot City" 
-          onFocusOut={(event) => setSpotCity(event.target.value)}
+          onChange={handleChange}
         />
       </div>
       {spotCity ? (
