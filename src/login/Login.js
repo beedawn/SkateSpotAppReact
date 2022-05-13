@@ -5,7 +5,6 @@ import Home from "../HomeRouter";
 import AuthContext from "../context/AuthContext";
 import loading from "../images/Loading_icon.gif";
 import Loading from "../graphics/Loading";
-
 import LoginForm from "./LoginForm";
 import DisplayNameSetup from "./DisplayNameSetup";
 

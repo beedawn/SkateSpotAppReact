@@ -20,9 +20,7 @@ import { refreshPage } from "../functions/Refresh";
 export default function DeleteComment() {
   const { id, spot } = useParams();
   const { user } = useContext(AuthContext);
-
   const [agree, setAgree] = useState("");
-
   const [spots, setSpots] = useState([]);
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "comments"), (snapshot) => {
@@ -37,12 +35,10 @@ export default function DeleteComment() {
 
   const handleDelete = async (id) => {
     const docRef = doc(db, "comments", id);
-
     await deleteDoc(docRef);
     refreshPage(spot);
   };
 
- 
   if (filteredProduct.length === 0) {
     return <div> 404 Error - Not Found</div>;
   } else {
