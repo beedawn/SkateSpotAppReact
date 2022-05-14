@@ -49,8 +49,6 @@ export default function AddSpot() {
 console.log(geo);
 
   const handleNewSpot = async () => {
-    
-    
     const collectionRef = collection(db, "spots");
     const date = new Date(Date.now());
     const payload = {
