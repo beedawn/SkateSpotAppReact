@@ -33,15 +33,12 @@ export default function EditSpot() {
     const docRef = doc(db, "spots", id);
     const date = new Date(Date.now());
     const payload = {
+      ...filteredSpots[0],
       name: spotName,
       location: spotLocation,
       description: spotDescription,
       admin: { email: user.email, name: user.displayName },
       time: date.toString(),
-      images: filteredSpots[0].images,
-      timePosted: filteredSpots[0].timePosted,
-      lat: filteredSpots[0].lat,
-      long: filteredSpots[0].long,
       edited: true,
     };
     await setDoc(docRef, payload);
