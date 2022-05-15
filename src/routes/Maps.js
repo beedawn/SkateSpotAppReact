@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import useGeolocation from 'react-hook-geolocation';
+// import useGeolocation from 'react-hook-geolocation';
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS;
 const containerStyle = {
@@ -10,14 +10,19 @@ const containerStyle = {
   margin:"auto"
 };
 
+
 export default function Maps(props) {
   const spot = props.spot
-  
+  const handleDrag = props.handleDrag
+  const [spotLocation, setSpotlocation] = useState();
+
+ 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: apiKey,
   });
 
+ 
   const center = {
     lat: spot[0].lat,
     lng: spot[0].long,
@@ -33,7 +38,7 @@ export default function Maps(props) {
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
   }, []);
-console.log(spot)
+
   return isLoaded ? (spot[0].name ? (
     <div>
     <GoogleMap
@@ -64,11 +69,12 @@ console.log(spot)
       onUnmount={onUnmount}
     >
       {spot.map((spot)=>(
-      <Marker
+      <Marker 
       key={spot.id}
         position={{lat:spot.lat, lng:spot.long}}
-        title={"Pizza"}
         draggable
+        onDragEnd=
+        {(e)=>(handleDrag(e))}
         onClick={() => {
           alert(spot.lat);
         }}
