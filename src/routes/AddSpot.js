@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot} from "firebase/firestore";
 import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { getStorage, ref, uploadBytes, listAll, list, getDownloadURL } from "firebase/storage";
@@ -13,6 +13,7 @@ import Maps from './Maps';
 import Geocode from "react-geocode";
 import { refreshPage } from "../functions/Refresh";
 import { confirmPasswordReset } from "firebase/auth";
+import Loading from "../graphics/Loading";
 
 
 export default function AddSpot() {
@@ -27,12 +28,21 @@ const spotId = v4();
   const [spotName, setSpotName] = useState("");
   const [geo, setGeo] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
-  const [imageUpload, setImageUpload] = useState(null);
-  const [finalCoords,setFinalCoords]= useState();
-  
-  
-
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS;
+const [spots, setSpots] = useState([]);
+  useEffect(() => {
+   
+
+
+
+    const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
+      setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+
+    return unsub;
+  }, []);
+
+
   Geocode.setApiKey(apiKey);
   Geocode.setLanguage("en");
   Geocode.setRegion("es");
@@ -125,18 +135,12 @@ const spotId = v4();
    }
    //Handle Drag is Passed to Maps Component
  function handleDrag (e){
-  setGps({lat: e.latLng.lat(), long:e.latLng.lng()});
-  const lat = e.latLng.lat(); 
-  const lng = e.latLng.lng();
-
-  
-
-   }
-
+  setGps({lat: e.latLng.lat(), long:e.latLng.lng()});}
+  if (spots.length !== 0) {
   return (
     <div className="globalTopMargin">
       <h2>Add a Spot</h2>
-      {gps ?  (<Maps spot={[{lat:gps.lat,long:gps.long, id:spotId}]}  handleDrag={handleDrag} />):(<Maps spot={[{lat:geolocation.latitude,long:geolocation.longitude, id:spotId}]}  handleDrag={handleDrag} />)}
+      {gps ?  (<Maps spot={[{lat:gps.lat,long:gps.long, id:spotId}]}  handleDrag={handleDrag} drag={true} />):(<Maps spot={[{lat:geolocation.latitude,long:geolocation.longitude, id:spotId}]}  handleDrag={handleDrag} drag={true} />)}
       <div>
         <Input
           editable="true"
@@ -217,4 +221,13 @@ const spotId = v4();
       </div>
     </div>
   );
+
+} else {
+  return (
+    <div style={{ padding: "1rem 0" }}>
+      <h2>Spots</h2>
+      <Loading />
+    </div>
+  );
+}
 }

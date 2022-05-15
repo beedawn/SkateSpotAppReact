@@ -2,19 +2,21 @@ import React, {useState} from "react";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 // import useGeolocation from 'react-hook-geolocation';
-
+import useGeolocation from 'react-hook-geolocation';
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS;
 const containerStyle = {
-  width: "400px",
+  width: "auto",
   height: "400px",
   margin:"auto"
 };
 
 
 export default function Maps(props) {
+  const geolocation = useGeolocation();
   const spot = props.spot
   const handleDrag = props.handleDrag
-  const undrag = props.undrag;
+  const drag = props.drag;
+  const coords = props.spotCoords;
   const [spotLocation, setSpotlocation] = useState();
 
  
@@ -25,8 +27,8 @@ export default function Maps(props) {
 
  
   const center = {
-    lat: spot[0].lat,
-    lng: spot[0].long,
+    lat: geolocation.latitude,
+    lng: geolocation.longitude,
   };
 
   const [map, setMap] = React.useState(null);
@@ -40,29 +42,7 @@ export default function Maps(props) {
     setMap(null);
   }, []);
 console.log(spot)
-  return isLoaded ? (spot[0].name||undrag ? (
-    <div>
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={12}
-      onUnmount={onUnmount}
-    >
-      {/* Child components, such as markers, info windows, etc. */}
-      {
-      spot.map((spot)=>(
-      <Marker
-        key={spot.id}
-        position={{lat:spot.lat, lng:spot.long}}
-        title={"Pizza"}
-        onClick={() => {
-          alert(spot.lat);
-        }}
-      />))}
-      <></>
-    </GoogleMap>
-  </div>
-  ) : (
+  return isLoaded ? ( drag ?  ( coords ?(
     <div>
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -82,7 +62,49 @@ console.log(spot)
         }}
       />))}
       <></>
-    </GoogleMap>
+    </GoogleMap> 
   </div>
-  )):(<></>);
+  ):(
+    <div>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={12}
+      onUnmount={onUnmount}
+    >
+      {spot.map((spot)=>(
+      <Marker 
+        key={spot.id}
+        position={{lat:spot.lat, lng:spot.long}}
+        draggable
+        onDragEnd=
+        {(e)=>(handleDrag(e))}
+        onClick={() => {
+          alert(spot.lat);
+        }}
+      />))}
+      <></>
+    </GoogleMap>Piza
+  </div>
+  ) ):(<> <div>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={12}
+      onUnmount={onUnmount}
+    >
+      {/* Child components, such as markers, info windows, etc. */}
+      {
+      spot.map((spot)=>(
+      <Marker
+        key={spot.id}
+        position={{lat:spot.lat, lng:spot.long}}
+        title={"Pizza"}
+        onClick={() => {
+          alert(spot.lat);
+        }}
+      />))}
+      <></>
+    </GoogleMap>
+  </div></>)):(<></>);
 }

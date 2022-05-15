@@ -6,7 +6,7 @@ import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button, Card, CardHeader } from "reactstrap";
-import Maps from "./Maps";
+import AllSpotsMap from "./AllSpotsMap";
 import Loading from "../graphics/Loading";
 
 export default function Spots() {
@@ -42,7 +42,7 @@ export default function Spots() {
       <div>
         <div className="globalTopMargin">
           <h2>Spots</h2>
-          <Maps spot={spots} />
+          <AllSpotsMap spots={spots} />
         </div>
         {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }}>
