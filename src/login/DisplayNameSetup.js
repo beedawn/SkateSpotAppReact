@@ -41,6 +41,7 @@ export default function DisplayNameSetup() {
       <div>
         <input
           editable="true"
+          defaultValue={user.displayName}
           placeholder="Display Name"
           onChange={(event) => {
             setDisplayName(event.target.value);
