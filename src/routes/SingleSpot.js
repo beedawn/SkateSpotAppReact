@@ -46,10 +46,12 @@ export default function SingleSpot() {
         <h2>Spot</h2>
       </div>
       <SpotPics />
-      <Maps spot={filteredSpot} spotCoords={{lat:filteredSpot[0].lat, lng:filteredSpot[0].long}} />
+      
       {filteredSpot.map((spot) => (
-        <div>
+         <div>
           <div key={spot.id}>
+          <Maps spot={filteredSpot} singleView={true} />
+ 
             <div>
               Originally posted by {spot.admin.name} on {spot.timePosted}
             </div>

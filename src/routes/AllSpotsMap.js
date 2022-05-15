@@ -29,5 +29,5 @@ export default function AllSpotsMap(props){
     //   }, []);
     
     
-    return(<Maps spot={spots} />)
+    return(<Maps spot={spots} singleView={false} />)
 }
