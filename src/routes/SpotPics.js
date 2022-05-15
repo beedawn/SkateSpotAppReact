@@ -4,6 +4,7 @@ import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { onSnapshot, collection } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { refreshPage, imagePage } from "../functions/Refresh";
 
 export default function SpotPics() {
   const { spot } = useParams();
@@ -57,7 +58,7 @@ export default function SpotPics() {
                       </svg>
                     </Link>
                   </div>
-                  <img src={image.url} style={{ height: "200px" }} />
+                  <a href="#"><img alt={spot.name} src={image.url} style={{ height: "200px" }} onClick={()=> imagePage(image.url)}/></a>
                   <p>
                     Posted By: {image.displayName} on {image.time}
                   </p>

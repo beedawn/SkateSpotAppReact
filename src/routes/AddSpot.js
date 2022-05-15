@@ -47,17 +47,7 @@ const [spots, setSpots] = useState([]);
   Geocode.setLanguage("en");
   Geocode.setRegion("es");
   
-  // useEffect(()=> {
-  //   if(gps){
-  //     console.log(gps)
-  //   }
-  //   // if(gps!==false){
-  //   //   setFinalCoords([{lat:geolocation.latitude,long:geolocation.longitude}])
-  //   // }
-  //   // else{
-  //   //   setFinalCoords([{lat:gps.lat,long:gps}])
-  //   // }
-  // })
+
 
 
  function fetchLocation() { Geocode.fromAddress(spotLocation.address + " " + spotLocation.city).then(
@@ -140,7 +130,7 @@ const [spots, setSpots] = useState([]);
   return (
     <div className="globalTopMargin">
       <h2>Add a Spot</h2>
-      {gps ?  (<Maps spot={[{lat:gps.lat,long:gps.long, id:spotId}]}  handleDrag={handleDrag} drag={true} />):(<Maps spot={[{lat:geolocation.latitude,long:geolocation.longitude, id:spotId}]}  handleDrag={handleDrag} drag={true} />)}
+      {gps ?  (<Maps spot={[{lat:gps.lat,long:gps.long, id:spotId}]} spots={spots}  handleDrag={handleDrag} drag={true} />):(<Maps spot={[{lat:geolocation.latitude,long:geolocation.longitude, id:spotId}]} spots={spots} handleDrag={handleDrag} drag={true} />)}
       <div>
         <Input
           editable="true"

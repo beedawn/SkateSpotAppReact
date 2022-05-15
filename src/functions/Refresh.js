@@ -4,3 +4,8 @@ export const refreshPage = async (page) => {
     else
     window.location.replace("/spots/");
 };
+
+export const imagePage= async (page) => {
+
+    window.location.replace(page);
+};

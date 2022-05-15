@@ -41,17 +41,14 @@ export default function SingleSpot() {
 
   return (
     <div>
-      <div style={{ padding: "1rem" }}>
-        {" "}
-        <h2>Spot</h2>
-      </div>
-      <SpotPics />
-      
       {filteredSpot.map((spot) => (
          <div>
           <div key={spot.id}>
-          <Maps spot={filteredSpot} singleView={true} />
- 
+          <Maps spot={filteredSpot} spots={spots} singleView={true} />
+          
+          <h4>{spot.name}</h4>
+          <h5>{spot.location}</h5>
+          <SpotPics />
             <div>
               Originally posted by {spot.admin.name} on {spot.timePosted}
             </div>
@@ -64,8 +61,8 @@ export default function SingleSpot() {
                 <></>
               )}
             </div>
-            <h4>{spot.name}</h4>
-            <h5>{spot.location}</h5>
+            
+            
             <div></div>
             <div>
               {user.email === spot.admin.email ? (
