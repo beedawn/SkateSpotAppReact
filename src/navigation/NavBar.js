@@ -34,7 +34,7 @@ export default function NavBar() {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <div>
-      <Navbar color="dark" dark expand="md" fixed="top" full>
+      <Navbar color="dark" dark expand="md" fixed="top">
         <NavbarBrand href="/">SkateSpot</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>

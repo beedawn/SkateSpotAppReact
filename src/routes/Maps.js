@@ -14,6 +14,7 @@ const containerStyle = {
 export default function Maps(props) {
   const spot = props.spot
   const handleDrag = props.handleDrag
+  const undrag = props.undrag;
   const [spotLocation, setSpotlocation] = useState();
 
  
@@ -38,8 +39,8 @@ export default function Maps(props) {
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
   }, []);
-
-  return isLoaded ? (spot[0].name ? (
+console.log(spot)
+  return isLoaded ? (spot[0].name||undrag ? (
     <div>
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -48,9 +49,10 @@ export default function Maps(props) {
       onUnmount={onUnmount}
     >
       {/* Child components, such as markers, info windows, etc. */}
-      {spot.map((spot)=>(
+      {
+      spot.map((spot)=>(
       <Marker
-      key={spot.id}
+        key={spot.id}
         position={{lat:spot.lat, lng:spot.long}}
         title={"Pizza"}
         onClick={() => {
@@ -70,7 +72,7 @@ export default function Maps(props) {
     >
       {spot.map((spot)=>(
       <Marker 
-      key={spot.id}
+        key={spot.id}
         position={{lat:spot.lat, lng:spot.long}}
         draggable
         onDragEnd=

@@ -28,6 +28,8 @@ const spotId = v4();
   const [geo, setGeo] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
+  const [finalCoords,setFinalCoords]= useState();
+  
   
 
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS;
@@ -35,12 +37,17 @@ const spotId = v4();
   Geocode.setLanguage("en");
   Geocode.setRegion("es");
   
-  useEffect(()=> {
-    if(gps){
-      console.log(gps)
-    }
-    
-  })
+  // useEffect(()=> {
+  //   if(gps){
+  //     console.log(gps)
+  //   }
+  //   // if(gps!==false){
+  //   //   setFinalCoords([{lat:geolocation.latitude,long:geolocation.longitude}])
+  //   // }
+  //   // else{
+  //   //   setFinalCoords([{lat:gps.lat,long:gps}])
+  //   // }
+  // })
 
 
  function fetchLocation() { Geocode.fromAddress(spotLocation.address + " " + spotLocation.city).then(
@@ -56,6 +63,35 @@ const spotId = v4();
     
   );}
 
+  function fetchCoords(){Geocode.fromLatLng(gps.lat,gps.long).then(
+    (response) => {
+      const address = response.results[0].formatted_address;
+      let city, state, country;
+      for (let i = 0; i < response.results[0].address_components.length; i++) {
+        for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
+          switch (response.results[0].address_components[i].types[j]) {
+            case "locality":
+              city = response.results[0].address_components[i].long_name;
+              break;
+            case "administrative_area_level_1":
+              state = response.results[0].address_components[i].long_name;
+              break;
+            case "country":
+              country = response.results[0].address_components[i].long_name;
+              break;
+            default:
+              break;
+          }
+        }
+      }
+      console.log(city, state, country);
+      console.log(address);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );}
+
   const handleNewSpot = async () => {
     const collectionRef = collection(db, "spots");
     const date = new Date(Date.now());
@@ -67,13 +103,13 @@ const spotId = v4();
       images:[],
       time: date.toString(),
       timePosted: date.toString(),
-      lat:geo.lat,
-      long:geo.lng,
+      lat:gps.lat,
+      long:gps.long,
       edited:false,
     };
     await addDoc(collectionRef, payload);
     console.log(collectionRef);
-    // refreshPage();
+   refreshPage();
   };
 
 
@@ -85,6 +121,7 @@ const spotId = v4();
        ...spotLocation, [e.target.name]: value
      });
      fetchLocation()
+    //  fetchCoords(gps.lat,gps.long);
    }
    //Handle Drag is Passed to Maps Component
  function handleDrag (e){
@@ -99,7 +136,7 @@ const spotId = v4();
   return (
     <div className="globalTopMargin">
       <h2>Add a Spot</h2>
-      {gps===false ? (<Maps spot={[{lat:geolocation.latitude,long:geolocation.longitude}]}  handleDrag={handleDrag} />): (<Maps spot={[{lat:gps.lat,long:gps.long}]}  handleDrag={handleDrag} />)}
+      {gps ?  (<Maps spot={[{lat:gps.lat,long:gps.long, id:spotId}]}  handleDrag={handleDrag} />):(<Maps spot={[{lat:geolocation.latitude,long:geolocation.longitude, id:spotId}]}  handleDrag={handleDrag} />)}
       <div>
         <Input
           editable="true"
