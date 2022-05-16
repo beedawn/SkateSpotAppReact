@@ -6,7 +6,7 @@ const toggle = props.toggle
 
 return(
     <Form>
-    <FormGroup switch="true">
+    <FormGroup switch="true" style={{width:"175px", margin:"auto"}}>
     <Input
       type="switch"
       onChange={toggle}

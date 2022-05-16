@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, onSnapshot,setDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { Input } from "reactstrap";
@@ -123,7 +123,7 @@ export default function AddSpot() {
   function handleDrag(e) {
     setGps({ lat: e.latLng.lat(), long: e.latLng.lng() });
   }
-  
+
   if (spots.length !== 0) {
     return (
       <div>

@@ -10,15 +10,18 @@ import "../styles/style.css";
 import SpotPics from "./SpotPics";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
+import Maps from "./Maps";
+import useGeolocation from "react-hook-geolocation";
 
 export default function EditSpot() {
+  const geolocation = useGeolocation();
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
   const [spotLocation, setSpotLocation] = useState("");
   const [spotName, setSpotName] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
   const [spots, setSpots] = useState([]);
-
+  const [gps, setGps] = useState();
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -38,13 +41,20 @@ export default function EditSpot() {
       name: spotName,
       location: spotLocation,
       description: spotDescription,
-      admin: { email: user.email, name: user.displayName },
+      // admin: { email: user.email, name: user.displayName },
       time: date.toString(),
       edited: true,
+      lat: gps.lat,
+      long: gps.long,
     };
     await setDoc(docRef, payload);
     refreshPage();
   };
+
+    //Handle Drag is Passed to Maps Component
+    function handleDrag(e) {
+      setGps({ lat: e.latLng.lat(), long: e.latLng.lng() });
+    }
 
   if (filteredSpots.length === 0) {
     return <div> <Loading /></div>;
@@ -52,6 +62,36 @@ export default function EditSpot() {
     return (
       <div className="globalTopMargin">
         <h2>Edit a Spot</h2>
+      
+        {gps ? (
+          <Maps
+            spot={[{ lat: gps.lat, long: gps.long, id: filteredSpots[0].id }]}
+            spots={spots}
+            handleDrag={handleDrag}
+            drag={true}
+            singleView={true}
+          />
+        ) : (
+          <Maps
+            spot={[
+              {
+                lat: filteredSpots[0].lat,
+                long: filteredSpots[0].long,
+                id: filteredSpots[0].id,
+              },
+            ]}
+            spots={spots}
+            handleDrag={handleDrag}
+            drag={true}
+            singleView={true}
+          />
+        )}
+        
+   
+
+
+
+
         <SpotPics />
         {filteredSpots.map((spot) => (
           <div className="globalTopMargin">

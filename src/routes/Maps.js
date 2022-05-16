@@ -20,7 +20,7 @@ export default function Maps(props) {
   const drag = props.drag;
   const coords = props.singleView;
   const spots = props.spots;
-  const [toggleState, setToggleState]=useState("false");
+  const [toggleState, setToggleState] = useState("false");
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -39,48 +39,98 @@ export default function Maps(props) {
     setMap(map);
   }, []);
 
-  
-
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
   }, []);
 
-  function toggle(){
-    
-setToggleState(!toggleState);
+  function toggle() {
+    setToggleState(!toggleState);
   }
   if (isLoaded) {
-    if(toggleState){
-    if (drag) {
-      if (spots) {
+    if (toggleState) {
+      if (drag) {
+        if (spots) {
+          return (
+            /* return statement for Add a Spot */
+            <div>
+              <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={{ lat: spot[0].lat, lng: spot[0].long }}
+                zoom={12}
+                onUnmount={onUnmount}
+              >
+                {spot.map((spot) => (
+                  <Marker
+                    key={spot.id}
+                    position={{ lat: spot.lat, lng: spot.long }}
+                    draggable
+                    onDragEnd={(e) => handleDrag(e)}
+                    onClick={() => {
+                      refreshPage(spot.id);
+                    }}
+                  />
+                ))}
+              </GoogleMap>
+              <Switch toggle={toggle} />
+            </div>
+          );
+        } else {
+          /* Doubt this ever returns */
+          return (
+            <div>
+              
+              <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={center}
+                zoom={12}
+                onUnmount={onUnmount}
+              >
+                {spot.map((spot) => (
+                  <Marker
+                    key={spot.id}
+                    position={{ lat: spot.lat, lng: spot.long }}
+                    draggable
+                    title="New Spot"
+                    onDragEnd={(e) => handleDrag(e)}
+                    onClick={() => {
+                      refreshPage(spot.id);
+                    }}
+                  />
+                ))}
+                <Switch toggle={toggle} />
+                <></>
+              </GoogleMap>
+            </div>
+          );
+        }
+      } else if (coords === true) {
+        /* return statement for Single Spot */
         return (
-          /* return statement for Add a Spot */
           <div>
+            
             <GoogleMap
               mapContainerStyle={containerStyle}
-              center={center}
+              center={{ lat: spot[0].lat, lng: spot[0].long }}
               zoom={12}
               onUnmount={onUnmount}
             >
+              {/* Child components, such as markers, info windows, etc. */}
               {spot.map((spot) => (
                 <Marker
                   key={spot.id}
                   position={{ lat: spot.lat, lng: spot.long }}
-                  draggable
-                  onDragEnd={(e) => handleDrag(e)}
+                  title={spot.name}
                   onClick={() => {
                     refreshPage(spot.id);
                   }}
                 />
               ))}
-            
-              <></>
             </GoogleMap>
-          <Switch toggle={toggle} />
+            <Switch toggle={toggle} />
           </div>
         );
       } else {
-        /* Doubt this ever returns */
+        /* return statement for Spots component, and Dashboard */
         return (
           <div>
             <GoogleMap
@@ -89,28 +139,61 @@ setToggleState(!toggleState);
               zoom={12}
               onUnmount={onUnmount}
             >
+              {/* Child components, such as markers, info windows, etc. */}
               {spot.map((spot) => (
                 <Marker
                   key={spot.id}
                   position={{ lat: spot.lat, lng: spot.long }}
-                  draggable
-                  title="New Spot"
-                  onDragEnd={(e) => handleDrag(e)}
+                  title={spot.name}
                   onClick={() => {
                     refreshPage(spot.id);
                   }}
                 />
               ))}
-              
-              <Switch toggle={toggle} />
-              <></>
             </GoogleMap>
           </div>
         );
       }
-    } else if (coords === true) {
-      /* return statement for Single Spot */
-      
+    }
+    if (drag && spots) {
+      return (
+        /* return statement for Add a Spot */
+        <div>
+          
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={12}
+            onUnmount={onUnmount}
+          >
+            {spot.map((spot) => (
+              <Marker
+                key={spot.id}
+                position={{ lat: spot.lat, lng: spot.long }}
+                draggable
+                onDragEnd={(e) => handleDrag(e)}
+                onClick={() => {
+                  refreshPage(spot.id);
+                }}
+              />
+            ))}
+            {spots.map((spot) => (
+              <Marker
+                key={spot.id}
+                position={{ lat: spot.lat, lng: spot.long }}
+                title={spot.name}
+                onClick={() => {
+                  refreshPage(spot.id);
+                }}
+              />
+            ))}
+            <></>
+          </GoogleMap>
+          <Switch toggle={toggle} />
+        </div>
+      );
+    } else {
+      /*single Spot with all spots on */
       return (
         <div>
           <GoogleMap
@@ -130,22 +213,7 @@ setToggleState(!toggleState);
                 }}
               />
             ))}
-          </GoogleMap>
-          <Switch toggle={toggle} />
-        </div>
-      );
-    } else {
-      /* return statement for Spots component, and Dashboard */
-      return (
-        <div>
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={12}
-            onUnmount={onUnmount}
-          >
-            {/* Child components, such as markers, info windows, etc. */}
-            {spot.map((spot) => (
+            {spots.map((spot) => (
               <Marker
                 key={spot.id}
                 position={{ lat: spot.lat, lng: spot.long }}
@@ -156,84 +224,11 @@ setToggleState(!toggleState);
               />
             ))}
           </GoogleMap>
-          
+          <Switch toggle={toggle} />
         </div>
       );
     }
-  }if(drag && spots){
-    return (
-      /* return statement for Add a Spot */
-      <div>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={12}
-          onUnmount={onUnmount}
-        >
-          {spot.map((spot) => (
-            <Marker
-              key={spot.id}
-              position={{ lat: spot.lat, lng: spot.long }}
-              draggable
-              onDragEnd={(e) => handleDrag(e)}
-              onClick={() => {
-                refreshPage(spot.id);
-              }}
-            />
-          ))}
-          {spots.map((spot) => (
-            <Marker
-              key={spot.id}
-              position={{ lat: spot.lat, lng: spot.long }}
-              title={spot.name}
-              onClick={() => {
-                refreshPage(spot.id);
-              }}
-            />
-          ))}
-          <></>
-        </GoogleMap>
-        <Switch toggle={toggle} />
-      </div>
-    );
   } else {
-    /*single Spot with all spots on */
-    
-    return (
-      <div>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={{ lat: spot[0].lat, lng: spot[0].long }}
-          zoom={12}
-          onUnmount={onUnmount}
-        >
-          {/* Child components, such as markers, info windows, etc. */}
-          {spot.map((spot) => (
-            <Marker
-              key={spot.id}
-              position={{ lat: spot.lat, lng: spot.long }}
-              title={spot.name}
-              onClick={() => {
-                refreshPage(spot.id);
-              }}
-            />
-          ))}
-             {spots.map((spot) => (
-                <Marker
-                  key={spot.id}
-                  position={{ lat: spot.lat, lng: spot.long }}
-                  title={spot.name}
-                  onClick={() => {
-                    refreshPage(spot.id);
-                  }}
-                />
-              ))}
-        </GoogleMap>
-        <Switch toggle={toggle} />
-      </div>
-    );
+    return <div> Hello you shouldn't be here.</div>;
   }
-} else{
-  return <div></div>
-}
 }

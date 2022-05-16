@@ -46,10 +46,19 @@ export default function SingleSpot() {
          <div>
           <div key={spot.id}>
           <Maps spot={filteredSpot} spots={spots} singleView={true} />
-          
           <h4>{spot.name}</h4>
           <h5>{spot.location}</h5>
-          <SpotPics />
+          {filteredSpot[0].images.length === 0 ?(
+            <div><div>Add a picture?</div><Link to={"/spot/" + spot.id + "/upload"}>
+                    <Button
+                      color="success"
+                      className="adminButtonsEach"
+                      onClick={() => {}}
+                    >
+                      Upload
+                    </Button>
+                  </Link></div>):(<SpotPics />)
+                  }
             <div>
               Originally posted by {spot.admin.name} on {spot.timePosted}
             </div>
