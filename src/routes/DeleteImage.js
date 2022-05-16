@@ -25,6 +25,12 @@ export default function DeleteImage() {
   const [imageList, setImageList] = useState([]);
   const [imageUrl, setImageUrl]= useState();
 
+  const filteredSpot = spots.filter((el) => {
+    
+    return el.id === spot;
+  });
+
+ 
   useEffect(() => {
     listAll(imageListRef).then((response) => {
       response.items.forEach((item) => {
@@ -33,46 +39,56 @@ export default function DeleteImage() {
         });
       });
     });
-console.log(imageUrl);
+    if(filteredSpot[0]){
+setImageUrl(filteredSpot[0].images[0].url)
+return;
+}
+
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
-  }, []);
+  }, [spots]);
 
-  const filteredSpot = spots.filter((el) => {
-    return el.id === spot;
-  });
+ 
+
+
+  
 
   const handleDelete = async () => {
     const imageRef = ref(storage, `images/${spot}/${id}`);
     const imageFilter = filteredSpot[0].images.filter((el) => {
       return el.id !== id;
     });
-    await setImageUrl(imageFilter);
+    const imageFilterReverse = filteredSpot[0].images.filter((el) => {
+      return el.spot === spot;
+    });
+  
+  
     const docRef = doc(db, "spots", spot);
     const payload = {
       ...filteredSpot[0],
       images: imageFilter,
     };
     await setDoc(docRef, payload);
-
+   
     deleteObject(imageRef)
       .then(() => {
-        // refreshPage(spot);
+         refreshPage(spot);
+        
       })
       .catch((error) => {
         console.log(error);
       });
   };
-console.log(imageUrl)
+
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
         <h2> Spot {spot}</h2>
         <h3> Image Deletion</h3>
-        <img src={imageUrl}/>
-        {/* <img src={imagePreview[0].url} style={{height:"200px"}} /> */}
+   {imageUrl ?(
+        <img alt={imageUrl} src={imageUrl} style={{height:"200px"}} />):(<>No Preview available.</>)}
       </div>
       <div style={{ marginTop: "1rem" }}>
         <Button color="danger" onClick={handleDelete}>

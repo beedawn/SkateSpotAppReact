@@ -22,7 +22,7 @@ export default function ImageUploadConfirm() {
         });
       });
     });
-
+  
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -58,17 +58,9 @@ export default function ImageUploadConfirm() {
     console.log(filteredSpot);
     const date = new Date(Date.now());
     const payload = {
-      name: filteredSpot[0].name,
-      location: filteredSpot[0].location,
-      description: filteredSpot[0].description,
-      id: filteredSpot[0].id,
-      admin: filteredSpot[0].admin,
+  ...filteredSpot[0],
       images: imageArrayHandler(filteredSpot),
       time: date.toString(),
-      timePosted: filteredSpot[0].timePosted,
-      lat: filteredSpot[0].lat,
-      long: filteredSpot[0].long,
-      edited: filteredSpot[0].edited,
     };
 
     await setDoc(docRef, payload);
