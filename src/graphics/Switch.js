@@ -10,7 +10,7 @@ return(
     <Input
       type="switch"
       onChange={toggle}
-      checked="false"
+      
     />
     <Label switch="true">Toggle All Spots</Label>
   </FormGroup>
