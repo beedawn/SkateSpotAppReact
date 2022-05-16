@@ -34,35 +34,57 @@ export default function EditSpot() {
   });
 
   const handleEdit = async (id) => {
-    const docRef = doc(db, "spots", id);
-    const date = new Date(Date.now());
-    const payload = {
-      ...filteredSpots[0],
-      name: spotName,
-      location: spotLocation,
-      description: spotDescription,
-      // admin: { email: user.email, name: user.displayName },
-      time: date.toString(),
-      edited: true,
-      lat: gps.lat,
-      long: gps.long,
-    };
-    await setDoc(docRef, payload);
-    refreshPage();
+    if (gps) {
+      const docRef = doc(db, "spots", id);
+      const date = new Date(Date.now());
+      const payload = {
+        ...filteredSpots[0],
+        name: spotName,
+        location: spotLocation,
+        description: spotDescription,
+        // admin: { email: user.email, name: user.displayName },
+        time: date.toString(),
+        edited: true,
+        lat: gps.lat,
+        long: gps.long,
+      };
+      await setDoc(docRef, payload);
+      refreshPage();
+    } else {
+      const docRef = doc(db, "spots", id);
+      const date = new Date(Date.now());
+      const payload = {
+        ...filteredSpots[0],
+        name: spotName,
+        location: spotLocation,
+        description: spotDescription,
+        // admin: { email: user.email, name: user.displayName },
+        time: date.toString(),
+        edited: true,
+       
+      };
+      await setDoc(docRef, payload);
+      refreshPage();
+    }
   };
 
-    //Handle Drag is Passed to Maps Component
-    function handleDrag(e) {
-      setGps({ lat: e.latLng.lat(), long: e.latLng.lng() });
-    }
+  //Handle Drag is Passed to Maps Component
+  function handleDrag(e) {
+    setGps({ lat: e.latLng.lat(), long: e.latLng.lng() });
+  }
 
   if (filteredSpots.length === 0) {
-    return <div> <Loading /></div>;
+    return (
+      <div>
+        {" "}
+        <Loading />
+      </div>
+    );
   } else {
     return (
-      <div className="globalTopMargin">
+      <div>
         <h2>Edit a Spot</h2>
-      
+
         {gps ? (
           <Maps
             spot={[{ lat: gps.lat, long: gps.long, id: filteredSpots[0].id }]}
@@ -86,11 +108,6 @@ export default function EditSpot() {
             singleView={true}
           />
         )}
-        
-   
-
-
-
 
         <SpotPics />
         {filteredSpots.map((spot) => (
@@ -101,25 +118,12 @@ export default function EditSpot() {
             />
           </div>
         ))}
-        {spotName ? (
+           {spotName ? (
           <p></p>
         ) : (
-          <span className="errorSpan">Please enter Spotname</span>
+          <span className="errorSpan">Please update Spotname</span>
         )}
-        {filteredSpots.map((spot) => (
-          <div style={{ marginTop: "1rem" }}>
-            <Input
-              editable="true"
-              defaultValue={spot.location}
-              onChange={(event) => setSpotLocation(event.target.value)}
-            />
-          </div>
-        ))}
-        {spotLocation ? (
-          <p></p>
-        ) : (
-          <span className="errorSpan">Please enter Location</span>
-        )}
+
         {filteredSpots.map((spot) => (
           <div style={{ marginTop: "1rem" }}>
             <Input
@@ -128,16 +132,17 @@ export default function EditSpot() {
               type="textarea"
               onChange={(event) => setSpotDescription(event.target.value)}
             />
-          </div>
-        ))}
-        {spotDescription ? (
+              {spotDescription ? (
           <p></p>
         ) : (
-          <span className="errorSpan">Please enter Description</span>
+          <span className="errorSpan">Please update Description</span>
         )}
+          </div>
+        ))}
+
         <div style={{ marginTop: "1rem" }}>
           <div>
-            {spotName && spotLocation && spotDescription ? (
+          {spotName && spotDescription ? (
               <Button color="primary" onClick={() => handleEdit(spot)}>
                 Submit
               </Button>

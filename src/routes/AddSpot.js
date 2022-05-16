@@ -162,14 +162,14 @@ export default function AddSpot() {
           <span className="errorSpan">Please enter Spotname</span>
         )}
         <div style={{ marginTop: "1rem" }}>
-          <Input
+        {gps ? (<></>
+          ):(<div><Input
             editable="true"
             name="address"
             placeholder="Spot Address"
             onChange={handleChange}
           />
-        </div>
-        {spotAddress ? (
+            {spotAddress ? (
           <p></p>
         ) : (
           <span className="errorSpan">Please enter Address</span>
@@ -187,6 +187,8 @@ export default function AddSpot() {
         ) : (
           <span className="errorSpan">Please enter City</span>
         )}
+         </div>)}
+        </div>
         <div style={{ marginTop: "1rem" }}>
           <Input
             editable="true"

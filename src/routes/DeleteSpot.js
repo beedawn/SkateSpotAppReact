@@ -6,13 +6,19 @@ import {
   collection,
   deleteDoc,
 } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import "../styles/style.css";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
+import {
+  ref,
+  listAll,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 
 export default function DeleteComment() {
   const { spot } = useParams();
@@ -28,24 +34,34 @@ export default function DeleteComment() {
     return unsub;
   }, []);
 
-  const filteredProduct = spots.filter(function (el) {
+  const filteredSpots = spots.filter(function (el) {
     return el.id === spot;
   });
 
   const handleDelete = async (id) => {
     const docRef = doc(db, "spots", id);
-
+    
     await deleteDoc(docRef);
+    for(let i = 0; i < filteredSpots[0].images.length;i++){
+      const imageRef = ref(storage, `images/${spot}/${filteredSpots[0].images[i].id}`);
+    deleteObject(imageRef)
+    .then(() => {
+      console.log(imageRef)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
     refreshPage();
   };
 
-  if (filteredProduct.length === 0) {
+  if (filteredSpots.length === 0) {
     return <div> <Loading /></div>;
   } else {
     return (
       <div className="globalTopMargin">
         <h2>Delete a Spot</h2>
-        {filteredProduct.map((spot) => (
+        {filteredSpots.map((spot) => (
           <div className="globalTopMargin">
             <h3>Spot Title:</h3>
             <p> {spot.name}</p>
