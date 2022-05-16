@@ -35,7 +35,6 @@ export default function Comment() {
         <div className="globalTopMargin"> </div>
 
         <h4>Comments</h4>
-        <Link to={"/spot/" + spot + "/addComment/"}>Add a Comment</Link>
         <div style={{ width: "400px", margin: "0 auto" }}>
           {filteredComments.map((comment) => (
             <Card className="mt-5">
@@ -79,7 +78,7 @@ export default function Comment() {
               <CardTitle style={{ fontSize: "10px" }}>
                 {" "}
                 Posted By: {comment.name} on {comment.time};
-                {console.log(comment)}
+               
               </CardTitle>
             </Card>
           ))}
@@ -90,8 +89,7 @@ export default function Comment() {
     return (
       <div style={{ padding: "1rem 0" }}>
         <h2>Comments</h2>
-        <Link to={"/spot/" + spot + "/addComment/"}>Add a Comment</Link>
-      </div>
+         </div>
     );
   }
 }

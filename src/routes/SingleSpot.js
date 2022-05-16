@@ -37,28 +37,45 @@ export default function SingleSpot() {
   });
 
   if (filteredSpot.length === 0) {
-    return <div><Loading/></div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   return (
     <div>
       {filteredSpot.map((spot) => (
-         <div>
+        <div>
           <div key={spot.id}>
-          <Maps spot={filteredSpot} spots={spots} singleView={true} />
-          <h4>{spot.name}</h4>
-          <h5>{spot.location}</h5>
-          {filteredSpot[0].images.length === 0 ?(
-            <div><div>Add a picture?</div><Link to={"/spot/" + spot.id + "/upload"}>
-                    <Button
-                      color="success"
-                      className="adminButtonsEach"
-                      onClick={() => {}}
-                    >
-                      Upload
-                    </Button>
-                  </Link></div>):(<SpotPics />)
-                  }
+            <Maps
+              style={{ height: "200px" }}
+              spot={filteredSpot}
+              spots={spots}
+              singleView={true}
+            />
+            <h4>{spot.name}</h4>
+            <h5>{spot.location}</h5>
+            {filteredSpot[0].images.length === 0 ? (
+              <div>Add a picture?</div>
+            ) : (
+              <SpotPics />
+            )}
+            <div>
+              <Link to={"/spot/" + spot.id + "/addComment/"}>
+                <Button>Comment</Button>
+              </Link>
+              <Link to={"/spot/" + spot.id + "/upload"}>
+                <Button
+                  color="success"
+                  className="adminButtonsEach"
+                  onClick={() => {}}
+                >
+                  Upload
+                </Button>
+              </Link>{" "}
+            </div>
             <div>
               Originally posted by {spot.admin.name} on {spot.timePosted}
             </div>
@@ -71,8 +88,7 @@ export default function SingleSpot() {
                 <></>
               )}
             </div>
-            
-            
+
             <div></div>
             <div>
               {user.email === spot.admin.email ? (

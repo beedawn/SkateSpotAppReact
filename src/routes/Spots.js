@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { Button, Card, CardHeader } from "reactstrap";
 import AllSpotsMap from "./AllSpotsMap";
 import Loading from "../graphics/Loading";
-
+import Maps from "./Maps";
 export default function Spots() {
   const { spot } = useParams();
   const [imageList, setImageList] = useState([]);
@@ -51,14 +51,14 @@ export default function Spots() {
                 <CardHeader>
                   <Link to={"/spot/" + spot.id}>{spot.name}</Link>
                 </CardHeader>
+                <Maps spot={[spot]} spots={spots} singleView={true} />
                 <div
                   style={{
                     display: "block",
                     marginRight: "70%",
                     marginTop: "10px",
                   }}
-                >
-                  {user.email === spot.admin.email ? (
+                >{user.email === spot.admin.email ? (
                     <Link to={"/spot/" + spot.id + "/edit"}>
                       {" "}
                       <Button color="primary"> Edit </Button>
@@ -78,7 +78,9 @@ export default function Spots() {
                       </Button>
                     </Link>
                   </div>
+                  
                 </div>
+                
                 <h6>{spot.location}</h6>
                 <p>{spot.description}</p>
                 <p>
