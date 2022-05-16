@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
-import { collection, addDoc, onSnapshot,setDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { Input } from "reactstrap";
@@ -162,32 +162,36 @@ export default function AddSpot() {
           <span className="errorSpan">Please enter Spotname</span>
         )}
         <div style={{ marginTop: "1rem" }}>
-        {gps ? (<></>
-          ):(<div><Input
-            editable="true"
-            name="address"
-            placeholder="Spot Address"
-            onChange={handleChange}
-          />
-            {spotAddress ? (
-          <p></p>
-        ) : (
-          <span className="errorSpan">Please enter Address</span>
-        )}
-        <div style={{ marginTop: "1rem" }}>
-          <Input
-            editable="true"
-            name="city"
-            placeholder="Spot City"
-            onChange={handleChange}
-          />
-        </div>
-        {spotCity ? (
-          <p></p>
-        ) : (
-          <span className="errorSpan">Please enter City</span>
-        )}
-         </div>)}
+          {gps ? (
+            <></>
+          ) : (
+            <div>
+              <Input
+                editable="true"
+                name="address"
+                placeholder="Spot Address"
+                onChange={handleChange}
+              />
+              {spotAddress ? (
+                <p></p>
+              ) : (
+                <span className="errorSpan">Please enter Address</span>
+              )}
+              <div style={{ marginTop: "1rem" }}>
+                <Input
+                  editable="true"
+                  name="city"
+                  placeholder="Spot City"
+                  onChange={handleChange}
+                />
+              </div>
+              {spotCity ? (
+                <p></p>
+              ) : (
+                <span className="errorSpan">Please enter City</span>
+              )}
+            </div>
+          )}
         </div>
         <div style={{ marginTop: "1rem" }}>
           <Input

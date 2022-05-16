@@ -52,11 +52,11 @@ export default function SingleSpot() {
           <div key={spot.id}>
             <Maps
               style={{ height: "200px" }}
-              spot={filteredSpot}
+              spot={[spot]}
               spots={spots}
               singleView={true}
             />
-            
+
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
             <div>
@@ -69,10 +69,7 @@ export default function SingleSpot() {
                     </Button>
                   </Link>
                   <Link to={"/spot/" + spot.id + "/delete"}>
-                    <Button
-                      color="danger"
-                      className="adminButtonsEach"
-                    >
+                    <Button color="danger" className="adminButtonsEach">
                       Delete
                     </Button>
                   </Link>
@@ -91,11 +88,7 @@ export default function SingleSpot() {
                 <Button>Comment</Button>
               </Link>
               <Link to={"/spot/" + spot.id + "/upload"}>
-                <Button
-                  color="success"
-                  className="adminButtonsEach"
-                  onClick={() => {}}
-                >
+                <Button color="success" className="adminButtonsEach">
                   Upload
                 </Button>
               </Link>{" "}

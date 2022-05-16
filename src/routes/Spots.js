@@ -55,8 +55,8 @@ export default function Spots() {
                 <Maps spot={[spot]} spots={spots} singleView={true} />
                 <div
                   style={{
-                    display: "block",
-                    marginRight: "70%",
+                    display: "inline",
+                    marginRight: "auto",
                     marginTop: "10px",
                   }}
                 >
@@ -68,12 +68,11 @@ export default function Spots() {
                   ) : (
                     <p></p>
                   )}{" "}
-                  <div style={{ marginTop: "10px" }}>
+                  <div style={{ marginTop: "10px" }}><div style={{marginLeft:"0px"}}>
                     <Link to={"/spot/" + spot.id + "/addComment/"}>
                       <Button>Comment</Button>
                     </Link>
-                  </div>
-                  <div style={{ marginTop: "10px" }}>
+                    </div>
                     <Link to={"/spot/" + spot.id + "/upload"}>
                       <Button color="success" onClick={() => {}}>
                         Upload
