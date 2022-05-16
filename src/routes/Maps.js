@@ -70,16 +70,7 @@ setToggleState(!toggleState);
                   }}
                 />
               ))}
-              {spots.map((spot) => (
-                <Marker
-                  key={spot.id}
-                  position={{ lat: spot.lat, lng: spot.long }}
-                  title={spot.name}
-                  onClick={() => {
-                    refreshPage(spot.id);
-                  }}
-                />
-              ))}
+            
               <></>
             </GoogleMap>
             <FormGroup switch>
@@ -128,6 +119,7 @@ setToggleState(!toggleState);
       }
     } else if (coords === true) {
       /* return statement for Single Spot */
+      
       return (
         <div>
           <GoogleMap
@@ -179,12 +171,55 @@ setToggleState(!toggleState);
               />
             ))}
           </GoogleMap>
-         
+          
         </div>
       );
     }
+  }if(drag && spots){
+    return (
+      /* return statement for Add a Spot */
+      <div>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={12}
+          onUnmount={onUnmount}
+        >
+          {spot.map((spot) => (
+            <Marker
+              key={spot.id}
+              position={{ lat: spot.lat, lng: spot.long }}
+              draggable
+              onDragEnd={(e) => handleDrag(e)}
+              onClick={() => {
+                refreshPage(spot.id);
+              }}
+            />
+          ))}
+          {spots.map((spot) => (
+            <Marker
+              key={spot.id}
+              position={{ lat: spot.lat, lng: spot.long }}
+              title={spot.name}
+              onClick={() => {
+                refreshPage(spot.id);
+              }}
+            />
+          ))}
+          <></>
+        </GoogleMap>
+        <FormGroup switch>
+          <Input
+            type="switch"
+            onChange={toggle}
+          />
+          <Label switch>All Spots?</Label>
+        </FormGroup>
+      </div>
+    );
   } else {
-    /*single Spot with all spots off */
+    /*single Spot with all spots on */
+    
     return (
       <div>
         <GoogleMap
@@ -222,8 +257,9 @@ setToggleState(!toggleState);
           />
           <Label switch>All Spots?</Label>
         </FormGroup>
+        
       </div>
-    );;
+    );
   }
 } else{
   return <div></div>
