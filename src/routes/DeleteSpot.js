@@ -25,23 +25,35 @@ export default function DeleteComment() {
   const { user } = useContext(AuthContext);
 
   const [agree, setAgree] = useState("");
-
+const [comments,setComments]=useState([]);
   const [spots, setSpots] = useState([]);
   useEffect(() => {
+     onSnapshot(collection(db, "comments"), (snapshot) => {
+      setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
   }, []);
-
+  const filteredComments = comments.filter(function (comment) {
+    return comment.spot === spot;
+  });
   const filteredSpots = spots.filter(function (el) {
     return el.id === spot;
   });
 
   const handleDelete = async (id) => {
     const docRef = doc(db, "spots", id);
-    
+   ;
     await deleteDoc(docRef);
+    
+
+    for(let i = 0; i < filteredComments.length;i++){
+      const docRef2 = doc(db, "comments", filteredComments[i].id);
+      await deleteDoc(docRef2);
+    }
+
     for(let i = 0; i < filteredSpots[0].images.length;i++){
       const imageRef = ref(storage, `images/${spot}/${filteredSpots[0].images[i].id}`);
     deleteObject(imageRef)
