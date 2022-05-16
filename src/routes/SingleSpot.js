@@ -56,8 +56,31 @@ export default function SingleSpot() {
               spots={spots}
               singleView={true}
             />
+            
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
+            <div>
+              {user.email === spot.admin.email ? (
+                <div>
+                  <Link to={"/spot/" + spot.id + "/edit"}>
+                    <Button color="primary" onClick={() => {}}>
+                      {" "}
+                      Edit{" "}
+                    </Button>
+                  </Link>
+                  <Link to={"/spot/" + spot.id + "/delete"}>
+                    <Button
+                      color="danger"
+                      className="adminButtonsEach"
+                    >
+                      Delete
+                    </Button>
+                  </Link>
+                </div>
+              ) : (
+                <p></p>
+              )}
+            </div>
             {filteredSpot[0].images.length === 0 ? (
               <div>Add a picture?</div>
             ) : (
@@ -78,36 +101,6 @@ export default function SingleSpot() {
               </Link>{" "}
             </div>
             <PostedEdited spot={spot} />
-            <div>
-              {user.email === spot.admin.email ? (
-                <div>
-                  <Link to={"/spot/" + spot.id + "/edit"}>
-                    <Button color="primary" onClick={() => {}}>
-                      {" "}
-                      Edit{" "}
-                    </Button>
-                  </Link>
-                  <Link to={"/spot/" + spot.id + "/delete"}>
-                    <Button
-                      color="danger"
-                      className="adminButtonsEach"
-                    >
-                      Delete
-                    </Button>
-                  </Link>
-                  <Link to={"/spot/" + spot.id + "/upload"}>
-                    <Button
-                      color="success"
-                      className="adminButtonsEach"
-                    >
-                      Upload
-                    </Button>
-                  </Link>
-                </div>
-              ) : (
-                <p></p>
-              )}
-            </div>
             <p>{spot.description}</p>
           </div>
         </div>
