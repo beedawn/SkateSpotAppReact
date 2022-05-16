@@ -1,8 +1,6 @@
 import { onSnapshot, collection, doc, getDocs } from "firebase/firestore";
-import { getStorage, ref } from "firebase/storage";
 import React, { useEffect, useState, useContext } from "react";
 import { db } from "../firebase-config";
-import loading from "../images/Loading_icon.gif";
 import AuthContext from "../context/AuthContext";
 import {
   Button,
@@ -32,7 +30,6 @@ export default function Comment() {
     return comment.spot === spot;
   });
   if (comments.length !== 0) {
-    console.log(spot);
     return (
       <div>
         <div className="globalTopMargin"> </div>
@@ -74,13 +71,9 @@ export default function Comment() {
                   ) : (
                     <p></p>
                   )}
-
-                  <p></p>
                   <CardText style={{ fontSize: "12px" }}>
                     <p>{comment.comment}</p>
                   </CardText>
-
-                  <div></div>
                 </div>
               </div>
               <CardTitle style={{ fontSize: "10px" }}>
@@ -97,7 +90,6 @@ export default function Comment() {
     return (
       <div style={{ padding: "1rem 0" }}>
         <h2>Comments</h2>
-
         <Link to={"/spot/" + spot + "/addComment/"}>Add a Comment</Link>
       </div>
     );
