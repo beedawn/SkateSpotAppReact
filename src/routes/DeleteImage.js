@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Button } from "reactstrap";
+import { Button, FormText } from "reactstrap";
 import { db, storage } from "../firebase-config";
 import {
   onSnapshot,
@@ -40,7 +40,13 @@ export default function DeleteImage() {
       });
     });
     if(filteredSpot[0]){
-setImageUrl(filteredSpot[0].images[0].url)
+      for(let i=0; i<filteredSpot.length;i++){
+        for(let x=0;x<filteredSpot[i].images.length;x++)
+        if(filteredSpot[i].images[x].id === id){
+          setImageUrl(filteredSpot[i].images[x].url)
+        }
+      }
+
 return;
 }
 
