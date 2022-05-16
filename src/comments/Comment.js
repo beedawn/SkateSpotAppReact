@@ -36,6 +36,11 @@ export default function Comment() {
 
         <h4>Comments</h4>
         <div style={{ width: "400px", margin: "0 auto" }}>
+          {filteredComments.filter((cmt) => cmt.spot === spot).length > 0 ? (
+            `${comments.filter((cmt) => cmt.spot === spot).length} Comments`
+          ) : (
+            <></>
+          )}
           {filteredComments.map((comment) => (
             <Card className="mt-5">
               <CardHeader>{comment.title}</CardHeader>
@@ -78,7 +83,6 @@ export default function Comment() {
               <CardTitle style={{ fontSize: "10px" }}>
                 {" "}
                 Posted By: {comment.name} on {comment.time};
-               
               </CardTitle>
             </Card>
           ))}
@@ -89,7 +93,7 @@ export default function Comment() {
     return (
       <div style={{ padding: "1rem 0" }}>
         <h2>Comments</h2>
-         </div>
+      </div>
     );
   }
 }

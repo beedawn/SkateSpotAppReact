@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import SpotPics from "./SpotPics";
 import Maps from "./Maps";
 import Loading from "../graphics/Loading";
+import PostedEdited from "../SpotComponents/PostedEdited";
 
 export default function SingleSpot() {
   const { spot } = useParams();
@@ -76,20 +77,7 @@ export default function SingleSpot() {
                 </Button>
               </Link>{" "}
             </div>
-            <div>
-              Originally posted by {spot.admin.name} on {spot.timePosted}
-            </div>
-            <div>
-              {spot.edited === true ? (
-                <>
-                  Edited by {spot.admin.name} on {spot.time}{" "}
-                </>
-              ) : (
-                <></>
-              )}
-            </div>
-
-            <div></div>
+            <PostedEdited spot={spot} />
             <div>
               {user.email === spot.admin.email ? (
                 <div>
@@ -103,7 +91,6 @@ export default function SingleSpot() {
                     <Button
                       color="danger"
                       className="adminButtonsEach"
-                      onClick={() => {}}
                     >
                       Delete
                     </Button>
@@ -112,7 +99,6 @@ export default function SingleSpot() {
                     <Button
                       color="success"
                       className="adminButtonsEach"
-                      onClick={() => {}}
                     >
                       Upload
                     </Button>

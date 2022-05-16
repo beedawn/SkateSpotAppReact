@@ -9,6 +9,7 @@ import { Button, Card, CardHeader } from "reactstrap";
 import AllSpotsMap from "./AllSpotsMap";
 import Loading from "../graphics/Loading";
 import Maps from "./Maps";
+import PostedEdited from "../SpotComponents/PostedEdited";
 export default function Spots() {
   const { spot } = useParams();
   const [imageList, setImageList] = useState([]);
@@ -58,7 +59,8 @@ export default function Spots() {
                     marginRight: "70%",
                     marginTop: "10px",
                   }}
-                >{user.email === spot.admin.email ? (
+                >
+                  {user.email === spot.admin.email ? (
                     <Link to={"/spot/" + spot.id + "/edit"}>
                       {" "}
                       <Button color="primary"> Edit </Button>
@@ -78,9 +80,8 @@ export default function Spots() {
                       </Button>
                     </Link>
                   </div>
-                  
                 </div>
-                
+
                 <h6>{spot.location}</h6>
                 <p>{spot.description}</p>
                 <p>
@@ -92,18 +93,7 @@ export default function Spots() {
                     <></>
                   )}{" "}
                 </p>
-                <p>
-                  {spot.edited === true ? (
-                    <>
-                      Edited on {spot.time} by {spot.admin.name}
-                    </>
-                  ) : (
-                    <></>
-                  )}{" "}
-                </p>
-                <p>
-                  Posted By {spot.admin.name} on {spot.timePosted}
-                </p>
+                <PostedEdited spot={spot} />
               </div>
             </Card>
           </div>
