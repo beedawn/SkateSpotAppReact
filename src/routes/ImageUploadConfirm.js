@@ -6,6 +6,7 @@ import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import { refreshPage } from "../functions/Refresh";
+import Loading from "../graphics/Loading";
 
 export default function ImageUploadConfirm() {
   const { spot, id } = useParams();
@@ -75,7 +76,7 @@ export default function ImageUploadConfirm() {
   };
 
   if (filteredSpot.length === 0) {
-    return <div>404 Error - Not Found</div>;
+    return <div><Loading /></div>;
   }
   return (
     <div>

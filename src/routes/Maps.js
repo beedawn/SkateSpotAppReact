@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { refreshPage } from "../functions/Refresh";
 import { Form, Input, FormGroup, Label } from "reactstrap";
+import Switch from "../graphics/Switch";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 // import useGeolocation from 'react-hook-geolocation';
@@ -38,6 +39,8 @@ export default function Maps(props) {
     setMap(map);
   }, []);
 
+  
+
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
   }, []);
@@ -73,13 +76,7 @@ setToggleState(!toggleState);
             
               <></>
             </GoogleMap>
-            <FormGroup switch>
-              <Input
-                type="switch"
-                onChange={toggle}
-              />
-              <Label switch>All Spots?</Label>
-            </FormGroup>
+          <Switch toggle={toggle} />
           </div>
         );
       } else {
@@ -105,13 +102,7 @@ setToggleState(!toggleState);
                 />
               ))}
               
-              <FormGroup switch>
-                <Input
-                  type="switch"
-                  onChange={toggle}
-                />
-                <Label switch>All Spots?</Label>
-              </FormGroup>
+              <Switch toggle={toggle} />
               <></>
             </GoogleMap>
           </div>
@@ -140,13 +131,7 @@ setToggleState(!toggleState);
               />
             ))}
           </GoogleMap>
-          <FormGroup switch>
-            <Input
-              type="switch"
-              onChange={toggle}
-            />
-            <Label switch>All Spots?</Label>
-          </FormGroup>
+          <Switch toggle={toggle} />
         </div>
       );
     } else {
@@ -208,13 +193,7 @@ setToggleState(!toggleState);
           ))}
           <></>
         </GoogleMap>
-        <FormGroup switch>
-          <Input
-            type="switch"
-            onChange={toggle}
-          />
-          <Label switch>All Spots?</Label>
-        </FormGroup>
+        <Switch toggle={toggle} />
       </div>
     );
   } else {
@@ -250,14 +229,7 @@ setToggleState(!toggleState);
                 />
               ))}
         </GoogleMap>
-        <FormGroup switch>
-          <Input
-            type="switch"
-            onChange={toggle}
-          />
-          <Label switch>All Spots?</Label>
-        </FormGroup>
-        
+        <Switch toggle={toggle} />
       </div>
     );
   }

@@ -9,6 +9,7 @@ import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
 import SpotPics from "./SpotPics";
 import Maps from "./Maps";
+import Loading from "../graphics/Loading";
 
 export default function SingleSpot() {
   const { spot } = useParams();
@@ -36,7 +37,7 @@ export default function SingleSpot() {
   });
 
   if (filteredSpot.length === 0) {
-    return <div>404 Error - Not Found</div>;
+    return <div><Loading/></div>;
   }
 
   return (

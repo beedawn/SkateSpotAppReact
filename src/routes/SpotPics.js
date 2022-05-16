@@ -5,6 +5,7 @@ import { onSnapshot, collection } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { refreshPage, imagePage } from "../functions/Refresh";
+import Loading from "../graphics/Loading";
 
 export default function SpotPics() {
   const { spot } = useParams();
@@ -30,7 +31,7 @@ export default function SpotPics() {
     return el.id === spot;
   });
   if (filteredSpot.length === 0) {
-    return <div>404 Error - Not Found</div>;
+    return <div><Loading /></div>;
   }
   return (
     <div>

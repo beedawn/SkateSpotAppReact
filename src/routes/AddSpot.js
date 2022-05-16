@@ -1,31 +1,21 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
-import { db, storage } from "../firebase-config";
+import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  listAll,
-  list,
-  getDownloadURL,
-} from "firebase/storage";
 import { Input } from "reactstrap";
 import "../styles/style.css";
 import { v4 } from "uuid";
-import { useParams } from "react-router-dom";
 import useGeolocation from "react-hook-geolocation";
 import Maps from "./Maps";
 import Geocode from "react-geocode";
 import { refreshPage } from "../functions/Refresh";
-import { confirmPasswordReset } from "firebase/auth";
 import Loading from "../graphics/Loading";
 
 export default function AddSpot() {
   const spotId = v4();
   const geolocation = useGeolocation();
-  const { spot } = useParams();
+
   const { user } = useContext(AuthContext);
   const [gps, setGps] = useState();
   const [spotLocation, setSpotLocation] = useState("");
@@ -128,10 +118,12 @@ export default function AddSpot() {
     fetchLocation();
     //  fetchCoords(gps.lat,gps.long);
   }
+
   //Handle Drag is Passed to Maps Component
   function handleDrag(e) {
     setGps({ lat: e.latLng.lat(), long: e.latLng.lng() });
   }
+  
   if (spots.length !== 0) {
     return (
       <div>

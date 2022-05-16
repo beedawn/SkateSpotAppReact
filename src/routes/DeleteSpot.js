@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import "../styles/style.css";
 import { refreshPage } from "../functions/Refresh";
+import Loading from "../graphics/Loading";
 
 export default function DeleteComment() {
   const { spot } = useParams();
@@ -39,7 +40,7 @@ export default function DeleteComment() {
   };
 
   if (filteredProduct.length === 0) {
-    return <div> 404 Error - Not Found</div>;
+    return <div> <Loading /></div>;
   } else {
     return (
       <div className="globalTopMargin">
