@@ -1,26 +1,15 @@
 import React, { useState } from "react";
-import { refreshPage } from "../functions/Refresh";
-import { Form, Input, FormGroup, Label } from "reactstrap";
 import Switch from "../graphics/Switch";
 import CustomMarker from "./CustomMarker";
 
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { useJsApiLoader } from "@react-google-maps/api";
 // import useGeolocation from 'react-hook-geolocation';
 import useGeolocation from "react-hook-geolocation";
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS;
-const containerStyle = {
-  width: "auto",
-  height: "400px",
-  margin: "auto",
-};
 
 export default function Maps(props) {
   const geolocation = useGeolocation();
-  const spot = props.spot;
-  const handleDrag = props.handleDrag;
-  const drag = props.drag;
-  const coords = props.singleView;
-  const spots = props.spots;
+  const { spot, handleDrag, drag, coords, spots, allSpots } = props;
   const [toggleState, setToggleState] = useState("false");
 
   const { isLoaded } = useJsApiLoader({
@@ -47,6 +36,7 @@ export default function Maps(props) {
   function toggle() {
     setToggleState(!toggleState);
   }
+
   if (isLoaded) {
     if (toggleState) {
       if (drag) {
@@ -75,7 +65,6 @@ export default function Maps(props) {
                 drag={drag}
                 check="2"
               />
-
               <Switch toggle={toggle} />
               <></>
             </div>
@@ -92,12 +81,13 @@ export default function Maps(props) {
               drag={drag}
               check="3"
             />
-
             <Switch toggle={toggle} />
           </div>
         );
       } else {
         /* return statement for Spots component, and Dashboard */
+       console.log(spot.length)
+       if(spot.length>1 ){
         return (
           <div>
             <CustomMarker
@@ -107,8 +97,24 @@ export default function Maps(props) {
               drag={drag}
               check="4"
             />
+            42
           </div>
+        
         );
+      }else {
+        return(
+          <div>
+          <CustomMarker
+            spot={spot}
+            center={{lat:spot[0].lat, lng:spot[0].long}}
+            handleDrag={handleDrag}
+            drag={drag}
+            check="4"
+          />
+          4
+        </div> )
+       
+      }
       }
     }
     if (drag && spots) {
@@ -123,6 +129,7 @@ export default function Maps(props) {
             drag={drag}
             check="5"
           />
+          5
           <Switch toggle={toggle} />
         </div>
       );
@@ -138,6 +145,7 @@ export default function Maps(props) {
             drag={drag}
             check="6"
           />
+          6
           <Switch toggle={toggle} />
         </div>
       );

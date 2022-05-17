@@ -43,7 +43,7 @@ export default function Spots() {
       <div>
         <div className="globalTopMargin">
           <h2>Spots</h2>
-          <AllSpotsMap spots={spots} />
+          <AllSpotsMap spots={spots}  />
         </div>
         {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }}>
@@ -52,7 +52,7 @@ export default function Spots() {
                 <CardHeader>
                   <Link to={"/spot/" + spot.id}>{spot.name}</Link>
                 </CardHeader>
-                <Maps spot={[spot]} spots={spots} singleView={true} />
+                <Maps spot={[spot]} spots={spots} center={{lat:spot.lat,lng:spot.long}} singleView={true} />
                 <div
                   style={{
                     display: "inline",
