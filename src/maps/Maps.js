@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Switch from "../graphics/Switch";
-import CustomMarker from "./CustomMarkerLogic";
+import CustomMapLogic from "./CustomMapLogic";
 import CustomMarkerBuilder from "./CustomMarkerBuilder";
 
 import { useJsApiLoader } from "@react-google-maps/api";
@@ -64,7 +64,7 @@ export default function Maps(props) {
         /* return statement for Single Spot */
         return (
           <div>
-            <CustomMarker
+            <CustomMapLogic
               spot={spot}
               center={{ lat: spot[0].lat, lng: spot[0].long }}
               handleDrag={handleDrag}
@@ -80,7 +80,7 @@ export default function Maps(props) {
        if(spot.length>1 ){
         return (
           <div>
-            <CustomMarker
+            <CustomMapLogic
               spot={spot}
               center={center}
               handleDrag={handleDrag}
@@ -94,7 +94,7 @@ export default function Maps(props) {
       }else {
         return(
           <div>
-          <CustomMarker
+          <CustomMapLogic
             spot={spot}
             center={{lat:spot[0].lat, lng:spot[0].long}}
             handleDrag={handleDrag}
@@ -111,7 +111,7 @@ export default function Maps(props) {
       return (
         /* return statement for Add a Spot */
         <div>
-          <CustomMarker
+          <CustomMapLogic
             spot={spot}
             spots={spots}
             center={{ lat: spot[0].lat, lng: spot[0].long }}
@@ -127,7 +127,7 @@ export default function Maps(props) {
       /*single Spot with all spots on */
       return (
         <div>
-          <CustomMarker
+          <CustomMapLogic
             spot={spot}
             spots={spots}
             center={{ lat: spot[0].lat, lng: spot[0].long }}

@@ -7,7 +7,7 @@ import { Input } from "reactstrap";
 import "../styles/style.css";
 import { v4 } from "uuid";
 import useGeolocation from "react-hook-geolocation";
-import Maps from "./Maps";
+import Maps from "../maps/Maps";
 import Geocode from "react-geocode";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
@@ -105,7 +105,6 @@ export default function AddSpot() {
       edited: false,
     };
     await addDoc(collectionRef, payload);
-    console.log(collectionRef);
     refreshPage();
   };
 
@@ -134,6 +133,7 @@ export default function AddSpot() {
             spots={spots}
             handleDrag={handleDrag}
             drag={true}
+            singleView={true}
           />
         ) : (
           <Maps
@@ -172,24 +172,6 @@ export default function AddSpot() {
                 placeholder="Spot Address"
                 onChange={handleChange}
               />
-              {spotAddress ? (
-                <p></p>
-              ) : (
-                <span className="errorSpan">Please enter Address</span>
-              )}
-              <div style={{ marginTop: "1rem" }}>
-                <Input
-                  editable="true"
-                  name="city"
-                  placeholder="Spot City"
-                  onChange={handleChange}
-                />
-              </div>
-              {spotCity ? (
-                <p></p>
-              ) : (
-                <span className="errorSpan">Please enter City</span>
-              )}
             </div>
           )}
         </div>

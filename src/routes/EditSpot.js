@@ -3,20 +3,19 @@ import { Button } from "reactstrap";
 import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../firebase-config";
-import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import "../styles/style.css";
 import SpotPics from "./SpotPics";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
-import Maps from "./Maps";
-import useGeolocation from "react-hook-geolocation";
+import Maps from "../maps/Maps";
+
 
 export default function EditSpot() {
-  const geolocation = useGeolocation();
+
   const { spot } = useParams();
-  const { user } = useContext(AuthContext);
+
   const [spotLocation, setSpotLocation] = useState("");
   const [spotName, setSpotName] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
@@ -42,7 +41,6 @@ export default function EditSpot() {
         name: spotName,
         location: spotLocation,
         description: spotDescription,
-        // admin: { email: user.email, name: user.displayName },
         time: date.toString(),
         edited: true,
         lat: gps.lat,
@@ -58,7 +56,6 @@ export default function EditSpot() {
         name: spotName,
         location: spotLocation,
         description: spotDescription,
-        // admin: { email: user.email, name: user.displayName },
         time: date.toString(),
         edited: true,
        
@@ -84,7 +81,6 @@ export default function EditSpot() {
     return (
       <div>
         <h2>Edit a Spot</h2>
-
         {gps ? (
           <Maps
             spot={[{edit:true, lat: gps.lat, long: gps.long, id: filteredSpots[0].id }]}

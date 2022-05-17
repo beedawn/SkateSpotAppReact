@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
 import SpotPics from "./SpotPics";
-import Maps from "./Maps";
+import Maps from "../maps/Maps";
 import Loading from "../graphics/Loading";
 import PostedEdited from "../SpotComponents/PostedEdited";
 

@@ -5,7 +5,7 @@ import AuthContext from "../context/AuthContext";
 import { v4 } from "uuid";
 import { db } from "../firebase-config";
 import { onSnapshot, collection } from "firebase/firestore";
-import AllSpotsMap from "./AllSpotsMap";
+import AllSpotsMap from "../maps/AllSpotsMap";
 import Loading from "../graphics/Loading";
 
 export default function Dashboard() {

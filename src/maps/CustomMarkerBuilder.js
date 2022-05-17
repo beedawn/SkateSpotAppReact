@@ -1,8 +1,8 @@
 import React from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker, Autocomplete } from "@react-google-maps/api";
 import { refreshPage } from "../functions/Refresh";
 import useGeolocation from "react-hook-geolocation";
-export default function CustomMarkerBuilder(props) {
+export default function CustomMarke1rBuilder(props) {
 
   const { spot, handleDrag } = props;
  
@@ -47,12 +47,14 @@ if(spot[0].edit){
 }
   return (
     //Return statement for add a spot
+    <div>
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
       zoom={12}
       onUnmount={onUnmount}
     >
+ 
       {spot.map((spot) => (
         <Marker
           key={spot.id}
@@ -60,11 +62,11 @@ if(spot[0].edit){
           draggable
           title="New Spot"
           onDragEnd={(e) => handleDrag(e)}
-          onClick={() => {
-            refreshPage(spot.id);
-          }}
+          
         />
       ))}
-    </GoogleMap>
+      
+    </GoogleMap>:)
+    </div>
   );
 }

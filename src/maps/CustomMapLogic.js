@@ -1,8 +1,8 @@
 import React from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker, Autocomplete } from "@react-google-maps/api";
 import { refreshPage } from "../functions/Refresh";
 
-export default function CustomMarker(props) {
+export default function CustomMapLogic(props) {
   const { spot, handleDrag, center, spots, check } = props;
 
   const containerStyle = {
@@ -20,12 +20,22 @@ export default function CustomMarker(props) {
     case "1":
       return (
         //Return statement for add a spot
+        <div>
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
           zoom={12}
           onUnmount={onUnmount}
         >
+             <Autocomplete
+           
+          >
+            <input
+              type="text"
+              placeholder="Customized your placeholder"
+              
+            />
+          </Autocomplete>
           {spot.map((spot) => (
             <Marker
               key={spot.id}
@@ -38,11 +48,12 @@ export default function CustomMarker(props) {
               }}
             />
           ))}
-        </GoogleMap>
+          
+        </GoogleMap>11</div>
       );
     case "2":
       //Not sure if this ever returns
-      return (
+      return (<div>
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
@@ -61,12 +72,13 @@ export default function CustomMarker(props) {
               }}
             />
           ))}
-        </GoogleMap>
+        </GoogleMap>22</div>
       );
 
     case "3":
       //Return Statement for Single Spot
       return (
+        <div>
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={{ lat: spot[0].lat, lng: spot[0].long }}
@@ -84,7 +96,7 @@ export default function CustomMarker(props) {
               }}
             />
           ))}
-        </GoogleMap>
+        </GoogleMap>33</div>
        
       );
 
@@ -92,6 +104,7 @@ export default function CustomMarker(props) {
   
       //Return statement for Spots Component and Dashboard
       return (
+        <div>
         <GoogleMap
               mapContainerStyle={containerStyle}
               center={center}
@@ -109,12 +122,13 @@ export default function CustomMarker(props) {
                   }}
                 />
               ))}
-            </GoogleMap>
+            </GoogleMap>44</div>
       );
 
     case "5":
       // Return Statement for Add a Spot
       return (
+        <div>
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={{ lat: spot[0].lat, lng: spot[0].long }}
@@ -127,9 +141,8 @@ export default function CustomMarker(props) {
               position={{ lat: spot.lat, lng: spot.long }}
               draggable
               onDragEnd={(e) => handleDrag(e)}
-              onClick={() => {
-                refreshPage(spot.id);
-              }}
+           
+            
             />
           ))}
           {spots.map((spot) => (
@@ -143,7 +156,7 @@ export default function CustomMarker(props) {
             />
           ))}
           <></>
-        </GoogleMap>
+        </GoogleMap>55</div>
         
       );
 

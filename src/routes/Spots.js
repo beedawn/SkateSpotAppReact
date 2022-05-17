@@ -6,9 +6,9 @@ import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button, Card, CardHeader } from "reactstrap";
-import AllSpotsMap from "./AllSpotsMap";
+import AllSpotsMap from "../maps/AllSpotsMap";
 import Loading from "../graphics/Loading";
-import Maps from "./Maps";
+import Maps from "../maps/Maps";
 import PostedEdited from "../SpotComponents/PostedEdited";
 export default function Spots() {
   const { spot } = useParams();
