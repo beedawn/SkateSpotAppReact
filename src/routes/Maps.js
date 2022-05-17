@@ -3,6 +3,7 @@ import { refreshPage } from "../functions/Refresh";
 import { Form, Input, FormGroup, Label } from "reactstrap";
 import Switch from "../graphics/Switch";
 import CustomMarker from "./CustomMarker";
+
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 // import useGeolocation from 'react-hook-geolocation';
 import useGeolocation from "react-hook-geolocation";
@@ -53,7 +54,13 @@ export default function Maps(props) {
           return (
             /* return statement for Add a Spot */
             <div>
-             <CustomMarker spot={spot} center={{ lat: spot[0].lat, lng: spot[0].long }}handleDrag={handleDrag} drag={drag}/>
+              <CustomMarker
+                spot={spot}
+                center={{ lat: spot[0].lat, lng: spot[0].long }}
+                handleDrag={handleDrag}
+                drag={drag}
+                check="1"
+              />
               <Switch toggle={toggle} />
             </div>
           );
@@ -61,9 +68,16 @@ export default function Maps(props) {
           /* Doubt this ever returns */
           return (
             <div>
-              
-             <CustomMarker spot={spot} center={{ lat: spot[0].lat, lng: spot[0].long }}handleDrag={handleDrag} drag={drag}/>
+              <CustomMarker
+                spot={spot}
+                center={{ lat: spot[0].lat, lng: spot[0].long }}
+                handleDrag={handleDrag}
+                drag={drag}
+                check="2"
+              />
+
               <Switch toggle={toggle} />
+              <></>
             </div>
           );
         }
@@ -71,7 +85,14 @@ export default function Maps(props) {
         /* return statement for Single Spot */
         return (
           <div>
-            <CustomMarker spot={spot}  center={{ lat: spot[0].lat, lng: spot[0].long }} handleDrag={handleDrag} drag={drag}/>
+            <CustomMarker
+              spot={spot}
+              center={{ lat: spot[0].lat, lng: spot[0].long }}
+              handleDrag={handleDrag}
+              drag={drag}
+              check="3"
+            />
+
             <Switch toggle={toggle} />
           </div>
         );
@@ -79,10 +100,13 @@ export default function Maps(props) {
         /* return statement for Spots component, and Dashboard */
         return (
           <div>
-
-<CustomMarker spot={spot} center={center} handleDrag={handleDrag} drag={drag}/>
-             
-           
+            <CustomMarker
+              spot={spot}
+              center={center}
+              handleDrag={handleDrag}
+              drag={drag}
+              check="4"
+            />
           </div>
         );
       }
@@ -91,37 +115,14 @@ export default function Maps(props) {
       return (
         /* return statement for Add a Spot */
         <div>
-          <CustomMarker spot={spot} center={center} handleDrag={handleDrag} drag={drag}/>
-             
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={{lat:spot[0].lat,lng:spot[0].long}}
-            zoom={12}
-            onUnmount={onUnmount}
-          >
-            {spot.map((spot) => (
-              <Marker
-                key={spot.id}
-                position={{ lat: spot.lat, lng: spot.long }}
-                draggable
-                onDragEnd={(e) => handleDrag(e)}
-                onClick={() => {
-                  refreshPage(spot.id);
-                }}
-              />
-            ))}
-            {spots.map((spot) => (
-              <Marker
-                key={spot.id}
-                position={{ lat: spot.lat, lng: spot.long }}
-                title={spot.name}
-                onClick={() => {
-                  refreshPage(spot.id);
-                }}
-              />
-            ))}
-            <></>
-          </GoogleMap>
+          <CustomMarker
+            spot={spot}
+            spots={spots}
+            center={{ lat: spot[0].lat, lng: spot[0].long }}
+            handleDrag={handleDrag}
+            drag={drag}
+            check="5"
+          />
           <Switch toggle={toggle} />
         </div>
       );
@@ -129,34 +130,14 @@ export default function Maps(props) {
       /*single Spot with all spots on */
       return (
         <div>
-          <GoogleMap
-            mapContainerStyle={containerStyle}
+          <CustomMarker
+            spot={spot}
+            spots={spots}
             center={{ lat: spot[0].lat, lng: spot[0].long }}
-            zoom={12}
-            onUnmount={onUnmount}
-          >
-            {/* Child components, such as markers, info windows, etc. */}
-            {spot.map((spot) => (
-              <Marker
-                key={spot.id}
-                position={{ lat: spot.lat, lng: spot.long }}
-                title={spot.name}
-                onClick={() => {
-                  refreshPage(spot.id);
-                }}
-              />
-            ))}
-            {spots.map((spot) => (
-              <Marker
-                key={spot.id}
-                position={{ lat: spot.lat, lng: spot.long }}
-                title={spot.name}
-                onClick={() => {
-                  refreshPage(spot.id);
-                }}
-              />
-            ))}
-          </GoogleMap>
+            handleDrag={handleDrag}
+            drag={drag}
+            check="6"
+          />
           <Switch toggle={toggle} />
         </div>
       );

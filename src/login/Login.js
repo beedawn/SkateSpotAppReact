@@ -39,8 +39,6 @@ export default function Login() {
     );
   } else {
     //returns loading animation
-    return (
-     <Loading />
-    );
+    return <Loading />;
   }
 }

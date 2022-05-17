@@ -16,9 +16,7 @@ export default function LoginForm() {
         loginEmail,
         loginPassword
       );
-      console.log(user);
     } catch (error) {
-      console.log(loginEmail);
       console.log(error.message);
     }
   };
@@ -29,7 +27,6 @@ export default function LoginForm() {
         loginEmail,
         loginPassword
       );
-      console.log(user);
     } catch (error) {
       console.log(error.message);
     }
