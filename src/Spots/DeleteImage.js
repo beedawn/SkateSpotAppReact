@@ -20,7 +20,7 @@ import { useParams } from "react-router-dom";
 
 export default function DeleteImage() {
   const { spot, id } = useParams();
-  const imageListRef = ref(storage, "images/" + spot + "/");
+  const imageListRef = ref(storage, "images/spots/" + spot + "/");
   const [spots, setSpots] = useState([]);
   const [imageList, setImageList] = useState([]);
   const [imageUrl, setImageUrl]= useState();
@@ -62,7 +62,7 @@ return;
   
 
   const handleDelete = async () => {
-    const imageRef = ref(storage, `images/${spot}/${id}`);
+    const imageRef = ref(storage, `images/spots/${spot}/${id}`);
     const imageFilter = filteredSpot[0].images.filter((el) => {
       return el.id !== id;
     });

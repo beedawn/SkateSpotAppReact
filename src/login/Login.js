@@ -7,6 +7,7 @@ import loading from "../images/Loading_icon.gif";
 import Loading from "../graphics/Loading";
 import LoginForm from "./LoginForm";
 import DisplayNameSetup from "./DisplayNameSetup";
+import ImageUploadUser from "../User/ImageUploadUser";
 
 export default function Login() {
   const { user, setUser } = useContext(AuthContext);
@@ -33,6 +34,7 @@ export default function Login() {
       <div>
         {" "}
         <div>
+          <ImageUploadUser />
           <DisplayNameSetup />
         </div>
       </div>

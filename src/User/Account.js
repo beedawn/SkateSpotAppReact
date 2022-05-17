@@ -11,8 +11,7 @@ export default function Account() {
       <p>
         Picture: <img src={user.photoURL} alt="Avatar" height="50px" />
       </p>
-      <Link to="/edit" >Edit Display Name</Link>
-
+      <Link to="/edit">Edit Display Name</Link>
     </div>
   );
 }

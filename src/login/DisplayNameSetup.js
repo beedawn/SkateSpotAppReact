@@ -6,7 +6,7 @@ import { Button } from "reactstrap";
 import AuthContext from "../context/AuthContext";
 
 export default function DisplayNameSetup() {
-
+  //Need to add a way to verify DisplayName isn't already used?
 
   const { user, setUser } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");

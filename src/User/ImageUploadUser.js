@@ -7,17 +7,17 @@ import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { Input } from "reactstrap";
 import "../styles/style.css";
 import { v4 } from "uuid";
-import { useParams } from "react-router-dom";
 
-export default function ImageUpload() {
-  const { spot } = useParams();
+
+export default function ImageUploadUser() {
+  
   const vkey = v4();
   const [imageList, setImageList] = useState([]);
-  const imageListRef = ref(storage, "images/spots/" + spot + "/");
+  const imageListRef = ref(storage, "images/users/" + vkey + "/");
 
   const [imageUpload, setImageUpload] = useState(null);
   const [check, setCheck] = useState("true");
-  const [spots, setSpots] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     listAll(imageListRef).then((response) => {
@@ -28,8 +28,8 @@ export default function ImageUpload() {
       });
     });
 
-    const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
-      setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
+      setUsers(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
   }, []);
@@ -42,10 +42,10 @@ export default function ImageUpload() {
     //      )
     //  }
     if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/spots/${spot}/${vkey}`);
+    const imageRef = ref(storage, `images/users/${vkey}`);
 
     uploadBytes(imageRef, imageUpload).then(() => {
-      window.location.replace(`/spot/${spot}/uploadConfirm/${vkey}`);
+      window.location.replace(`/user/uploadConfirm/${vkey}`);
     });
   };
   const imageSpot = imageList.filter((image) => {
@@ -54,7 +54,7 @@ export default function ImageUpload() {
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
-        <h2> Spot {spot}</h2>
+        
         <h3> Image Upload</h3>
         <Input
           type="file"
@@ -67,8 +67,8 @@ export default function ImageUpload() {
       {console.log(imageSpot[0])}
       <div style={{ marginTop: "1rem" }}>
         {/* {check ? <div>File too large!</div> : <p></p>} */}
-        <Button color="primary" onClick={handleUpload}>
-          Submit
+        <Button color="success" onClick={handleUpload}>
+          Upload
         </Button>
       </div>
     </div>
