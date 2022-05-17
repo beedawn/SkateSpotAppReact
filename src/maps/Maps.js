@@ -76,7 +76,7 @@ export default function Maps(props) {
         );
       } else {
         /* return statement for Spots component, and Dashboard */
-       console.log(spot.length)
+       
        if(spot.length>1 ){
         return (
           <div>

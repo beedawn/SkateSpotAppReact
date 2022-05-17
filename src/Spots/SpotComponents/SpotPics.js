@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { db, storage } from "../firebase-config";
+import { db, storage } from "../../firebase-config";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { onSnapshot, collection } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { refreshPage, imagePage } from "../functions/Refresh";
-import Loading from "../graphics/Loading";
+import { refreshPage, imagePage } from "../../functions/Refresh";
+import Loading from "../../graphics/Loading";
 
 export default function SpotPics() {
   const { spot } = useParams();

@@ -7,10 +7,10 @@ import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
-import SpotPics from "./SpotPics";
+import SpotPics from "./SpotComponents/SpotPics";
 import Maps from "../maps/Maps";
 import Loading from "../graphics/Loading";
-import PostedEdited from "../SpotComponents/PostedEdited";
+import PostedEdited from "./SpotComponents/PostedEdited";
 
 export default function SingleSpot() {
   const { spot } = useParams();

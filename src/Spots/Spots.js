@@ -9,7 +9,7 @@ import { Button, Card, CardHeader } from "reactstrap";
 import AllSpotsMap from "../maps/AllSpotsMap";
 import Loading from "../graphics/Loading";
 import Maps from "../maps/Maps";
-import PostedEdited from "../SpotComponents/PostedEdited";
+import PostedEdited from "./SpotComponents/PostedEdited";
 export default function Spots() {
   const { spot } = useParams();
   const [imageList, setImageList] = useState([]);

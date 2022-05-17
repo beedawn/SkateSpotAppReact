@@ -1,22 +1,22 @@
 import React from "react";
 import NavBar from "./navigation/NavBar";
 import { Routes, Route } from "react-router-dom";
-import Spots from "./routes/Spots";
+import Spots from "./Spots/Spots";
 import Dashboard from "./routes/Dashboard";
 
-import AddSpot from "./routes/AddSpot";
-import Account from "./routes/Account";
-import SingleSpot from "./routes/SingleSpot";
-import AddComment from "./routes/AddComment";
+import AddSpot from "./Spots/AddSpot";
+import Account from "./User/Account";
+import SingleSpot from "./Spots/SingleSpot";
+import AddComment from "./comments/AddComment";
 import Comment from "./comments/Comment";
-import EditSpot from "./routes/EditSpot";
-import EditComment from "./routes/EditComment";
-import DeleteComment from "./routes/DeleteComment";
-import DeleteSpot from "./routes/DeleteSpot";
+import EditSpot from "./Spots/EditSpot";
+import EditComment from "./comments/EditComment";
+import DeleteComment from "./comments/DeleteComment";
+import DeleteSpot from "./Spots/DeleteSpot";
 import DisplayNameSetup from "./login/DisplayNameSetup";
-import ImageUpload from "./routes/ImageUpload";
-import ImageUploadConfirm from "./routes/ImageUploadConfirm";
-import DeleteImage from "./routes/DeleteImage";
+import ImageUpload from "./Spots/ImageUpload";
+import ImageUploadConfirm from "./Spots/ImageUploadConfirm";
+import DeleteImage from "./Spots/DeleteImage";
 export default function Home() {
   return (
     <div>

@@ -6,7 +6,7 @@ import { db } from "../firebase-config";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import "../styles/style.css";
-import SpotPics from "./SpotPics";
+import SpotPics from "./SpotComponents/SpotPics";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
 import Maps from "../maps/Maps";
