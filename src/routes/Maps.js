@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Switch from "../graphics/Switch";
-import CustomMarker from "./CustomMarker";
+import CustomMarker from "./CustomMarkerLogic";
+import CustomMarkerBuilder from "./CustomMarkerBuilder";
 
 import { useJsApiLoader } from "@react-google-maps/api";
 // import useGeolocation from 'react-hook-geolocation';
@@ -44,27 +45,16 @@ export default function Maps(props) {
           return (
             /* return statement for Add a Spot */
             <div>
-              <CustomMarker
-                spot={spot}
-                center={{ lat: spot[0].lat, lng: spot[0].long }}
-                handleDrag={handleDrag}
-                drag={drag}
-                check="1"
-              />
-              <Switch toggle={toggle} />
+             <CustomMarkerBuilder spot={spot} handleDrag={handleDrag} />
+              <Switch toggle={toggle} />1
             </div>
           );
         } else {
           /* Doubt this ever returns */
           return (
             <div>
-              <CustomMarker
-                spot={spot}
-                center={{ lat: spot[0].lat, lng: spot[0].long }}
-                handleDrag={handleDrag}
-                drag={drag}
-                check="2"
-              />
+           <CustomMarkerBuilder spot={spot} handleDrag={handleDrag} />
+           2
               <Switch toggle={toggle} />
               <></>
             </div>

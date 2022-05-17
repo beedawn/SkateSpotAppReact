@@ -87,7 +87,7 @@ export default function EditSpot() {
 
         {gps ? (
           <Maps
-            spot={[{ lat: gps.lat, long: gps.long, id: filteredSpots[0].id }]}
+            spot={[{edit:true, lat: gps.lat, long: gps.long, id: filteredSpots[0].id }]}
             spots={spots}
             handleDrag={handleDrag}
             drag={true}
@@ -97,6 +97,7 @@ export default function EditSpot() {
           <Maps
             spot={[
               {
+                edit:true,
                 lat: filteredSpots[0].lat,
                 long: filteredSpots[0].long,
                 id: filteredSpots[0].id,
