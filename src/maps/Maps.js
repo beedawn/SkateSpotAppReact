@@ -101,6 +101,7 @@ export default function Maps(props) {
             drag={drag}
             check="4"
           />
+          <Switch toggle={toggle} />
           4
         </div> )
        

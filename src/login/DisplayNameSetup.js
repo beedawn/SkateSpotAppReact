@@ -5,9 +5,9 @@ import { Button } from "reactstrap";
 
 import AuthContext from "../context/AuthContext";
 
-export default function DisplayNameSetup() {
+export default function DisplayNameSetup(props) {
   //Need to add a way to verify DisplayName isn't already used?
-
+const image=props.image;
   const { user, setUser } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");
 
@@ -16,9 +16,7 @@ export default function DisplayNameSetup() {
       const update = {
         ...user,
         displayName: displayName,
-        photoURL:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png",
-      };
+         };
 
       updateProfile(auth.currentUser, update);
       onAuthStateChanged(auth, (currentUser) => {
@@ -48,7 +46,7 @@ export default function DisplayNameSetup() {
           }}
         />
       </div>
-
+<div>{image}</div>
       <div>
         <Button
           color="primary"

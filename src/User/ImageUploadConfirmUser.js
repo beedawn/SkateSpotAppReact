@@ -8,12 +8,14 @@ import { useParams } from "react-router-dom";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
 
-export default function ImageUploadConfirmUser() {
+export default function ImageUploadConfirmUser(props) {
+ const vkey = props.vkey;
+ const toggle = props.toggle;
   const { spot, id } = useParams();
   const { user } = useContext(AuthContext);
   const [imageList, setImageList] = useState([]);
-  const imageListRef = ref(storage, "images/" + spot + "/");
-  const [spots, setSpots] = useState([]);
+  const imageListRef = ref(storage, "images/users/"+ user.photoURL + "/" );
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     listAll(imageListRef).then((response) => {
       response.items.forEach((item) => {
@@ -23,30 +25,30 @@ export default function ImageUploadConfirmUser() {
       });
     });
   
-    const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
-      setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
+      setUsers(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
   }, []);
   // filter spot
-  const filteredSpot = spots.filter((el) => {
-    return el.id === spot;
-  });
 
+  const filteredUser = users.filter((el) => {
+    return el.myid=== user.photoURL;
+  });
+  console.log(user.id)
+  console.log(filteredUser)
   const arrayPush = (array) => {
     const date = new Date(Date.now());
     array.push({
-      displayName: user.displayName,
-      id: id,
-      spot: spot,
+      id: vkey,
       url: imageList[imageList.length - 1],
       time: date.toString(),
     });
     return array;
   };
-  const imageArrayHandler = (filteredSpot) => {
-    if (filteredSpot[0].images) {
-      const arrayImg = [...filteredSpot[0].images];
+  const imageArrayHandler = (filteredUser) => {
+    if (filteredUser[0].images) {
+      const arrayImg = [...filteredUser[0].images];
       return arrayPush(arrayImg);
     } else {
       const arrayImg = [];
@@ -54,31 +56,33 @@ export default function ImageUploadConfirmUser() {
     }
   };
   const handleEdit = async (id, url) => {
-    const docRef = doc(db, "spots", id);
-    console.log(filteredSpot);
+    const docRef = doc(db, "users", id);
+    console.log(filteredUser);
     const date = new Date(Date.now());
     const payload = {
-  ...filteredSpot[0],
-      images: imageArrayHandler(filteredSpot),
+  ...filteredUser[0],
+      images: imageArrayHandler(filteredUser),
       time: date.toString(),
     };
 
     await setDoc(docRef, payload);
-    refreshPage(spot);
+    toggle();
   };
-
-  if (filteredSpot.length === 0) {
+console.log(filteredUser);
+console.log(imageList)
+console.log(user.email)
+  if (filteredUser.length === 0) {
     return <div><Loading /></div>;
   }
   return (
     <div>
       <div style={{ padding: "1rem" }}>
-        <h2>Confirm Image Upload</h2>
+        <h2>Confirm Profile Picture Upload</h2>
       </div>
-      {filteredSpot.map((spot) => (
+      {filteredUser.map((image) => (
         <div style={{ padding: "1rem 0" }}>
-          <div key={spot.id}>
-            <h4>{spot.name}</h4>
+          <div key={image.id}>
+            
             <div>
               <img
                 alt={imageList[imageList.length - 1]}
@@ -88,7 +92,8 @@ export default function ImageUploadConfirmUser() {
             </div>
             <div>
               <div>
-                <Button color="primary" onClick={() => handleEdit(spot.id)}>
+                <Button color="primary" onClick={() => handleEdit(image.id)}>
+                  {console.log(image.id)}
                   {" "}
                   Confirm Upload{" "}
                 </Button>
@@ -98,7 +103,6 @@ export default function ImageUploadConfirmUser() {
         </div>
       ))}
       <div>
-        <a href={`/spot/${spot}`}>Back to Spot</a>
       </div>
     </div>
   );

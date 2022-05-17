@@ -22,6 +22,7 @@ const [spots, setSpots] = useState([]);
   const { user } = useContext(AuthContext);
 
 if (spots.length !== 0) {
+  console.log(user)
   return (
     <div>
       <AllSpotsMap spots={spots}/>

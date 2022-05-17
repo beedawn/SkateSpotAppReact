@@ -9,11 +9,12 @@ import "../styles/style.css";
 import { v4 } from "uuid";
 
 
-export default function ImageUploadUser() {
-  
+export default function ImageUploadUser(props) {
+  const handleUpload = props.handleUpload;
+  const { user } = useContext(AuthContext);
   const vkey = v4();
   const [imageList, setImageList] = useState([]);
-  const imageListRef = ref(storage, "images/users/" + vkey + "/");
+  const imageListRef = ref(storage, "images/users/" + user.photoURL + "/");
 
   const [imageUpload, setImageUpload] = useState(null);
   const [check, setCheck] = useState("true");
@@ -27,27 +28,27 @@ export default function ImageUploadUser() {
         });
       });
     });
-
+console.log(user.email)
     const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
       setUsers(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
   }, []);
 
-  const handleUpload = () => {
-    //  if(imageUpload.size > 500000){
-    //      setCheck("false");
-    //      return(
-    //          console.log("File is too Large!")
-    //      )
-    //  }
-    if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/users/${vkey}`);
+  // const handleUpload = () => {
+  //   //  if(imageUpload.size > 500000){
+  //   //      setCheck("false");
+  //   //      return(
+  //   //          console.log("File is too Large!")
+  //   //      )
+  //   //  }
+  //   if (imageUpload == null) return;
+  //   const imageRef = ref(storage, `images/users/${vkey}`);
 
-    uploadBytes(imageRef, imageUpload).then(() => {
-      window.location.replace(`/user/uploadConfirm/${vkey}`);
-    });
-  };
+  //   uploadBytes(imageRef, imageUpload).then(() => {
+  //     window.location.replace(`/user/uploadConfirm/${vkey}`);
+  //   });
+  // };
   const imageSpot = imageList.filter((image) => {
     return image.search(vkey);
   });
@@ -64,10 +65,9 @@ export default function ImageUploadUser() {
           }}
         />
       </div>
-      {console.log(imageSpot[0])}
       <div style={{ marginTop: "1rem" }}>
         {/* {check ? <div>File too large!</div> : <p></p>} */}
-        <Button color="success" onClick={handleUpload}>
+        <Button color="success" onClick={()=>handleUpload(imageUpload)}>
           Upload
         </Button>
       </div>
