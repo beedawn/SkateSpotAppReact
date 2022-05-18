@@ -12,6 +12,7 @@ import { db } from "../firebase-config";
 export default function LoginForm() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const[error, setError] = useState("");
   const register = async () => {
     try {
       const user = await createUserWithEmailAndPassword(
@@ -21,6 +22,7 @@ export default function LoginForm() {
       );
     } catch (error) {
       console.log(error.message);
+      setError(error.message);
     }
   };
   const login = async () => {
@@ -52,8 +54,10 @@ export default function LoginForm() {
             setLoginPassword(event.target.value);
           }}
         />
-      </div>
-      <div style={{ marginTop: "1rem" }}>
+        <div style={{color:"red"}}> {error==="Firebase: Error (auth/email-already-in-use)."?(<>This email is already in use try again.</>):(<></>)}
+        {error==="Firebase: Password should be at least 6 characters (auth/weak-password)."?(<>Password is weak, should be at least 6 characters.</>):(<></>)}
+
+     </div> <div style={{ marginTop: "1rem" }}>
         <Button color="primary" onClick={register}>
           Sign Up{" "}
         </Button>
@@ -61,7 +65,9 @@ export default function LoginForm() {
           {" "}
           Login{" "}
         </Button>
+        
       </div>
+    </div>
     </div>
   );
 }
