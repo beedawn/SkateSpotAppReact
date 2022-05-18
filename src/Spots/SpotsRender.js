@@ -17,7 +17,7 @@ const [comments, setComments] = useState([]);
         onSnapshot(collection(db, "comments"), (snapshot) => {
             setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
           });
-    })
+    },[])
     return(
         <div>
         <div>

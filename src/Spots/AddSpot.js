@@ -131,7 +131,7 @@ export default function AddSpot() {
   }
 
   if (spots.length !== 0) {
-    const filteredUserArray = userArray.map((user)=>{return({value:user.email, label:user.name})});
+    const filteredUserArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
     console.log(filteredUserArray)
     console.log(sharedUsers)
     return (
