@@ -20,11 +20,12 @@ export default function Account() {
     return (oneUser.myid === user.photoURL);
 
   })
+  console.log(userList);
   if (filteredUsers.length !== 0) {
     return (
       <div className="globalTopMargin">
         <h2>Account Info</h2>
-        <p>Username: {user.displayName}</p>
+        <p>Username: {filteredUsers[0].name}</p>
         <p>Email: {user.email}</p>
         <p>
           Picture: <img src={filteredUsers[0].images[0].url} alt="Avatar" height="50px" />

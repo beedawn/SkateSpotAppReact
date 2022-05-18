@@ -17,7 +17,7 @@ const image=props.image;
         ...user,
         displayName: displayName,
          };
-
+//need to add this display name update to the DB
       updateProfile(auth.currentUser, update);
       onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);

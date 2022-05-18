@@ -129,6 +129,8 @@ export default function AddSpot() {
   }
 
   if (spots.length !== 0) {
+    const filteredUserArray = userArray.map((user)=>{return({value:user.email, label:user.name})});
+    console.log(filteredUserArray)
     return (
       <div>
         <h2>Add a Spot</h2>
@@ -193,7 +195,7 @@ export default function AddSpot() {
         ) : (
           <span className="errorSpan">Please enter Description</span>
         )}
-        <div><Select  isMulti options={[{value:'pizza', label:'Pizza'}]} isMulti/></div>
+        <div><Select  isMulti options={filteredUserArray} /></div>
 
         <div style={{ marginTop: "1rem" }}>
           <div>

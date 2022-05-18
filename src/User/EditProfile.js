@@ -38,7 +38,7 @@ export default function EditProfile() {
             setAddImage(true);
         });
     };
-
+    console.log(user.displayName);
     const handleNewUser = async () => {
 
         const collectionRef = collection(db, "users");
