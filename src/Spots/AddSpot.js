@@ -11,6 +11,7 @@ import Maps from "../maps/Maps";
 import Geocode from "react-geocode";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
+import Select from 'react-select';
 
 export default function AddSpot() {
   const spotId = v4();
@@ -24,9 +25,13 @@ export default function AddSpot() {
   const [spotName, setSpotName] = useState("");
   const [geo, setGeo] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
+  const [userArray, setUserArray] = useState([]);
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS;
   const [spots, setSpots] = useState([]);
   useEffect(() => {
+    onSnapshot(collection(db, "users"), (snapshot) => {
+      setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -161,7 +166,7 @@ export default function AddSpot() {
         ) : (
           <span className="errorSpan">Please enter Spotname</span>
         )}
-        <div style={{ marginTop: "1rem" }}>
+        {/* <div style={{ marginTop: "1rem" }}>
           {gps ? (
             <></>
           ) : (
@@ -174,7 +179,7 @@ export default function AddSpot() {
               />
             </div>
           )}
-        </div>
+        </div> */}
         <div style={{ marginTop: "1rem" }}>
           <Input
             editable="true"
@@ -188,6 +193,7 @@ export default function AddSpot() {
         ) : (
           <span className="errorSpan">Please enter Description</span>
         )}
+        <div><Select  isMulti options={[{value:'pizza', label:'Pizza'}]} isMulti/></div>
 
         <div style={{ marginTop: "1rem" }}>
           <div>
