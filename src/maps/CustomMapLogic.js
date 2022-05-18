@@ -49,7 +49,7 @@ export default function CustomMapLogic(props) {
             />
           ))}
           
-        </GoogleMap>11</div>
+        </GoogleMap></div>
       );
     case "2":
       //Not sure if this ever returns
@@ -72,7 +72,7 @@ export default function CustomMapLogic(props) {
               }}
             />
           ))}
-        </GoogleMap>22</div>
+        </GoogleMap></div>
       );
 
     case "3":
@@ -96,7 +96,7 @@ export default function CustomMapLogic(props) {
               }}
             />
           ))}
-        </GoogleMap>33</div>
+        </GoogleMap></div>
        
       );
 
@@ -122,7 +122,7 @@ export default function CustomMapLogic(props) {
                   }}
                 />
               ))}
-            </GoogleMap>44</div>
+            </GoogleMap></div>
       );
 
     case "5":
@@ -156,7 +156,7 @@ export default function CustomMapLogic(props) {
             />
           ))}
           <></>
-        </GoogleMap>55</div>
+        </GoogleMap></div>
         
       );
 
@@ -191,7 +191,6 @@ export default function CustomMapLogic(props) {
             />
           ))}
         </GoogleMap>
-        test
         </div>
       );
   }

@@ -87,7 +87,6 @@ export default function Maps(props) {
               drag={drag}
               check="4"
             />
-            42
           </div>
         
         );
@@ -102,7 +101,6 @@ export default function Maps(props) {
             check="4"
           />
           <Switch toggle={toggle} />
-          4
         </div> )
        
       }
@@ -120,7 +118,6 @@ export default function Maps(props) {
             drag={drag}
             check="5"
           />
-          5
           <Switch toggle={toggle} />
         </div>
       );
@@ -136,7 +133,6 @@ export default function Maps(props) {
             drag={drag}
             check="6"
           />
-          6
           <Switch toggle={toggle} />
         </div>
       );

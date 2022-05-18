@@ -66,7 +66,7 @@ if(spot[0].edit){
         />
       ))}
       
-    </GoogleMap>:)
+    </GoogleMap>
     </div>
   );
 }
