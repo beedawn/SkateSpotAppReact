@@ -32,7 +32,7 @@ const image=props.image;
   };
   const refreshPage = async () => {
     await updateDisplayName();
-   window.location.replace("/");
+   window.location.replace("/account");
   };
   return (
     <div>

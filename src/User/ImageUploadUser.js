@@ -57,7 +57,7 @@ console.log(user)
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
         
-        <h3> Image Upload</h3>
+        <h3>Profile Picture Upload</h3>
         <Input
           type="file"
           accept=".png, .jpg, .jpeg"

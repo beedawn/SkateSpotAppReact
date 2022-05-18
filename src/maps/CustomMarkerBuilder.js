@@ -50,7 +50,7 @@ if(spot[0].edit){
     <div>
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={center}
+      center={{ lat: spot[0].lat, lng: spot[0].long }}
       zoom={12}
       onUnmount={onUnmount}
     >
