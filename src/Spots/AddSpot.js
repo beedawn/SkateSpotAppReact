@@ -109,6 +109,7 @@ export default function AddSpot() {
       lat: gps.lat,
       long: gps.long,
       edited: false,
+      users:sharedUsers
     };
     await addDoc(collectionRef, payload);
     refreshPage();

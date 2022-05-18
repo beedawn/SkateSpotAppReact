@@ -44,7 +44,7 @@ export default function SingleSpot() {
       </div>
     );
   }
-
+console.log(filteredSpot[0])
   return (
     <div>
       {filteredSpot.map((spot) => (
