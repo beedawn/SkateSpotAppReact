@@ -22,24 +22,24 @@ const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 
 export const auth = getAuth(app);
-signInAnonymously(auth)
-  .then(() => {
-    // Signed in..
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ...
-  });
-// signInWithEmailAndPassword(auth, email, password)
-// .then((userCredential) => {
-//   //Signed in...
-//   const user= userCredential.user;
-// })
-// .catch ((error)=>{
-//   const errorCode = error.code;
-//   const errorMessage= error.message;
-// });
+// signInAnonymously(auth)
+//   .then(() => {
+//     // Signed in..
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // ...
+//   });
+// // signInWithEmailAndPassword(auth, email, password)
+// // .then((userCredential) => {
+// //   //Signed in...
+// //   const user= userCredential.user;
+// // })
+// // .catch ((error)=>{
+// //   const errorCode = error.code;
+// //   const errorMessage= error.message;
+// // });
 
 export const firebaseObject = firebaseConfig;
 

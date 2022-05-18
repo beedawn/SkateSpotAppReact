@@ -23,6 +23,7 @@ const [spots, setSpots] = useState([]);
 
 if (spots.length !== 0) {
   console.log(user)
+ 
   return (
     <div>
       <AllSpotsMap spots={spots}/>

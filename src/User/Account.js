@@ -19,7 +19,8 @@ export default function Account() {
   const filteredUsers = userList.filter((oneUser)=>{return(oneUser.myid===user.photoURL);
 
   })
-  // console.log(filteredUsers)
+  // console.log(filteredUsers[0].images[0])
+  console.log(filteredUsers)
   if(filteredUsers.length!==0){
   return (
     <div className="globalTopMargin">
@@ -27,7 +28,7 @@ export default function Account() {
       <p>Username: {user.displayName}</p>
       <p>Email: {user.email}</p>
       <p>
-        Picture: <img src={filteredUsers[0].images[0].url} alt="Avatar" height="50px" />
+         Picture: <img src={filteredUsers[0].images[0].url} alt="Avatar" height="50px" />
       </p>
       <Link to="/edit">Edit Display Name</Link>
     </div>

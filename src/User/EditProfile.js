@@ -6,7 +6,7 @@ import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
-import { onAuthStateChanged, updateProfile, signOut } from "firebase/auth";
+import { onAuthStateChanged, updateProfile, updateEmail, sendEmailVerification } from "firebase/auth";
 import ConfirmUser from "./ConfirmUser";
 import { v4 } from "uuid";
 import { Button, Input } from "reactstrap";
@@ -14,9 +14,10 @@ import { auth } from "../firebase-config";
 
 export default function EditProfile() {
     const [userList, setUserList] = useState([]);
-const [addDb, setAddDb]=useState(false);
-const [addImage, setAddImage]=useState(false);
-const [imageConfirm, setImageConfirm]=useState(false);
+    const [addDb, setAddDb] = useState(false);
+    const [addImage, setAddImage] = useState(false);
+    const [imageConfirm, setImageConfirm] = useState(false);
+    const [email, setEmail] = useState();
 
     const { user, setUser } = useContext(AuthContext);
     const vkey = v4();
@@ -37,12 +38,12 @@ const [imageConfirm, setImageConfirm]=useState(false);
             setAddImage(true);
         });
     };
-    
+
     const handleNewUser = async () => {
-       
+
         const collectionRef = collection(db, "users");
         const date = new Date(Date.now());
-        
+
         const payload = {
             myid: vkey2,
             email: user.email,
@@ -51,66 +52,95 @@ const [imageConfirm, setImageConfirm]=useState(false);
             edited: false,
         };
         setAddDb("true");
+        await emailVerify();
+        await newEmail();
         await updateUserId(payload.id);
         await addDoc(collectionRef, payload);
-       
+
     };
+    console.log(auth.currentUser);
+    const emailVerify = async () => {
+        sendEmailVerification(auth.currentUser).then(() => {
+            //email verification sent!
+            console.log("email sent")
+        })
+    }
+    const newEmail = async () => {
+        updateEmail(auth.currentUser, email).then(() => {
+            // Email updated!
+            // ...
+        }).catch((error) => {
+            // An error occurred
+            console.log(error)
+        });
+    }
 
     const updateUserId = async (id) => {
         try {
-          const update = {
-            ...user,
-        photoURL:vkey2}
-    
-          updateProfile(auth.currentUser, update);
-          onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            
-          });
-    
-          console.log(update)
-          console.log(user.email)
-        } catch (error) {
-          console.log(error.message);
-        }
-        
-      };
+            const update = {
+                ...user,
+                photoURL: vkey2
+            }
 
-    function toggle(){
+            updateProfile(auth.currentUser, update);
+            onAuthStateChanged(auth, (currentUser) => {
+                setUser(currentUser);
+
+            });
+
+            console.log(update)
+            console.log(user.email)
+        } catch (error) {
+            console.log(error.message);
+        }
+
+    };
+
+    function toggle() {
         setImageConfirm(true);
     }
-   if(!imageConfirm){
-    if(!addImage){
-    if (!addDb)
-        return (<div>
-            {/* if user is not in database, show this component */}
-            <div>
-                <p>Does your email look good?</p>
-                <p>{user.email}</p>
-                <Button color="danger">Start Over</Button>
-                <Button color="primary" onClick={handleNewUser}>Confirm</Button>
-            </div>
-        </div>)
-       if(addDb){
-        {/* if user is in database, but has no images in there image array, show this */}
-       return( <ImageUploadUser handleUpload={handleUpload}/>)}
-    }
-    if(addImage)  {
+    console.log(user.emailVerified)
+
+    if (!imageConfirm) {
+        if (!addImage) {
+            if (!addDb) {
+
+                return (<div>
+                    {/* if user is not in database, show this component */}
+                    <div>
+                        <p>Does your email look good?</p>
+                        <Input defaultValue={user.email} onChange={(e) => setEmail(e.target.value)} />
+                        <Button color="danger">Start Over</Button>
+                        <Button color="primary" onClick={handleNewUser}>Confirm</Button>
+                    </div>
+                </div>)
+            }
+            if (user.emailVerified) {
+                if (addDb) {
+                    {/* if user is in database, but has no images in there image array, show this */ }
+                    return (<ImageUploadUser handleUpload={handleUpload} />)
+                }
+            } else {
+                return (<div>Please check your email for the verification link, once that is clicked, you will be able to proceed.</div>)
+            }
+        } if (addImage) {
+            return (
+                <div>
+                    {/* else show display name setup */}
+                    {/* <DisplayNameSetup /> */}
+                    <ImageUploadConfirmUser toggle={toggle} vkey={vkey} />
+                </div>
+            )
+        }
+        
+
+
+    }else {
         return (
             <div>
                 {/* else show display name setup */}
-                {/* <DisplayNameSetup /> */}
-                <ImageUploadConfirmUser toggle={toggle} vkey={vkey} />
-            </div>
-        )
+                <DisplayNameSetup />
+
+            </div>)
     }
-}
-else{
-    return (
-        <div>
-            {/* else show display name setup */}
-            <DisplayNameSetup />
-            
-        </div>)
-}
 }
