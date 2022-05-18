@@ -129,8 +129,8 @@ export default function AddSpot() {
   function handleDrag(e) {
     setGps({ lat: e.latLng.lat(), long: e.latLng.lng() });
   }
-
-  if (spots.length !== 0) {
+console.log(spots)
+  if (spots.length !== 0 ||spots!==[] )  {
     const filteredUserArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
     console.log(filteredUserArray)
     console.log(sharedUsers)
