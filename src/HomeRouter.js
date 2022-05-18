@@ -17,6 +17,8 @@ import DisplayNameSetup from "./login/DisplayNameSetup";
 import ImageUpload from "./Spots/ImageUpload";
 import ImageUploadConfirm from "./Spots/ImageUploadConfirm";
 import DeleteImage from "./Spots/DeleteImage";
+
+
 export default function Home() {
   return (
     <div>
@@ -29,7 +31,8 @@ export default function Home() {
         <Route path="/spot/:spot" element={<SingleSpot />} />
         <Route path="spot/:spot/addComment" element={<AddComment />} />
         <Route path="edit" element={<DisplayNameSetup />} />
-
+        <Route path="spots/my" element={<Spots mySpot={true} />}/>
+        <Route path="spots/shared" element={<Spots sharedSpot={true}/>}/>
         <Route path="spot/:spot/edit" element={<EditSpot />} />
         <Route path="spot/:spot/Comments" element={<Comment />} />
         <Route path="spot/:spot/Comments/:id" element={<EditComment />} />

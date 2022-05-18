@@ -10,7 +10,11 @@ import AllSpotsMap from "../maps/AllSpotsMap";
 import Loading from "../graphics/Loading";
 import Maps from "../maps/Maps";
 import PostedEdited from "./SpotComponents/PostedEdited";
-export default function Spots() {
+import SpotsRender from "./SpotsRender";
+
+export default function Spots(props) {
+  const mySpot = props.mySpot;
+  const sharedSpot = props.sharedSpot;
   const { spot } = useParams();
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/" + spot + "/");
@@ -38,68 +42,36 @@ export default function Spots() {
     return unsub;
   }, []);
 
-  if (spots.length !== 0) {
+
+if (spots.length !== 0) {
+  if(mySpot){
+    
+const filterSpots=spots.filter((spot)=>{return(user.email===spot.admin.email)});
+console.log(filterSpots)
+    return(
+      <div className="globalTopMargin">
+      <h2>My Posted Spots</h2>
+      <SpotsRender spots={filterSpots} />
+  </div>
+  )}
+    
+if(sharedSpot){
+  return (
+    <div className="globalTopMargin">
+      <h2>Spots Shared with me.</h2>
+      <SpotsRender spots={spots} />
+ </div>
+  )
+}
+  else {
     return (
-      <div>
+      
         <div className="globalTopMargin">
           <h2>Spots</h2>
-          <AllSpotsMap spots={spots}  />
-        </div>
-        {spots.map((spot) => (
-          <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }}>
-            <Card>
-              <div key={spot.id}>
-                <CardHeader>
-                  <Link to={"/spot/" + spot.id}>{spot.name}</Link>
-                </CardHeader>
-                <Maps spot={[spot]} spots={spots} center={{lat:spot.lat,lng:spot.long}} singleView={true} />
-                <div
-                  style={{
-                    display: "inline",
-                    marginRight: "auto",
-                    marginTop: "10px",
-                  }}
-                >
-                  {user.email === spot.admin.email ? (
-                    <Link to={"/spot/" + spot.id + "/edit"}>
-                      {" "}
-                      <Button color="primary"> Edit </Button>
-                    </Link>
-                  ) : (
-                    <p></p>
-                  )}{" "}
-                  <div style={{ marginTop: "10px" }}><div style={{marginLeft:"0px"}}>
-                    <Link to={"/spot/" + spot.id + "/addComment/"}>
-                      <Button>Comment</Button>
-                    </Link>
-                    </div>
-                    <Link to={"/spot/" + spot.id + "/upload"}>
-                      <Button color="success" onClick={() => {}}>
-                        Upload
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-
-                <h6>{spot.location}</h6>
-                <p>{spot.description}</p>
-                <p>
-                  {comments.filter((cmt) => cmt.spot === spot.id).length > 0 ? (
-                    `${
-                      comments.filter((cmt) => cmt.spot === spot.id).length
-                    } Comments`
-                  ) : (
-                    <></>
-                  )}{" "}
-                </p>
-                <PostedEdited spot={spot} />
-              </div>
-            </Card>
-          </div>
-        ))}
+          <SpotsRender spots={spots} />
       </div>
     );
-  } else {
+  }} else {
     return (
       <div style={{ padding: "1rem 0" }}>
         <h2>Spots</h2>

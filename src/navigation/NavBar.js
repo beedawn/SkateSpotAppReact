@@ -12,7 +12,7 @@ import {
   DropdownItem,
   DropdownToggle,
   DropdownMenu,
-  NavbarText,
+  NavbarText, uncontrolledDropdown
 } from "reactstrap";
 
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -22,6 +22,7 @@ import AuthContext from "../context/AuthContext";
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, setUser } = useContext(AuthContext);
+
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
@@ -42,11 +43,24 @@ export default function NavBar() {
             <NavItem>
               <NavLink href="/addspot">
                 <Button color="primary">Add Spot</Button>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/spots">Spots</NavLink>
-            </NavItem>
+              </NavLink></NavItem>
+              <UncontrolledDropdown nav inNavbar >
+                <DropdownToggle nav caret>
+                  Spots
+                </DropdownToggle>
+                <DropdownMenu style={{backgroundColor: '#292b2c'}}>
+                  <DropdownItem>
+                  <NavLink href="/spots">All Spots</NavLink>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink href="/spots/my">My Spots</NavLink>
+                  </DropdownItem>
+                
+                  <DropdownItem>
+                    <NavLink href="/spots/shared/">Spots Shared with Me</NavLink>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
             <NavItem>
               <NavLink href="/account">Account</NavLink>
             </NavItem>

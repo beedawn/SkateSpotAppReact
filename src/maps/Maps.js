@@ -90,19 +90,30 @@ export default function Maps(props) {
           </div>
         
         );
-      }else {
+      }else { if(spot[0]===undefined){
+        <div>
+        <CustomMapLogic
+          spot={spot}
+        center={{lat:spot.lat, lng:spot.long}}
+          handleDrag={handleDrag}
+          drag={drag}
+          check="4"
+        />
+        <Switch toggle={toggle} />
+      </div>
+      }else{
         return(
           <div>
           <CustomMapLogic
             spot={spot}
-            center={{lat:spot[0].lat, lng:spot[0].long}}
+          center={{lat:spot[0].lat, lng:spot[0].long}}
             handleDrag={handleDrag}
             drag={drag}
             check="4"
           />
           <Switch toggle={toggle} />
         </div> )
-       
+       }
       }
       }
     }
@@ -123,6 +134,20 @@ export default function Maps(props) {
       );
     } else {
       /*single Spot with all spots on */
+      if(spot[0]===undefined){
+        return(
+        <div>
+        <CustomMapLogic
+          spot={spot}
+          spots={spots}
+          center={{ lat: spot.lat, lng: spot.long }}
+          handleDrag={handleDrag}
+          drag={drag}
+          check="6"
+        />
+        <Switch toggle={toggle} />
+      </div>)
+      }else{
       return (
         <div>
           <CustomMapLogic
@@ -135,7 +160,7 @@ export default function Maps(props) {
           />
           <Switch toggle={toggle} />
         </div>
-      );
+      );}
     }
   } else {
     return <div> </div>;

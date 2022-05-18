@@ -162,6 +162,39 @@ export default function CustomMapLogic(props) {
 
     case "6":
       // Single Spot with all spots on
+      if(spot[0]===undefined){
+        return (<div>
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={{ lat: spot.lat, lng: spot.long }}
+            zoom={12}
+            onUnmount={onUnmount}
+          >
+            {/* Child components, such as markers, info windows, etc. */}
+            {spot.map((spot) => (
+              <Marker
+                key={spot.id}
+                position={{ lat: spot.lat, lng: spot.long }}
+                title={spot.name}
+                onClick={() => {
+                  refreshPage(spot.id);
+                }}
+              />
+            ))}
+            {spots.map((spot) => (
+              <Marker
+                key={spot.id}
+                position={{ lat: spot.lat, lng: spot.long }}
+                title={spot.name}
+                onClick={() => {
+                  refreshPage(spot.id);
+                }}
+              />
+            ))}
+          </GoogleMap>
+          </div>
+        );
+      }else{
       return (<div>
         <GoogleMap
           mapContainerStyle={containerStyle}
@@ -193,5 +226,5 @@ export default function CustomMapLogic(props) {
         </GoogleMap>
         </div>
       );
-  }
+  }}
 }
