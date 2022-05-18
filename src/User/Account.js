@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext.js";
 import { Link } from "react-router-dom";
 import { db } from "../firebase-config";
@@ -16,27 +16,26 @@ export default function Account() {
     return unsub;
   }, [userList]);
 
-  const filteredUsers = userList.filter((oneUser)=>{return(oneUser.myid===user.photoURL);
+  const filteredUsers = userList.filter((oneUser) => {
+    return (oneUser.myid === user.photoURL);
 
   })
-  // console.log(filteredUsers[0].images[0])
-  console.log(filteredUsers)
-  if(filteredUsers.length!==0){
-  return (
-    <div className="globalTopMargin">
-      <h2>Account Info</h2>
-      <p>Username: {user.displayName}</p>
-      <p>Email: {user.email}</p>
-      <p>
-         Picture: <img src={filteredUsers[0].images[0].url} alt="Avatar" height="50px" />
-      </p>
-      <Link to="/edit">Edit Display Name</Link>
-    </div>
-  );
-}else{
-  return(
-    <Loading />
-  )
+  if (filteredUsers.length !== 0) {
+    return (
+      <div className="globalTopMargin">
+        <h2>Account Info</h2>
+        <p>Username: {user.displayName}</p>
+        <p>Email: {user.email}</p>
+        <p>
+          Picture: <img src={filteredUsers[0].images[0].url} alt="Avatar" height="50px" />
+        </p>
+        <Link to="/edit">Edit Profile</Link>
+      </div>
+    );
+  } else {
+    return (
+      <Loading />
+    )
 
-}
+  }
 }
