@@ -2,7 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase-config";
 import { onAuthStateChanged, updateProfile, signOut } from "firebase/auth";
 import { Button } from "reactstrap";
-
+import { doc, setDoc, collection, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 
 export default function DisplayNameSetup(props) {
@@ -10,7 +11,17 @@ export default function DisplayNameSetup(props) {
 const image=props.image;
   const { user, setUser } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");
+  const [userList, setUserList] = useState([]);
 
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
+      setUserList(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+    return unsub;
+  }, []);
+  const filteredUser = userList.filter((el) => {
+    return el.myid=== user.photoURL;
+  });
   const updateDisplayName = async () => {
     try {
       const update = {
@@ -18,6 +29,12 @@ const image=props.image;
         displayName: displayName,
          };
 //need to add this display name update to the DB
+const docRef = doc(db, "users", user.photoURL);
+const payload = {
+...filteredUser[0],
+name: displayName
+}
+ setDoc(docRef, payload);
       updateProfile(auth.currentUser, update);
       onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);

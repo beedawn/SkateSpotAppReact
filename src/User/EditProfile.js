@@ -13,7 +13,7 @@ import { Button, Input } from "reactstrap";
 import { auth } from "../firebase-config";
 
 export default function EditProfile() {
-    const [userList, setUserList] = useState([]);
+   
     const [addDb, setAddDb] = useState(false);
     const [addImage, setAddImage] = useState(false);
     const [imageConfirm, setImageConfirm] = useState(false);
