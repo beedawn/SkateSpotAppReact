@@ -28,6 +28,7 @@ export default function AddSpot() {
   const [userArray, setUserArray] = useState([]);
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS;
   const [spots, setSpots] = useState([]);
+  const [sharedUsers,setSharedUsers]= useState([]);
   useEffect(() => {
     onSnapshot(collection(db, "users"), (snapshot) => {
       setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -131,6 +132,7 @@ export default function AddSpot() {
   if (spots.length !== 0) {
     const filteredUserArray = userArray.map((user)=>{return({value:user.email, label:user.name})});
     console.log(filteredUserArray)
+    console.log(sharedUsers)
     return (
       <div>
         <h2>Add a Spot</h2>
@@ -195,7 +197,7 @@ export default function AddSpot() {
         ) : (
           <span className="errorSpan">Please enter Description</span>
         )}
-        <div><Select  isMulti options={filteredUserArray} /></div>
+        <div><Select  isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))}/></div>
 
         <div style={{ marginTop: "1rem" }}>
           <div>
