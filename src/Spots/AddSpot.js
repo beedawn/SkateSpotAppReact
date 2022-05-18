@@ -100,7 +100,7 @@ export default function AddSpot() {
     const date = new Date(Date.now());
     const payload = {
       name: spotName,
-      location: spotAddress + " " + spotCity,
+      // location: spotAddress + " " + spotCity,
       description: spotDescription,
       admin: { email: user.email, name: user.displayName },
       images: [],
@@ -109,8 +109,9 @@ export default function AddSpot() {
       lat: gps.lat,
       long: gps.long,
       edited: false,
-      users:sharedUsers
+      users:[...sharedUsers]
     };
+    console.log(payload)
     await addDoc(collectionRef, payload);
     refreshPage();
   };
@@ -198,7 +199,7 @@ console.log(spots)
         ) : (
           <span className="errorSpan">Please enter Description</span>
         )}
-        <div><Select  isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))}/></div>
+        <div><Select isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))}/></div>
 
         <div style={{ marginTop: "1rem" }}>
           <div>

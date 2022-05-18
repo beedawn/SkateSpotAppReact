@@ -10,18 +10,24 @@ import SpotPics from "./SpotComponents/SpotPics";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
 import Maps from "../maps/Maps";
+import Select from 'react-select';
 
 
 export default function EditSpot() {
 
   const { spot } = useParams();
-
+  const [userArray, setUserArray] = useState([]);
   const [spotLocation, setSpotLocation] = useState("");
   const [spotName, setSpotName] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
   const [spots, setSpots] = useState([]);
   const [gps, setGps] = useState();
+  const [sharedUsers,setSharedUsers]= useState([]);
   useEffect(() => {
+
+    onSnapshot(collection(db, "users"), (snapshot) => {
+      setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -45,6 +51,7 @@ export default function EditSpot() {
         edited: true,
         lat: gps.lat,
         long: gps.long,
+        users:sharedUsers
       };
       await setDoc(docRef, payload);
       refreshPage();
@@ -58,7 +65,7 @@ export default function EditSpot() {
         description: spotDescription,
         time: date.toString(),
         edited: true,
-       
+        users:sharedUsers
       };
       await setDoc(docRef, payload);
       refreshPage();
@@ -71,6 +78,7 @@ export default function EditSpot() {
   }
 
   if (filteredSpots.length === 0) {
+
     return (
       <div>
         {" "}
@@ -78,7 +86,10 @@ export default function EditSpot() {
       </div>
     );
   } else {
+    const filteredUserArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
+  
     return (
+      
       <div>
         <h2>Edit a Spot</h2>
         {gps ? (
@@ -134,7 +145,10 @@ export default function EditSpot() {
         ) : (
           <span className="errorSpan">Please update Description</span>
         )}
-          </div>
+      
+
+<div><Select isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))} defaultValue={[...spot.users]}/></div>
+</div>
         ))}
 
         <div style={{ marginTop: "1rem" }}>
