@@ -44,14 +44,27 @@ export default function Spots(props) {
 
 
 if (spots.length !== 0) {
+      
+const filterMySpots=spots.filter((spot)=>{return(user.email===spot.admin.email)});
+const filterSharedSpots=spots.filter((spot)=>{
+ for(let i=0; i < spot.length;i++){
+   console.log(spot.users[i]);
+  return(spot.users)}});
+ 
+// const filterAgain = filterSharedSpots.filter((spot)=>{
+//   for(let i=0; i<filterSharedSpots.length;i)
+//   {
+//     filterSharedSpots[i]
+//   }
+// })
+
+console.log(filterSharedSpots)
   if(mySpot){
-    
-const filterSpots=spots.filter((spot)=>{return(user.email===spot.admin.email)});
-console.log(filterSpots)
+
     return(
       <div className="globalTopMargin">
       <h2>My Posted Spots</h2>
-      <SpotsRender spots={filterSpots} />
+      <SpotsRender spots={filterMySpots} />
   </div>
   )}
     
