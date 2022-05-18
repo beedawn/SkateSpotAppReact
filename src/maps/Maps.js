@@ -138,6 +138,6 @@ export default function Maps(props) {
       );
     }
   } else {
-    return <div> Hello you shouldn't be here.</div>;
+    return <div> </div>;
   }
 }
