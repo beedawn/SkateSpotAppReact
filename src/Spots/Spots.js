@@ -47,16 +47,13 @@ if (spots.length !== 0) {
       
 const filterMySpots=spots.filter((spot)=>{return(user.email===spot.admin.email)});
 const filterSharedSpots=spots.filter((spot)=>{
- for(let i=0; i < spot.length;i++){
-   console.log(spot.users[i]);
-  return(spot.users)}});
+  for(let i=0; i < spot.users.length;i++){
+  if( spot.users[i].email===user.email){
+    return spot
+  } 
+ }});
  
-// const filterAgain = filterSharedSpots.filter((spot)=>{
-//   for(let i=0; i<filterSharedSpots.length;i)
-//   {
-//     filterSharedSpots[i]
-//   }
-// })
+
 
 console.log(filterSharedSpots)
   if(mySpot){
@@ -72,7 +69,7 @@ if(sharedSpot){
   return (
     <div className="globalTopMargin">
       <h2>Spots Shared with me.</h2>
-      <SpotsRender spots={spots} />
+      <SpotsRender spots={filterSharedSpots} />
  </div>
   )
 }
