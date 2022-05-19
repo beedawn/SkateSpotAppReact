@@ -59,22 +59,25 @@ console.log(user.photoURL)
   if(filteredUser.length!==0){
   for(let i = 0; i < filteredUser[0].images.length-1;i++){
 console.log(filteredUser[0].images[i].id)}}
-
+console.log(filteredUser[0])
   const handleEdit = async (id) => {
-    const imageKeys=[];
-    for(let i = 0; i < filteredUser[0].images.length-1;i++){
-      imageKeys.push(`images/users/${filteredUser[0].id}/${filteredUser[0].images[i].id}`)
-      const imageRef = ref(storage, imageKeys[i]);
-      console.log(imageKeys)
-   console.log(`images/users/${filteredUser[0].id}/${filteredUser[0].images[i].id}`);
-      deleteObject(imageRef)
+    // const imageKeys=[];
+    // for(let i = 0; i < filteredUser[0].images.length-1;i++){
+    //   imageKeys.push(`images/users/${filteredUser[0].id}/${filteredUser[0].images[i].id}`)
+    //   const imageRef = ref(storage, imageKeys[i]);
+      const imageRef = ref(storage, `images/users/${filteredUser[0].id}/${filteredUser[0].images[0].id}`);
+  //     console.log(imageKeys[i])
+  //     console.log(imageKeys)
+  //  console.log(`images/users/${filteredUser[0].id}/${filteredUser[0].images[i].id}`);
+      await deleteObject(imageRef)
     .then(() => {
       console.log(imageRef)
+      console.log("Success")
     })
     .catch((error) => {
       console.log(error);
     });
-  }
+  // }
 
 
     const docRef = doc(db, "users", id);
