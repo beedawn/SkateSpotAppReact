@@ -30,7 +30,7 @@ export default function ImageUploadConfirmUser(props) {
     });
     return unsub;
   }, []);
-  // filter spot
+  // filter user
 
   const filteredUser = users.filter((el) => {
     return el.myid=== user.photoURL;
@@ -47,7 +47,7 @@ export default function ImageUploadConfirmUser(props) {
     return array;
   };
   const imageArrayHandler = (filteredUser) => {
-    if (filteredUser[0].images) {
+    if (filteredUser[0].images.length>0) {
       const arrayImg = [...filteredUser[0].images];
       return arrayPush(arrayImg);
     } else {
@@ -55,11 +55,17 @@ export default function ImageUploadConfirmUser(props) {
       return arrayPush(arrayImg);
     }
   };
-  const handleEdit = async (id, url) => {
+  if(filteredUser.length!==0){
+  for(let i = 0; i < filteredUser[0].images.length-1;i++){
+console.log(filteredUser[0].images[i].id)}}
 
-    for(let i = 0; i < filteredUser[0].images.length;i++){
-      const imageRef = ref(storage, `images/users/${filteredUser[0].id}/${filteredUser[0].images[i].id}`);
-   console.log(`images/${filteredUser[0].id}/${filteredUser[0].images[i].id}`);
+  const handleEdit = async (id) => {
+    const imageKeys=[];
+    for(let i = 0; i < filteredUser[0].images.length-1;i++){
+      imageKeys.push(`images/users/${filteredUser[0].id}/${filteredUser[0].images[i].id}`)
+      const imageRef = ref(storage, imageKeys[i]);
+      console.log(imageKeys)
+   console.log(`images/users/${filteredUser[0].id}/${filteredUser[0].images[i].id}`);
       deleteObject(imageRef)
     .then(() => {
       console.log(imageRef)

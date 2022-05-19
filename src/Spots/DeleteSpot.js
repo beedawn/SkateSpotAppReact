@@ -55,7 +55,7 @@ const [comments,setComments]=useState([]);
     }
 
     for(let i = 0; i < filteredSpots[0].images.length;i++){
-      const imageRef = ref(storage, `images/${spot}/${filteredSpots[0].images[i].id}`);
+      const imageRef = ref(storage, `images/spots/${spot}/${filteredSpots[0].images[i].id}`);
     deleteObject(imageRef)
     .then(() => {
       console.log(imageRef)

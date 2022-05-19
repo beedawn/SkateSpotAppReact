@@ -50,9 +50,7 @@ console.log(user)
   //     window.location.replace(`/user/uploadConfirm/${vkey}`);
   //   });
   // };
-  const imageSpot = imageList.filter((image) => {
-    return image.search(vkey);
-  });
+
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
