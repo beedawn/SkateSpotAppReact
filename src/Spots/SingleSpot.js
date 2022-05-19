@@ -59,6 +59,7 @@ console.log(filteredSpot[0])
 
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
+            {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
             <div>
               {user.email === spot.admin.email ? (
                 <div>

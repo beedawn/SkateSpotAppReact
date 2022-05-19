@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
-import { Input } from "reactstrap";
+
 import "../styles/style.css";
 import { v4 } from "uuid";
 import useGeolocation from "react-hook-geolocation";
@@ -12,6 +12,9 @@ import Geocode from "react-geocode";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
 import Select from 'react-select';
+import { Form, Input, FormGroup, Label, Tooltip } from "reactstrap";
+import {FaQuestionCircle} from 'react-icons/fa';
+
 
 export default function AddSpot() {
   const spotId = v4();
@@ -28,7 +31,9 @@ export default function AddSpot() {
   const [userArray, setUserArray] = useState([]);
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS;
   const [spots, setSpots] = useState([]);
+  const [tooltip, setTooltip]= useState(false);
   const [sharedUsers,setSharedUsers]= useState([]);
+  const [toggleState, setToggleState] = useState(false);
   useEffect(() => {
     onSnapshot(collection(db, "users"), (snapshot) => {
       setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -109,7 +114,8 @@ export default function AddSpot() {
       lat: gps.lat,
       long: gps.long,
       edited: false,
-      users:[...sharedUsers]
+      users:[...sharedUsers],
+      private:toggleState
     };
     console.log(payload)
     await addDoc(collectionRef, payload);
@@ -199,8 +205,23 @@ console.log(spots)
         ) : (
           <span className="errorSpan">Please enter Description</span>
         )}
-        <div><Select isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))}/></div>
 
+{toggleState ? (<Select placeholder="Add users you want to share this spot with" isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))}/>):(<></>)}
+        <div></div>
+        <Form>
+    <FormGroup switch="true" style={{width:"175px", margin:"auto"}}>
+  
+        <Input
+      type="switch"
+     onChange={()=>setToggleState(!toggleState)}
+    />
+  
+    <Label switch="true" >Private Spot?</Label>  <Tooltip isOpen={tooltip} target="PrivateTooltip" toggle={()=>setTooltip(!tooltip)}>
+         Check this slider to the right(turns blue), to set this as a private spot. If left unchecked, this will be a public spot available to all users.
+        </Tooltip> <FaQuestionCircle id="PrivateTooltip" />
+  </FormGroup>
+  </Form>
+{console.log(toggleState)}
         <div style={{ marginTop: "1rem" }}>
           <div>
             {spotName && spotDescription ? (

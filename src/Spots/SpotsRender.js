@@ -28,7 +28,9 @@ const [comments, setComments] = useState([]);
             <Card>
               <div key={spot.id}>
                 <CardHeader>
+                {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
                   <Link to={"/spot/" + spot.id}>{spot.name}</Link>
+                 
                 </CardHeader>
                 <Maps spot={[spot]} spots={spots} center={{lat:spot.lat,lng:spot.long}} singleView={true} />
                 <div

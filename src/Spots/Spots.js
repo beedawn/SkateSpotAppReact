@@ -52,7 +52,7 @@ const filterSharedSpots=spots.filter((spot)=>{
     return spot
   } 
  }});
- 
+ const publicSpots=filterSharedSpots.concat(spots.filter((spot)=>{return(spot.private===false)}));
 
 
 console.log(filterSharedSpots)
@@ -78,7 +78,7 @@ if(sharedSpot){
       
         <div className="globalTopMargin">
           <h2>Spots</h2>
-          <SpotsRender spots={spots} />
+          <SpotsRender spots={publicSpots} />
       </div>
     );
   }} else {
