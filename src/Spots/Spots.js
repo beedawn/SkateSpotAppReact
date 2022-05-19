@@ -56,7 +56,7 @@ const filterSharedSpots=spots.filter((spot)=>{
  const publicSpots=filterSharedSpots.concat(spots.filter((spot)=>{return(spot.private===false)}));
 
 
-  if(mySpot){
+  if(mySpot&& filterMySpots.length !==0){
 
     return(
       <div className="globalTopMargin">
@@ -64,6 +64,9 @@ const filterSharedSpots=spots.filter((spot)=>{
       <SpotsRender spots={filterMySpots} />
   </div>
   )}
+  if(mySpot&& filterMySpots.length ===0){
+    return(<div>You haven't posted any spots yet.</div>)
+  }
     
 if(sharedSpot && filterSharedSpots.length !== 0){
   return (

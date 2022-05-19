@@ -11,7 +11,8 @@ import Loading from "../graphics/Loading";
 export default function ImageUploadConfirmUser(props) {
  const vkey = props.vkey;
  const toggle = props.toggle;
-  const { spot, id } = useParams();
+ const router = props.router;
+  const { id } = useParams();
   const { user } = useContext(AuthContext);
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/users/"+ user.photoURL + "/" );
@@ -31,44 +32,40 @@ export default function ImageUploadConfirmUser(props) {
     return unsub;
   }, []);
   // filter user
-console.log(user.photoURL)
+
   const filteredUser = users.filter((el) => {
     return el.myid=== user.photoURL;
   });
-  console.log(user.id)
-  console.log(filteredUser)
-  console.log(vkey)
+
   const arrayPush = (array) => {
     const date = new Date(Date.now());
     array.push({
-      id: vkey,
+      id: id,
       url: imageList[imageList.length - 1],
       time: date.toString(),
     });
     return array;
   };
   const imageArrayHandler = (filteredUser) => {
-    if (filteredUser[0].images.length>0) {
-      const arrayImg = [...filteredUser[0].images];
-      return arrayPush(arrayImg);
-    } else {
+    // if (filteredUser[0].images.length>0) {
+    //   const arrayImg = [...filteredUser[0].images];
+    //   return arrayPush(arrayImg);
+    // } else {
       const arrayImg = [];
       return arrayPush(arrayImg);
-    }
+  // }
   };
-  if(filteredUser.length!==0){
-  for(let i = 0; i < filteredUser[0].images.length-1;i++){
-console.log(filteredUser[0].images[i].id)}}
-console.log(filteredUser[0])
+
+
   const handleEdit = async (id) => {
-    // const imageKeys=[];
-    // for(let i = 0; i < filteredUser[0].images.length-1;i++){
-    //   imageKeys.push(`images/users/${filteredUser[0].id}/${filteredUser[0].images[i].id}`)
-    //   const imageRef = ref(storage, imageKeys[i]);
+    console.log("hello")
+    if(filteredUser.length!==0){
+    
+ 
       const imageRef = ref(storage, `images/users/${filteredUser[0].id}/${filteredUser[0].images[0].id}`);
-  //     console.log(imageKeys[i])
-  //     console.log(imageKeys)
-  //  console.log(`images/users/${filteredUser[0].id}/${filteredUser[0].images[i].id}`);
+ 
+
+   console.log(filteredUser[0]);
       await deleteObject(imageRef)
     .then(() => {
       console.log(imageRef)
@@ -77,11 +74,11 @@ console.log(filteredUser[0])
     .catch((error) => {
       console.log(error);
     });
-  // }
+  
 
 
     const docRef = doc(db, "users", id);
-    console.log(filteredUser);
+   
     const date = new Date(Date.now());
     const payload = {
   ...filteredUser[0],
@@ -89,13 +86,14 @@ console.log(filteredUser[0])
       time: date.toString(),
     };
 
-    await setDoc(docRef, payload);
-    toggle();
+     await setDoc(docRef, payload);
+    if(router){ window.location.replace(`/displayName`);}
+      else{toggle();}
+  }
   };
-console.log(filteredUser);
-console.log(imageList)
-console.log(user.email)
-console.log(imageList)
+
+
+
   if (filteredUser.length === 0) {
     return <div><Loading /></div>;
   }
@@ -105,7 +103,7 @@ console.log(imageList)
         <h2>Confirm Profile Picture Upload</h2>
       </div>
       {filteredUser.map((image) => (
-        <div style={{ padding: "1rem 0" }}>
+        <div style={{ padding: "1rem 0" }} key={image.id}>
           <div key={image.id}>
             
             <div>
@@ -121,7 +119,7 @@ console.log(imageList)
             <div>
               <div>
                 <Button color="primary" onClick={() => handleEdit(image.id)}>
-                  {console.log(image.id)}
+               
                   {" "}
                   Confirm Upload{" "}
                 </Button>

@@ -32,14 +32,17 @@ const { user, setUser } = useContext(AuthContext);
 
       const filteredUserArray = userArray.filter((userSingle)=>{return userSingle.myid===user.photoURL});
     const signedIn = props.signedIn;
-   console.log(filteredUserArray)
     const [addDb, setAddDb] = useState(false);
     const [addImage, setAddImage] = useState(false);
     const [imageConfirm, setImageConfirm] = useState(false);
     const [email, setEmail] = useState();
-
-    const vkey = v4();
     const vkey2 = v4();
+ const[vkeyState,setVkeyState]=useState(vkey2);
+    const vkey = v4();
+  
+    
+
+
     const [next, setNext] = useState();
     const handleUpload = (imageUpload) => {
         //  if(imageUpload.size > 500000){
@@ -50,10 +53,12 @@ const { user, setUser } = useContext(AuthContext);
         //  }
 
         if (imageUpload == null) return;
+        
         const imageRef = ref(storage, `images/users/${user.photoURL}/${vkey}`);
 
         uploadBytes(imageRef, imageUpload).then(() => {
             setAddImage(true);
+            window.location.replace(`/edit/${vkey}`);
         });
     };
     // console.log(filteredUserArray[0].myid);
@@ -129,7 +134,6 @@ await setDoc(docRef, payload);
     function toggle() {
         setImageConfirm(true);
     }
-    console.log(user.emailVerified)
 
     if (!imageConfirm) {
         if (!addImage) {
@@ -153,7 +157,7 @@ await setDoc(docRef, payload);
                 <div>
                     {/* else show display name setup */}
                     {/* <DisplayNameSetup /> */}
-                    <ImageUploadConfirmUser toggle={toggle} vkey={vkey} />
+                    <ImageUploadConfirmUser toggle={toggle} vkey={vkeyState} />
                 </div>
             )
         }

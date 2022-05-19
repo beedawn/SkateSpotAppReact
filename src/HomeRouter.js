@@ -18,6 +18,7 @@ import ImageUpload from "./Spots/ImageUpload";
 import ImageUploadConfirm from "./Spots/ImageUploadConfirm";
 import DeleteImage from "./Spots/DeleteImage";
 import EditProfile from "./User/EditProfile";
+import ImageUploadConfirmUser from "./User/ImageUploadConfirmUser";
 
 
 export default function Home() {
@@ -31,8 +32,9 @@ export default function Home() {
         <Route path="/account" element={<Account />} />
         <Route path="/spot/:spot" element={<SingleSpot />} />
         <Route path="spot/:spot/addComment" element={<AddComment />} />
-        
+        <Route path="/edit/:id" element={<ImageUploadConfirmUser router={true} />} />
         <Route path="/edit" element={<EditProfile signedIn={true} />} />
+        <Route path="/displayName" element={<DisplayNameSetup />} />
         <Route path="spots/my" element={<Spots mySpot={true} />}/>
         <Route path="spots/shared" element={<Spots sharedSpot={true}/>}/>
         <Route path="spot/:spot/edit" element={<EditSpot />} />
