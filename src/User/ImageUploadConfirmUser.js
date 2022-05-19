@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { db, storage } from "../firebase-config";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
+import { ref, listAll, getDownloadURL,  deleteObject, } from "firebase/storage";
 import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
@@ -56,6 +56,19 @@ export default function ImageUploadConfirmUser(props) {
     }
   };
   const handleEdit = async (id, url) => {
+
+    for(let i = 0; i < filteredUser[0].images.length;i++){
+      const imageRef = ref(storage, `images/${filteredUser[0].id}/${filteredUser[0].images[i].id}`);
+    deleteObject(imageRef)
+    .then(() => {
+      console.log(imageRef)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+
     const docRef = doc(db, "users", id);
     console.log(filteredUser);
     const date = new Date(Date.now());

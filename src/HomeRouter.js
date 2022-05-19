@@ -32,7 +32,7 @@ export default function Home() {
         <Route path="/spot/:spot" element={<SingleSpot />} />
         <Route path="spot/:spot/addComment" element={<AddComment />} />
         
-        <Route path="/edit" element={<EditProfile />} />
+        <Route path="/edit" element={<EditProfile signedIn={true} />} />
         <Route path="spots/my" element={<Spots mySpot={true} />}/>
         <Route path="spots/shared" element={<Spots sharedSpot={true}/>}/>
         <Route path="spot/:spot/edit" element={<EditSpot />} />

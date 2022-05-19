@@ -3,7 +3,7 @@ import DisplayNameSetup from "../login/DisplayNameSetup";
 import ImageUploadUser from "../User/ImageUploadUser";
 import ImageUploadConfirmUser from "./ImageUploadConfirmUser";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { doc, collection, addDoc, onSnapshot, setDoc } from "firebase/firestore";
 import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { onAuthStateChanged, updateProfile, updateEmail, sendEmailVerification } from "firebase/auth";
@@ -12,14 +12,31 @@ import { v4 } from "uuid";
 import { Button, Input } from "reactstrap";
 import { auth } from "../firebase-config";
 
-export default function EditProfile() {
-   
+export default function EditProfile(props) {
+const [userArray,setUserArray]=useState([]);
+const { user, setUser } = useContext(AuthContext);
+
+//need to build out the ConfirmUser Component again
+
+
+    useEffect(() => {
+
+        const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
+          setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        });
+      
+        return unsub;
+      }, []);
+    
+
+      const filteredUserArray = userArray.filter((userSingle)=>{return userSingle.myid===user.photoURL});
+    const signedIn = props.signedIn;
+   console.log(filteredUserArray)
     const [addDb, setAddDb] = useState(false);
     const [addImage, setAddImage] = useState(false);
     const [imageConfirm, setImageConfirm] = useState(false);
     const [email, setEmail] = useState();
 
-    const { user, setUser } = useContext(AuthContext);
     const vkey = v4();
     const vkey2 = v4();
     const [next, setNext] = useState();
@@ -39,6 +56,17 @@ export default function EditProfile() {
         });
     };
     console.log(user.displayName);
+    const editEmail = async () => {
+        await newEmail();
+        const docRef = doc(db, "spots", filteredUserArray[0].myid);
+const payload = {
+    ...filteredUserArray[0],
+    email: user.email
+}
+await setDoc(docRef, payload);
+
+    }
+
     const handleNewUser = async () => {
 
         const collectionRef = collection(db, "users");
@@ -51,7 +79,7 @@ export default function EditProfile() {
             joined: date.toString(),
             edited: false,
         };
-        setAddDb("true");
+        setAddDb(true);
         await emailVerify();
         await newEmail();
         await updateUserId(payload.id);
@@ -111,7 +139,7 @@ export default function EditProfile() {
                         <p>Does your email look good?</p>
                         <Input defaultValue={user.email} onChange={(e) => setEmail(e.target.value)} />
                         <Button color="danger">Start Over</Button>
-                        <Button color="primary" onClick={handleNewUser}>Confirm</Button>
+                        {signedIn ?(<Button color="primary" >Confirm</Button>):(<Button color="primary" onClick={handleNewUser}>Confirm</Button>)}
                     </div>
                 </div>)
             }
