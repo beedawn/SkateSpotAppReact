@@ -31,7 +31,7 @@ export default function Spots(props) {
       });
     });
 
-    onSnapshot(collection(db, "comments"), (snapshot) => {
+     onSnapshot(collection(db, "comments"), (snapshot) => {
       setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
 
@@ -44,7 +44,7 @@ export default function Spots(props) {
 
 
 if (spots.length !== 0) {
-      
+  console.log(spots)
 const filterMySpots=spots.filter((spot)=>{return(user.email===spot.admin.email)});
 const filterSharedSpots=spots.filter((spot)=>{
   for(let i=0; i < spot.users.length;i++){
@@ -52,6 +52,7 @@ const filterSharedSpots=spots.filter((spot)=>{
     return spot
   } 
  }});
+ console.log(filterMySpots)
  const publicSpots=filterSharedSpots.concat(spots.filter((spot)=>{return(spot.private===false)}));
 
 

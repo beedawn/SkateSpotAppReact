@@ -58,7 +58,7 @@ const { user, setUser } = useContext(AuthContext);
     console.log(user.displayName);
     const editEmail = async () => {
         await newEmail();
-        const docRef = doc(db, "spots", filteredUserArray[0].myid);
+        const docRef = doc(db, "users", filteredUserArray[0].myid);
 const payload = {
     ...filteredUserArray[0],
     email: user.email
@@ -139,7 +139,7 @@ await setDoc(docRef, payload);
                         <p>Does your email look good?</p>
                         <Input defaultValue={user.email} onChange={(e) => setEmail(e.target.value)} />
                         <Button color="danger">Start Over</Button>
-                        {signedIn ?(<Button color="primary" >Confirm</Button>):(<Button color="primary" onClick={handleNewUser}>Confirm</Button>)}
+                        {signedIn ?(<Button color="primary" onClick={editEmail}>Confirm</Button>):(<Button color="primary" onClick={handleNewUser}>Confirm</Button>)}
                     </div>
                 </div>)
             }
