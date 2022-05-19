@@ -32,7 +32,7 @@ const [comments, setComments] = useState([]);
                   <Link to={"/spot/" + spot.id}>{spot.name}</Link>
                  
                 </CardHeader>
-                <Maps spot={[spot]} spots={spots} center={{lat:spot.lat,lng:spot.long}} singleView={true} />
+                {/* <Maps spot={[spot]} spots={spots} center={{lat:spot.lat,lng:spot.long}} singleView={true} /> */}
                 <div
                   style={{
                     display: "inline",

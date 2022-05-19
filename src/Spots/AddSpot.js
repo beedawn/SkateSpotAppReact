@@ -103,6 +103,8 @@ export default function AddSpot() {
   const handleNewSpot = async () => {
     const collectionRef = collection(db, "spots");
     const date = new Date(Date.now());
+
+    if(gps){
     const payload = {
       name: spotName,
       // location: spotAddress + " " + spotCity,
@@ -120,6 +122,25 @@ export default function AddSpot() {
     console.log(payload)
     await addDoc(collectionRef, payload);
     refreshPage();
+  }else{
+    const payload = {
+      name: spotName,
+      // location: spotAddress + " " + spotCity,
+      description: spotDescription,
+      admin: { email: user.email, name: user.displayName },
+      images: [],
+      time: date.toString(),
+      timePosted: date.toString(),
+      lat: geolocation.latitude,
+                long: geolocation.longitude,
+      edited: false,
+      users:[...sharedUsers],
+      private:toggleState
+    };
+    console.log(payload)
+    await addDoc(collectionRef, payload);
+    refreshPage();
+  }
   };
 
   function handleChange(e) {

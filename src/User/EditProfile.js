@@ -12,6 +12,7 @@ import { v4 } from "uuid";
 import { Button, Input } from "reactstrap";
 import { auth } from "../firebase-config";
 
+
 export default function EditProfile(props) {
 const [userArray,setUserArray]=useState([]);
 const { user, setUser } = useContext(AuthContext);
@@ -55,7 +56,7 @@ const { user, setUser } = useContext(AuthContext);
             setAddImage(true);
         });
     };
-    console.log(user.displayName);
+    // console.log(filteredUserArray[0].myid);
     const editEmail = async () => {
         await newEmail();
         const docRef = doc(db, "users", filteredUserArray[0].myid);
@@ -63,6 +64,7 @@ const payload = {
     ...filteredUserArray[0],
     email: user.email
 }
+setAddDb(true);
 await setDoc(docRef, payload);
 
     }
@@ -135,21 +137,16 @@ await setDoc(docRef, payload);
 
                 return (<div>
                     {/* if user is not in database, show this component */}
-                    <div>
-                        <p>Does your email look good?</p>
-                        <Input defaultValue={user.email} onChange={(e) => setEmail(e.target.value)} />
-                        <Button color="danger">Start Over</Button>
-                        {signedIn ?(<Button color="primary" onClick={editEmail}>Confirm</Button>):(<Button color="primary" onClick={handleNewUser}>Confirm</Button>)}
-                    </div>
+                   <ConfirmUser editEmail={editEmail} signedIn={signedIn} handleNewUser={handleNewUser} />
                 </div>)
             }
-            if (user.emailVerified) {
+            if (!user.emailVerified) {
                 if (addDb) {
                     {/* if user is in database, but has no images in there image array, show this */ }
                     return (<ImageUploadUser handleUpload={handleUpload} />)
                 }
-            } else {
-                return (<div>Please check your email for the verification link, once that is clicked, you will be able to proceed.</div>)
+            } else {{console.log(user)}
+                return (<div>Please check your email for the verification link, once that is clicked, you will be able to proceed.<div><Button onClick={emailVerify}>Send Again</Button></div></div>)
             }
         } if (addImage) {
             return (

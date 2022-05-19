@@ -28,7 +28,7 @@ export default function Account() {
         <p>Username: {filteredUsers[0].name}</p>
         <p>Email: {filteredUsers[0].email}</p>
         <p>
-          {/* Picture: <img src={filteredUsers[0].images[0].url} alt="Avatar" height="50px" /> */}
+          Picture: <img src={filteredUsers[0].images[0].url} alt="Avatar" height="50px" />
         </p>
         <Link to="/edit">Edit Profile</Link>
       </div>

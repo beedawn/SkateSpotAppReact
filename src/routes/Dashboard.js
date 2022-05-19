@@ -26,7 +26,7 @@ if (spots.length !== 0) {
  
   return (
     <div>
-      <AllSpotsMap spots={spots}/>
+      {/* <AllSpotsMap spots={spots}/> */}
         <div>Logo</div>
         <div>Welcome {user.displayName}</div>
         <div>New spots</div> <div>Updates</div>{" "}

@@ -58,8 +58,9 @@ export default function ImageUploadConfirmUser(props) {
   const handleEdit = async (id, url) => {
 
     for(let i = 0; i < filteredUser[0].images.length;i++){
-      const imageRef = ref(storage, `images/${filteredUser[0].id}/${filteredUser[0].images[i].id}`);
-    deleteObject(imageRef)
+      const imageRef = ref(storage, `images/users/${filteredUser[0].id}/${filteredUser[0].images[i].id}`);
+   console.log(`images/${filteredUser[0].id}/${filteredUser[0].images[i].id}`);
+      deleteObject(imageRef)
     .then(() => {
       console.log(imageRef)
     })
