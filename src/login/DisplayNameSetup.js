@@ -10,7 +10,7 @@ export default function DisplayNameSetup(props) {
   //Need to add a way to verify DisplayName isn't already used?
 const image=props.image;
   const { user, setUser } = useContext(AuthContext);
-  const [displayName, setDisplayName] = useState("");
+  const [displayName, setDisplayName] = useState();
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
@@ -30,11 +30,14 @@ const image=props.image;
          };
 //need to add this display name update to the DB
 const docRef = doc(db, "users", user.photoURL);
+console.log(displayName)
 const payload = {
 ...filteredUser[0],
 name: displayName
 }
- setDoc(docRef, payload);
+console.log(payload)
+
+await setDoc(docRef, payload);
       updateProfile(auth.currentUser, update);
       onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
@@ -44,11 +47,12 @@ name: displayName
       console.log(user);
     } catch (error) {
       console.log(error.message);
+      
     }
     
   };
   const refreshPage = async () => {
-    await updateDisplayName();
+     await updateDisplayName();
    window.location.replace("/account");
   };
   return (

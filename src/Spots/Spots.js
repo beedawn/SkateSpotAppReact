@@ -55,7 +55,6 @@ const filterSharedSpots=spots.filter((spot)=>{
  const publicSpots=filterSharedSpots.concat(spots.filter((spot)=>{return(spot.private===false)}));
 
 
-console.log(filterSharedSpots)
   if(mySpot){
 
     return(

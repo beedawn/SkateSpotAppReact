@@ -14,14 +14,14 @@ export default function Account() {
     });
 
     return unsub;
-  }, [userList]);
+  }, []);
 
   const filteredUsers = userList.filter((oneUser) => {
     return (oneUser.myid === user.photoURL);
 
   })
-  console.log(userList);
   if (filteredUsers.length !== 0) {
+    console.log(filteredUsers[0])
     return (
       <div className="globalTopMargin">
         <h2>Account Info</h2>

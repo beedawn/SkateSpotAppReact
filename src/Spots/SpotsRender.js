@@ -24,9 +24,9 @@ const [comments, setComments] = useState([]);
     <AllSpotsMap spots={spots}  />
         </div>
         {spots.map((spot) => (
-          <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }}>
+          <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }} key={spot.id}>
             <Card>
-              <div key={spot.id}>
+              <div >
                 <CardHeader>
                 {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
                   <Link to={"/spot/" + spot.id}>{spot.name}</Link>

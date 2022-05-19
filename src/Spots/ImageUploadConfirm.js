@@ -12,7 +12,7 @@ export default function ImageUploadConfirm() {
   const { spot, id } = useParams();
   const { user } = useContext(AuthContext);
   const [imageList, setImageList] = useState([]);
-  const imageListRef = ref(storage, "images/" + spot + "/");
+  const imageListRef = ref(storage, "images/spots/" + spot + "/");
   const [spots, setSpots] = useState([]);
   useEffect(() => {
     listAll(imageListRef).then((response) => {
@@ -32,7 +32,7 @@ export default function ImageUploadConfirm() {
   const filteredSpot = spots.filter((el) => {
     return el.id === spot;
   });
-
+console.log(imageList)
   const arrayPush = (array) => {
     const date = new Date(Date.now());
     array.push({
@@ -56,13 +56,14 @@ export default function ImageUploadConfirm() {
   const handleEdit = async (id, url) => {
     const docRef = doc(db, "spots", id);
     console.log(filteredSpot);
+    console.log(id);
     const date = new Date(Date.now());
     const payload = {
   ...filteredSpot[0],
       images: imageArrayHandler(filteredSpot),
       time: date.toString(),
     };
-
+console.log(payload)
     await setDoc(docRef, payload);
     refreshPage(spot);
   };
@@ -76,8 +77,8 @@ export default function ImageUploadConfirm() {
         <h2>Confirm Image Upload</h2>
       </div>
       {filteredSpot.map((spot) => (
-        <div style={{ padding: "1rem 0" }}>
-          <div key={spot.id}>
+        <div style={{ padding: "1rem 0" }} key={spot.id}>
+          <div >
             <h4>{spot.name}</h4>
             <div>
               <img
