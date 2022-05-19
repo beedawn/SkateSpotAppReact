@@ -31,12 +31,13 @@ export default function ImageUploadConfirmUser(props) {
     return unsub;
   }, []);
   // filter user
-
+console.log(user.photoURL)
   const filteredUser = users.filter((el) => {
     return el.myid=== user.photoURL;
   });
   console.log(user.id)
   console.log(filteredUser)
+  console.log(vkey)
   const arrayPush = (array) => {
     const date = new Date(Date.now());
     array.push({
@@ -91,6 +92,7 @@ console.log(filteredUser[0].images[i].id)}}
 console.log(filteredUser);
 console.log(imageList)
 console.log(user.email)
+console.log(imageList)
   if (filteredUser.length === 0) {
     return <div><Loading /></div>;
   }
@@ -104,9 +106,12 @@ console.log(user.email)
           <div key={image.id}>
             
             <div>
+              {/* {image.images.filter((img)=>(return img.id===))}
+              {image.images[image.images.length-1].id}<br/>
+              {image.images[0].id} */}
               <img
-                alt={imageList[imageList.length - 1]}
-                src={imageList[imageList.length - 1]}
+                alt={imageList[imageList.length-1]}
+                src={imageList[imageList.length-1]}
                 style={{ height: "200px" }}
               />
             </div>

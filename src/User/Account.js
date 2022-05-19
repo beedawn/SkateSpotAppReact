@@ -21,14 +21,14 @@ export default function Account() {
 
   })
   if (filteredUsers.length !== 0) {
-    console.log(filteredUsers[0])
+    console.log(filteredUsers[0].images[filteredUsers[0].images.length-1])
     return (
       <div className="globalTopMargin">
         <h2>Account Info</h2>
         <p>Username: {filteredUsers[0].name}</p>
         <p>Email: {filteredUsers[0].email}</p>
-        <p>
-          Picture: <img src={filteredUsers[0].images[0].url} alt="Avatar" height="50px" />
+        <p>{console.log(filteredUsers[0])}
+          Picture: <img src={filteredUsers[0].images[filteredUsers[0].images.length-1].url} alt="Avatar" height="50px" />
         </p>
         <Link to="/edit">Edit Profile</Link>
       </div>
