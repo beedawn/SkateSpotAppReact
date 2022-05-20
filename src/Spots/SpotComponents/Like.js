@@ -37,13 +37,8 @@ const payload = {
     likedSpots: [...newArray]
 }
 await setDoc(docRef, payload)
-console.log(userDb[0].likedSpots)
-console.log(newArray)
 setAddLike(false);
-console.log(addLike);
-console.log(userDb)
 }else{
-    
     const payload = {
         ...userDb[0],
         likedSpots: [...userDb[0].likedSpots,spot.id]
@@ -51,43 +46,15 @@ console.log(userDb)
     console.log("Added to likedSpot Array")
     await setDoc(docRef, payload);
     setAddLike(true);
-    console.log(addLike)
-
 }
 }
 
 const determineLike = () => {
     editLike();
-
 }
 
-
-
-console.log(isLoaded)
-
     return (!isLoaded)?(<>Loading</>):(<><div>{addLike || userDb[0].likedSpots.includes(spot.id)  ? <FaHeart onClick={determineLike}/> : <FaRegHeart onClick={determineLike}/>}</div> </>)
-  
-        
-
-        
-    
-    
-    // else{
-// if(userDb[0].likedSpots.includes(spot.id)){
-//     return(
-//         <div>
-//         <FaHeart onClick={determineLike}/>
-//         hh
-//             </div>
-//     )
-//     }
-// else{
-// return(
-//     <div>
-// <FaHeart onClick={determineLike}/>
-// aa
-//     </div>
-// )}
+ 
 }
 
 
