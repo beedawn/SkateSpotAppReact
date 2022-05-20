@@ -93,6 +93,12 @@ await setDoc(docRef, payload);
         await addDoc(collectionRef, payload);
 
     };
+
+    const skipImageUpload = () => {
+        setImageConfirm(true);
+        
+
+    }
     console.log(auth.currentUser);
     const emailVerify = async () => {
         sendEmailVerification(auth.currentUser).then(() => {
@@ -147,7 +153,7 @@ await setDoc(docRef, payload);
             if (!user.emailVerified) {
                 if (addDb) {
                     {/* if user is in database, but has no images in there image array, show this */ }
-                    return (<ImageUploadUser handleUpload={handleUpload} />)
+                    return (<ImageUploadUser handleUpload={handleUpload} skipImageUpload={skipImageUpload}/>)
                 }
             } else {{console.log(user)}
                 return (<div>Please check your email for the verification link, once that is clicked, you will be able to proceed.<div><Button onClick={emailVerify}>Send Again</Button></div></div>)

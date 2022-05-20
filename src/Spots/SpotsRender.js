@@ -7,6 +7,7 @@ import PostedEdited from "./SpotComponents/PostedEdited";
 import AuthContext from "../context/AuthContext";
 import { onSnapshot, collection } from "firebase/firestore";
 import { db, storage } from "../firebase-config";
+import Like from './SpotComponents/Like';
 export default function SpotsRender(props){
     const { user } = useContext(AuthContext);
 
@@ -14,6 +15,8 @@ const [comments, setComments] = useState([]);
     const spots=props.spots;
 
     useEffect(()=>{
+
+      
         onSnapshot(collection(db, "comments"), (snapshot) => {
             setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
           });
@@ -30,6 +33,7 @@ const [comments, setComments] = useState([]);
                 <CardHeader>
                 {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
                   <Link to={"/spot/" + spot.id}>{spot.name}</Link>
+                  <Like spot={spot}/>
                  
                 </CardHeader>
                 {/* <Maps spot={[spot]} spots={spots} center={{lat:spot.lat,lng:spot.long}} singleView={true} /> */}

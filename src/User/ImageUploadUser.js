@@ -11,6 +11,7 @@ import "../styles/style.css";
 
 export default function ImageUploadUser(props) {
   const handleUpload = props.handleUpload;
+  const skipImageUpload = props.skipImageUpload;
   const { user } = useContext(AuthContext);
 
   const [imageList, setImageList] = useState([]);
@@ -36,21 +37,6 @@ console.log(user)
     return unsub;
   }, []);
 
-  // const handleUpload = () => {
-  //   //  if(imageUpload.size > 500000){
-  //   //      setCheck("false");
-  //   //      return(
-  //   //          console.log("File is too Large!")
-  //   //      )
-  //   //  }
-  //   if (imageUpload == null) return;
-  //   const imageRef = ref(storage, `images/users/${vkey}`);
-
-  //   uploadBytes(imageRef, imageUpload).then(() => {
-  //     window.location.replace(`/user/uploadConfirm/${vkey}`);
-  //   });
-  // };
-
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
@@ -66,6 +52,9 @@ console.log(user)
       </div>
       <div style={{ marginTop: "1rem" }}>
         {/* {check ? <div>File too large!</div> : <p></p>} */}
+        <Button color="primary" onClick={skipImageUpload}>
+          Skip
+        </Button>
         <Button color="success" onClick={()=>handleUpload(imageUpload)}>
           Upload
         </Button>
