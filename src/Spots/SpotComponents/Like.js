@@ -14,7 +14,6 @@ export default function Like(props){
         setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         setIsLoaded(true);
       });
-
     },[]);
 const userDb =userArray.filter((person)=>{return user.photoURL===person.id});
 
@@ -27,9 +26,8 @@ const editLike = async() =>{
     }
     setAddLike(userDb[0].likedSpots.includes(spot.id));
     await setDoc(docRef, payload)
-    console.log("undefined ok")
+  
 }if(userDb[0].likedSpots.includes(spot.id)){
-console.log("already in array")
 const newArray = 
 userDb[0].likedSpots.filter((item)=>{return item!==spot.id});
 const payload = {
@@ -43,16 +41,13 @@ setAddLike(false);
         ...userDb[0],
         likedSpots: [...userDb[0].likedSpots,spot.id]
     }
-    console.log("Added to likedSpot Array")
     await setDoc(docRef, payload);
     setAddLike(true);
 }
 }
-
 const determineLike = () => {
     editLike();
 }
-
     return (!isLoaded)?(<>Loading</>):(<><div>{addLike || userDb[0].likedSpots.includes(spot.id)  ? <FaHeart onClick={determineLike}/> : <FaRegHeart onClick={determineLike}/>}</div> </>)
  
 }

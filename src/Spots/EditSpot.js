@@ -12,9 +12,7 @@ import Loading from "../graphics/Loading";
 import Maps from "../maps/Maps";
 import Select from 'react-select';
 
-
 export default function EditSpot() {
-
   const { spot } = useParams();
   const [userArray, setUserArray] = useState([]);
   const [spotLocation, setSpotLocation] = useState("");
@@ -24,7 +22,6 @@ export default function EditSpot() {
   const [gps, setGps] = useState();
   const [sharedUsers,setSharedUsers]= useState([]);
   useEffect(() => {
-
     onSnapshot(collection(db, "users"), (snapshot) => {
       setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -78,7 +75,6 @@ export default function EditSpot() {
   }
 
   if (filteredSpots.length === 0) {
-
     return (
       <div>
         {" "}
@@ -89,7 +85,6 @@ export default function EditSpot() {
     const filteredUserArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
   
     return (
-      
       <div>
         <h2>Edit a Spot</h2>
         {gps ? (
@@ -145,7 +140,6 @@ export default function EditSpot() {
         ) : (
           <span className="errorSpan">Please update Description</span>
         )}
-      
 
 <div><Select isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))} defaultValue={[...spot.users]}/></div>
 </div>

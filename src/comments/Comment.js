@@ -1,4 +1,4 @@
-import { onSnapshot, collection, doc, getDocs } from "firebase/firestore";
+import { onSnapshot, collection } from "firebase/firestore";
 import React, { useEffect, useState, useContext } from "react";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
@@ -6,14 +6,11 @@ import {
   Button,
   Card,
   CardHeader,
-  CardBody,
   CardTitle,
   CardText,
-  Input,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import "../styles/style.css";
-
 import { useParams } from "react-router-dom";
 export default function Comment() {
   const { user } = useContext(AuthContext);
@@ -33,7 +30,6 @@ export default function Comment() {
     return (
       <div>
         <div className="globalTopMargin"> </div>
-
         <h4>Comments</h4>
         <div style={{ width: "400px", margin: "0 auto" }}>
           {filteredComments.filter((cmt) => cmt.spot === spot).length > 0 ? (

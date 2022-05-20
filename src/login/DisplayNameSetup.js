@@ -30,26 +30,20 @@ const image=props.image;
          };
 //need to add this display name update to the DB
 const docRef = doc(db, "users", user.photoURL);
-console.log(displayName)
 const payload = {
 ...filteredUser[0],
 name: displayName
 }
-console.log(payload)
+
 
 await setDoc(docRef, payload);
       updateProfile(auth.currentUser, update);
       onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
-        
       });
-
-      console.log(user);
     } catch (error) {
       console.log(error.message);
-      
     }
-    
   };
   const refreshPage = async () => {
      await updateDisplayName();
@@ -77,7 +71,6 @@ await setDoc(docRef, payload);
         >
           Submit
         </Button>
-       
       </div>
     </div>
   );

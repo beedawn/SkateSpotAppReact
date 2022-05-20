@@ -12,37 +12,24 @@ import { v4 } from "uuid";
 import { Button, Input } from "reactstrap";
 import { auth } from "../firebase-config";
 
-
 export default function EditProfile(props) {
 const [userArray,setUserArray]=useState([]);
 const { user, setUser } = useContext(AuthContext);
-
-//need to build out the ConfirmUser Component again
-
-
     useEffect(() => {
-
         const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
           setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         });
-      
         return unsub;
       }, []);
-    
-
-      const filteredUserArray = userArray.filter((userSingle)=>{return userSingle.myid===user.photoURL});
+    const filteredUserArray = userArray.filter((userSingle)=>{return userSingle.myid===user.photoURL});
     const signedIn = props.signedIn;
     const [addDb, setAddDb] = useState(false);
     const [addImage, setAddImage] = useState(false);
     const [imageConfirm, setImageConfirm] = useState(false);
     const [email, setEmail] = useState();
     const vkey2 = v4();
- const[vkeyState,setVkeyState]=useState(vkey2);
+    const[vkeyState,setVkeyState]=useState(vkey2);
     const vkey = v4();
-  
-    
-
-
     const [next, setNext] = useState();
     const handleUpload = (imageUpload) => {
         //  if(imageUpload.size > 500000){
@@ -51,17 +38,13 @@ const { user, setUser } = useContext(AuthContext);
         //          console.log("File is too Large!")
         //      )
         //  }
-
         if (imageUpload == null) return;
-        
         const imageRef = ref(storage, `images/users/${user.photoURL}/${vkey}`);
-
         uploadBytes(imageRef, imageUpload).then(() => {
             setAddImage(true);
             window.location.replace(`/edit/${vkey}`);
         });
     };
-    // console.log(filteredUserArray[0].myid);
     const editEmail = async () => {
         await newEmail();
         const docRef = doc(db, "users", filteredUserArray[0].myid);
@@ -71,15 +54,11 @@ const payload = {
 }
 setAddDb(true);
 await setDoc(docRef, payload);
-
     }
-
     const handleNewUser = async () => {
-
-        const collectionRef = collection(db, "users");
-        const date = new Date(Date.now());
-
-        const payload = {
+    const collectionRef = collection(db, "users");
+    const date = new Date(Date.now());
+    const payload = {
             myid: vkey2,
             email: user.email,
             images: [],
@@ -91,15 +70,10 @@ await setDoc(docRef, payload);
         await newEmail();
         await updateUserId(payload.id);
         await addDoc(collectionRef, payload);
-
     };
-
     const skipImageUpload = () => {
         setImageConfirm(true);
-        
-
     }
-    console.log(auth.currentUser);
     const emailVerify = async () => {
         sendEmailVerification(auth.currentUser).then(() => {
             //email verification sent!
@@ -115,36 +89,26 @@ await setDoc(docRef, payload);
             console.log(error)
         });
     }
-
     const updateUserId = async (id) => {
         try {
             const update = {
                 ...user,
                 photoURL: vkey2
             }
-
             updateProfile(auth.currentUser, update);
             onAuthStateChanged(auth, (currentUser) => {
                 setUser(currentUser);
-
             });
-
-            console.log(update)
-            console.log(user.email)
         } catch (error) {
             console.log(error.message);
         }
-
     };
-
     function toggle() {
         setImageConfirm(true);
     }
-
     if (!imageConfirm) {
         if (!addImage) {
             if (!addDb) {
-
                 return (<div>
                     {/* if user is not in database, show this component */}
                    <ConfirmUser editEmail={editEmail} signedIn={signedIn} handleNewUser={handleNewUser} />
@@ -160,22 +124,12 @@ await setDoc(docRef, payload);
             }
         } if (addImage) {
             return (
-                <div>
-                    {/* else show display name setup */}
-                    {/* <DisplayNameSetup /> */}
                     <ImageUploadConfirmUser toggle={toggle} vkey={vkeyState} />
-                </div>
             )
         }
-        
-
-
     }else {
         return (
-            <div>
-                {/* else show display name setup */}
                 <DisplayNameSetup />
-
-            </div>)
+)
     }
 }

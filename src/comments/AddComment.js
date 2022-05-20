@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import "../styles/style.css";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Input } from "reactstrap";
-import { v4 } from "uuid";
 import { refreshPage } from "../functions/Refresh";
 
 export default function AddComment() {
@@ -17,7 +16,6 @@ export default function AddComment() {
   const [userComment, setUserComment] = useState("");
   const [userTitle, setUserTitle] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
-
   const handleNewComment = async () => {
     const collectionRef = collection(db, "comments");
     const date = new Date(Date.now());
@@ -30,12 +28,9 @@ export default function AddComment() {
       time: date.toString(),
       edited: false,
     };
-
     await addDoc(collectionRef, payload);
     refreshPage(spot);
   };
-
-
   return (
     <div style={{ padding: "1rem 0", width: "500px", margin: "auto" }}>
       <Card>
@@ -54,7 +49,6 @@ export default function AddComment() {
             </Button>
           </div>
         </CardHeader>
-
         <div>
           <Input
             editable="true"
@@ -80,7 +74,6 @@ export default function AddComment() {
         ) : (
           <span className="errorSpan">Please enter a Comment</span>
         )}
-
         <div style={{ marginTop: "1rem" }}>
           <div>
             {" "}

@@ -5,9 +5,6 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { Button, Link } from "reactstrap";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
-
 
 export default function LoginForm() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -29,7 +26,6 @@ export default function LoginForm() {
   };
 
   const passwordReset = async () => {
-
     await sendPasswordResetEmail(auth, loginEmail)
       .then(() => {
         // Password reset email sent!
@@ -85,7 +81,6 @@ export default function LoginForm() {
               {" "}
               Login{" "}
             </Button>
-
           </div><Button color="success" onClick={() => (setPassReset(true))}>Reset Password</Button>
         </div>
       </div>
@@ -99,14 +94,10 @@ export default function LoginForm() {
     <div style={{ color: "red" }}> {error === "Firebase: Error (auth/missing-email)." ? (<>Please enter your email.</>) : (<></>)}</div>
       <div style={{ color: "red" }}> {error === "Firebase: Error (auth/user-not-found)." ? (<>Email not found. Have you signed up yet?</>) : (<></>)}
       </div>
- 
-
-
-      <div>    <Button color="primary" onClick={() => (setPassReset(false))}>Back</Button><Button color="success" onClick={passwordReset}>Submit</Button>
+      <div>
+            <Button color="primary" onClick={() => (setPassReset(false))}>Back</Button><Button color="success" onClick={passwordReset}>Submit</Button>
       </div>
-
     </div>)
   }
-
 }
 

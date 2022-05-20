@@ -15,15 +15,12 @@ import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
 import {
   ref,
-  listAll,
-  getDownloadURL,
   deleteObject,
 } from "firebase/storage";
 
 export default function DeleteComment() {
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
-
   const [agree, setAgree] = useState("");
 const [comments,setComments]=useState([]);
   const [spots, setSpots] = useState([]);
@@ -45,10 +42,9 @@ const [comments,setComments]=useState([]);
 
   const handleDelete = async (id) => {
     const docRef = doc(db, "spots", id);
-   ;
+   
     await deleteDoc(docRef);
     
-
     for(let i = 0; i < filteredComments.length;i++){
       const docRef2 = doc(db, "comments", filteredComments[i].id);
       await deleteDoc(docRef2);
@@ -81,7 +77,6 @@ const [comments,setComments]=useState([]);
             <p> {spot.description}</p>
           </div>
         ))}
-
         <div className="globalTopMargin">
           <Input
             placeholder="Are you sure? (yes)"

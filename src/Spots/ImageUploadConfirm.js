@@ -22,7 +22,6 @@ export default function ImageUploadConfirm() {
         });
       });
     });
-  
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -32,7 +31,7 @@ export default function ImageUploadConfirm() {
   const filteredSpot = spots.filter((el) => {
     return el.id === spot;
   });
-console.log(imageList)
+
   const arrayPush = (array) => {
     const date = new Date(Date.now());
     array.push({
@@ -55,15 +54,12 @@ console.log(imageList)
   };
   const handleEdit = async (id, url) => {
     const docRef = doc(db, "spots", id);
-    console.log(filteredSpot);
-    console.log(id);
     const date = new Date(Date.now());
     const payload = {
   ...filteredSpot[0],
       images: imageArrayHandler(filteredSpot),
       time: date.toString(),
     };
-console.log(payload)
     await setDoc(docRef, payload);
     refreshPage(spot);
   };
@@ -78,7 +74,6 @@ console.log(payload)
       </div>
       {filteredSpot.map((spot) => (
         <div style={{ padding: "1rem 0" }} key={spot.id}>
-          <div >
             <h4>{spot.name}</h4>
             <div>
               <img
@@ -95,7 +90,6 @@ console.log(payload)
                 </Button>
               </div>
             </div>
-          </div>
         </div>
       ))}
       <div>

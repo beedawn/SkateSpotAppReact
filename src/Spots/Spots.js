@@ -4,12 +4,7 @@ import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Button, Card, CardHeader } from "reactstrap";
-import AllSpotsMap from "../maps/AllSpotsMap";
 import Loading from "../graphics/Loading";
-import Maps from "../maps/Maps";
-import PostedEdited from "./SpotComponents/PostedEdited";
 import SpotsRender from "./SpotsRender";
 
 export default function Spots(props) {
@@ -42,9 +37,7 @@ export default function Spots(props) {
     return unsub;
   }, []);
 
-
 if (spots.length !== 0) {
-  console.log(spots)
 const filterMySpots=spots.filter((spot)=>{return(user.email===spot.admin.email)});
 const filterSharedSpots=spots.filter((spot)=>{
   for(let i=0; i < spot.users.length;i++){
@@ -52,12 +45,9 @@ const filterSharedSpots=spots.filter((spot)=>{
     return spot
   } 
  }});
- console.log(filterSharedSpots)
  const publicSpots=filterSharedSpots.concat(spots.filter((spot)=>{return(spot.private===false)}));
 
-
   if(mySpot&& filterMySpots.length !==0){
-
     return(
       <div className="globalTopMargin">
       <h2>My Posted Spots</h2>
@@ -80,7 +70,6 @@ if(sharedSpot && filterSharedSpots.length !== 0){
 }
   else {
     return (
-      
         <div className="globalTopMargin">
           <h2>Spots</h2>
           <SpotsRender spots={publicSpots} />

@@ -2,16 +2,11 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
 import {
   doc,
-  setDoc,
   onSnapshot,
   collection,
   deleteDoc,
 } from "firebase/firestore";
-
-import { storage } from "../firebase-config";
-
 import { db } from "../firebase-config";
-import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
 import "../styles/style.css";
@@ -20,7 +15,6 @@ import Loading from "../graphics/Loading";
 
 export default function DeleteComment() {
   const { id, spot } = useParams();
-  const { user } = useContext(AuthContext);
   const [agree, setAgree] = useState("");
   const [spots, setSpots] = useState([]);
   useEffect(() => {

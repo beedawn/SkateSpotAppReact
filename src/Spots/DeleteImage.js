@@ -5,7 +5,6 @@ import {
   onSnapshot,
   collection,
   doc,
-
   setDoc,
 } from "firebase/firestore";
 import {
@@ -24,13 +23,11 @@ export default function DeleteImage() {
   const [spots, setSpots] = useState([]);
   const [imageList, setImageList] = useState([]);
   const [imageUrl, setImageUrl]= useState();
-
   const filteredSpot = spots.filter((el) => {
     
     return el.id === spot;
   });
 
- 
   useEffect(() => {
     listAll(imageListRef).then((response) => {
       response.items.forEach((item) => {
@@ -49,17 +46,11 @@ export default function DeleteImage() {
 
 return;
 }
-
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
   }, [spots]);
-
- 
-
-
-  
 
   const handleDelete = async () => {
     const imageRef = ref(storage, `images/spots/${spot}/${id}`);
@@ -69,7 +60,6 @@ return;
     const imageFilterReverse = filteredSpot[0].images.filter((el) => {
       return el.spot === spot;
     });
-  
   
     const docRef = doc(db, "spots", spot);
     const payload = {

@@ -20,7 +20,6 @@ export default function EditComment() {
   const { user } = useContext(AuthContext);
   const [userTitle, setUserTitle] = useState("");
   const [userComment, setUserComment] = useState("");
-
   const [spots, setSpots] = useState([]);
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "comments"), (snapshot) => {
@@ -34,7 +33,6 @@ export default function EditComment() {
   });
 
   const handleEdit = async (id) => {
-    console.log(user);
     const docRef = doc(db, "comments", id);
     const date = new Date(Date.now());
     const payload = {
@@ -48,8 +46,6 @@ export default function EditComment() {
     await setDoc(docRef, payload);
     refreshPage(spot);
   };
-
-
   if (filteredProduct.length === 0) {
     return <div> <Loading /></div>;
   } else {

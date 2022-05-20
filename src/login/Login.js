@@ -34,7 +34,6 @@ export default function Login() {
         {" "}
         <div>
           <EditProfile />
-  
         </div>
       </div>
     );

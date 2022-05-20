@@ -29,8 +29,6 @@ export default function SingleSpot() {
       });
     });
 
-
-
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -48,7 +46,6 @@ export default function SingleSpot() {
       </div>
     );
   }
-console.log(filteredSpot[0])
   return (
     <div>
       {filteredSpot.map((spot) => (
@@ -60,7 +57,6 @@ console.log(filteredSpot[0])
               spots={spots}
               singleView={true}
             />
-
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
             <Like spot={spot} />

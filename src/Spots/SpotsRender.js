@@ -9,14 +9,11 @@ import { onSnapshot, collection } from "firebase/firestore";
 import { db, storage } from "../firebase-config";
 import Like from './SpotComponents/Like';
 export default function SpotsRender(props){
-    const { user } = useContext(AuthContext);
-
+const { user } = useContext(AuthContext);
 const [comments, setComments] = useState([]);
     const spots=props.spots;
 
     useEffect(()=>{
-
-      
         onSnapshot(collection(db, "comments"), (snapshot) => {
             setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
           });
@@ -34,9 +31,7 @@ const [comments, setComments] = useState([]);
                 {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
                   <Link to={"/spot/" + spot.id}>{spot.name}</Link>
                   <Like spot={spot}/>
-                 
                 </CardHeader>
-                {/* <Maps spot={[spot]} spots={spots} center={{lat:spot.lat,lng:spot.long}} singleView={true} /> */}
                 <div
                   style={{
                     display: "inline",
@@ -64,7 +59,6 @@ const [comments, setComments] = useState([]);
                     </Link>
                   </div>
                 </div>
-
                 <h6>{spot.location}</h6>
                 <p>{spot.description}</p>
                 <p>
@@ -80,6 +74,7 @@ const [comments, setComments] = useState([]);
               </div>
             </Card>
           </div>
-        ))}</div>
+        ))}
+        </div>
         )
 }

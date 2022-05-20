@@ -242,7 +242,7 @@ console.log(spots)
         </Tooltip> <FaQuestionCircle id="PrivateTooltip" />
   </FormGroup>
   </Form>
-{console.log(toggleState)}
+
         <div style={{ marginTop: "1rem" }}>
           <div>
             {spotName && spotDescription ? (

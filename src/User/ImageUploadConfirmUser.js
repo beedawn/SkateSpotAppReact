@@ -32,7 +32,6 @@ export default function ImageUploadConfirmUser(props) {
     return unsub;
   }, []);
   // filter user
-
   const filteredUser = users.filter((el) => {
     return el.myid=== user.photoURL;
   });
@@ -47,25 +46,15 @@ export default function ImageUploadConfirmUser(props) {
     return array;
   };
   const imageArrayHandler = (filteredUser) => {
-    // if (filteredUser[0].images.length>0) {
-    //   const arrayImg = [...filteredUser[0].images];
-    //   return arrayPush(arrayImg);
-    // } else {
       const arrayImg = [];
       return arrayPush(arrayImg);
-  // }
   };
 
 
   const handleEdit = async (id) => {
-    console.log("hello")
-    if(filteredUser.length!==0){
-    
- 
-      const imageRef = ref(storage, `images/users/${filteredUser[0].id}/${filteredUser[0].images[0].id}`);
- 
 
-   console.log(filteredUser[0]);
+    if(filteredUser.length!==0){
+      const imageRef = ref(storage, `images/users/${filteredUser[0].id}/${filteredUser[0].images[0].id}`);
       await deleteObject(imageRef)
     .then(() => {
       console.log(imageRef)
@@ -75,10 +64,7 @@ export default function ImageUploadConfirmUser(props) {
       console.log(error);
     });
   
-
-
     const docRef = doc(db, "users", id);
-   
     const date = new Date(Date.now());
     const payload = {
   ...filteredUser[0],
@@ -91,9 +77,6 @@ export default function ImageUploadConfirmUser(props) {
       else{toggle();}
   }
   };
-
-
-
   if (filteredUser.length === 0) {
     return <div><Loading /></div>;
   }
@@ -105,11 +88,7 @@ export default function ImageUploadConfirmUser(props) {
       {filteredUser.map((image) => (
         <div style={{ padding: "1rem 0" }} key={image.id}>
           <div key={image.id}>
-            
             <div>
-              {/* {image.images.filter((img)=>(return img.id===))}
-              {image.images[image.images.length-1].id}<br/>
-              {image.images[0].id} */}
               <img
                 alt={imageList[imageList.length-1]}
                 src={imageList[imageList.length-1]}
@@ -119,7 +98,6 @@ export default function ImageUploadConfirmUser(props) {
             <div>
               <div>
                 <Button color="primary" onClick={() => handleEdit(image.id)}>
-               
                   {" "}
                   Confirm Upload{" "}
                 </Button>

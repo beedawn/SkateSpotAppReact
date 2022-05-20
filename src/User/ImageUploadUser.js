@@ -7,16 +7,12 @@ import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { Input } from "reactstrap";
 import "../styles/style.css";
 
-
-
 export default function ImageUploadUser(props) {
   const handleUpload = props.handleUpload;
   const skipImageUpload = props.skipImageUpload;
   const { user } = useContext(AuthContext);
-
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/users/" + user.photoURL + "/");
-
   const [imageUpload, setImageUpload] = useState(null);
   const [check, setCheck] = useState("true");
   const [users, setUsers] = useState([]);
@@ -36,7 +32,6 @@ console.log(user)
     });
     return unsub;
   }, []);
-
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
