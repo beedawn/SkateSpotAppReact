@@ -19,6 +19,7 @@ export default function SingleSpot() {
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/" + spot + "/");
   const [spots, setSpots] = useState([]);
+
   useEffect(() => {
     listAll(imageListRef).then((response) => {
       response.items.forEach((item) => {
@@ -27,6 +28,8 @@ export default function SingleSpot() {
         });
       });
     });
+
+
 
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));

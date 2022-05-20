@@ -1,19 +1,22 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {FaHeart, FaRegHeart} from 'react-icons/fa';
 import AuthContext from "../../context/AuthContext";
-import { onSnapshot, collection,setDoc, doc } from "firebase/firestore";
+import { onSnapshot, collection,setDoc, doc, query, where, getDocs } from "firebase/firestore";
 import { db } from '../../firebase-config';
 export default function Like(props){
     const { user } = useContext(AuthContext);
     const spot = props.spot;
     const [userArray, setUserArray] = useState([]);
-    const [addLike, setAddLike] = useState();
+    const [addLike, setAddLike] = useState(false);
+    const [isLoaded, setIsLoaded] = useState();
     useEffect(()=>{
     onSnapshot(collection(db, "users"), (snapshot) => {
         setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        setIsLoaded(true);
       });
+
     },[]);
-const userDb = userArray.filter((person)=>{return user.photoURL===person.id});
+const userDb =userArray.filter((person)=>{return user.photoURL===person.id});
 
 const editLike = async() =>{
     const docRef = doc(db, "users", userDb[0].id);
@@ -38,7 +41,7 @@ console.log(userDb[0].likedSpots)
 console.log(newArray)
 setAddLike(false);
 console.log(addLike);
-
+console.log(userDb)
 }else{
     
     const payload = {
@@ -60,29 +63,31 @@ const determineLike = () => {
 
 
 
-if(userDb.likedSpots===undefined){
+console.log(isLoaded)
+
+    return (!isLoaded)?(<>Loading</>):(<><div>{addLike || userDb[0].likedSpots.includes(spot.id)  ? <FaHeart onClick={determineLike}/> : <FaRegHeart onClick={determineLike}/>}</div> </>)
   
         
-        return <div>{addLike ? <FaHeart onClick={determineLike}/> : <FaRegHeart onClick={determineLike}/>}</div>
+
+        
     
-}
     
-    else{
-if(userDb[0].likedSpots.includes(spot.id)){
-    return(
-        <div>
-        <FaHeart onClick={determineLike}/>
-        hh
-            </div>
-    )
-    }
-else{
-return(
-    <div>
-<FaHeart onClick={determineLike}/>
-aa
-    </div>
-)}
+    // else{
+// if(userDb[0].likedSpots.includes(spot.id)){
+//     return(
+//         <div>
+//         <FaHeart onClick={determineLike}/>
+//         hh
+//             </div>
+//     )
+//     }
+// else{
+// return(
+//     <div>
+// <FaHeart onClick={determineLike}/>
+// aa
+//     </div>
+// )}
 }
-}
+
 
