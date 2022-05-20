@@ -11,6 +11,7 @@ import SpotPics from "./SpotComponents/SpotPics";
 import Maps from "../maps/Maps";
 import Loading from "../graphics/Loading";
 import PostedEdited from "./SpotComponents/PostedEdited";
+import Like from "./SpotComponents/Like";
 
 export default function SingleSpot() {
   const { spot } = useParams();
@@ -59,6 +60,7 @@ console.log(filteredSpot[0])
 
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
+            <Like spot={spot} />
             {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
             <div>
               {user.email === spot.admin.email ? (

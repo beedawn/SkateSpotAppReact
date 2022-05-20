@@ -7,6 +7,7 @@ export default function Like(props){
     const { user } = useContext(AuthContext);
     const spot = props.spot;
     const [userArray, setUserArray] = useState([]);
+    const [addLike, setAddLike] = useState();
     useEffect(()=>{
     onSnapshot(collection(db, "users"), (snapshot) => {
         setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -21,53 +22,67 @@ const editLike = async() =>{
         ...userDb[0],
         likedSpots: [spot.id]
     }
-    await setDoc(docRef, payload);
+    setAddLike(userDb[0].likedSpots.includes(spot.id));
+    await setDoc(docRef, payload)
+    console.log("undefined ok")
+}if(userDb[0].likedSpots.includes(spot.id)){
+console.log("already in array")
+const newArray = 
+userDb[0].likedSpots.filter((item)=>{return item!==spot.id});
+const payload = {
+    ...userDb[0],
+    likedSpots: [...newArray]
+}
+await setDoc(docRef, payload)
+console.log(userDb[0].likedSpots)
+console.log(newArray)
+setAddLike(false);
+console.log(addLike);
+
 }else{
     
     const payload = {
         ...userDb[0],
         likedSpots: [...userDb[0].likedSpots,spot.id]
     }
+    console.log("Added to likedSpot Array")
     await setDoc(docRef, payload);
+    setAddLike(true);
+    console.log(addLike)
 
 }
 }
 
 const determineLike = () => {
-    if(userDb.likedSpots === undefined){
-return false;
-}else {
-    const likes = userDb[0].likedSpots.filter((item)=> {
-        return item.id=spot.id;
-            })
-           
-}
-console.log(userDb[0])
+    editLike();
+
 }
 
-determineLike();
-if(userDb[0].likedSpots===undefined){
+
+
+if(userDb.likedSpots===undefined){
+  
+        
+        return <div>{addLike ? <FaHeart onClick={determineLike}/> : <FaRegHeart onClick={determineLike}/>}</div>
+    
+}
+    
+    else{
+if(userDb[0].likedSpots.includes(spot.id)){
     return(
         <div>
-        <FaRegHeart />
-        
+        <FaHeart onClick={determineLike}/>
+        hh
             </div>
     )
-}
-if(userDb[0].likedSpots.filter((item)=> {
-    return item.id=spot.id;
-        })){
+    }
+else{
 return(
     <div>
-<FaHeart />
-
+<FaHeart onClick={determineLike}/>
+aa
     </div>
-)}else{
-    return(
-    <div>
-    <FaRegHeart />
-    
-        </div>)
+)}
+}
 }
 
-}
