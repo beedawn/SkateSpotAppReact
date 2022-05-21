@@ -49,33 +49,25 @@ export default function AddSpot() {
   Geocode.setLanguage("en");
   Geocode.setRegion("es");
 
-  function fetchLocation() {
-    Geocode.fromAddress(spotLocation.address + " " + spotLocation.city).then(
-      (response) => {
-        const location = response.results[0].geometry.location;
-        setGeo(location);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
+  function fetchLocation(lat, long) {
+    // Geocode.fromAddress(spotLocation.address + " " + spotLocation.city).then(
+    //   (response) => {
+    //     const location = response.results[0].geometry.location;
+    //     setGeo(location);
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
 
-  function fetchCoords() {
-    Geocode.fromLatLng(gps.lat, gps.long).then(
+
+
+    Geocode.fromLatLng(lat, long).then(
       (response) => {
         const address = response.results[0].formatted_address;
         let city, state, country;
-        for (
-          let i = 0;
-          i < response.results[0].address_components.length;
-          i++
-        ) {
-          for (
-            let j = 0;
-            j < response.results[0].address_components[i].types.length;
-            j++
-          ) {
+        for (let i = 0; i < response.results[0].address_components.length; i++) {
+          for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
             switch (response.results[0].address_components[i].types[j]) {
               case "locality":
                 city = response.results[0].address_components[i].long_name;
@@ -86,12 +78,12 @@ export default function AddSpot() {
               case "country":
                 country = response.results[0].address_components[i].long_name;
                 break;
-              default:
-                break;
             }
           }
         }
         console.log(city, state, country);
+        setSpotCity(city)
+        setSpotAddress(address)
         console.log(address);
       },
       (error) => {
@@ -100,11 +92,16 @@ export default function AddSpot() {
     );
   }
 
+  fetchLocation( geolocation.latitude,
+    geolocation.longitude);
+
   const handleNewSpot = async () => {
     const collectionRef = collection(db, "spots");
     const date = new Date(Date.now());
 
     if(gps){
+
+  fetchLocation( gps.lat, gps.long);
     const payload = {
       name: spotName,
       // location: spotAddress + " " + spotCity,
@@ -123,6 +120,9 @@ export default function AddSpot() {
     await addDoc(collectionRef, payload);
     refreshPage();
   }else{
+
+  fetchLocation( geolocation.latitude,
+    geolocation.longitude);
     const payload = {
       name: spotName,
       // location: spotAddress + " " + spotCity,

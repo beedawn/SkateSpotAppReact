@@ -28,7 +28,7 @@ const [comments, setComments] = useState([]);
             <Card>
               <div >
                 <CardHeader>
-                {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
+                {/* {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)} */}
                   <Link to={"/spot/" + spot.id}>{spot.name}</Link>
                   <Like spot={spot}/>
                 </CardHeader>
@@ -59,7 +59,7 @@ const [comments, setComments] = useState([]);
                     </Link>
                   </div>
                 </div>
-                <h6>{spot.location}</h6>
+                {/* <h6>{spot.location.address}</h6> */}
                 <p>{spot.description}</p>
                 <p>
                   {comments.filter((cmt) => cmt.spot === spot.id).length > 0 ? (

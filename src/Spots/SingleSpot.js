@@ -46,6 +46,7 @@ export default function SingleSpot() {
       </div>
     );
   }
+  console.log(filteredSpot[0])
   return (
     <div>
       {filteredSpot.map((spot) => (
@@ -58,7 +59,7 @@ export default function SingleSpot() {
               singleView={true}
             />
             <h4>{spot.name}</h4>
-            <h5>{spot.location}</h5>
+            {/* <h5>{spot.location}</h5> */}
             <Like spot={spot} />
             {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
             <div>
@@ -97,6 +98,7 @@ export default function SingleSpot() {
             </div>
             <PostedEdited spot={spot} />
             <p>{spot.description}</p>
+           <p>{spot.location.address}</p>
           </div>
         </div>
       ))}
