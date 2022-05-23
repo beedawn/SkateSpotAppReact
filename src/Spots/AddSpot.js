@@ -26,6 +26,7 @@ export default function AddSpot() {
   const [spotLocation, setSpotLocation] = useState("");
   const [spotAddress, setSpotAddress] = useState("");
   const [spotCity, setSpotCity] = useState("");
+  const [spotCountry, setSpotCountry ] = useState();
   const [spotName, setSpotName] = useState("");
   const [geo, setGeo] = useState("");
   const [spotDescription, setSpotDescription] = useState("");
@@ -37,9 +38,6 @@ export default function AddSpot() {
   const [toggleState, setToggleState] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-
-      fetchLocation( geolocation.latitude,
-    geolocation.longitude);
 
     onSnapshot(collection(db, "users"), (snapshot) => {
       setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -56,18 +54,6 @@ export default function AddSpot() {
   Geocode.setRegion("es");
 
   function fetchLocation(lat, long) {
-    // Geocode.fromAddress(spotLocation.address + " " + spotLocation.city).then(
-    //   (response) => {
-    //     const location = response.results[0].geometry.location;
-    //     setGeo(location);
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
-
-
-
     Geocode.fromLatLng(lat, long).then(
       (response) => {
         const address = response.results[0].formatted_address;
@@ -90,6 +76,7 @@ export default function AddSpot() {
         console.log(city, state, country);
         setSpotCity(city)
         setSpotAddress(address)
+        setSpotCountry(country)
         setIsLoaded(true);
         console.log(address);
       },
@@ -107,12 +94,13 @@ if(!gps){
     const date = new Date(Date.now());
 
     if(gps){
-
   fetchLocation( gps.lat, gps.long);
-
     const payload = {
       name: spotName,
       location: spotAddress + " " + spotCity,
+      address: spotAddress,
+      city: spotCity,
+      country: spotCountry,
       description: spotDescription,
       admin: { email: user.email, name: user.displayName },
       images: [],
@@ -128,12 +116,14 @@ if(!gps){
     await addDoc(collectionRef, payload);
     refreshPage();
   }else{
-
   fetchLocation(geolocation.latitude,
     geolocation.longitude);
     const payload = {
       name: spotName,
       location: spotAddress + " " + spotCity,
+      address: spotAddress,
+      city: spotCity,
+      country: spotCountry,
       description: spotDescription,
       admin: { email: user.email, name: user.displayName },
       images: [],
@@ -151,23 +141,10 @@ if(!gps){
   }
   };
 
-  function handleChange(e) {
-    const value = e.target.value;
-    setSpotLocation({
-      ...spotLocation,
-      [e.target.name]: value,
-    });
-    fetchLocation(gps.lat, gps.long);
-    //  fetchCoords(gps.lat,gps.long);
-  }
-
   //Handle Drag is Passed to Maps Component
   function handleDrag(e) {
- 
     setGps({ lat: e.latLng.lat(), long: e.latLng.lng() });
-  
     fetchLocation(e.latLng.lat(), e.latLng.lng());
-
   }
 
   if (spots.length !== 0 ||spots!==[] )  {
