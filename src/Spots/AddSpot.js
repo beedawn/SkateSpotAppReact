@@ -16,6 +16,7 @@ import { Form, Input, FormGroup, Label, Tooltip } from "reactstrap";
 import {FaQuestionCircle} from 'react-icons/fa';
 
 
+
 export default function AddSpot() {
   const spotId = v4();
   const geolocation = useGeolocation();
@@ -34,7 +35,12 @@ export default function AddSpot() {
   const [tooltip, setTooltip]= useState(false);
   const [sharedUsers,setSharedUsers]= useState([]);
   const [toggleState, setToggleState] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
+
+      fetchLocation( geolocation.latitude,
+    geolocation.longitude);
+
     onSnapshot(collection(db, "users"), (snapshot) => {
       setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -84,6 +90,7 @@ export default function AddSpot() {
         console.log(city, state, country);
         setSpotCity(city)
         setSpotAddress(address)
+        setIsLoaded(true);
         console.log(address);
       },
       (error) => {
@@ -91,9 +98,9 @@ export default function AddSpot() {
       }
     );
   }
-
+if(!gps){
   fetchLocation( geolocation.latitude,
-    geolocation.longitude);
+    geolocation.longitude);}
 
   const handleNewSpot = async () => {
     const collectionRef = collection(db, "spots");
@@ -102,9 +109,10 @@ export default function AddSpot() {
     if(gps){
 
   fetchLocation( gps.lat, gps.long);
+
     const payload = {
       name: spotName,
-      // location: spotAddress + " " + spotCity,
+      location: spotAddress + " " + spotCity,
       description: spotDescription,
       admin: { email: user.email, name: user.displayName },
       images: [],
@@ -121,11 +129,11 @@ export default function AddSpot() {
     refreshPage();
   }else{
 
-  fetchLocation( geolocation.latitude,
+  fetchLocation(geolocation.latitude,
     geolocation.longitude);
     const payload = {
       name: spotName,
-      // location: spotAddress + " " + spotCity,
+      location: spotAddress + " " + spotCity,
       description: spotDescription,
       admin: { email: user.email, name: user.displayName },
       images: [],
@@ -149,15 +157,19 @@ export default function AddSpot() {
       ...spotLocation,
       [e.target.name]: value,
     });
-    fetchLocation();
+    fetchLocation(gps.lat, gps.long);
     //  fetchCoords(gps.lat,gps.long);
   }
 
   //Handle Drag is Passed to Maps Component
   function handleDrag(e) {
+ 
     setGps({ lat: e.latLng.lat(), long: e.latLng.lng() });
+  
+    fetchLocation(e.latLng.lat(), e.latLng.lng());
+
   }
-console.log(spots)
+
   if (spots.length !== 0 ||spots!==[] )  {
     const filteredUserArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
     console.log(filteredUserArray)
@@ -199,20 +211,7 @@ console.log(spots)
         ) : (
           <span className="errorSpan">Please enter Spotname</span>
         )}
-        {/* <div style={{ marginTop: "1rem" }}>
-          {gps ? (
-            <></>
-          ) : (
-            <div>
-              <Input
-                editable="true"
-                name="address"
-                placeholder="Spot Address"
-                onChange={handleChange}
-              />
-            </div>
-          )}
-        </div> */}
+
         <div style={{ marginTop: "1rem" }}>
           <Input
             editable="true"
@@ -244,6 +243,7 @@ console.log(spots)
   </Form>
 
         <div style={{ marginTop: "1rem" }}>
+          { isLoaded ?  (<>{spotCity} {spotAddress}</>):(<>Loading Address...</>)}
           <div>
             {spotName && spotDescription ? (
               <Button color="primary" onClick={handleNewSpot}>
