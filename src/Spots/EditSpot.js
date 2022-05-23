@@ -99,8 +99,7 @@ export default function EditSpot() {
       const payload = {
         ...filteredSpots[0],
         name: spotName,
-        location: spotAddress + " " + spotCity,
-        address: spotAddress,
+        location: spotAddress,
         city: spotCity,
         country: spotCountry,
         description: spotDescription,
@@ -119,8 +118,7 @@ export default function EditSpot() {
       const payload = {
         ...filteredSpots[0],
         name: spotName,
-        location: spotAddress + " " + spotCity,
-        address: spotAddress,
+        location: spotAddress,
         city: spotCity,
         country: spotCountry,
         description: spotDescription,

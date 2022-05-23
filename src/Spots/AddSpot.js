@@ -97,8 +97,7 @@ if(!gps){
   fetchLocation( gps.lat, gps.long);
     const payload = {
       name: spotName,
-      location: spotAddress + " " + spotCity,
-      address: spotAddress,
+      location: spotAddress,
       city: spotCity,
       country: spotCountry,
       description: spotDescription,
@@ -120,8 +119,7 @@ if(!gps){
     geolocation.longitude);
     const payload = {
       name: spotName,
-      location: spotAddress + " " + spotCity,
-      address: spotAddress,
+      location: spotAddress,
       city: spotCity,
       country: spotCountry,
       description: spotDescription,
