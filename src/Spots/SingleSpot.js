@@ -98,7 +98,7 @@ export default function SingleSpot() {
             </div>
             <PostedEdited spot={spot} />
             <p>{spot.description}</p>
-           <p>{spot.location} hi</p>
+           <p>{spot.location}</p>
           </div>
         </div>
       ))}
