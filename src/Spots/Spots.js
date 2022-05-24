@@ -44,7 +44,7 @@ export default function Spots(props) {
 
 if (spots.length !== 0) {
   const userArrayFiltered=userArray.filter((userItem)=>{return(userItem.id===user.photoURL)})
-console.log(userArrayFiltered)
+
 const filterMySpots=spots.filter((spot)=>{return(user.email===spot.admin.email)});
 
 
@@ -65,7 +65,7 @@ const filteredLikedSpots=spots.filter((spot)=>{
     return spot
   }
 }})
-console.log(filteredLikedSpots)
+
 
 if(likedSpot && filteredLikedSpots.length !==0){
   return(
@@ -79,7 +79,7 @@ if(likedSpot && filteredLikedSpots.length ===0){
   return(
     <div className="globalTopMargin">
     <h2>My Liked Spots</h2>
-    <div>No liked spots.</div>
+    <div>No liked spots. Click on the small heart underneath a spot on one of the other pages to like it.</div>
 </div>
   )
 }
@@ -91,7 +91,8 @@ if(likedSpot && filteredLikedSpots.length ===0){
   </div>
   )}
   if(mySpot&& filterMySpots.length ===0){
-    return(<div>You haven't posted any spots yet.</div>)
+    <h2>My Posted Spots</h2>
+    return(<div>You haven't posted any spots yet. Click "Add Spot" at the top of the page to add a spot.</div>)
   }
     
 if(sharedSpot && filterSharedSpots.length !== 0){
@@ -102,7 +103,7 @@ if(sharedSpot && filterSharedSpots.length !== 0){
  </div>
   )
 }if(sharedSpot && filterSharedSpots.length === 0){
-  return(<div> No Shared Spots.</div>)
+  return(<div> <h2>Spots Shared with me.</h2><div> No Shared Spots.</div></div>)
 }
   else {
     return (

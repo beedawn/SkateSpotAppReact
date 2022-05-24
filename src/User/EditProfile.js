@@ -62,6 +62,7 @@ await setDoc(docRef, payload);
             myid: vkey2,
             email: user.email,
             images: [],
+            likedSpots:[],
             joined: date.toString(),
             edited: false,
         };

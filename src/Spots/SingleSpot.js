@@ -83,7 +83,7 @@ export default function SingleSpot() {
               )}
             </div>
             {filteredSpot[0].images.length === 0 ? (
-              <div>Add a picture?</div>
+              <div>         <Link to={"/spot/" + spot.id + "/upload"}>Add a picture?</Link></div>
             ) : (
               <SpotPics />
             )}

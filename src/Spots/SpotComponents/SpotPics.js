@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { refreshPage, imagePage } from "../../functions/Refresh";
 import Loading from "../../graphics/Loading";
 
+
 export default function SpotPics() {
   const { spot } = useParams();
   const [imageList, setImageList] = useState([]);
@@ -41,6 +42,8 @@ export default function SpotPics() {
             filteredSpot[0].images.map((image) => {
               return (
                 <div>
+          
+                  <a href="#"><img src={image.url} style={{ height: "200px" }} onClick={()=> imagePage(image.url)} alt="Delete Picture"/></a>
                   <div>
                     <Link to={"/spot/" + spot.id + "/deleteImage/" + image.id}>
                       <svg
@@ -59,7 +62,6 @@ export default function SpotPics() {
                       </svg>
                     </Link>
                   </div>
-                  <a href="#"><img alt={spot.name} src={image.url} style={{ height: "200px" }} onClick={()=> imagePage(image.url)}/></a>
                   <p>
                     Posted By: {image.displayName} on {image.time}
                   </p>

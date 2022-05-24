@@ -26,7 +26,6 @@ export default function EditSpot() {
   const [tooltip, setTooltip]= useState(false);
   const [userArray, setUserArray] = useState([]);
   const [toggleState, setToggleState] = useState(false);
-  const [spotLocation, setSpotLocation] = useState("");
   const [spotName, setSpotName] = useState("");
   const [spotAddress, setSpotAddress] = useState("");
   const [spotCity, setSpotCity] = useState("");
