@@ -40,6 +40,7 @@ export default function Home() {
         <Route path="/displayName" element={<DisplayNameSetup />} />
         <Route path="spots/my" element={<Spots mySpot={true} />}/>
         <Route path="spots/shared" element={<Spots sharedSpot={true}/>}/>
+        <Route path="spots/liked" element={<Spots likedSpot={true}/>}/>
         <Route path="spot/:spot/edit" element={<EditSpot />} />
         <Route path="spot/:spot/Comments" element={<Comment />} />
         <Route path="spot/:spot/Comments/:id" element={<EditComment />} />

@@ -42,13 +42,12 @@ setAddLike(false);
         likedSpots: [...userDb[0].likedSpots,spot.id]
     }
     await setDoc(docRef, payload);
-    setAddLike(false);
 }
 }
 const determineLike = () => {
     editLike();
 }
-    return (!isLoaded)?(<>Loading</>):(<><div>{addLike || userDb[0].likedSpots.includes(spot.id)  ? <FaHeart onClick={determineLike}/> : <FaRegHeart onClick={determineLike}/>}</div> </>)
+    return (!isLoaded)?(<>Loading</>):(<><div>{ userDb[0].likedSpots.includes(spot.id)  ? <FaHeart onClick={determineLike}/> : <FaRegHeart onClick={determineLike}/>}</div> </>)
  
 }
 

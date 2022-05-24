@@ -12,8 +12,8 @@ import {
   DropdownItem,
   DropdownToggle,
   DropdownMenu,
-  NavbarText, uncontrolledDropdown
 } from "reactstrap";
+
 
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
@@ -22,7 +22,6 @@ import AuthContext from "../context/AuthContext";
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, setUser } = useContext(AuthContext);
-
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
@@ -55,7 +54,9 @@ export default function NavBar() {
                   <DropdownItem>
                     <NavLink href="/spots/my">My Spots</NavLink>
                   </DropdownItem>
-                
+                  <DropdownItem>
+                    <NavLink href="/spots/liked/">Liked Spots</NavLink>
+                  </DropdownItem>
                   <DropdownItem>
                     <NavLink href="/spots/shared/">Spots Shared with Me</NavLink>
                   </DropdownItem>

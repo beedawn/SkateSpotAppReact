@@ -8,6 +8,7 @@ import Loading from "../graphics/Loading";
 import SpotsRender from "./SpotsRender";
 
 export default function Spots(props) {
+  const likedSpot = props.likedSpot;
   const mySpot = props.mySpot;
   const sharedSpot = props.sharedSpot;
   const { spot } = useParams();
@@ -16,6 +17,7 @@ export default function Spots(props) {
   const { user } = useContext(AuthContext);
   const [spots, setSpots] = useState([]);
   const [comments, setComments] = useState([]);
+  const [userArray, setUserArray] = useState([]);
 
   useEffect(() => {
     listAll(imageListRef).then((response) => {
@@ -26,6 +28,9 @@ export default function Spots(props) {
       });
     });
 
+    onSnapshot(collection(db, "users"), (snapshot) => {
+      setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
      onSnapshot(collection(db, "comments"), (snapshot) => {
       setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -38,7 +43,11 @@ export default function Spots(props) {
   }, []);
 
 if (spots.length !== 0) {
+  const userArrayFiltered=userArray.filter((userItem)=>{return(userItem.id===user.photoURL)})
+console.log(userArrayFiltered)
 const filterMySpots=spots.filter((spot)=>{return(user.email===spot.admin.email)});
+
+
 const filterSharedSpots=spots.filter((spot)=>{
   for(let i=0; i < spot.users.length;i++){
   if( spot.users[i].email===user.email){
@@ -47,6 +56,33 @@ const filterSharedSpots=spots.filter((spot)=>{
  }});
  const publicSpots=filterSharedSpots.concat(spots.filter((spot)=>{return(spot.private===false)}));
 
+
+const filteredLikedSpots=spots.filter((spot)=>{  
+
+  for(let i =0; i<userArrayFiltered[0].likedSpots.length;i++) {
+  if(userArrayFiltered[0].likedSpots[i]===spot.id){
+
+    return spot
+  }
+}})
+console.log(filteredLikedSpots)
+
+if(likedSpot && filteredLikedSpots.length !==0){
+  return(
+    <div className="globalTopMargin">
+    <h2>My Liked Spots</h2>
+    <SpotsRender spots={filteredLikedSpots} />
+</div>
+  )
+}
+if(likedSpot && filteredLikedSpots.length ===0){
+  return(
+    <div className="globalTopMargin">
+    <h2>My Liked Spots</h2>
+    <div>No liked spots.</div>
+</div>
+  )
+}
   if(mySpot&& filterMySpots.length !==0){
     return(
       <div className="globalTopMargin">
