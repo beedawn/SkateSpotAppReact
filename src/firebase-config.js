@@ -1,9 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {
-  getAuth,
-  signInAnonymously,
-  updateProfile,
-  signInWithEmailAndPassword,
+  getAuth
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
@@ -20,27 +17,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
-
 export const auth = getAuth(app);
-// signInAnonymously(auth)
-//   .then(() => {
-//     // Signed in..
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     // ...
-//   });
-// // signInWithEmailAndPassword(auth, email, password)
-// // .then((userCredential) => {
-// //   //Signed in...
-// //   const user= userCredential.user;
-// // })
-// // .catch ((error)=>{
-// //   const errorCode = error.code;
-// //   const errorMessage= error.message;
-// // });
-
 export const firebaseObject = firebaseConfig;
-
 export const db = getFirestore();

@@ -1,6 +1,6 @@
 import React, { useContext,useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
-
+import { Container,Row, Col } from "reactstrap";
 import { v4 } from "uuid";
 import { db } from "../firebase-config";
 import { onSnapshot, collection } from "firebase/firestore";
@@ -18,12 +18,13 @@ const [spots, setSpots] = useState([]);
   }, []);
 if (spots.length !== 0) {
   return (
-    <div>
-      {/* <AllSpotsMap spots={spots}/> */}
-        <div>Logo</div>
-        <div>Welcome {user.displayName}</div>
-        <div>New spots</div> <div>Updates</div>{" "}
-      </div>)
+  <Container>
+    <Row>
+        <div>Logo</div></Row>
+        <Row><Col lg="4">
+        <div>Welcome {user.displayName}</div></Col>
+        <Col lg="4"><div>New spots</div></Col><Col lg="4"><div>Updates</div></Col>
+    </Row></Container>)
     } else {
       return (
         <div style={{ padding: "1rem 0" }}>

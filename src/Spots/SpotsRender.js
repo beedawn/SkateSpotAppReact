@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import AllSpotsMap from "../maps/AllSpotsMap";
-import { Button, Card, CardHeader } from "reactstrap";
+import { Button, Card, CardHeader, Col, Row, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 import Maps from "../maps/Maps";
 import PostedEdited from "./SpotComponents/PostedEdited";
@@ -8,6 +8,7 @@ import AuthContext from "../context/AuthContext";
 import { onSnapshot, collection } from "firebase/firestore";
 import { db, storage } from "../firebase-config";
 import Like from './SpotComponents/Like';
+import '../styles/style.css';
 export default function SpotsRender(props){
 const { user } = useContext(AuthContext);
 const [comments, setComments] = useState([]);
@@ -21,8 +22,9 @@ const [comments, setComments] = useState([]);
     return(
         <div>
         <div>
-    <AllSpotsMap spots={spots}  />
-        </div>
+          <Row><Col><AllSpotsMap spots={spots} sm="12" /></Col></Row>
+
+        </div><Row>
         {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }} key={spot.id}>
             <Card>
@@ -44,26 +46,26 @@ const [comments, setComments] = useState([]);
                   
                 > 
                   {user.email === spot.admin.email ? (
-                    <Link to={"/spot/" + spot.id + "/edit"}>
+                    <Row><Link to={"/spot/" + spot.id + "/edit"}>
                       {" "}
                       <Button color="primary"> Edit </Button>
-                    </Link>
+                    </Link></Row>
                   ) : (
                     <p></p>
                   )}{" "}
-                  <div style={{ marginTop: "10px" }}><div style={{marginLeft:"0px"}}>
+                  <Row><Col>
                     <Link to={"/spot/" + spot.id + "/addComment/"}>
-                      <Button>Comment</Button>
+                      <Button className="spotButton">Comment</Button>
                     </Link>
-                    </div>
+                 
                     <Link to={"/spot/" + spot.id + "/upload"}>
-                      <Button color="success" onClick={() => {}}>
+                      <Button className="spotButton" color="success" onClick={() => {}}>
                         Upload
                       </Button>
-                    </Link>
+                    </Link></Col>
+                    </Row>
                   </div>
                 </div>
-               
                 <p>{spot.description}</p>
                 <p>
                   {comments.filter((cmt) => cmt.spot === spot.id).length > 0 ? (
@@ -75,10 +77,10 @@ const [comments, setComments] = useState([]);
                   )}{" "}
                 </p>
                 <PostedEdited spot={spot} />
-              </div>
+            
             </Card>
           </div>
-        ))}
+        ))}</Row>
         </div>
         )
 }

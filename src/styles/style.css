@@ -18,3 +18,13 @@
 .adminButtonsEach{
      margin-left:15px;
 }
+/* Text for Posted Edited Font */
+.PostedEditedText{
+     font-size:12px;
+     padding-left:10px;
+     padding-right:10px;
+}
+
+.spotButton{
+     padding-right:10px,
+}
