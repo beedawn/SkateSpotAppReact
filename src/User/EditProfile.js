@@ -45,30 +45,31 @@ const { user, setUser } = useContext(AuthContext);
             window.location.replace(`/edit/${vkey}`);
         });
     };
-    const editEmail = async () => {
-        await newEmail();
+    const editEmail = async (e) => {
+        await newEmail(e);
         const docRef = doc(db, "users", filteredUserArray[0].myid);
 const payload = {
     ...filteredUserArray[0],
-    email: user.email
+    email: e
 }
-setAddDb(true);
 await setDoc(docRef, payload);
+setAddDb(true);
+
     }
-    const handleNewUser = async () => {
+    const handleNewUser = async (email) => {
     const collectionRef = collection(db, "users");
     const date = new Date(Date.now());
     const payload = {
             myid: vkey2,
-            email: user.email,
-            images: [],
-            likedSpots:[],
+            email: email,
+            images: [""],
+            likedSpots:[""],
             joined: date.toString(),
             edited: false,
         };
         setAddDb(true);
-        await emailVerify();
-        await newEmail();
+        // await emailVerify();
+        await newEmail(email);
         await updateUserId(payload.id);
         await addDoc(collectionRef, payload);
     };
@@ -81,10 +82,11 @@ await setDoc(docRef, payload);
             console.log("email sent")
         })
     }
-    const newEmail = async () => {
+    const newEmail = async (email) => {
         updateEmail(auth.currentUser, email).then(() => {
             // Email updated!
             // ...
+            
         }).catch((error) => {
             // An error occurred
             console.log(error)

@@ -10,12 +10,13 @@ export default function ConfirmUser(props) {
     const handleNewUser= props.handleNewUser;
     const { user, setUser } = useContext(AuthContext);
   const [userState, setUserState ] = useState();
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState(user.email);
+
     return (
          <div>
 <p>Does your email look good?</p>
-<Input defaultValue={user.email} onChange={(e) => setEmail(e.target.value)} />
+<Input value={email} onChange={(e) => setEmail(e.target.value)} />
 <Button color="danger">Start Over</Button>
-{signedIn ?(<Button color="primary" onClick={editEmail}>Confirm</Button>):(<Button color="primary" onClick={handleNewUser}>Confirm</Button>)}
+{signedIn ?(<Button color="primary" onClick={()=>editEmail(email)}>Confirm</Button>):(<Button color="primary" onClick={()=>handleNewUser(email)}>Confirm</Button>)}
 </div>)
 }

@@ -103,7 +103,7 @@ if(sharedSpot && filterSharedSpots.length !== 0){
  </div>
   )
 }if(sharedSpot && filterSharedSpots.length === 0){
-  return(<div> <h2>Spots Shared with me.</h2><div> No Shared Spots.</div></div>)
+  return(<div> <h2>Spots Shared with me.</h2><div> No Shared Spots, another user needs to share a private spot with you for you to see it.</div></div>)
 }
   else {
     return (

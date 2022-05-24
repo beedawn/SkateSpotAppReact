@@ -88,9 +88,7 @@ export default function SingleSpot() {
               <SpotPics />
             )}
             <div>
-              <Link to={"/spot/" + spot.id + "/addComment/"}>
-                <Button>Comment</Button>
-              </Link>
+              
               <Link to={"/spot/" + spot.id + "/upload"}>
                 <Button color="success" className="adminButtonsEach">
                   Upload
@@ -101,13 +99,14 @@ export default function SingleSpot() {
             <p>{spot.description}</p>
        
           </div>
-        </div>
-      ))}
-      <a href="/spots/">Back to Spots</a>
+          <a href="/spots/">Back to Spots</a>
+        
       <Comment />
       <div>
         <a href="/spots/">Back to Spots</a>
       </div>
+       </div>
+      ))}
     </div>
   );
 }

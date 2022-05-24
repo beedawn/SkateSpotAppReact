@@ -10,7 +10,7 @@ export default function DisplayNameSetup(props) {
   //Need to add a way to verify DisplayName isn't already used?
 const image=props.image;
   const { user, setUser } = useContext(AuthContext);
-  const [displayName, setDisplayName] = useState();
+  const [displayName, setDisplayName] = useState(user.displayName);
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
@@ -49,12 +49,13 @@ await setDoc(docRef, payload);
      await updateDisplayName();
    window.location.replace("/account");
   };
+  if(filteredUser[0] !== undefined){
   return (
     <div>
       <div>
         <input
           editable="true"
-          defaultValue={user.displayName}
+          value={displayName}
           placeholder="Display Name"
           onChange={(event) => {
             setDisplayName(event.target.value);
@@ -74,4 +75,9 @@ await setDoc(docRef, payload);
       </div>
     </div>
   );
+}else{
+  return(
+    <div>Loading</div>
+  )
+}
 }

@@ -25,8 +25,6 @@ export default function ImageUploadUser(props) {
         });
       });
     });
-console.log(user.email)
-console.log(user)
     const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
       setUsers(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });

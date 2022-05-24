@@ -32,26 +32,44 @@ export default function EditSpot() {
   const [spotCountry, setSpotCountry ] = useState();
   const [spotState, setSpotState] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
-
+const [oneSpot, setOneSpot]= useState();
   const [spotDescription, setSpotDescription] = useState("");
   const [spots, setSpots] = useState([]);
   const [gps, setGps] = useState();
   const [sharedUsers,setSharedUsers]= useState([]);
-  useEffect(() => {
+const [load, setLoad]= useState(false);
+  
+  useEffect(async () => {
     onSnapshot(collection(db, "users"), (snapshot) => {
       setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
-    const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
+   onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
     });
-    return unsub;
-  }, []);
+
+if(filteredSpots[0]!==undefined)
+{
+  setSpotName(filteredSpots[0].name)
+  setSpotDescription(filteredSpots[0].description)
+  setSharedUsers(filteredSpots[0].users)
+ 
+
+}else{
+  setSpotName(filteredSpots[0].name)
+  setSpotDescription(filteredSpots[0].description)
+  setSharedUsers(filteredSpots[0].users)
+}
+
+
+  },[]);
 
   const filteredSpots = spots.filter(function (el) {
     return el.id === spot;
   });
+  
 
-
+console.log(oneSpot)
   function fetchLocation(lat, long) {
     Geocode.fromLatLng(lat, long).then(
       (response) => {
@@ -142,6 +160,7 @@ export default function EditSpot() {
   }
 
   if (filteredSpots.length === 0) {
+  
     return (
       <div>
         {" "}
@@ -150,7 +169,7 @@ export default function EditSpot() {
     );
   } else {
     const filteredUserArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
-  
+
     return (
       <div>
         <h2>Edit a Spot</h2>
@@ -180,11 +199,13 @@ export default function EditSpot() {
         )}
 
         <SpotPics />
+      
         {filteredSpots.map((spot) => (
           <div className="globalTopMargin">
             <Input
-              defaultValue={spot.name}
+              value={spotName}
               onChange={(event) => setSpotName(event.target.value)}
+              
             />
           </div>
         ))}
@@ -198,9 +219,10 @@ export default function EditSpot() {
           <div style={{ marginTop: "1rem" }}>
             <Input
               editable="true"
-              defaultValue={spot.description}
+              value={spotDescription}
               type="textarea"
               onChange={(event) => setSpotDescription(event.target.value)}
+             
             />
               {spotDescription ? (
           <p></p>
@@ -208,7 +230,7 @@ export default function EditSpot() {
           <span className="errorSpan">Please update Description</span>
         )}
 
-<div><Select isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))} defaultValue={[...spot.users]}/></div>
+<div><Select isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))} value={sharedUsers}/></div>
 
 <div></div>
         <Form>

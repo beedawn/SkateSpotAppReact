@@ -77,9 +77,9 @@ export default function ImageUploadConfirmUser(props) {
       else{toggle();}
   }
   };
-  if (filteredUser.length === 0) {
+  if (filteredUser[0] === undefined) {
     return <div><Loading /></div>;
-  }
+  }else
   return (
     <div>
       <div style={{ padding: "1rem" }}>

@@ -35,12 +35,7 @@ export default function ImageUpload() {
   }, []);
 
   const handleUpload = () => {
-    //  if(imageUpload.size > 500000){
-    //      setCheck("false");
-    //      return(
-    //          console.log("File is too Large!")
-    //      )
-    //  }
+
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/spots/${spot}/${vkey}`);
     uploadBytes(imageRef, imageUpload).then(() => {
@@ -53,7 +48,6 @@ export default function ImageUpload() {
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
-        <h2> Spot {spot}</h2>
         <h3> Image Upload</h3>
         <Input
           type="file"
@@ -65,7 +59,7 @@ export default function ImageUpload() {
       </div>
       
       <div style={{ marginTop: "1rem" }}>
-        {/* {check ? <div>File too large!</div> : <p></p>} */}
+     
         <Button color="primary" onClick={handleUpload}>
           Submit
         </Button>

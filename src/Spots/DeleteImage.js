@@ -81,7 +81,6 @@ return;
   return (
     <div className="globalTopMargin">
       <div style={{ marginTop: "1rem" }}>
-        <h2> Spot {spot}</h2>
         <h3> Image Deletion</h3>
    {imageUrl ?(
         <img alt={imageUrl} src={imageUrl} style={{height:"200px"}} />):(<>No Preview available.</>)}

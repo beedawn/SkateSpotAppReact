@@ -31,6 +31,10 @@ export default function Comment() {
       <div>
         <div className="globalTopMargin"> </div>
         <h4>Comments</h4>
+
+        <Link to={"/spot/" + spot + "/addComment/"}>
+                <Button>Comment</Button>
+              </Link>
         <div style={{ width: "400px", margin: "0 auto" }}>
           {filteredComments.filter((cmt) => cmt.spot === spot).length > 0 ? (
             `${comments.filter((cmt) => cmt.spot === spot).length} Comments`
