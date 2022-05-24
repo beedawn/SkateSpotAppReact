@@ -9,6 +9,7 @@ import { onSnapshot, collection } from "firebase/firestore";
 import { db, storage } from "../firebase-config";
 import Like from './SpotComponents/Like';
 import '../styles/style.css';
+import {FaCameraRetro} from 'react-icons/fa';
 export default function SpotsRender(props){
 const { user } = useContext(AuthContext);
 const [comments, setComments] = useState([]);
@@ -60,7 +61,7 @@ const [comments, setComments] = useState([]);
                  
                     <Link to={"/spot/" + spot.id + "/upload"}>
                       <Button className="spotButton" color="success" onClick={() => {}}>
-                        Upload
+                         <FaCameraRetro />
                       </Button>
                     </Link></Col>
                     </Row>

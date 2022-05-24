@@ -35,7 +35,7 @@ export default function NavBar() {
   return (
     <div>
       <Navbar color="dark" dark expand="md" fixed="top">
-        <NavbarBrand href="/">SkateSpot</NavbarBrand>
+        <NavbarBrand href="/">Slantyard</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>

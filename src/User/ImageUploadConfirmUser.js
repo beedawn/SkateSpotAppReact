@@ -85,9 +85,9 @@ export default function ImageUploadConfirmUser(props) {
       <div style={{ padding: "1rem" }}>
         <h2>Confirm Profile Picture Upload</h2>
       </div>
-      {filteredUser.map((image) => (
-        <div style={{ padding: "1rem 0" }} key={image.id}>
-          <div key={image.id}>
+      
+        <div style={{ padding: "1rem 0" }}>
+          <div >
             <div>
               <img
                 alt={imageList[imageList.length-1]}
@@ -97,7 +97,7 @@ export default function ImageUploadConfirmUser(props) {
             </div>
             <div>
               <div>
-                <Button color="primary" onClick={() => handleEdit(image.id)}>
+                <Button color="primary" onClick={() => handleEdit(filteredUser[0].id)}>
                   {" "}
                   Confirm Upload{" "}
                 </Button>
@@ -105,7 +105,7 @@ export default function ImageUploadConfirmUser(props) {
             </div>
           </div>
         </div>
-      ))}
+      
       <div>
       </div>
     </div>

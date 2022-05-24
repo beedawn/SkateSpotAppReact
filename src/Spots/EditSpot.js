@@ -32,12 +32,11 @@ export default function EditSpot() {
   const [spotCountry, setSpotCountry ] = useState();
   const [spotState, setSpotState] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
-const [oneSpot, setOneSpot]= useState();
   const [spotDescription, setSpotDescription] = useState("");
   const [spots, setSpots] = useState([]);
   const [gps, setGps] = useState();
   const [sharedUsers,setSharedUsers]= useState([]);
-const [load, setLoad]= useState(false);
+  const [load, isLoad]= useState(false);
   
   useEffect(async () => {
     onSnapshot(collection(db, "users"), (snapshot) => {
@@ -55,21 +54,17 @@ if(filteredSpots[0]!==undefined)
   setSharedUsers(filteredSpots[0].users)
  
 
-}else{
-  setSpotName(filteredSpots[0].name)
-  setSpotDescription(filteredSpots[0].description)
-  setSharedUsers(filteredSpots[0].users)
 }
 
 
-  },[]);
+  },[load]);
 
   const filteredSpots = spots.filter(function (el) {
     return el.id === spot;
   });
   
 
-console.log(oneSpot)
+
   function fetchLocation(lat, long) {
     Geocode.fromLatLng(lat, long).then(
       (response) => {
@@ -171,7 +166,7 @@ console.log(oneSpot)
     const filteredUserArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
 
     return (
-      <div>
+      <div onMouseOver={()=>isLoad(true)}>
         <h2>Edit a Spot</h2>
         {gps ? (
           <Maps
@@ -201,7 +196,7 @@ console.log(oneSpot)
         <SpotPics />
       
         {filteredSpots.map((spot) => (
-          <div className="globalTopMargin">
+          <div className="globalTopMargin" >
             <Input
               value={spotName}
               onChange={(event) => setSpotName(event.target.value)}

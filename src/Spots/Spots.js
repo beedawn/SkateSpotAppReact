@@ -98,12 +98,12 @@ if(likedSpot && filteredLikedSpots.length ===0){
 if(sharedSpot && filterSharedSpots.length !== 0){
   return (
     <div className="globalTopMargin">
-      <h2>Spots Shared with me.</h2>
+      <h2>Spots Shared with Me</h2>
       <SpotsRender spots={filterSharedSpots} />
  </div>
   )
 }if(sharedSpot && filterSharedSpots.length === 0){
-  return(<div> <h2>Spots Shared with me.</h2><div> No Shared Spots, another user needs to share a private spot with you for you to see it.</div></div>)
+  return(<div> <h2>Spots Shared with me.</h2><div>No one has shared a private spot with you yet. :( </div></div>)
 }
   else {
     return (

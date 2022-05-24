@@ -21,14 +21,19 @@ export default function EditComment() {
   const [userTitle, setUserTitle] = useState("");
   const [userComment, setUserComment] = useState("");
   const [spots, setSpots] = useState([]);
+  const [load, setLoad]= useState(false);
   useEffect(() => {
+    if(filteredSpots[0] !== undefined){
+ setUserTitle(filteredSpots[0].title)
+ setUserComment(filteredSpots[0].comment)
+}
     const unsub = onSnapshot(collection(db, "comments"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     return unsub;
-  }, []);
+  }, [load]);
 
-  const filteredProduct = spots.filter(function (el) {
+  const filteredSpots = spots.filter(function (el) {
     return el.id === id;
   });
 
@@ -46,16 +51,17 @@ export default function EditComment() {
     await setDoc(docRef, payload);
     refreshPage(spot);
   };
-  if (filteredProduct.length === 0) {
+  if (filteredSpots.length === 0) {
     return <div> <Loading /></div>;
   } else {
     return (
-      <div className="globalTopMargin">
+      <div className="globalTopMargin" onMouseOver={()=>setLoad(true)}>
         <h2>Edit a Comment</h2>
-        {filteredProduct.map((id) => (
+        {filteredSpots.map((id) => (
           <div className="globalTopMargin">
             <Input
-              defaultValue={id.title}
+            value={userTitle}
+              // defaultValue={id.title}
               onChange={(event) => setUserTitle(event.target.value)}
             />
           </div>
@@ -65,11 +71,12 @@ export default function EditComment() {
         ) : (
           <span className="errorSpan">Please enter Spotname</span>
         )}
-        {filteredProduct.map((id) => (
+        {filteredSpots.map((id) => (
           <div style={{ marginTop: "1rem" }}>
             <Input
               editable="true"
-              defaultValue={id.comment}
+              value={userComment}
+              // defaultValue={id.comment}
               type="textarea"
               onChange={(event) => setUserComment(event.target.value)}
             />

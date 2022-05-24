@@ -3,7 +3,7 @@ import AuthContext from "../context/AuthContext";
 import { db, storage } from "../firebase-config";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { onSnapshot, collection } from "firebase/firestore";
-import { Button } from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ import Maps from "../maps/Maps";
 import Loading from "../graphics/Loading";
 import PostedEdited from "./SpotComponents/PostedEdited";
 import Like from "./SpotComponents/Like";
+import {FaCameraRetro} from 'react-icons/fa';
 
 export default function SingleSpot() {
   const { spot } = useParams();
@@ -51,13 +52,15 @@ export default function SingleSpot() {
     <div>
       {filteredSpot.map((spot) => (
         <div key={spot.id}>
-          <div>
+          <div><Row><Col>
             <Maps
               style={{ height: "200px" }}
               spot={[spot]}
               spots={spots}
               singleView={true}
-            />
+            /></Col>
+            </Row>
+            <Row><Col lg="6" >
             <h4>{spot.name}</h4>
             <h5>{spot.location}</h5>
             <Like spot={spot} />
@@ -91,16 +94,17 @@ export default function SingleSpot() {
               
               <Link to={"/spot/" + spot.id + "/upload"}>
                 <Button color="success" className="adminButtonsEach">
-                  Upload
+                 <FaCameraRetro />
                 </Button>
               </Link>{" "}
             </div>
             <PostedEdited spot={spot} />
-            <p>{spot.description}</p>
-       
+            </Col>
+            <Col>
+
+            <p>{spot.description}</p></Col>
+            </Row>
           </div>
-          <a href="/spots/">Back to Spots</a>
-        
       <Comment />
       <div>
         <a href="/spots/">Back to Spots</a>

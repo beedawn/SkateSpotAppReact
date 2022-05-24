@@ -42,7 +42,7 @@ export default function Comment() {
             <></>
           )}
           {filteredComments.map((comment) => (
-            <Card className="mt-5" key={comment.id}>
+            <Card className="mt-4" key={comment.id}>
               <CardHeader>{comment.title}</CardHeader>
               <div style={{ padding: "1rem 0" }}>
                 <div>
