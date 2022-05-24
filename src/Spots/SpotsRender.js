@@ -28,17 +28,21 @@ const [comments, setComments] = useState([]);
             <Card>
               <div >
                 <CardHeader>
-                {/* {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)} */}
-                  <Link to={"/spot/" + spot.id}>{spot.name}</Link>
+                {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
+                  <Link to={"/spot/" + spot.id}><h5>{spot.name}</h5></Link>
+                  <h6>{spot.city}, {spot.state}</h6>
                   <Like spot={spot}/>
+       
                 </CardHeader>
+
                 <div
                   style={{
                     display: "inline",
                     marginRight: "auto",
                     marginTop: "10px",
                   }}
-                >
+                  
+                > 
                   {user.email === spot.admin.email ? (
                     <Link to={"/spot/" + spot.id + "/edit"}>
                       {" "}
@@ -59,7 +63,7 @@ const [comments, setComments] = useState([]);
                     </Link>
                   </div>
                 </div>
-                {/* <h6>{spot.location.address}</h6> */}
+               
                 <p>{spot.description}</p>
                 <p>
                   {comments.filter((cmt) => cmt.spot === spot.id).length > 0 ? (

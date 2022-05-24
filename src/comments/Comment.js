@@ -38,10 +38,10 @@ export default function Comment() {
             <></>
           )}
           {filteredComments.map((comment) => (
-            <Card className="mt-5">
+            <Card className="mt-5" key={comment.id}>
               <CardHeader>{comment.title}</CardHeader>
               <div style={{ padding: "1rem 0" }}>
-                <div key={comment.id}>
+                <div>
                   {user.email === comment.admin ? (
                     <div className="adminButtons">
                       <Link to={"/spot/" + spot + "/Comments/" + comment.id}>
@@ -72,13 +72,13 @@ export default function Comment() {
                     <p></p>
                   )}
                   <CardText style={{ fontSize: "12px" }}>
-                    <p>{comment.comment}</p>
+                    {comment.comment}
                   </CardText>
                 </div>
               </div>
               <CardTitle style={{ fontSize: "10px" }}>
                 {" "}
-                Posted By: {comment.name} on {comment.time};
+                Posted By: <Link to={"/users/"+ comment.userId}>{comment.name}</Link> on {comment.time};
               </CardTitle>
             </Card>
           ))}

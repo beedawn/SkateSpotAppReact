@@ -22,6 +22,7 @@ export default function AddComment() {
     const payload = {
       spot: spot,
       name: user.displayName,
+      userId:user.photoURL,
       title: userTitle,
       comment: userComment,
       admin: user.email,

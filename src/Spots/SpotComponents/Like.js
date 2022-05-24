@@ -42,7 +42,7 @@ setAddLike(false);
         likedSpots: [...userDb[0].likedSpots,spot.id]
     }
     await setDoc(docRef, payload);
-    setAddLike(true);
+    setAddLike(false);
 }
 }
 const determineLike = () => {

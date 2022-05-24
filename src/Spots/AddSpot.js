@@ -37,6 +37,7 @@ export default function AddSpot() {
   const [sharedUsers,setSharedUsers]= useState([]);
   const [toggleState, setToggleState] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [spotState, setSpotState] = useState();
   useEffect(() => {
 
     onSnapshot(collection(db, "users"), (snapshot) => {
@@ -77,6 +78,7 @@ export default function AddSpot() {
         setSpotCity(city)
         setSpotAddress(address)
         setSpotCountry(country)
+        setSpotState(state);
         setIsLoaded(true);
         console.log(address);
       },
@@ -100,8 +102,9 @@ if(!gps){
       location: spotAddress,
       city: spotCity,
       country: spotCountry,
+      state:spotState,
       description: spotDescription,
-      admin: { email: user.email, name: user.displayName },
+      admin: { email: user.email, name: user.displayName, id:user.photoURL },
       images: [],
       time: date.toString(),
       timePosted: date.toString(),
@@ -122,8 +125,9 @@ if(!gps){
       location: spotAddress,
       city: spotCity,
       country: spotCountry,
+      state:spotState,
       description: spotDescription,
-      admin: { email: user.email, name: user.displayName },
+      admin: { email: user.email, name: user.displayName, id:user.photoURL },
       images: [],
       time: date.toString(),
       timePosted: date.toString(),

@@ -31,6 +31,7 @@ export default function EditSpot() {
   const [spotAddress, setSpotAddress] = useState("");
   const [spotCity, setSpotCity] = useState("");
   const [spotCountry, setSpotCountry ] = useState();
+  const [spotState, setSpotState] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [spotDescription, setSpotDescription] = useState("");
@@ -76,6 +77,7 @@ export default function EditSpot() {
         setSpotCity(city)
         setSpotAddress(address)
         setSpotCountry(country)
+        setSpotState(state);
         setIsLoaded(true);
         console.log(address);
       },
@@ -102,6 +104,7 @@ export default function EditSpot() {
         location: spotAddress,
         city: spotCity,
         country: spotCountry,
+        state:spotState,
         description: spotDescription,
         time: date.toString(),
         edited: true,
@@ -121,6 +124,7 @@ export default function EditSpot() {
         location: spotAddress,
         city: spotCity,
         country: spotCountry,
+        state:spotState,
         description: spotDescription,
         time: date.toString(),
         edited: true,
