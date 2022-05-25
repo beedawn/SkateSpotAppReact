@@ -3,7 +3,7 @@ import AuthContext from "../context/AuthContext";
 import { db, storage } from "../firebase-config";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { onSnapshot, collection } from "firebase/firestore";
-import { Row, Col, Button } from "reactstrap";
+import { Row, Col, Button, Tooltip } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Comment from "../comments/Comment";
 import { Link } from "react-router-dom";
@@ -20,6 +20,7 @@ export default function SingleSpot() {
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/" + spot + "/");
   const [spots, setSpots] = useState([]);
+  const [tooltip, setTooltip] = useState(false);
 
   useEffect(() => {
     listAll(imageListRef).then((response) => {
@@ -60,12 +61,15 @@ export default function SingleSpot() {
               singleView={true}
             /></Col>
             </Row>
-            <Row><Col lg="6" >
-            <h4>{spot.name}</h4>
+            <Row><Col xxl="3" lg="6" ><div className="spotCardParent"><div className="spotCard">
+            <Row>
+            <Col sm="4">
+                <div className="publicPrivate">{spot.private?(<div className="private">Private Spot</div>):(<div className="public">Public Spot</div>)}</div></Col>
+             <Col sm="4"> <h4>{spot.name}</h4></Col>
+          <Col sm="4">
+            <Like spot={spot} /></Col>
             <h5>{spot.location}</h5>
-            <Like spot={spot} />
-            {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
-           
+            </Row>
             <div>
               {user.email === spot.admin.email ? (
                 <div>
@@ -85,11 +89,7 @@ export default function SingleSpot() {
                 <p></p>
               )}
             </div>
-            {filteredSpot[0].images.length === 0 ? (
-              <div>         <Link to={"/spot/" + spot.id + "/upload"}>Add a picture?</Link></div>
-            ) : (
-              <SpotPics />
-            )}
+         
             <div>
               
               <Link to={"/spot/" + spot.id + "/upload"}>
@@ -99,13 +99,20 @@ export default function SingleSpot() {
               </Link>{" "}
             </div>
             <PostedEdited spot={spot} />
+            </div>
+            </div>
             </Col>
-            <Col>
+            <Col xxl="3" lg="6">   {filteredSpot[0].images.length === 0 ? (
+              <div>         <Link to={"/spot/" + spot.id + "/upload"}>Add a picture?</Link></div>
+            ) : (
+              <SpotPics />
+            )}</Col>
+            <Col xxl="3" lg="6">
 
-            <p>{spot.description}</p></Col>
+            <p>{spot.description}</p></Col> <Col xxl="3" lg="6"> <Comment /></Col>
             </Row>
           </div>
-      <Comment />
+     
       <div>
         <a href="/spots/">Back to Spots</a>
       </div>

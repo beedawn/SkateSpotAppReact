@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import AllSpotsMap from "../maps/AllSpotsMap";
-import { Button, Card, CardHeader, Col, Row, Container } from "reactstrap";
+import { Button, Card, CardHeader, Col, Row, Container, Tooltip } from "reactstrap";
 import { Link } from "react-router-dom";
 import Maps from "../maps/Maps";
 import PostedEdited from "./SpotComponents/PostedEdited";
@@ -14,6 +14,10 @@ export default function SpotsRender(props){
 const { user } = useContext(AuthContext);
 const [comments, setComments] = useState([]);
     const spots=props.spots;
+    const my = props.my;
+    const shared = props.shared;
+    const spotPublic = props.spotPublic;
+    const [tooltip, setTooltip] = useState(false);
 
     useEffect(()=>{
         onSnapshot(collection(db, "comments"), (snapshot) => {
@@ -24,23 +28,26 @@ const [comments, setComments] = useState([]);
         <div>
         <div>
           <Row><Col><AllSpotsMap spots={spots} sm="12" /></Col></Row>
-
+<Row><Col> {spotPublic !== undefined ? (<h2>Spots</h2>):(<></>)} {shared !== undefined ?(<h2>Spots Shared with Me</h2>):(<></>)} {my !== undefined ? (<h2>My Posted Spots</h2>):(<></>)}</Col></Row>
         </div><Row>
         {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }} key={spot.id}>
             <div className="spotCard">
               <div >
                 <div className="spotCardHeader">
-                  <Row><Col sm="4">
+                  <Row><Col sm="3">
                 <div className="publicPrivate">{spot.private?(<div className="private">Private Spot</div>):(<div className="public">Public Spot</div>)}</div></Col>
-                <Col sm="4">
+                <Col sm="3">
+                
+                </Col><Col sm="3">   <Link to={"/spot/" + spot.id + "/upload"}> <Tooltip isOpen={tooltip} target="imageTooltip" toggle={()=>setTooltip(!tooltip)} >
+                Click on this to upload a picture.</Tooltip><FaCameraRetro size={70} id="imageTooltip"/>
+                 
+                    </Link></Col><Col sm="3">  <Like spot={spot}/></Col>
+                </Row>
+                  <Link to={"/spot/" + spot.id}><h5>{spot.name}</h5></Link>
                   <div>
                 {spot.city}, {spot.state}
                 </div>
-                </Col><Col sm="4">   <Like spot={spot}/></Col>
-                </Row>
-                  <Link to={"/spot/" + spot.id}><h5>{spot.name}</h5></Link>
-                  
                
                   
                 </div>
@@ -53,24 +60,13 @@ const [comments, setComments] = useState([]);
                   }}
                   
                 > 
-                  {user.email === spot.admin.email ? (
-                    <Row><Link to={"/spot/" + spot.id + "/edit"}>
-                      {" "}
-                      <Button color="primary"> Edit </Button>
-                    </Link></Row>
-                  ) : (
-                    <p></p>
-                  )}{" "}
+                
                   <Row><Col>
                     <Link to={"/spot/" + spot.id + "/addComment/"}>
                       <Button className="spotButton">Comment</Button>
                     </Link>
                  
-                    <Link to={"/spot/" + spot.id + "/upload"}>
-                      <Button className="spotButton" color="success" onClick={() => {}}>
-                         <FaCameraRetro />
-                      </Button>
-                    </Link></Col>
+                 </Col>
                     </Row>
                   </div>
                 </div>
@@ -84,7 +80,16 @@ const [comments, setComments] = useState([]);
                     <></>
                   )}{" "}
                 </p>
-                <PostedEdited spot={spot} />
+               <Row><Col><PostedEdited spot={spot} one={true}/></Col>
+                 {user.email === spot.admin.email ? (
+                    <Col xs="3"><Link to={"/spot/" + spot.id + "/edit"}>
+                      {" "}
+                      <Button color="primary"> Edit </Button>
+                    </Link></Col>
+                  ) : (
+                    <p></p>
+                  )}{" "}
+               </Row>
             
             </div>
           </div>

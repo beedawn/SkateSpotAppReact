@@ -38,7 +38,8 @@
      background-color: #f0f1f1;
      border-radius:50px;
      padding:1rem;
-     margin:1rem;
+     margin:1rem; 
+     width:400px;
 }
 .spotCardHeader{
      background-color: rgb(240, 240, 240);
@@ -46,7 +47,7 @@
      border-radius:50px 50px 0px 0px;
 }
 /* .spotCardHeader:hover{background-color:#e0dede} */
-.spotCard:hover{opacity:0.9}
+.spotCard:hover{opacity:0.95}
 .publicPrivate  {
 background-color:none;
 }
@@ -67,4 +68,15 @@ background-color:none;
      text-align: center;
      color:white;
      font-weight:500;
+}
+.like{
+     color:rgb(62, 152, 89);
+}
+a.like:hover{
+     color:rgb(89, 199, 122);
+}
+.spotCardParent {
+      padding: 1rem 0;
+      width: 400px;
+      margin: auto;
 }

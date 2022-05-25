@@ -87,19 +87,20 @@ if(likedSpot && filteredLikedSpots.length ===0){
     return(
       <div className="globalTopMargin">
       <h2>My Posted Spots</h2>
-      <SpotsRender spots={filterMySpots} />
+      <SpotsRender spots={filterMySpots} my={true} />
   </div>
   )}
   if(mySpot&& filterMySpots.length ===0){
-    <h2>My Posted Spots</h2>
-    return(<div>You haven't posted any spots yet. Click "Add Spot" at the top of the page to add a spot.</div>)
+    
+   
+    return(<div className="globalTopMargin"><h2>My Posted Spots</h2><div>You haven't posted any spots yet. Click "Add Spot" at the top of the page to add a spot.</div></div>)
   }
     
 if(sharedSpot && filterSharedSpots.length !== 0){
   return (
     <div className="globalTopMargin">
       <h2>Spots Shared with Me</h2>
-      <SpotsRender spots={filterSharedSpots} />
+      <SpotsRender spots={filterSharedSpots} shared={true}/>
  </div>
   )
 }if(sharedSpot && filterSharedSpots.length === 0){
@@ -108,8 +109,8 @@ if(sharedSpot && filterSharedSpots.length !== 0){
   else {
     return (
         <div className="globalTopMargin">
-          <h2>Spots</h2>
-          <SpotsRender spots={publicSpots} />
+         
+          <SpotsRender spots={publicSpots} spotPublic={true} />
       </div>
     );
   }} else {
