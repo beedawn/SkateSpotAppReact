@@ -28,15 +28,22 @@ const [comments, setComments] = useState([]);
         </div><Row>
         {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }} key={spot.id}>
-            <Card>
+            <div className="spotCard">
               <div >
-                <CardHeader>
-                {spot.private?(<h6>Private Spot</h6>):(<><h6>Public Spot</h6></>)}
+                <div className="spotCardHeader">
+                  <Row><Col sm="4">
+                <div className="publicPrivate">{spot.private?(<div className="private">Private Spot</div>):(<div className="public">Public Spot</div>)}</div></Col>
+                <Col sm="4">
+                  <div>
+                {spot.city}, {spot.state}
+                </div>
+                </Col><Col sm="4">   <Like spot={spot}/></Col>
+                </Row>
                   <Link to={"/spot/" + spot.id}><h5>{spot.name}</h5></Link>
-                  <h6>{spot.city}, {spot.state}</h6>
-                  <Like spot={spot}/>
-       
-                </CardHeader>
+                  
+               
+                  
+                </div>
 
                 <div
                   style={{
@@ -79,7 +86,7 @@ const [comments, setComments] = useState([]);
                 </p>
                 <PostedEdited spot={spot} />
             
-            </Card>
+            </div>
           </div>
         ))}</Row>
         </div>

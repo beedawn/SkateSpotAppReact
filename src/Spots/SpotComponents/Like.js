@@ -47,7 +47,7 @@ setAddLike(false);
 const determineLike = () => {
     editLike();
 }
-    return (!isLoaded)?(<>Loading</>):(<><div>{ userDb[0].likedSpots.includes(spot.id)  ? <FaHeart onClick={determineLike}/> : <FaRegHeart onClick={determineLike}/>}</div> </>)
+    return (!isLoaded)?(<>Loading</>):(<><div>{ userDb[0].likedSpots.includes(spot.id)  ? <FaHeart   size={70} onClick={determineLike}/> : <FaRegHeart size={70} onClick={determineLike}/>}</div> </>)
  
 }
 

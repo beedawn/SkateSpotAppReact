@@ -28,3 +28,43 @@
 .spotButton{
      padding-right:10px,
 }
+.mainDiv{
+     background-color: rgb(179, 179, 179);
+     background-image: url("../../public/rasmus-smedstrup-mortensen-_ZtPsxAomeI-unsplash.jpg");
+     margin-top: 4rem;
+     min-height: 100vh;
+}
+.spotCard{
+     background-color: #f0f1f1;
+     border-radius:50px;
+     padding:1rem;
+     margin:1rem;
+}
+.spotCardHeader{
+     background-color: rgb(240, 240, 240);
+     padding:1rem;
+     border-radius:50px 50px 0px 0px;
+}
+/* .spotCardHeader:hover{background-color:#e0dede} */
+.spotCard:hover{opacity:0.9}
+.publicPrivate  {
+background-color:none;
+}
+.private{
+     background-color:rgb(236, 85, 3);
+     border-radius:20rem;
+     width:5rem;
+     padding:1rem;
+     text-align: center;
+     color:white;
+     font-weight:500;
+}
+.public{
+     background-color:rgb(35, 155, 153);
+     border-radius:20rem;
+     width:5rem;
+     padding:1rem;
+     text-align: center;
+     color:white;
+     font-weight:500;
+}
