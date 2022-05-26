@@ -98,10 +98,12 @@ padding:auto;
 .singleSpotPics{
      background-color: #f0f1f1;
      border-radius: 25px;
-     margin:2rem;
+     margin: 2rem;
      height:75%;
+    
 }
 .singleSpotPicsInner{
      margin:auto;
      padding:auto;
+     height:4rem;
 }

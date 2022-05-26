@@ -102,8 +102,8 @@ export default function SingleSpot() {
             </div>
             </div>
             </Col>
-            <Col xxl="3" lg="6">   <div className="singleSpotPics"><div className="singleSpotPicsInner">{filteredSpot[0].images.length === 0 ? (
-              <div>         <Link to={"/spot/" + spot.id + "/upload"}>Add a picture?</Link></div>
+            <Col xxl="3" lg="6"><div className="singleSpotPics"><div className="singleSpotPicsInner">{filteredSpot[0].images.length === 0 ? (
+              <div><Link to={"/spot/" + spot.id + "/upload"}>Add a picture?</Link></div>
             ) : (
               <SpotPics />
             )}</div>
