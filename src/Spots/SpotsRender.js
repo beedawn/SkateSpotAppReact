@@ -39,8 +39,7 @@ const [comments, setComments] = useState([]);
                 <div className="publicPrivate">{spot.private?(<div className="private">Private Spot</div>):(<div className="public">Public Spot</div>)}</div></Col>
                 <Col sm="3">
                 
-                </Col><Col sm="3">   <Link to={"/spot/" + spot.id + "/upload"}> <Tooltip isOpen={tooltip} target="imageTooltip" toggle={()=>setTooltip(!tooltip)} >
-                Click on this to upload a picture.</Tooltip><FaCameraRetro size={70} id="imageTooltip"/>
+                </Col><Col sm="3">   <Link to={"/spot/" + spot.id + "/upload"}> <FaCameraRetro size={70} />
                  
                     </Link></Col><Col sm="3">  <Like spot={spot}/></Col>
                 </Row>

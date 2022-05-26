@@ -80,3 +80,28 @@ a.like:hover{
       width: 400px;
       margin: auto;
 }
+.allSpotsToggle{
+     background-color: #f0f1f1;
+     border-radius:0px 0px 15px 15px;
+}
+.singleSpotDescription{
+     background-color: #f0f1f1;
+     border-radius: 25px;
+     margin:2rem;
+     height:75%;
+}
+.singleSpotDescriptionInner{
+     margin:auto;
+padding:auto;
+}
+
+.singleSpotPics{
+     background-color: #f0f1f1;
+     border-radius: 25px;
+     margin:2rem;
+     height:75%;
+}
+.singleSpotPicsInner{
+     margin:auto;
+     padding:auto;
+}
