@@ -83,7 +83,7 @@ return;
       <div style={{ marginTop: "1rem" }}>
         <h3> Image Deletion</h3>
    {imageUrl ?(
-        <img alt={imageUrl} src={imageUrl} style={{height:"200px"}} />):(<>No Preview available.</>)}
+        <img alt={imageUrl} src={imageUrl} className="spotPictureDelete" />):(<>No Preview available.</>)}
       </div>
       <div style={{ marginTop: "1rem" }}>
         <Button color="danger" onClick={handleDelete}>

@@ -6,9 +6,12 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { refreshPage, imagePage } from "../../functions/Refresh";
 import Loading from "../../graphics/Loading";
-
+import "../../styles/style.css";
+import { Button } from "reactstrap";
+import AuthContext from "../../context/AuthContext";
 
 export default function SpotPics() {
+  const { user } = useContext(AuthContext);
   const { spot } = useParams();
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "images/" + spot + "/");
@@ -37,15 +40,15 @@ export default function SpotPics() {
   return (
     <div>
       {filteredSpot.map((spot) => (
+       
         <div key={spot.id}>
+           {console.log(filteredSpot)}
           {filteredSpot[0].images ? (
             filteredSpot[0].images.map((image) => {
               return (
-                <div>
-          
-                  <a href="#"><img src={image.url} style={{ height: "200px" }} onClick={()=> imagePage(image.url)} alt="Delete Picture"/></a>
-                  <div>
-                    <Link to={"/spot/" + spot.id + "/deleteImage/" + image.id}>
+                <div className="spotPicContainer">
+             <div className="imgDelete">
+                    {image.email=== user.email ? (<Link to={"/spot/" + spot.id + "/deleteImage/" + image.id}><Button color="danger">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -60,11 +63,14 @@ export default function SpotPics() {
                           d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
                         />
                       </svg>
-                    </Link>
+                      </Button>
+                    </Link>):(<></>)}
                   </div>
-                  <p>
+                  <div className="spotPictureRenderContainer"><a href="#"><img src={image.url} className="spotPictureRender" onClick={()=> imagePage(image.url)} alt="Delete Picture"/></a></div>
+               
+                  <div className="imagePosted">
                     Posted By: {image.displayName} on {image.time}
-                  </p>
+                    </div>
                 </div>
               );
             })

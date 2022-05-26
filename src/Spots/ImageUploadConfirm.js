@@ -36,6 +36,7 @@ export default function ImageUploadConfirm() {
     const date = new Date(Date.now());
     array.push({
       displayName: user.displayName,
+      email:user.email,
       id: id,
       spot: spot,
       url: imageList[imageList.length - 1],

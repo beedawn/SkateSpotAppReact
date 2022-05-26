@@ -4,6 +4,8 @@ import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { useParams } from "react-router-dom";
 import {FaUserCircle} from 'react-icons/fa';
+
+import "../styles/style.css"
 export default function UserPage(){
     const { user } = useParams();
     const [userArray, setUserArray] = useState([]);
@@ -22,9 +24,9 @@ export default function UserPage(){
 
       if(filteredUser[0]!==undefined){
     return(
-<div>
+<div className="globalTopMargin">
     <p>{filteredUser[0].name}</p>
-    <p>Picture: {filteredUser[0].images[filteredUser[0].images.length-1] ? ( <img src={filteredUser[0].images[filteredUser[0].images.length-1].url} alt="Avatar" height="250px" />):(<><FaUserCircle /></>)}
+    <p>Picture: {filteredUser[0].images[filteredUser[0].images.length-1] ? ( <img className="userPicture" src={filteredUser[0].images[filteredUser[0].images.length-1].url} alt="Avatar" height="250px" />):(<><FaUserCircle /></>)}
         </p>
         
         Spots

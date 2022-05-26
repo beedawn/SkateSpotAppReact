@@ -70,7 +70,7 @@ const filteredLikedSpots=spots.filter((spot)=>{
 if(likedSpot && filteredLikedSpots.length !==0){
   return(
     <div className="globalTopMargin">
-    <h2>My Liked Spots</h2>
+    {/* <h2>My Liked Spots</h2> */}
     <SpotsRender spots={filteredLikedSpots} />
 </div>
   )
@@ -86,7 +86,7 @@ if(likedSpot && filteredLikedSpots.length ===0){
   if(mySpot&& filterMySpots.length !==0){
     return(
       <div className="globalTopMargin">
-      <h2>My Posted Spots</h2>
+      
       <SpotsRender spots={filterMySpots} my={true} />
   </div>
   )}
