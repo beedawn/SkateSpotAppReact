@@ -146,3 +146,15 @@ a.like:hover{
 .commentCard{
      margin-left:4rem;
 }
+.editIcon{
+     color:#702586
+}
+.editIcon:hover{
+     color:#9947b2
+}
+.uploadIcon{
+     color:#2c5ef6
+}
+.uploadIcon:hover{
+     color:#6b8ef5
+}

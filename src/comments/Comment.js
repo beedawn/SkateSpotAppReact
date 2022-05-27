@@ -12,9 +12,12 @@ import {
 import { Link } from "react-router-dom";
 import "../styles/style.css";
 import { useParams } from "react-router-dom";
+import AddComment from "./AddComment";
+import LazyLoad from 'react-lazyload';
 export default function Comment() {
   const { user } = useContext(AuthContext);
   const [comments, setComments] = useState([]);
+  const [ openComment, setOpenComment]=useState(false);
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "comments"), (snapshot) => {
       setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -27,14 +30,15 @@ export default function Comment() {
     return comment.spot === spot;
   });
   if (comments.length !== 0) {
+    if(!openComment){
     return (
       <div>
         <div className="globalTopMargin"> </div>
         <h4>Comments</h4>
 
-        <Link to={"/spot/" + spot + "/addComment/"}>
-                <Button>Comment</Button>
-              </Link>
+        {/* <Link to={"/spot/" + spot + "/addComment/"}> */}
+                <Button onClick={()=>setOpenComment(true)}>Comment</Button>
+              {/* </Link> */}
         <div style={{ width: "400px", margin: "0 auto" }}>
           {filteredComments.filter((cmt) => cmt.spot === spot).length > 0 ? (
             `${comments.filter((cmt) => cmt.spot === spot).length} Comments`
@@ -90,10 +94,67 @@ export default function Comment() {
       </div>
     );
   } else {
-    return (
-      <div style={{ padding: "1rem 0" }}>
-        <h2>Comments</h2>
-      </div>
-    );
+    return(
+      <div><AddComment />
+      {filteredComments.map((comment) => (
+        <div key={comment.id}>
+            <Card className="mt-4" >
+              <LazyLoad height={200}>
+              <CardHeader>{comment.title}</CardHeader>
+              <div style={{ padding: "1rem 0" }}>
+                <div>
+                  {user.email === comment.admin ? (
+                    <div className="adminButtons">
+                      <Link to={"/spot/" + spot + "/Comments/" + comment.id}>
+                        <Button color="primary" onClick={() => {}}>
+                          {" "}
+                          Edit{" "}
+                        </Button>
+                      </Link>
+                      <Link
+                        to={
+                          "/spot/" +
+                          spot +
+                          "/Comments/" +
+                          comment.id +
+                          "/delete"
+                        }
+                      >
+                        <Button
+                          color="danger"
+                          className="adminButtonsEach"
+                          onClick={() => {}}
+                        >
+                          Delete
+                        </Button>
+                      </Link>
+                    </div>
+                  ) : (
+                    <p></p>
+                  )}
+                  <CardText style={{ fontSize: "12px" }}>
+                    {comment.comment}
+                  </CardText>
+                </div>
+              </div>
+              <CardTitle style={{ fontSize: "10px" }}>
+                {" "}
+                Posted By: <Link to={"/users/"+ comment.userId}>{comment.name}</Link> on {comment.time};
+              </CardTitle>
+              </LazyLoad>
+            </Card></div>
+          ))}</div>
+    )
   }
+} else{
+
+
+  return (
+    <div style={{ padding: "1rem 0" }}>
+      <h2>Comments</h2>
+    </div>
+  );
+
+  
+}
 }

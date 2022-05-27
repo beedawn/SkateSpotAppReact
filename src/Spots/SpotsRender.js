@@ -9,9 +9,13 @@ import { onSnapshot, collection } from "firebase/firestore";
 import { db, storage } from "../firebase-config";
 import Like from './SpotComponents/Like';
 import '../styles/style.css';
-import {FaCameraRetro} from 'react-icons/fa';
+import {FaCameraRetro, FaPencilAlt} from 'react-icons/fa';
+import LazyLoad from 'react-lazyload';
 export default function SpotsRender(props){
 const { user } = useContext(AuthContext);
+
+
+
 const [comments, setComments] = useState([]);
     const spots=props.spots;
     const my = props.my;
@@ -32,6 +36,7 @@ const [comments, setComments] = useState([]);
         </div><Row>
         {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }} key={spot.id}>
+            <LazyLoad height={500} offset={-100}>
             <div className="spotCard">
               <div >
                 <div className="spotCardHeader">
@@ -39,7 +44,7 @@ const [comments, setComments] = useState([]);
                 <div className="publicPrivate">{spot.private?(<div className="private">Private Spot</div>):(<div className="public">Public Spot</div>)}</div></Col>
                 <Col sm="3">
                 
-                </Col><Col sm="3">   <Link to={"/spot/" + spot.id + "/upload"}> <FaCameraRetro size={70} />
+                </Col><Col sm="3">   <Link to={"/spot/" + spot.id + "/upload"}> <FaCameraRetro className="uploadIcon" size={70} />
                  
                     </Link></Col><Col sm="3">  <Like spot={spot}/></Col>
                 </Row>
@@ -83,7 +88,7 @@ const [comments, setComments] = useState([]);
                  {user.email === spot.admin.email ? (
                     <Col xs="3"><Link to={"/spot/" + spot.id + "/edit"}>
                       {" "}
-                      <Button color="primary"> Edit </Button>
+                      <FaPencilAlt className="editIcon" size={40} />
                     </Link></Col>
                   ) : (
                     <p></p>
@@ -91,8 +96,10 @@ const [comments, setComments] = useState([]);
                </Row>
             
             </div>
+            </LazyLoad>
           </div>
         ))}</Row>
+        
         </div>
         )
 }

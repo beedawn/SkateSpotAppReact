@@ -33,7 +33,7 @@ export default function AddComment() {
     refreshPage(spot);
   };
   return (
-    <div style={{ padding: "1rem 0", width: "500px", margin: "auto" }}>
+    <div style={{ padding: "1rem 0",  margin: "auto" }}>
       <Card>
         <CardHeader>
           Add a Comment{" "}
