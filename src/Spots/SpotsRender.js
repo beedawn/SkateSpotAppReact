@@ -36,7 +36,7 @@ const [comments, setComments] = useState([]);
         </div><Row>
         {spots.map((spot) => (
           <div style={{ padding: "1rem 0", width: "400px", margin: "auto" }} key={spot.id}>
-            <LazyLoad height={500} offset={-100}>
+            <LazyLoad>
             <div className="spotCard">
               <div >
                 <div className="spotCardHeader">
@@ -57,11 +57,7 @@ const [comments, setComments] = useState([]);
                 </div>
 
                 <div
-                  style={{
-                    display: "inline",
-                    marginRight: "auto",
-                    marginTop: "10px",
-                  }}
+                  className="globalMarginTop"
                   
                 > 
                 

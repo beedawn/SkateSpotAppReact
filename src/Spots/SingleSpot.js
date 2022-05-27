@@ -107,7 +107,7 @@ export default function SingleSpot() {
               <SpotPics />
             )}</div>
             </div></Col>
-       <Col xxl="3" lg="6"><div className="commentCard"> <Comment /></div></Col>
+       <Col xxl="3" lg="6"><div className="commentCard"> <Comment  close={true}/></div></Col>
             </Row>
           </div>
       <div>

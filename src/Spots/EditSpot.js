@@ -167,7 +167,7 @@ if(filteredSpots[0]!==undefined)
 
     return (
       <div onMouseOver={()=>isLoad(true)}>
-        <h2>Edit a Spot</h2>
+      
         {gps ? (
           <Maps
             spot={[{edit:true, lat: gps.lat, long: gps.long, id: filteredSpots[0].id }]}
@@ -192,11 +192,12 @@ if(filteredSpots[0]!==undefined)
             singleView={true}
           />
         )}
-
+  <h2>Edit a Spot</h2>
         <SpotPics />
-      
+        <div className="spotEditDiv">
         {filteredSpots.map((spot) => (
-          <div className="globalTopMargin" >
+          <div className="globalTopMargin" key={spot.id} >
+           <label>Spot Name:</label>
             <Input
               value={spotName}
               onChange={(event) => setSpotName(event.target.value)}
@@ -212,6 +213,7 @@ if(filteredSpots[0]!==undefined)
 
         {filteredSpots.map((spot) => (
           <div style={{ marginTop: "1rem" }}>
+            <label>Spot Description:</label>
             <Input
               editable="true"
               value={spotDescription}
@@ -225,7 +227,7 @@ if(filteredSpots[0]!==undefined)
           <span className="errorSpan">Please update Description</span>
         )}
 
-<div><Select isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))} value={sharedUsers}/></div>
+<div><label>If this is a private spot, select users to share with. (You can add more than 1.)</label><Select isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))} value={sharedUsers}/></div>
 
 <div></div>
         <Form>
@@ -281,6 +283,7 @@ if(filteredSpots[0]!==undefined)
               </Button>
             </Link>
           </div>
+        </div>
         </div>
       </div>
     );

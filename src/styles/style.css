@@ -158,3 +158,30 @@ a.like:hover{
 .uploadIcon:hover{
      color:#6b8ef5
 }
+
+.spotEditDiv{
+     background-color: #f0f1f1;
+     width:80%;
+     margin:auto;
+     margin-top:3rem;
+     padding:2rem;
+     border-radius:25px;
+}
+.editCommentDiv{
+     background-color: #f0f1f1;
+     width:80%;
+     margin:auto;
+     margin-top:1rem;
+    border-radius:25px;
+}
+.commentRender{
+     background-color: #f0f1f1;
+     padding:2rem;
+     border-radius:25px;
+}
+.commentTitle{
+     background-color: #dfdddd;
+    padding:.5rem;
+     border-radius:25px;
+     font-size:14px;
+}
