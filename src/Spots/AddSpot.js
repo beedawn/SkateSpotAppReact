@@ -20,7 +20,7 @@ import {FaQuestionCircle} from 'react-icons/fa';
 export default function AddSpot() {
   const spotId = v4();
   const geolocation = useGeolocation();
-
+console.log(geolocation)
   const { user } = useContext(AuthContext);
   const [gps, setGps] = useState();
   const [spotLocation, setSpotLocation] = useState("");
@@ -71,24 +71,25 @@ export default function AddSpot() {
               case "country":
                 country = response.results[0].address_components[i].long_name;
                 break;
+              
             }
           }
         }
-        console.log(city, state, country);
         setSpotCity(city)
         setSpotAddress(address)
         setSpotCountry(country)
         setSpotState(state);
         setIsLoaded(true);
-        console.log(address);
+        console.log(geolocation.lattitude)
       },
       (error) => {
         console.error(error);
+        
       }
     );
   }
 if(!gps){
-  fetchLocation( geolocation.latitude,
+  fetchLocation(geolocation.latitude,
     geolocation.longitude);}
 
   const handleNewSpot = async () => {
@@ -154,8 +155,9 @@ if(!gps){
     console.log(filteredUserArray)
     console.log(sharedUsers)
     return (
-      <div>
-        <h2>Add a Spot</h2>
+    // <div className="addSpotUpperContainer">
+      <div className="addSpotContainer">
+       
         {gps ? (
           <Maps
             spot={[{ lat: gps.lat, long: gps.long, id: spotId }]}
@@ -178,6 +180,8 @@ if(!gps){
             drag={true}
           />
         )}
+
+         <h2>Add a Spot</h2>
         <div>
           <Input
             editable="true"
@@ -248,6 +252,7 @@ if(!gps){
           </div>
         </div>
       </div>
+      // </div>
     );
   } else {
     return (

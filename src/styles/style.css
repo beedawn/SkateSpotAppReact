@@ -26,6 +26,7 @@
      background-image: url("../../public/rasmus-smedstrup-mortensen-_ZtPsxAomeI-unsplash.jpg");
      padding-top: 4rem;
      min-height: 100vh;
+     padding-bottom:1rem;
 }
 .spotCardHeader{
      background-color: rgb(240, 240, 240);
@@ -217,4 +218,17 @@ a.like:hover{
      text-decoration:none;
     
      
+}
+.addSpotContainer{
+     background-color: #f0f1f1;
+     padding:2rem;
+     margin:auto;
+     width:450px;
+     margin-top:3rem;
+     
+     border-radius:25px;
+}
+.addSpotUpperContainer{
+     padding-bottom:3rem;
+     height:100vh;
 }
