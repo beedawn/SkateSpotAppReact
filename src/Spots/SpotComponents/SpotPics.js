@@ -67,7 +67,7 @@ export default function SpotPics() {
                       </Button>
                     </Link>):(<></>)}
                   </div>
-                  <div className="spotPictureRenderContainer"><a href="#"><img src={image.url} className="spotPictureRender" onClick={()=> imagePage(image.url)} alt="Delete Picture"/></a></div>
+                  <div className="spotPictureRenderContainer"><a href="#!"><img src={image.url} className="spotPictureRender" onClick={()=> imagePage(image.url)} alt="Delete"/></a></div>
                
                   <div className="imagePosted">
                     Posted By: {image.displayName} on {image.time}
