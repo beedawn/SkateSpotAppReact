@@ -9,7 +9,9 @@ import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Input } from "reactstrap";
 import { refreshPage } from "../functions/Refresh";
 
-export default function AddComment() {
+export default function AddComment(props) {
+  const close = props.close;
+  const openCommentEdit = props.openCommentEdit;
   const storage = getStorage();
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
@@ -33,13 +35,9 @@ export default function AddComment() {
     refreshPage(spot);
   };
   return (
-    <div style={{ padding: "1rem 0", width: "500px", margin: "auto" }}>
-      <Card>
-        <CardHeader>
-          Add a Comment{" "}
-          <div style={{ display: "inline", marginLeft: "55%" }}>
-            {" "}
-            <Button
+
+    <div className="editCommentDiv">
+  <div>{close===undefined? (<Button
               color="primary"
               onClick={() => {
                 refreshPage(spot);
@@ -47,9 +45,16 @@ export default function AddComment() {
             >
               {" "}
               Close{" "}
-            </Button>
+            </Button>):(<Button
+              color="primary"
+              onClick={() => {
+                openCommentEdit(false)
+              }}
+            >
+              Close
+            </Button>)}
           </div>
-        </CardHeader>
+     
         <div>
           <Input
             editable="true"
@@ -90,7 +95,6 @@ export default function AddComment() {
             )}
           </div>
         </div>
-      </Card>
     </div>
   );
 }

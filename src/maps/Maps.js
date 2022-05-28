@@ -46,7 +46,7 @@ export default function Maps(props) {
             /* return statement for Add a Spot */
             <div>
              <CustomMarkerBuilder spot={spot} handleDrag={handleDrag} />
-              <Switch toggle={toggle} />1
+              <Switch toggle={toggle} />
             </div>
           );
         } else {
@@ -54,7 +54,7 @@ export default function Maps(props) {
           return (
             <div>
            <CustomMarkerBuilder spot={spot} handleDrag={handleDrag} />
-           2
+           
               <Switch toggle={toggle} />
               <></>
             </div>

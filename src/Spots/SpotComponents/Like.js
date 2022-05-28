@@ -3,12 +3,16 @@ import {FaHeart, FaRegHeart} from 'react-icons/fa';
 import AuthContext from "../../context/AuthContext";
 import { onSnapshot, collection,setDoc, doc, query, where, getDocs } from "firebase/firestore";
 import { db } from '../../firebase-config';
+import '../../styles/style.css';
+
+
 export default function Like(props){
     const { user } = useContext(AuthContext);
     const spot = props.spot;
     const [userArray, setUserArray] = useState([]);
     const [addLike, setAddLike] = useState(false);
     const [isLoaded, setIsLoaded] = useState();
+
     useEffect(()=>{
     onSnapshot(collection(db, "users"), (snapshot) => {
         setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -47,7 +51,7 @@ setAddLike(false);
 const determineLike = () => {
     editLike();
 }
-    return (!isLoaded)?(<>Loading</>):(<><div>{ userDb[0].likedSpots.includes(spot.id)  ? <FaHeart   size={70} onClick={determineLike}/> : <FaRegHeart size={70} onClick={determineLike}/>}</div> </>)
+    return (!isLoaded)?(<>Loading</>):(<><div> { userDb[0].likedSpots.includes(spot.id)  ? (<><a href="#!" className="like"><FaHeart size={70} onClick={determineLike} /></a></>) : (<><a href="#!" className="like"><FaRegHeart size={70} onClick={determineLike} /></a></>)}</div> </>)
  
 }
 
