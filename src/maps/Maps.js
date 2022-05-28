@@ -18,7 +18,7 @@ export default function Maps(props) {
     googleMapsApiKey: apiKey,
   });
 
-  const center = {
+  const center = { 
     lat: geolocation.latitude,
     lng: geolocation.longitude,
   };

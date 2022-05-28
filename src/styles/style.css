@@ -31,7 +31,7 @@
 .mainDiv{
      background-color: rgb(179, 179, 179);
      background-image: url("../../public/rasmus-smedstrup-mortensen-_ZtPsxAomeI-unsplash.jpg");
-     margin-top: 4rem;
+     padding-top: 4rem;
      min-height: 100vh;
 }
 .spotCard{
@@ -67,4 +67,37 @@ background-color:none;
      text-align: center;
      color:white;
      font-weight:500;
+}
+.loading{
+     background-color:#FFFFFF;
+     padding: 2rem;
+     border-radius:25px;
+     width:400px;
+     margin:auto;
+}
+.login{
+     background-color:#f0f1f1;
+     border-radius:25px;
+     margin:auto;
+     width:400px;
+     padding:2rem;
+}
+.loginButtonContainer{
+     margin-top:1rem;
+}
+.loginButtonSignUp{
+     background-color:#9673c8;
+     color:white;
+     width:7rem;
+     margin:auto;
+     border-radius:15px;
+     padding:.25rem;
+
+}
+.loginButtonSignUp a{
+
+     color:white;
+     text-decoration:none;
+    
+     
 }

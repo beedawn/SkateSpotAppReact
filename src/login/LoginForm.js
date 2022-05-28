@@ -5,7 +5,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { Button, Link } from "reactstrap";
-
+import "../styles/style.css";
 export default function LoginForm() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -55,7 +55,7 @@ export default function LoginForm() {
   };
   if (!passReset) {
     return (
-      <div>
+      <div className="login">
         <div>
           <input
             editable="true"
@@ -73,15 +73,18 @@ export default function LoginForm() {
             }}
           />
           <div style={{ color: "red" }}> {error ? (<>{error}</>):(<></>)}
-          </div> <div style={{ marginTop: "1rem" }}>
-            <Button color="primary" onClick={register}>
-              Sign Up{" "}
-            </Button>
+          </div> <div className="loginButtonContainer">
+            <div className="loginButtonSignUp">
+            <a href="#!"> <div onClick={register}>
+             Sign Up
+            </div></a></div>
+            <div className="loginButtonLogin">
             <Button color="primary" onClick={login}>
               {" "}
               Login{" "}
             </Button>
-          </div><Button color="success" onClick={() => (setPassReset(true))}>Reset Password</Button>
+            </div>
+          </div><div className="loginButtonResetPassword"><Button color="success" onClick={() => (setPassReset(true))}>Reset Password</Button></div>
         </div>
       </div>
     );

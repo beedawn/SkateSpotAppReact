@@ -1,6 +1,6 @@
 {
-  "name": "skate-spot-app-react",
-  "version": "0.1.0",
+  "name": "squash-skateshop",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@react-google-maps/api": "^2.10.2",

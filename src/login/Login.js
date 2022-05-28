@@ -3,9 +3,9 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
 import Home from "../HomeRouter";
 import AuthContext from "../context/AuthContext";
-import loading from "../images/Loading_icon.gif";
 import Loading from "../graphics/Loading";
 import LoginForm from "./LoginForm";
+
 
 import EditProfile from "../User/EditProfile";
 export default function Login() {
