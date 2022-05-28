@@ -46,7 +46,8 @@ export default function ImageUpload() {
     return image.search(vkey);
   });
   return (
-    <div className="globalTopMargin">
+    <div className="imageUploadSpot">
+
       <div style={{ marginTop: "1rem" }}>
         <h3> Image Upload</h3>
         <Input

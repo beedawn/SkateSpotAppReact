@@ -195,7 +195,7 @@ if(filteredSpots[0]!==undefined)
   <h2>Edit a Spot</h2>
 
     <Row>
-        <SpotPics />
+        <SpotPics edit={true}/>
         </Row>
  
         <div className="spotEditDiv">

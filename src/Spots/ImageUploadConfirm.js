@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
 
+
 export default function ImageUploadConfirm() {
   const { spot, id } = useParams();
   const { user } = useContext(AuthContext);
@@ -69,8 +70,8 @@ export default function ImageUploadConfirm() {
     return <div><Loading /></div>;
   }
   return (
-    <div>
-      <div style={{ padding: "1rem" }}>
+    <div className="imageUploadSpot">
+      <div >
         <h2>Confirm Image Upload</h2>
       </div>
       {filteredSpot.map((spot) => (

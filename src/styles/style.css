@@ -105,7 +105,8 @@ a.like:hover{
 
 }
 .spotPictureRender{
-     height: 175px;
+     height: 100px;
+     
      border-radius:15px;
      object-fit:cover;
        
@@ -139,7 +140,18 @@ a.like:hover{
      margin-top:2rem;
      padding:2rem;
      border-radius:15px;
-     width:400px;
+     width:300px;
+     display:inline-block;
+   
+}
+.spotPicContainerNoEdit{
+     background-color:#ffffff;
+     margin:0rem;
+     margin-top:2rem;
+     margin-bottom:2rem;
+     padding:2rem;
+     border-radius:15px;
+     
      display:inline-block;
    
 }
@@ -182,6 +194,7 @@ a.like:hover{
      background-color: #f0f1f1;
      padding:2rem;
      border-radius:25px;
+     margin:2rem;
 }
 .commentTitle{
      background-color: #dfdddd;
@@ -235,4 +248,12 @@ a.like:hover{
      padding-bottom:3rem;
     
 
+}
+.imageUploadSpot{
+     background-color:#f0f1f1;
+     padding:1rem;
+     border-radius:25px;
+     width:80%;
+     margin:auto;
+     margin-top:2rem;
 }
