@@ -72,7 +72,7 @@ a.like:hover{
 }
 .spotCardParent {
       padding: 2rem 0;
-      width: 80%;;
+      width: 80%;
       margin: auto;
 }
 .allSpotsToggle{
@@ -81,14 +81,13 @@ a.like:hover{
 }
 .singleSpotDescription{
      padding: 2rem 0;
-     width: 80%;;
+     width: 80%;
      margin: auto;
 }
 .singleSpotDescriptionInner{
      background-color: #f0f1f1;
      border-radius:50px;
      padding:1rem;
-     margin:2rem; 
      width:100%;
 }
 .singleSpotPics{
@@ -102,7 +101,6 @@ a.like:hover{
      background-color: #f0f1f1;
      border-radius:50px;
      padding:1rem;
-     margin:2rem; 
      width:100%;
 
 }
@@ -137,15 +135,20 @@ a.like:hover{
 }
 .spotPicContainer{
      background-color:#ffffff;
-     margin:2rem;
+     margin:1rem;
+     margin-top:2rem;
      padding:2rem;
      border-radius:15px;
+     width:400px;
+     display:inline-block;
+   
 }
 .spotPictureRenderContainer{
      margin:auto;
+
 }
 .commentCard{
-     margin-left:4rem;
+   
 }
 .editIcon{
      color:#702586
@@ -225,10 +228,11 @@ a.like:hover{
      margin:auto;
      width:80%;
      margin-top:3rem;
-     
+    
      border-radius:25px;
 }
 .addSpotUpperContainer{
      padding-bottom:3rem;
-     height:100vh;
+    
+
 }

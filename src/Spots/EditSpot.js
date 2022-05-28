@@ -4,7 +4,7 @@ import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../firebase-config";
 import { useParams } from "react-router-dom";
-import { Form, Input, FormGroup, Label, Tooltip } from "reactstrap";
+import { Form, Input, FormGroup, Label, Tooltip, Row, Col } from "reactstrap";
 import {FaQuestionCircle} from 'react-icons/fa';
 
 import "../styles/style.css";
@@ -193,7 +193,11 @@ if(filteredSpots[0]!==undefined)
           />
         )}
   <h2>Edit a Spot</h2>
+
+    <Row>
         <SpotPics />
+        </Row>
+ 
         <div className="spotEditDiv">
         {filteredSpots.map((spot) => (
           <div className="globalTopMargin" key={spot.id} >

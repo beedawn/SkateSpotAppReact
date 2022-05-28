@@ -4,10 +4,10 @@ import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { onSnapshot, collection } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { refreshPage, imagePage } from "../../functions/Refresh";
+import { refreshPage, imagePage, } from "../../functions/Refresh";
 import Loading from "../../graphics/Loading";
 import "../../styles/style.css";
-import { Button } from "reactstrap";
+import { Button, Row, Col } from "reactstrap";
 import AuthContext from "../../context/AuthContext";
 import LazyLoad from 'react-lazyload';
 
@@ -40,13 +40,16 @@ export default function SpotPics() {
   }
   return (
     <div>
+   
       {filteredSpot.map((spot) => (
        
         <div key={spot.id}>
+           <Row>
            {console.log(filteredSpot)}
           {filteredSpot[0].images ? (
             filteredSpot[0].images.map((image) => {
               return (
+                <Col xl="4" lg="6" sm="12">
                 <div className="spotPicContainer" key={image.id}><LazyLoad>
              <div className="imgDelete">
                     {image.email=== user.email ? (<Link to={"/spot/" + spot.id + "/deleteImage/" + image.id}><Button color="danger">
@@ -73,14 +76,19 @@ export default function SpotPics() {
                     Posted By: {image.displayName} on {image.time}
                     </div>
                     </LazyLoad>
+                    
                 </div>
+                </Col>
               );
             })
           ) : (
-            <div></div>
+            <></>
           )}
+         </Row>
         </div>
+       
       ))}
+    
     </div>
   );
 }
