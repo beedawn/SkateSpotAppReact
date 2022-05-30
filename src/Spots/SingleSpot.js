@@ -12,7 +12,7 @@ import Maps from "../maps/Maps";
 import Loading from "../graphics/Loading";
 import PostedEdited from "./SpotComponents/PostedEdited";
 import Like from "./SpotComponents/Like";
-import {FaCameraRetro} from 'react-icons/fa';
+import { FaCameraRetro } from "react-icons/fa";
 export default function SingleSpot() {
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
@@ -44,76 +44,126 @@ export default function SingleSpot() {
       </div>
     );
   }
-  console.log(filteredSpot[0])
+  console.log(filteredSpot[0]);
   return (
     <div>
       {filteredSpot.map((spot) => (
         <div key={spot.id}>
-          <div><Row><Col>
-            <Maps
-              style={{ height: "200px" }}
-              spot={[spot]}
-              spots={spots}
-              singleView={true}
-            /></Col>
-            </Row>
-            <Row><Col xxl="3" lg="6" ><div className="spotCardParent"><div className="spotCard">
+          <div>
             <Row>
-            <Col sm="4">
-                <div className="publicPrivate">{spot.private?(<div className="private">Private Spot</div>):(<div className="public">Public Spot</div>)}</div></Col>
-             <Col sm="4"> <h4>{spot.name}</h4></Col>
-          <Col sm="4">
-            <Like spot={spot} /></Col>
-            <h5>{spot.location}</h5>
+              <Col>
+                <Maps
+                  style={{ height: "200px" }}
+                  spot={[spot]}
+                  spots={spots}
+                  singleView={true}
+                />
+              </Col>
             </Row>
-            <div>
-              {user.email === spot.admin.email ? (
-                <div>
-                  <Link to={"/spot/" + spot.id + "/edit"}>
-                    <Button color="primary" onClick={() => {}}>
-                      {" "}
-                      Edit{" "}
-                    </Button>
-                  </Link>
-                  <Link to={"/spot/" + spot.id + "/delete"}>
-                    <Button color="danger" className="adminButtonsEach">
-                      Delete
-                    </Button>
-                  </Link>
+            <Row><Col>       <div className="spotNameLabel">
+                      Spot Name:
+                      </div>
+                      <div className="spotNameDiv">
+                        
+                        {spot.name}
+                      </div></Col></Row>
+            <Row>
+              <Col xxl="3" lg="6">
+                <div className="spotCardParent">
+                  <div className="spotCard">
+                    <Row>
+                      <Col sm="4">
+                        <div className="publicPrivate">
+                          {spot.private ? (
+                            <div className="private">Private Spot</div>
+                          ) : (
+                            <div className="public">Public Spot</div>
+                          )}
+                        </div>
+                      </Col>
+                      <Col sm="4"> </Col>
+                      <Col sm="4">
+                        <Like spot={spot} />
+                      </Col>
+                    </Row>
+                    <div>
+               
+                      <h5>{spot.location}</h5>
+
+                      {user.email === spot.admin.email ? (
+                        <div>
+                          <Link to={"/spot/" + spot.id + "/edit"}>
+                            <Button color="primary" onClick={() => {}}>
+                              {" "}
+                              Edit{" "}
+                            </Button>
+                          </Link>
+                          <Link to={"/spot/" + spot.id + "/delete"}>
+                            <Button color="danger" className="adminButtonsEach">
+                              Delete
+                            </Button>
+                          </Link>
+                        </div>
+                      ) : (
+                        <p></p>
+                      )}
+                    </div>
+                    <div>
+                      <Link to={"/spot/" + spot.id + "/upload"}>
+                        <Button color="success" className="adminButtonsEach">
+                          <FaCameraRetro />
+                        </Button>
+                      </Link>{" "}
+                    </div>
+                    <PostedEdited spot={spot} />
+                  </div>
                 </div>
-              ) : (
-                <p></p>
-              )}
-            </div>
-            <div>
-              <Link to={"/spot/" + spot.id + "/upload"}>
-                <Button color="success" className="adminButtonsEach">
-                 <FaCameraRetro />
-                </Button>
-              </Link>{" "}
-            </div>
-            <PostedEdited spot={spot} />
-            </div>
-            </div>
-            </Col>
-            <Col xxl="3" lg="6">
-<div className="singleSpotDescription">
-  <div className="singleSpotDescriptionInner">
-    <h4>Spot Description</h4>
-            <p>{spot.description}</p></div></div></Col> 
-            <Col xxl="3" lg="6"><div className="singleSpotPics"><div className="singleSpotPicsInner">{filteredSpot[0].images.length === 0 ? (
-              <div><Link to={"/spot/" + spot.id + "/upload"}>Add a picture?</Link></div>
-            ) : (
-              <SpotPics />
-            )}</div>
-            </div></Col>
-       <Col xxl="3" lg="6"><div className="commentCard"> <Comment  close={true}/></div></Col>
+              </Col>
+              <Col xxl="3" lg="6">
+                <div className="singleSpotDescription">
+                  <div className="singleSpotDescriptionInner">
+                    <h4>Spot Description</h4>
+                    <p>{spot.description}</p>
+                  </div>
+                </div>
+
+                <div className="singleSpotLL">
+                  <div className="singleSpotLLInner">
+                    <h4>Spot Coordinates</h4>
+                    <p>
+                      {spot.lat}, {spot.long}
+                    </p>
+                  </div>
+                </div>
+              </Col>
+
+              <Col xxl="3" lg="6">
+                <div className="singleSpotPics">
+                  <div className="singleSpotPicsInner">
+                    {filteredSpot[0].images.length === 0 ? (
+                      <div>
+                        <Link to={"/spot/" + spot.id + "/upload"}>
+                          Add a picture?
+                        </Link>
+                      </div>
+                    ) : (
+                      <SpotPics />
+                    )}
+                  </div>
+                </div>
+              </Col>
+              <Col xxl="3" lg="6">
+                <div className="commentCard">
+                  {" "}
+                  <Comment close={true} />
+                </div>
+              </Col>
             </Row>
           </div>
-      <div>
-        <a href="/spots/">Back to Spots</a>
-      </div>
-       </div>
+          <div>
+            <a href="/spots/">Back to Spots</a>
+          </div>
+        </div>
       ))}
     </div>
   );

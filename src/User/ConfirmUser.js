@@ -3,6 +3,7 @@ import AuthContext from "../context/AuthContext";
 import { Button, Input } from "reactstrap";
 import { onAuthStateChanged, updateProfile, signOut } from "firebase/auth";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import "../styles/style.css";
 
 export default function ConfirmUser(props) {
     const editEmail=props.editEmail;
@@ -13,7 +14,7 @@ export default function ConfirmUser(props) {
   const [email, setEmail] = useState(user.email);
 
     return (
-         <div>
+         <div className="confirmUserStyle">
 <p>Does your email look good?</p>
 <Input value={email} onChange={(e) => setEmail(e.target.value)} />
 <Button color="danger">Start Over</Button>

@@ -38,7 +38,7 @@ export default function DeleteComment() {
     return <div> <Loading /></div>;
   } else {
     return (
-      <div className="globalTopMargin">
+      <div className="deleteComment">
         <h2>Delete a Comment</h2>
         {filteredProduct.map((id) => (
           <div className="globalTopMargin">

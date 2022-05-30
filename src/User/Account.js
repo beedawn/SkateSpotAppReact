@@ -29,7 +29,7 @@ export default function Account() {
         <p>Username: {filteredUsers[0].name}</p>
         <p>{filteredUsers[0].id}</p>
         <p>Email: {filteredUsers[0].email}</p>
-       <p>Picture: {filteredUsers[0].images[filteredUsers[0].images.length-1] ? ( <img src={filteredUsers[0].images[filteredUsers[0].images.length-1].url} alt="Avatar" height="25px" />):(<><FaUserCircle /></>)}
+       <p>Picture: {filteredUsers[0].images[filteredUsers[0].images.length-1] ? ( <a href={filteredUsers[0].images[filteredUsers[0].images.length-1].url}><img src={filteredUsers[0].images[filteredUsers[0].images.length-1].url} alt="Avatar" height="50px" /></a>):(<><FaUserCircle /></>)}
         </p>
         <Link to="/edit">Edit Profile</Link>
         </div>

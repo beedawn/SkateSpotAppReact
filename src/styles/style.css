@@ -1,259 +1,322 @@
-.errorSpan{
-     color: #FF0000; 
+.errorSpan {
+  color: #ff0000;
 }
-.globalTopMargin{
-     padding: 1rem 0; 
+.globalTopMargin {
+  padding: 1rem 0;
 }
-.adminButtons{
-     margin-right: 0px;
-     margin-top: 5px;
-     display:inline;
+.adminButtons {
+  margin-right: 0px;
+  margin-top: 5px;
+  display: inline;
 }
-.adminButtonsEach{
-     margin:5px;
+.adminButtonsEach {
+  margin: 5px;
 }
 /* Text for Posted Edited Font */
-.PostedEditedText{
-     font-size:12px;
-     padding-left:10px;
-     padding-right:10px;
+.PostedEditedText {
+  font-size: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
-.spotButton{
-     padding-right:10px,
+.spotButton {
+  padding-right: 10px;
 }
-.mainDiv{
-     background-color: rgb(179, 179, 179);
-     background-image: url("../../public/rasmus-smedstrup-mortensen-_ZtPsxAomeI-unsplash.jpg");
-     padding-top: 4rem;
-     min-height: 100vh;
-     padding-bottom:1rem;
+.mainDiv {
+  background-color: rgb(179, 179, 179);
+  background-image: url("../../public/rasmus-smedstrup-mortensen-_ZtPsxAomeI-unsplash.jpg");
+  padding-top: 4rem;
+  min-height: 100vh;
+  padding-bottom: 1rem;
 }
-.spotCardHeader{
-     background-color: rgb(240, 240, 240);
-     border-radius:50px 50px 0px 0px;
+.spotCardHeader {
+  background-color: rgb(240, 240, 240);
+  border-radius: 50px 50px 0px 0px;
 }
 /* .spotCardHeader:hover{background-color:#e0dede} */
-.spotCard:hover{
-     opacity:0.95
+.spotCard:hover {
+  opacity: 0.95;
 }
-.publicPrivate  {
-     background-color:none;
+.publicPrivate {
+  background-color: none;
 }
-.private{
-     background-color:rgb(236, 85, 3);
-     border-radius:20rem;
-     width:5rem;
-     padding:1rem;
-     text-align: center;
-     color:white;
-     font-weight:500;
+.private {
+  background-color: rgb(236, 85, 3);
+  border-radius: 20rem;
+  width: 5rem;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+  font-weight: 500;
 }
-.public{
-     background-color:rgb(35, 155, 153);
-     border-radius:20rem;
-     width:5rem;
-     padding:1rem;
-     text-align: center;
-     color:white;
-     font-weight:500;
+.public {
+  background-color: rgb(35, 155, 153);
+  border-radius: 20rem;
+  width: 5rem;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+  font-weight: 500;
 }
-.like{
-     color:rgb(62, 152, 89);
+.like {
+  color: rgb(62, 152, 89);
 }
-a.like:hover{
-     color:rgb(89, 199, 122);
+a.like:hover {
+  color: rgb(89, 199, 122);
 }
-.spotCard{
-     background-color: #f0f1f1;
-     border-radius:50px;
-     padding:1rem;
-     margin:0rem; 
-     width:100%;
+.spotCard {
+  background-color: #f0f1f1;
+  border-radius: 50px;
+  padding: 1rem;
+  margin: 0rem;
+  width: 100%;
 }
 .spotCardParent {
-      padding: 2rem 0;
-      width: 80%;
-      margin: auto;
+  padding: 2rem 0;
+  width: 80%;
+  margin: auto;
 }
-.allSpotsToggle{
-     background-color: #f0f1f1;
-     border-radius:0px 0px 15px 15px;
+.allSpotsToggle {
+  background-color: #f0f1f1;
+  border-radius: 0px 0px 15px 15px;
 }
-.singleSpotDescription{
-     padding: 2rem 0;
-     width: 80%;
-     margin: auto;
+.singleSpotDescription {
+  padding: 2rem 0;
+  width: 80%;
+  margin: auto;
 }
-.singleSpotDescriptionInner{
-     background-color: #f0f1f1;
-     border-radius:50px;
-     padding:1rem;
-     width:100%;
+.singleSpotDescriptionInner {
+  background-color: #f0f1f1;
+  border-radius: 50px;
+  padding: 1rem;
+  width: 100%;
 }
-.singleSpotPics{
-     padding: 2rem 0;
-     width:400px;
-     margin: auto;
-     
-    
+.singleSpotPics {
+  padding: 2rem 0;
+  width: 400px;
+  margin: auto;
 }
-.singleSpotPicsInner{
-     background-color: #f0f1f1;
-     border-radius:50px;
-     padding:1rem;
-     width:100%;
+.singleSpotPicsInner {
+  background-color: #f0f1f1;
+  border-radius: 50px;
+  padding: 1rem;
+  width: 100%;
+}
+.spotPictureRender {
+  height: 100px;
 
+  border-radius: 15px;
+  object-fit: cover;
 }
-.spotPictureRender{
-     height: 100px;
-     
-     border-radius:15px;
-     object-fit:cover;
-       
+.imgDelete {
+  position: relative;
+  top: 10.5rem;
+  right: 0;
 }
-.imgDelete{
-     position:relative;
-     top:10.5rem;
-     right:0;
+.spotPictureDelete {
+  width: 400px;
+  border-radius: 25px;
 }
-.spotPictureDelete{
-     width: 400px;
-     border-radius:25px;
+.userPicture {
+  width: 400px;
+  border-radius: 25px;
 }
-.userPicture{
-     width: 400px;
-     border-radius:25px;
+.accountInfo {
+  background-color: #f0f1f1;
+  margin: auto;
+  width: 400px;
+  border-radius: 25px;
+  padding: 2rem;
 }
-.accountInfo{
-     background-color:#f0f1f1;
-     margin:auto;
-     width:400px;
-     border-radius:25px;
-     padding:2rem;
+.imagePosted {
+  font-size: 12px;
 }
-.imagePosted{
-     font-size:12px;
+.spotPicContainer {
+  background-color: #ffffff;
+  margin: 1rem;
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 15px;
+  width: 300px;
+  display: inline-block;
 }
-.spotPicContainer{
-     background-color:#ffffff;
-     margin:1rem;
-     margin-top:2rem;
-     padding:2rem;
-     border-radius:15px;
-     width:300px;
-     display:inline-block;
-   
-}
-.spotPicContainerNoEdit{
-     background-color:#ffffff;
-     margin:0rem;
-     margin-top:2rem;
-     margin-bottom:2rem;
-     padding:2rem;
-     border-radius:15px;
-     
-     display:inline-block;
-   
-}
-.spotPictureRenderContainer{
-     margin:auto;
+.spotPicContainerNoEdit {
+  background-color: #ffffff;
+  margin: 0rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 15px;
 
+  display: inline-block;
 }
-.commentCard{
-   
+.spotPictureRenderContainer {
+  margin: auto;
 }
-.editIcon{
-     color:#702586
+.commentCard {
 }
-.editIcon:hover{
-     color:#9947b2
+.editIcon {
+  color: #702586;
 }
-.uploadIcon{
-     color:#2c5ef6
+.editIcon:hover {
+  color: #9947b2;
 }
-.uploadIcon:hover{
-     color:#6b8ef5
+.uploadIcon {
+  color: #517bf7;
+}
+.uploadIcon:hover {
+  color: #8fabfc;
 }
 
-.spotEditDiv{
-     background-color: #f0f1f1;
-     width:80%;
-     margin:auto;
-     margin-top:3rem;
-     padding:2rem;
-     border-radius:25px;
+.spotEditDiv {
+  background-color: #f0f1f1;
+  width: 80%;
+  margin: auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  border-radius: 25px;
 }
-.editCommentDiv{
-     background-color: #f0f1f1;
-     width:80%;
-     margin:auto;
-     margin-top:1rem;
-    border-radius:25px;
+.editCommentDiv {
+  background-color: #f0f1f1;
+  width: 80%;
+  margin: auto;
+  margin-top: 1rem;
+  border-radius: 25px;
+  padding: 2rem;
 }
-.commentRender{
+.commentRender {
+  background-color: #f0f1f1;
+  padding: 2rem;
+  border-radius: 25px;
+  margin: 2rem;
+}
+.commentTitle {
+  background-color: #dfdddd;
+  padding: 0.5rem;
+  border-radius: 25px;
+  font-size: 14px;
+}
+.loading {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 25px;
+  width: 400px;
+  margin: auto;
+}
+.login {
+  background-color: #f0f1f1;
+  border-radius: 25px;
+  margin: auto;
+  width: 400px;
+  padding: 2rem;
+}
+.loginButtonContainer {
+  margin-top: 1rem;
+}
+.loginButtonSignUp {
+  background-color: #9673c8;
+  color: white;
+  width: 7rem;
+  margin: auto;
+  border-radius: 15px;
+  padding: 0.25rem;
+}
+.loginButtonSignUp a {
+  color: white;
+  text-decoration: none;
+}
+.addSpotContainer {
+  background-color: #f0f1f1;
+  padding: 2rem;
+  margin: auto;
+  width: 80%;
+  margin-top: 3rem;
+
+  border-radius: 25px;
+}
+.addSpotUpperContainer {
+  padding-bottom: 3rem;
+}
+.imageUploadSpot {
+  background-color: #f0f1f1;
+  padding: 1rem;
+  border-radius: 25px;
+  width: 80%;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+.singleSpotLL {
+  padding: 2rem 0;
+  width: 80%;
+  margin: auto;
+}
+.singleSpotLLInner {
+  background-color: #f0f1f1;
+  border-radius: 50px;
+  padding: 1rem;
+  width: 100%;
+}
+
+.spotNameDiv {
+  background-color: rgba(248, 248, 248, 0.8);
+  padding: 1rem;
+width:90%;
+
+  border-radius: 25px;
+  display: inline-block;
+  font-weight: bold;
+  font-size:36px;
+  overflow:auto;
+  margin-top:0;
+ 
+}
+.spotNameLabel {
+
+  font-size:42px;
+  padding: .25rem;
+  margin: 2rem;
+  margin-top:0;
+  border-radius: 25px;
+  display: inline-block;
+  font-style:italic;
+  font-weight:bold;
+  margin-bottom:0;
+
+}
+
+.viewIcon {
+     color:rgb(117, 117, 117);
+}
+.viewIcon:hover {
+     color:rgb(180, 180, 180);
+}
+.deleteComment{
      background-color: #f0f1f1;
      padding:2rem;
-     border-radius:25px;
      margin:2rem;
 }
-.commentTitle{
-     background-color: #dfdddd;
-    padding:.5rem;
-     border-radius:25px;
-     font-size:14px;
+
+.displayNameStyle{
+    padding-top:2rem;
+    background-color:#f0f1f1;
+    margin:2rem;
+    border-radius:25px;
+    padding:2rem;
+       padding-top:2rem;
 }
-.loading{
-     background-color:#FFFFFF;
-     padding: 2rem;
-     border-radius:25px;
-     width:400px;
-     margin:auto;
-}
-.login{
+
+.confirmUserStyle{
+  background-color:#f0f1f1;
+  margin:2rem;
+  border-radius:25px;
+  padding:2rem;
+     padding-top:2rem;
+ }
+ .imageUploadUserStyle{
      background-color:#f0f1f1;
+     margin:2rem;
      border-radius:25px;
-     margin:auto;
-     width:400px;
      padding:2rem;
-}
-.loginButtonContainer{
-     margin-top:1rem;
-}
-.loginButtonSignUp{
-     background-color:#9673c8;
-     color:white;
-     width:7rem;
-     margin:auto;
-     border-radius:15px;
-     padding:.25rem;
+        padding-top:2rem;
 
-}
-.loginButtonSignUp a{
-
-     color:white;
-     text-decoration:none;
-    
-     
-}
-.addSpotContainer{
-     background-color: #f0f1f1;
-     padding:2rem;
-     margin:auto;
-     width:80%;
-     margin-top:3rem;
-    
-     border-radius:25px;
-}
-.addSpotUpperContainer{
-     padding-bottom:3rem;
-    
-
-}
-.imageUploadSpot{
-     background-color:#f0f1f1;
-     padding:1rem;
-     border-radius:25px;
-     width:80%;
-     margin:auto;
-     margin-top:2rem;
-}
+ }

@@ -31,7 +31,7 @@ export default function ImageUploadUser(props) {
     return unsub;
   }, []);
   return (
-    <div className="globalTopMargin">
+    <div className="imageUploadUserStyle">
       <div style={{ marginTop: "1rem" }}>
         
         <h3>Profile Picture Upload</h3>

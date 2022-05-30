@@ -6,6 +6,7 @@ import { doc, setDoc, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 
+import "../styles/style.css";
 export default function DisplayNameSetup(props) {
   //Need to add a way to verify DisplayName isn't already used?
 const image=props.image;
@@ -51,7 +52,8 @@ await setDoc(docRef, payload);
   };
   if(filteredUser[0] !== undefined){
   return (
-    <div>
+    <div className="displayNameStyle">
+      Display name setup:
       <div>
         <input
           editable="true"
