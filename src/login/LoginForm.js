@@ -79,12 +79,12 @@ export default function LoginForm() {
              Sign Up
             </div></a></div>
             <div className="loginButtonLogin">
-            <Button color="primary" onClick={login}>
+            <a href="#!"><div onClick={login}>
               {" "}
               Login{" "}
-            </Button>
+            </div></a>
             </div>
-          </div><div className="loginButtonResetPassword"><Button color="success" onClick={() => (setPassReset(true))}>Reset Password</Button></div>
+          </div><div className="loginButtonPassword"> <a href="#!"><div onClick={() => (setPassReset(true))}>Reset Password</div></a></div>
         </div>
       </div>
     );

@@ -211,19 +211,44 @@ a.like:hover {
 }
 .loginButtonContainer {
   margin-top: 1rem;
+  display:inline-block;
 }
 .loginButtonSignUp {
   background-color: #9673c8;
   color: white;
-  width: 7rem;
-  margin: auto;
+  width: 6rem;
   border-radius: 15px;
   padding: 0.25rem;
+  display:inline-block;
 }
 .loginButtonSignUp a {
   color: white;
   text-decoration: none;
 }
+.loginButtonLogin {
+     background-color: #1a5aef;
+     color: white;
+     width: 7rem;
+     margin: auto;
+     border-radius: 15px;
+     padding: 0.25rem;
+   }
+   .loginButtonLogin a {
+     color: white;
+     text-decoration: none;
+   }
+   .loginButtonPassword {
+     background-color: #24930e;
+     color: white;
+     width: 7rem;
+     margin: auto;
+     border-radius: 15px;
+     padding: 0.25rem;
+   }
+   .loginButtonPassword a {
+     color: white;
+     text-decoration: none;
+   }
 .addSpotContainer {
   background-color: #f0f1f1;
   padding: 2rem;
