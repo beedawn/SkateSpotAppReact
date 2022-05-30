@@ -59,7 +59,7 @@ export default function Comment(props) {
                 <div>
                   {user.email === comment.admin ? (
                     <div className="adminButtons">
-                      <Link to={"/spot/" + spot + "/Comments/" + comment.id}>
+                      <Link to={"/spot/" + spot + "/Comments/" + comment.id +"/"}>
                       <FaPencilAlt className="editIcon" size={30} />
                       </Link>
                     <Link
@@ -97,7 +97,7 @@ export default function Comment(props) {
               </div>
               <div style={{ fontSize: "10px" }}>
                 {" "}
-                Posted By: <Link to={"/users/"+ comment.userId}>{comment.name}</Link> on {comment.time};
+                Posted By: <Link to={"/users/"+ comment.userId+"/"}>{comment.name}</Link> on {comment.time};
               </div>
               </LazyLoad>
             </div>

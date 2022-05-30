@@ -53,7 +53,7 @@ export default function SpotPics(props) {
                 
                 {edit !== undefined ? (<Col xl="4" lg="6" sm="12"><div className="spotPicContainer" key={image.id}><LazyLoad>
              <div className="imgDelete">
-                    {image.email=== user.email ? (<Link to={"/spot/" + spot.id + "/deleteImage/" + image.id}><Button color="danger">
+                    {image.email=== user.email ? (<Link to={"/spot/" + spot.id + "/deleteImage/" + image.id +"/"}><Button color="danger">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -80,7 +80,7 @@ export default function SpotPics(props) {
                     
                 </div></Col>):(<div className="spotPicContainerNoEdit" key={image.id}><LazyLoad>
              <div className="imgDelete">
-                    {image.email=== user.email ? (<Link to={"/spot/" + spot.id + "/deleteImage/" + image.id}><Button color="danger">
+                    {image.email=== user.email ? (<Link to={"/spot/" + spot.id + "/deleteImage/" + image.id+"/"}><Button color="danger">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"

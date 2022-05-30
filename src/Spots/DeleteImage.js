@@ -79,7 +79,7 @@ return;
   };
 
   return (
-    <div className="globalTopMargin">
+    <div className="deleteImageDiv">
       <div style={{ marginTop: "1rem" }}>
         <h3> Image Deletion</h3>
    {imageUrl ?(

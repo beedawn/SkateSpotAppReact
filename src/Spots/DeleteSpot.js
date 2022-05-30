@@ -67,7 +67,7 @@ const [comments,setComments]=useState([]);
     return <div> <Loading /></div>;
   } else {
     return (
-      <div className="globalTopMargin">
+      <div className="deleteSpotDiv">
         <h2>Delete a Spot</h2>
         {filteredSpots.map((spot) => (
           <div className="globalTopMargin">

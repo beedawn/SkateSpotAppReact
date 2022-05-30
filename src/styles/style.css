@@ -109,8 +109,9 @@ a.like:hover {
 }
 .imgDelete {
   position: relative;
-  top: 10.5rem;
-  right: 0;
+  top: 3rem;
+ left: 20px;
+  opacity:.9;
 }
 .spotPictureDelete {
   width: 400px;
@@ -338,6 +339,26 @@ width:90%;
      padding-top:2rem;
  }
  .imageUploadUserStyle{
+     background-color:#f0f1f1;
+     margin:2rem;
+     border-radius:25px;
+     padding:2rem;
+        padding-top:2rem;
+
+ }
+ .deleteSpotDiv{
+
+
+     background-color:#f0f1f1;
+     margin:2rem;
+     border-radius:25px;
+     padding:2rem;
+        padding-top:2rem;
+
+ }
+ .deleteImageDiv{
+
+
      background-color:#f0f1f1;
      margin:2rem;
      border-radius:25px;
