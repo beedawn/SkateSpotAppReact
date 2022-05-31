@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import "../styles/style.css";
 import Help from "../graphics/Help";
 import Help2 from "../graphics/Help2";
+import AllowLocation from "../graphics/AllowLocation";
 export default function Dashboard() {
   const { user } = useContext(AuthContext);
 const [spotType, setSpotType]=useState(false);
@@ -47,12 +48,17 @@ const [spotLike, setSpotLike]=useState(false);
                 <a href="#!" onClick={()=>setSpotUpload(!spotUpload)}><p>Upload Image</p></a>
                 {spotUpload?(<p>This will take you to a page that will allow you to upload an image to that spot.</p>):(<></>)}
                 <a href="#!" onClick={()=>setSpotLike(!spotLike)}><p>Like Spot</p></a>
-                {spotLike?(<p>This will allow you to like the spot. So you can view it in your liked spots.</p>):(<></>)}
-              
+             {spotLike?(<p>This will allow you to like the spot. So you can view it in your liked spots.</p>):(<></>)}
+             <br /><br />
+              <AllowLocation />
+              <br /><br />
+              Please be sure to <i><b>Allow</b></i> Location when you see this pop up, otherwise the maps will not render.
+              <br /><br />
 <Help2 />
 <div>You can click the <i>Add Spot</i> button to add a new spot. It will start on whereever you are, so be sure to be near the spot you want to add.</div>
             </div>
             <div> To go view the spots go to the top, and select <i>Spots</i> then <i>All Spots</i>, or click <Link to="/spots">here</Link></div>
+          
           </Col>
         
           <Col lg="4">

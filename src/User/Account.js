@@ -27,7 +27,7 @@ export default function Account() {
       <div className="globalTopMargin"><div className="accountInfo">
         <h2>Account Info</h2>
         <p>Username: {filteredUsers[0].name}</p>
-        <p>{filteredUsers[0].id}</p>
+        {console.log(filteredUsers[0].id)}
         <p>Email: {filteredUsers[0].email}</p>
        <p>Picture: {filteredUsers[0].images[filteredUsers[0].images.length-1] ? ( <a href={filteredUsers[0].images[filteredUsers[0].images.length-1].url}><img src={filteredUsers[0].images[filteredUsers[0].images.length-1].url} alt="Avatar" height="50px" /></a>):(<><FaUserCircle /></>)}
         </p>
