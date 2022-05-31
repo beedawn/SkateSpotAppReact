@@ -142,7 +142,7 @@ export default function SingleSpot() {
                 <div className="singleSpotPics">
                   <div className="singleSpotPicsInner">
                     {filteredSpot[0].images.length === 0 ? (
-                      <div>
+                      <div style={{width:"100%"}}>
                         <Link to={"/spot/" + spot.id + "/upload"}>
                           Add a picture?
                         </Link>

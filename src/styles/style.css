@@ -22,10 +22,12 @@
   padding-right: 10px;
 }
 .mainDiv {
-  background-color: rgb(179, 179, 179);
+  background-color: rgb(117, 152, 208);
   background-image: url("../../public/rasmus-smedstrup-mortensen-_ZtPsxAomeI-unsplash.jpg");
+  background-repeat: repeat;
   padding-top: 4rem;
   min-height: 100vh;
+
   padding-bottom: 1rem;
 }
 .spotCardHeader {
@@ -67,8 +69,9 @@ a.like:hover {
   background-color: #f0f1f1;
   border-radius: 50px;
   padding: 1rem;
-  margin: 0rem;
-  width: 100%;
+  margin: auto;
+  width: 90%;
+  overflow:auto;
 }
 .spotCardParent {
   padding: 2rem 0;
@@ -92,25 +95,26 @@ a.like:hover {
 }
 .singleSpotPics {
   padding: 2rem 0;
-  width: 400px;
+  width: 100%;
   margin: auto;
 }
 .singleSpotPicsInner {
   background-color: #f0f1f1;
   border-radius: 50px;
   padding: 1rem;
-  width: 100%;
+  margin:auto;
+  width: 80%;
 }
 .spotPictureRender {
-  height: 100px;
+  height: 15rem;
 
   border-radius: 15px;
   object-fit: cover;
 }
 .imgDelete {
   position: relative;
-  top: 3rem;
- left: 20px;
+  top: 2rem;
+ left: 10%;
   opacity:.9;
 }
 .spotPictureDelete {
@@ -388,4 +392,13 @@ width:90%;
      width: 100%;
      border-radius: 25px;
      max-width:400px;
+   }
+
+   .dashboardStyle{
+    background-color:#f0f1f1;
+   
+    border-radius:25px;
+    padding:2rem;
+       padding-top:2rem;
+       width:80%;
    }

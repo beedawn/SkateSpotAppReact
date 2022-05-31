@@ -24,7 +24,7 @@ const [spotLike, setSpotLike]=useState(false);
           <div className="globalTopMargin"></div>
         </Row>
         <Row>
-          <Col className="confirmUserStyle" lg="7">
+          <Col className="dashboardStyle" lg="7">
             <div>Welcome {user.displayName}, to Slantyard!</div>{" "}
             <div>
             <Help />
