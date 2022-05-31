@@ -31,7 +31,7 @@ export default function Home() {
     <div>
       <NavBar />
 
-      <Routes basename="/">
+   <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/spots" element={<Spots />} />
         <Route path="/addspot" element={<AddSpot />} />
@@ -60,8 +60,8 @@ export default function Home() {
         />
         <Route path="/spot/:spot/deleteImage/:id" element={<DeleteImage />} />
         <Route path="*" element={<Navigate replace to="/index.html"/>} />
-      </Routes>
-  
+
+        </Routes>
     </div>
   );
 }
