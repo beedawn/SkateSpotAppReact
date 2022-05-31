@@ -124,7 +124,7 @@ setAddDb(true);
                 }
             } else {{console.log(user)}
             emailVerify();
-                return (<div>Please check your email for the verification link, once that is clicked, you will be able to proceed.<div><Button onClick={emailVerify}>Send Again</Button></div></div>)
+                return (<div>Please check your email for the verification link, once that is clicked, you will be able to proceed.<div><Button onClick={emailVerify}>Send Again</Button> <Button onClick={()=>window.location.reload(true)}>Click Here After Verification</Button></div></div>)
             }
         } if (addImage) {
             return (
