@@ -151,7 +151,9 @@ if(!gps){
   }
 
   if (spots.length !== 0 ||spots!==[] )  {
-    const filteredUserArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
+    const anotherArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
+    const filteredUserArray = anotherArray.filter((user)=>{return user.name !== undefined})
+    console.log(anotherArray);
     console.log(filteredUserArray)
     console.log(sharedUsers)
     return (

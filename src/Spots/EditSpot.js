@@ -163,8 +163,8 @@ if(filteredSpots[0]!==undefined)
       </div>
     );
   } else {
-    const filteredUserArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
-
+    const anotherArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
+    const filteredUserArray = anotherArray.filter((user)=>{return user.name !== undefined})
     return (
       <div onMouseOver={()=>isLoad(true)}>
       
