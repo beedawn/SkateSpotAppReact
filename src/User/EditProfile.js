@@ -20,7 +20,7 @@ const { user, setUser } = useContext(AuthContext);
           setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         });
         return unsub;
-      }, []);
+      }, [user]);
     const filteredUserArray = userArray.filter((userSingle)=>{return userSingle.myid===user.photoURL});
     const signedIn = props.signedIn;
     const [addDb, setAddDb] = useState(false);
@@ -117,12 +117,13 @@ setAddDb(true);
                    <ConfirmUser editEmail={editEmail} signedIn={signedIn} handleNewUser={handleNewUser} />
                 </div>)
             }
-            if (!user.emailVerified) {
+            if (user.emailVerified) {
                 if (addDb) {
                     {/* if user is in database, but has no images in there image array, show this */ }
                     return (<ImageUploadUser handleUpload={handleUpload} skipImageUpload={skipImageUpload}/>)
                 }
             } else {{console.log(user)}
+            emailVerify();
                 return (<div>Please check your email for the verification link, once that is clicked, you will be able to proceed.<div><Button onClick={emailVerify}>Send Again</Button></div></div>)
             }
         } if (addImage) {
