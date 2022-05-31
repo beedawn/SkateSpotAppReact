@@ -39,7 +39,7 @@ export default function ImageUpload() {
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/spots/${spot}/${vkey}`);
     uploadBytes(imageRef, imageUpload).then(() => {
-      window.location.replace(`/spot/${spot}/uploadConfirm/${vkey}/`);
+      window.location.replace(`/spot/${spot}/uploadConfirm/${vkey}`);
     });
   };
   const imageSpot = imageList.filter((image) => {

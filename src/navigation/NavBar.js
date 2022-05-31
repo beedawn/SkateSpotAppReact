@@ -49,21 +49,21 @@ export default function NavBar() {
                 </DropdownToggle>
                 <DropdownMenu style={{backgroundColor: '#292b2c'}}>
                   <DropdownItem>
-                  <NavLink href="/spots/">All Spots</NavLink>
+                  <NavLink href="/spots">All Spots</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/spots/my/">My Spots</NavLink>
+                    <NavLink href="/spots/my">My Spots</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/spots/liked/">Liked Spots</NavLink>
+                    <NavLink href="/spots/liked">Liked Spots</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/spots/shared/">Spots Shared with Me</NavLink>
+                    <NavLink href="/spots/shared">Spots Shared with Me</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             <NavItem>
-              <NavLink href="/account/">Account</NavLink>
+              <NavLink href="/account">Account</NavLink>
             </NavItem>
           </Nav>
           <Nav navbar>

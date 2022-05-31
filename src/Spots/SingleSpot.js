@@ -92,13 +92,14 @@ export default function SingleSpot() {
 
                       {user.email === spot.admin.email ? (
                         <div>
-                          <Link to={"/spot/" + spot.id + "/edit/"}>
+                          <Link to={"/spot/" + spot.id + "/edit"}>
                             <Button color="primary" onClick={() => {}}>
                               {" "}
                               Edit{" "}
                             </Button>
+                            
                           </Link>
-                          <Link to={"/spot/" + spot.id + "/delete/"}>
+                          <Link to={"/spot/" + spot.id + "/delete"}>
                             <Button color="danger" className="adminButtonsEach">
                               Delete
                             </Button>
@@ -109,7 +110,7 @@ export default function SingleSpot() {
                       )}
                     </div>
                     <div>
-                      <Link to={"/spot/" + spot.id + "/upload/"}>
+                      <Link to={"/spot/" + spot.id + "/upload"}>
                         <Button color="success" className="adminButtonsEach">
                           <FaCameraRetro />
                         </Button>
@@ -142,7 +143,7 @@ export default function SingleSpot() {
                   <div className="singleSpotPicsInner">
                     {filteredSpot[0].images.length === 0 ? (
                       <div>
-                        <Link to={"/spot/" + spot.id + "/upload/"}>
+                        <Link to={"/spot/" + spot.id + "/upload"}>
                           Add a picture?
                         </Link>
                       </div>

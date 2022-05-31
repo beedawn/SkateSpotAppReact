@@ -71,10 +71,10 @@ export default function SpotsRender(props) {
                           )}
                         </div>
                       </Col>
-                      <Col xs="3"> <Link to={"/spot/" + spot.id +"/"}><FaEye className="viewIcon" size={70}/> </Link></Col>
+                      <Col xs="3"> <Link to={"/spot/" + spot.id}><FaEye className="viewIcon" size={70}/> </Link></Col>
                       <Col xs="3">
                         {" "}
-                        <Link to={"/spot/" + spot.id + "/upload/"}>
+                        <Link to={"/spot/" + spot.id + "/upload"}>
                           {" "}
                           <FaCameraRetro className="uploadIcon" size={70} />
                         </Link>
@@ -84,7 +84,7 @@ export default function SpotsRender(props) {
                         <Like spot={spot} />
                       </Col>
                     </Row>
-                    <Link to={"/spot/" + spot.id + "/"}>
+                    <Link to={"/spot/" + spot.id }>
                       <h5>{spot.name}</h5>
                     </Link>
                     <div>
@@ -98,7 +98,7 @@ export default function SpotsRender(props) {
                   <div className="globalMarginTop">
                     <Row>
                       <Col>
-                        <Link to={"/spot/" + spot.id + "/addComment/"}>
+                        <Link to={"/spot/" + spot.id + "/addComment"}>
                           <Button className="spotButton">Comment</Button>
                         </Link>
                       </Col>
@@ -121,7 +121,7 @@ export default function SpotsRender(props) {
                   </Col>
                   {user.email === spot.admin.email ? (
                     <Col xs="3">
-                      <Link to={"/spot/" + spot.id + "/edit/"}>
+                      <Link to={"/spot/" + spot.id + "/edit"}>
                         {" "}
                         <FaPencilAlt className="editIcon" size={40} />
                       </Link>

@@ -52,7 +52,7 @@ const [spotLike, setSpotLike]=useState(false);
 <Help2 />
 <div>You can click the <i>Add Spot</i> button to add a new spot. It will start on whereever you are, so be sure to be near the spot you want to add.</div>
             </div>
-            <div> To go view the spots go to the top, and select <i>Spots</i> then <i>All Spots</i>, or click <Link to="/spots/">here</Link></div>
+            <div> To go view the spots go to the top, and select <i>Spots</i> then <i>All Spots</i>, or click <Link to="/spots">here</Link></div>
           </Col>
         
           <Col lg="4">
