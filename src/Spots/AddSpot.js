@@ -23,12 +23,12 @@ export default function AddSpot() {
 console.log(geolocation)
   const { user } = useContext(AuthContext);
   const [gps, setGps] = useState();
-  const [spotLocation, setSpotLocation] = useState("");
+
   const [spotAddress, setSpotAddress] = useState("");
   const [spotCity, setSpotCity] = useState("");
   const [spotCountry, setSpotCountry ] = useState();
   const [spotName, setSpotName] = useState("");
-  const [geo, setGeo] = useState("");
+
   const [spotDescription, setSpotDescription] = useState("");
   const [userArray, setUserArray] = useState([]);
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS;

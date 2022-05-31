@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState,  useEffect } from "react";
 import { Button } from "reactstrap";
 import { db, storage } from "../firebase-config";
-import AuthContext from "../context/AuthContext";
 import { onSnapshot, collection } from "firebase/firestore";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { Input } from "reactstrap";
@@ -16,7 +15,7 @@ export default function ImageUpload() {
   const imageListRef = ref(storage, "images/spots/" + spot + "/");
 
   const [imageUpload, setImageUpload] = useState(null);
-  const [check, setCheck] = useState("true");
+
   const [spots, setSpots] = useState([]);
 
   useEffect(() => {

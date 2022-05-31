@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "./navigation/NavBar";
 import {
-
+Navigate,
   Routes,
   Route,
 
@@ -31,7 +31,7 @@ export default function Home() {
     <div>
       <NavBar />
 
-      <Routes>
+      <Routes basename="/">
         <Route path="/" element={<Dashboard />} />
         <Route path="/spots" element={<Spots />} />
         <Route path="/addspot" element={<AddSpot />} />
@@ -59,6 +59,7 @@ export default function Home() {
           element={<ImageUploadConfirm />}
         />
         <Route path="/spot/:spot/deleteImage/:id" element={<DeleteImage />} />
+        <Route path="*" element={<Navigate replace to="/index.html"/>} />
       </Routes>
   
     </div>
