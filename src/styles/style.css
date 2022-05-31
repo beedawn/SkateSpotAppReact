@@ -117,10 +117,7 @@ a.like:hover {
   width: 400px;
   border-radius: 25px;
 }
-.userPicture {
-  width: 400px;
-  border-radius: 25px;
-}
+
 .accountInfo {
   background-color: #f0f1f1;
   margin: auto;
@@ -366,3 +363,28 @@ width:90%;
         padding-top:2rem;
 
  }
+
+ .userPage{
+     background-color:#f0f1f1;
+     margin:auto;
+     border-radius:25px;
+     padding:2rem;
+        padding-top:2rem;
+        width:100%;
+ }
+ .userPageContainer {
+     background-color:#f0f1f1;
+     margin:auto;
+     margin-top:2rem;
+     border-radius:25px;
+     padding:2rem;
+        padding-top:2rem;
+        width:80%;
+        max-width:800px;
+ }
+
+ .userPicture {
+     width: 100%;
+     border-radius: 25px;
+     max-width:400px;
+   }

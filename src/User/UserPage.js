@@ -24,14 +24,13 @@ export default function UserPage(){
 
       if(filteredUser[0]!==undefined){
     return(
-<div className="globalTopMargin">
+        <div className="userPageContainer">
+<div className="userPage">
     <p>{filteredUser[0].name}</p>
-    <p>Picture: {filteredUser[0].images[filteredUser[0].images.length-1] ? ( <img className="userPicture" src={filteredUser[0].images[filteredUser[0].images.length-1].url} alt="Avatar" height="250px" />):(<><FaUserCircle /></>)}
-        </p>
-        
-        Spots
-        {}
-</div>
+    <p>Photo: </p>{filteredUser[0].images[filteredUser[0].images.length-1] ? (<div><a href={filteredUser[0].images[filteredUser[0].images.length-1].url}><img className="userPicture" src={filteredUser[0].images[filteredUser[0].images.length-1].url} alt="Avatar" /></a> </div>):(<><FaUserCircle /></>)}
+   
+
+</div></div>
     )
 }else{
     return(
