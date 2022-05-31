@@ -125,9 +125,11 @@ a.like:hover {
 .accountInfo {
   background-color: #f0f1f1;
   margin: auto;
-  width: 400px;
+  width: 90%;
+  max-width:400px;
   border-radius: 25px;
   padding: 2rem;
+  overflow:auto;
 }
 .imagePosted {
   font-size: 12px;
