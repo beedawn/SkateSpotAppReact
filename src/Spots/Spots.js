@@ -77,7 +77,7 @@ if(likedSpot && filteredLikedSpots.length !==0){
 }
 if(likedSpot && filteredLikedSpots.length ===0){
   return(
-    <div className="globalTopMargin">
+    <div className="spotsView">
     <h2>My Liked Spots</h2>
     <div>No liked spots. Click on the small heart underneath a spot on one of the other pages to like it.</div>
 </div>
@@ -85,15 +85,15 @@ if(likedSpot && filteredLikedSpots.length ===0){
 }
   if(mySpot&& filterMySpots.length !==0){
     return(
-      <div className="globalTopMargin">
+
       
       <SpotsRender spots={filterMySpots} my={true} />
-  </div>
+
   )}
   if(mySpot&& filterMySpots.length ===0){
     
    
-    return(<div className="globalTopMargin"><h2>My Posted Spots</h2><div>You haven't posted any spots yet. Click "Add Spot" at the top of the page to add a spot.</div></div>)
+    return(<div className="spotsView"><h2>My Posted Spots</h2><div>You haven't posted any spots yet. Click "Add Spot" at the top of the page to add a spot.</div></div>)
   }
     
 if(sharedSpot && filterSharedSpots.length !== 0){
@@ -104,7 +104,7 @@ if(sharedSpot && filterSharedSpots.length !== 0){
  </div>
   )
 }if(sharedSpot && filterSharedSpots.length === 0){
-  return(<div> <h2>Spots Shared with me.</h2><div>No one has shared a private spot with you yet. :( </div></div>)
+  return(<div className="spotsView"> <h2>Spots Shared with me.</h2><div>No one has shared a private spot with you yet. :( </div></div>)
 }
   else {
     return (

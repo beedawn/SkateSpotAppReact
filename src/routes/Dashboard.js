@@ -24,7 +24,7 @@ const [spotLike, setSpotLike]=useState(false);
           <div className="globalTopMargin"></div>
         </Row>
         <Row>
-          <Col className="dashboardStyle" lg="7">
+          <Col  lg="7"><div className="dashboardStyle">
             <div>Welcome {user.displayName}, to Slantyard!</div>{" "}
             <div>
             <Help />
@@ -58,7 +58,7 @@ const [spotLike, setSpotLike]=useState(false);
 <div>You can click the <i>Add Spot</i> button to add a new spot. It will start on whereever you are, so be sure to be near the spot you want to add.</div>
             </div>
             <div> To go view the spots go to the top, and select <i>Spots</i> then <i>All Spots</i>, or click <Link to="/spots">here</Link></div>
-          
+            </div>
           </Col>
         
           <Col lg="4">

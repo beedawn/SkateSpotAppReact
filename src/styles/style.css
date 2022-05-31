@@ -398,9 +398,18 @@ width:90%;
 
    .dashboardStyle{
     background-color:#f0f1f1;
-   
+   margin:auto;
     border-radius:25px;
     padding:2rem;
        padding-top:2rem;
-       width:80%;
+       width:90%;
+   }
+   .spotsView{   background-color:#f0f1f1;
+    margin:auto;
+     border-radius:25px;
+     padding:2rem;
+        padding-top:2rem;
+        width:90%;
+        margin-top:2rem;
+
    }
