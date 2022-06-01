@@ -5,7 +5,7 @@ import AuthState from "./context/AuthState";
 function App() {
   return (
     <div className="App">
-         <AuthState>
+      <AuthState>
         <Main />
       </AuthState>
     </div>

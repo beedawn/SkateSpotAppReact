@@ -60,13 +60,13 @@ export default function SingleSpot() {
                 />
               </Col>
             </Row>
-            <Row><Col>       <div className="spotNameLabel">
-                      Spot Name:
-                      </div>
-                      <div className="spotNameDiv">
-                        
-                        {spot.name}
-                      </div></Col></Row>
+            <Row>
+              <Col>
+                {" "}
+                <div className="spotNameLabel">Spot Name:</div>
+                <div className="spotNameDiv">{spot.name}</div>
+              </Col>
+            </Row>
             <Row>
               <Col xxl="3" lg="6">
                 <div className="spotCardParent">
@@ -87,7 +87,6 @@ export default function SingleSpot() {
                       </Col>
                     </Row>
                     <div>
-               
                       <h5>{spot.location}</h5>
 
                       {user.email === spot.admin.email ? (
@@ -97,7 +96,6 @@ export default function SingleSpot() {
                               {" "}
                               Edit{" "}
                             </Button>
-                            
                           </Link>
                           <Link to={"/spot/" + spot.id + "/delete"}>
                             <Button color="danger" className="adminButtonsEach">
@@ -142,7 +140,7 @@ export default function SingleSpot() {
                 <div className="singleSpotPics">
                   <div className="singleSpotPicsInner">
                     {filteredSpot[0].images.length === 0 ? (
-                      <div style={{width:"100%"}}>
+                      <div style={{ width: "100%" }}>
                         <Link to={"/spot/" + spot.id + "/upload"}>
                           Add a picture?
                         </Link>

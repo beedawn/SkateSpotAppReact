@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { db, storage } from "../firebase-config";
-import { ref, listAll, getDownloadURL,  deleteObject, } from "firebase/storage";
+import { ref, listAll, getDownloadURL, deleteObject } from "firebase/storage";
 import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";
@@ -9,13 +9,13 @@ import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
 
 export default function ImageUploadConfirmUser(props) {
- const vkey = props.vkey;
- const toggle = props.toggle;
- const router = props.router;
+  const vkey = props.vkey;
+  const toggle = props.toggle;
+  const router = props.router;
   const { id } = useParams();
   const { user } = useContext(AuthContext);
   const [imageList, setImageList] = useState([]);
-  const imageListRef = ref(storage, "images/users/"+ user.photoURL + "/" );
+  const imageListRef = ref(storage, "images/users/" + user.photoURL + "/");
   const [users, setUsers] = useState([]);
   useEffect(() => {
     listAll(imageListRef).then((response) => {
@@ -25,7 +25,7 @@ export default function ImageUploadConfirmUser(props) {
         });
       });
     });
-  
+
     const unsub = onSnapshot(collection(db, "users"), (snapshot) => {
       setUsers(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -33,7 +33,7 @@ export default function ImageUploadConfirmUser(props) {
   }, []);
   // filter user
   const filteredUser = users.filter((el) => {
-    return el.myid=== user.photoURL;
+    return el.myid === user.photoURL;
   });
 
   const arrayPush = (array) => {
@@ -46,58 +46,69 @@ export default function ImageUploadConfirmUser(props) {
     return array;
   };
   const imageArrayHandler = (filteredUser) => {
-      const arrayImg = [];
-      return arrayPush(arrayImg);
+    const arrayImg = [];
+    return arrayPush(arrayImg);
   };
-
 
   const handleEdit = async (id) => {
-
-    if(filteredUser.length!==0){
-      const imageRef = ref(storage, `images/users/${filteredUser[0].id}/${filteredUser[0].images[0].id}`);
+    if (filteredUser.length !== 0) {
+      const imageRef = ref(
+        storage,
+        `images/users/${filteredUser[0].id}/${filteredUser[0].images[0].id}`
+      );
       await deleteObject(imageRef)
-    .then(() => {
-      console.log(imageRef)
-      console.log("Success")
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  
-    const docRef = doc(db, "users", id);
-    const date = new Date(Date.now());
-    const payload = {
-  ...filteredUser[0],
-      images: imageArrayHandler(filteredUser),
-      time: date.toString(),
-    };
+        .then(() => {
+          console.log(imageRef);
+          console.log("Success");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
-     await setDoc(docRef, payload);
-    if(router){ window.location.replace(`/displayName`);}
-      else{toggle();}
-  }
+      const docRef = doc(db, "users", id);
+      const date = new Date(Date.now());
+      const payload = {
+        ...filteredUser[0],
+        images: imageArrayHandler(filteredUser),
+        time: date.toString(),
+      };
+
+      await setDoc(docRef, payload);
+      if (router) {
+        window.location.replace(`/displayName`);
+      } else {
+        toggle();
+      }
+    }
   };
   if (filteredUser[0] === undefined) {
-    return <div><Loading /></div>;
-  }else
-  return (
-    <div>
-      <div style={{ padding: "1rem" }}>
-        <h2>Confirm Profile Picture Upload</h2>
+    return (
+      <div>
+        <Loading />
       </div>
-      
+    );
+  } else
+    return (
+      <div>
+        <div style={{ padding: "1rem" }}>
+          <h2>Confirm Profile Picture Upload</h2>
+        </div>
+
         <div style={{ padding: "1rem 0" }}>
-          <div >
+          <div>
             <div>
               <img
-                alt={imageList[imageList.length-1]}
-                src={imageList[imageList.length-1]}
+                alt={imageList[imageList.length - 1]}
+                src={imageList[imageList.length - 1]}
                 style={{ height: "200px" }}
               />
             </div>
             <div>
               <div>
-                <Button color="primary" onClick={() => handleEdit(filteredUser[0].id)}>
+                <Button
+                  color="primary"
+                  onClick={() => handleEdit(filteredUser[0].id)}
+                >
                   {" "}
                   Confirm Upload{" "}
                 </Button>
@@ -105,9 +116,8 @@ export default function ImageUploadConfirmUser(props) {
             </div>
           </div>
         </div>
-      
-      <div>
+
+        <div></div>
       </div>
-    </div>
-  );
+    );
 }

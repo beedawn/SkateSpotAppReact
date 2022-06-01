@@ -1,11 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
-import {
-  doc,
-  onSnapshot,
-  collection,
-  deleteDoc,
-} from "firebase/firestore";
+import { doc, onSnapshot, collection, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { useParams } from "react-router-dom";
 import { Input } from "reactstrap";
@@ -35,7 +30,12 @@ export default function DeleteComment() {
   };
 
   if (filteredProduct.length === 0) {
-    return <div> <Loading /></div>;
+    return (
+      <div>
+        {" "}
+        <Loading />
+      </div>
+    );
   } else {
     return (
       <div className="deleteComment">

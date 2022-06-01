@@ -1,11 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
-import {
-  doc,
-  setDoc,
-  onSnapshot,
-  collection,
-} from "firebase/firestore";
+import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
@@ -21,12 +16,12 @@ export default function EditComment() {
   const [userTitle, setUserTitle] = useState("");
   const [userComment, setUserComment] = useState("");
   const [spots, setSpots] = useState([]);
-  const [load, setLoad]= useState(false);
+  const [load, setLoad] = useState(false);
   useEffect(() => {
-    if(filteredSpots[0] !== undefined){
- setUserTitle(filteredSpots[0].title)
- setUserComment(filteredSpots[0].comment)
-}
+    if (filteredSpots[0] !== undefined) {
+      setUserTitle(filteredSpots[0].title);
+      setUserComment(filteredSpots[0].comment);
+    }
     const unsub = onSnapshot(collection(db, "comments"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -52,15 +47,20 @@ export default function EditComment() {
     refreshPage(spot);
   };
   if (filteredSpots.length === 0) {
-    return <div> <Loading /></div>;
+    return (
+      <div>
+        {" "}
+        <Loading />
+      </div>
+    );
   } else {
     return (
-      <div className="globalTopMargin" onMouseOver={()=>setLoad(true)}>
+      <div className="globalTopMargin" onMouseOver={() => setLoad(true)}>
         <h2>Edit a Comment</h2>
         {filteredSpots.map((id) => (
           <div className="globalTopMargin">
             <Input
-            value={userTitle}
+              value={userTitle}
               // defaultValue={id.title}
               onChange={(event) => setUserTitle(event.target.value)}
             />

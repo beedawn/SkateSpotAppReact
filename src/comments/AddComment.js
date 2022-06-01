@@ -24,7 +24,7 @@ export default function AddComment(props) {
     const payload = {
       spot: spot,
       name: user.displayName,
-      userId:user.photoURL,
+      userId: user.photoURL,
       title: userTitle,
       comment: userComment,
       admin: user.email,
@@ -35,66 +35,70 @@ export default function AddComment(props) {
     refreshPage(spot);
   };
   return (
-
     <div className="editCommentDiv">
-  <div>{close===undefined? (<Button
-              color="primary"
-              onClick={() => {
-                refreshPage(spot);
-              }}
-            >
-              {" "}
-              Close{" "}
-            </Button>):(<Button
-              color="primary"
-              onClick={() => {
-                openCommentEdit(false)
-              }}
-            >
-              Close
-            </Button>)}
-          </div>
-     
-        <div>
-          <Input
-            editable="true"
-            placeholder="Title of Comment"
-            onChange={(event) => setUserTitle(event.target.value)}
-          />
-        </div>
-        {userTitle ? (
-          <p></p>
-        ) : (
-          <span className="errorSpan">Please enter a Title</span>
-        )}
-        <div style={{ marginTop: "1rem" }}>
-          <Input
-            editable="true"
-            placeholder="Comment"
-            type="textarea"
-            onChange={(event) => setUserComment(event.target.value)}
-          />
-        </div>
-        {userComment ? (
-          <p></p>
-        ) : (
-          <span className="errorSpan">Please enter a Comment</span>
-        )}
-        <div style={{ marginTop: "1rem" }}>
-          <div>
+      <div>
+        {close === undefined ? (
+          <Button
+            color="primary"
+            onClick={() => {
+              refreshPage(spot);
+            }}
+          >
             {" "}
-            {userComment && userTitle ? (
-              <Button color="primary" onClick={handleNewComment}>
-                Submit
-              </Button>
-            ) : (
-              <p>
-                Once you complete the required forms a submit button will appear
-                here
-              </p>
-            )}
-          </div>
+            Close{" "}
+          </Button>
+        ) : (
+          <Button
+            color="primary"
+            onClick={() => {
+              openCommentEdit(false);
+            }}
+          >
+            Close
+          </Button>
+        )}
+      </div>
+
+      <div>
+        <Input
+          editable="true"
+          placeholder="Title of Comment"
+          onChange={(event) => setUserTitle(event.target.value)}
+        />
+      </div>
+      {userTitle ? (
+        <p></p>
+      ) : (
+        <span className="errorSpan">Please enter a Title</span>
+      )}
+      <div style={{ marginTop: "1rem" }}>
+        <Input
+          editable="true"
+          placeholder="Comment"
+          type="textarea"
+          onChange={(event) => setUserComment(event.target.value)}
+        />
+      </div>
+      {userComment ? (
+        <p></p>
+      ) : (
+        <span className="errorSpan">Please enter a Comment</span>
+      )}
+      <div style={{ marginTop: "1rem" }}>
+        <div>
+          {" "}
+          {userComment && userTitle ? (
+            <Button color="primary" onClick={handleNewComment}>
+              Submit
+            </Button>
+          ) : (
+            <p>
+              Once you complete the required forms a submit button will appear
+              here
+            </p>
+          )}
         </div>
+      </div>
     </div>
   );
 }

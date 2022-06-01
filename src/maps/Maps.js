@@ -18,7 +18,7 @@ export default function Maps(props) {
     googleMapsApiKey: apiKey,
   });
 
-  const center = { 
+  const center = {
     lat: geolocation.latitude,
     lng: geolocation.longitude,
   };
@@ -45,7 +45,7 @@ export default function Maps(props) {
           return (
             /* return statement for Add a Spot */
             <div>
-             <CustomMarkerBuilder spot={spot} handleDrag={handleDrag} />
+              <CustomMarkerBuilder spot={spot} handleDrag={handleDrag} />
               <Switch toggle={toggle} />
             </div>
           );
@@ -53,8 +53,8 @@ export default function Maps(props) {
           /* Doubt this ever returns */
           return (
             <div>
-           <CustomMarkerBuilder spot={spot} handleDrag={handleDrag} />
-           
+              <CustomMarkerBuilder spot={spot} handleDrag={handleDrag} />
+
               <Switch toggle={toggle} />
               <></>
             </div>
@@ -76,45 +76,46 @@ export default function Maps(props) {
         );
       } else {
         /* return statement for Spots component, and Dashboard */
-       
-       if(spot.length>1 ){
-        return (
-          <div>
-            <CustomMapLogic
-              spot={spot}
-              center={center}
-              handleDrag={handleDrag}
-              drag={drag}
-              check="4"
-            />
-          </div>
-        
-        );
-      }else { if(spot[0]===undefined){
-        <div>
-        <CustomMapLogic
-          spot={spot}
-        center={{lat:spot.lat, lng:spot.long}}
-          handleDrag={handleDrag}
-          drag={drag}
-          check="4"
-        />
-        <Switch toggle={toggle} />
-      </div>
-      }else{
-        return(
-          <div>
-          <CustomMapLogic
-            spot={spot}
-          center={{lat:spot[0].lat, lng:spot[0].long}}
-            handleDrag={handleDrag}
-            drag={drag}
-            check="4"
-          />
-          <Switch toggle={toggle} />
-        </div> )
-       }
-      }
+
+        if (spot.length > 1) {
+          return (
+            <div>
+              <CustomMapLogic
+                spot={spot}
+                center={center}
+                handleDrag={handleDrag}
+                drag={drag}
+                check="4"
+              />
+            </div>
+          );
+        } else {
+          if (spot[0] === undefined) {
+            <div>
+              <CustomMapLogic
+                spot={spot}
+                center={{ lat: spot.lat, lng: spot.long }}
+                handleDrag={handleDrag}
+                drag={drag}
+                check="4"
+              />
+              <Switch toggle={toggle} />
+            </div>;
+          } else {
+            return (
+              <div>
+                <CustomMapLogic
+                  spot={spot}
+                  center={{ lat: spot[0].lat, lng: spot[0].long }}
+                  handleDrag={handleDrag}
+                  drag={drag}
+                  check="4"
+                />
+                <Switch toggle={toggle} />
+              </div>
+            );
+          }
+        }
       }
     }
     if (drag && spots) {
@@ -134,33 +135,35 @@ export default function Maps(props) {
       );
     } else {
       /*single Spot with all spots on */
-      if(spot[0]===undefined){
-        return(
-        <div>
-        <CustomMapLogic
-          spot={spot}
-          spots={spots}
-          center={{ lat: spot.lat, lng: spot.long }}
-          handleDrag={handleDrag}
-          drag={drag}
-          check="6"
-        />
-        <Switch toggle={toggle} />
-      </div>)
-      }else{
-      return (
-        <div>
-          <CustomMapLogic
-            spot={spot}
-            spots={spots}
-            center={{ lat: spot[0].lat, lng: spot[0].long }}
-            handleDrag={handleDrag}
-            drag={drag}
-            check="6"
-          />
-          <Switch toggle={toggle} />
-        </div>
-      );}
+      if (spot[0] === undefined) {
+        return (
+          <div>
+            <CustomMapLogic
+              spot={spot}
+              spots={spots}
+              center={{ lat: spot.lat, lng: spot.long }}
+              handleDrag={handleDrag}
+              drag={drag}
+              check="6"
+            />
+            <Switch toggle={toggle} />
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <CustomMapLogic
+              spot={spot}
+              spots={spots}
+              center={{ lat: spot[0].lat, lng: spot[0].long }}
+              handleDrag={handleDrag}
+              drag={drag}
+              check="6"
+            />
+            <Switch toggle={toggle} />
+          </div>
+        );
+      }
     }
   } else {
     return <div> </div>;

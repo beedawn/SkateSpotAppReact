@@ -71,7 +71,7 @@ a.like:hover {
   padding: 1rem;
   margin: auto;
   width: 90%;
-  overflow:auto;
+  overflow: auto;
 }
 .spotCardParent {
   padding: 2rem 0;
@@ -102,7 +102,7 @@ a.like:hover {
   background-color: #f0f1f1;
   border-radius: 50px;
   padding: 1rem;
-  margin:auto;
+  margin: auto;
   width: 80%;
 }
 .spotPictureRender {
@@ -114,8 +114,8 @@ a.like:hover {
 .imgDelete {
   position: relative;
   top: 2rem;
- left: 10%;
-  opacity:.9;
+  left: 10%;
+  opacity: 0.9;
 }
 .spotPictureDelete {
   width: 400px;
@@ -126,10 +126,10 @@ a.like:hover {
   background-color: #f0f1f1;
   margin: auto;
   width: 90%;
-  max-width:400px;
+  max-width: 400px;
   border-radius: 25px;
   padding: 2rem;
-  overflow:auto;
+  overflow: auto;
 }
 .imagePosted {
   font-size: 12px;
@@ -215,7 +215,7 @@ a.like:hover {
 }
 .loginButtonContainer {
   margin-top: 1rem;
-  display:inline-block;
+  display: inline-block;
 }
 .loginButtonSignUp {
   background-color: #9673c8;
@@ -223,36 +223,36 @@ a.like:hover {
   width: 6rem;
   border-radius: 15px;
   padding: 0.25rem;
-  display:inline-block;
+  display: inline-block;
 }
 .loginButtonSignUp a {
   color: white;
   text-decoration: none;
 }
 .loginButtonLogin {
-     background-color: #1a5aef;
-     color: white;
-     width: 7rem;
-     margin: auto;
-     border-radius: 15px;
-     padding: 0.25rem;
-   }
-   .loginButtonLogin a {
-     color: white;
-     text-decoration: none;
-   }
-   .loginButtonPassword {
-     background-color: #24930e;
-     color: white;
-     width: 7rem;
-     margin: auto;
-     border-radius: 15px;
-     padding: 0.25rem;
-   }
-   .loginButtonPassword a {
-     color: white;
-     text-decoration: none;
-   }
+  background-color: #1a5aef;
+  color: white;
+  width: 7rem;
+  margin: auto;
+  border-radius: 15px;
+  padding: 0.25rem;
+}
+.loginButtonLogin a {
+  color: white;
+  text-decoration: none;
+}
+.loginButtonPassword {
+  background-color: #24930e;
+  color: white;
+  width: 7rem;
+  margin: auto;
+  border-radius: 15px;
+  padding: 0.25rem;
+}
+.loginButtonPassword a {
+  color: white;
+  text-decoration: none;
+}
 .addSpotContainer {
   background-color: #f0f1f1;
   padding: 2rem;
@@ -289,127 +289,117 @@ a.like:hover {
 .spotNameDiv {
   background-color: rgba(248, 248, 248, 0.8);
   padding: 1rem;
-width:90%;
+  width: 90%;
 
   border-radius: 25px;
   display: inline-block;
   font-weight: bold;
-  font-size:36px;
-  overflow:auto;
-  margin-top:0;
- 
+  font-size: 36px;
+  overflow: auto;
+  margin-top: 0;
 }
 .spotNameLabel {
-
-  font-size:42px;
-  padding: .25rem;
+  font-size: 42px;
+  padding: 0.25rem;
   margin: 2rem;
-  margin-top:0;
+  margin-top: 0;
   border-radius: 25px;
   display: inline-block;
-  font-style:italic;
-  font-weight:bold;
-  margin-bottom:0;
-
+  font-style: italic;
+  font-weight: bold;
+  margin-bottom: 0;
 }
 
 .viewIcon {
-     color:rgb(117, 117, 117);
+  color: rgb(117, 117, 117);
 }
 .viewIcon:hover {
-     color:rgb(180, 180, 180);
+  color: rgb(180, 180, 180);
 }
-.deleteComment{
-     background-color: #f0f1f1;
-     padding:2rem;
-     margin:2rem;
-     border-radius:25px;
-}
-
-.displayNameStyle{
-    padding-top:2rem;
-    background-color:#f0f1f1;
-    margin:2rem;
-    border-radius:25px;
-    padding:2rem;
-       padding-top:2rem;
+.deleteComment {
+  background-color: #f0f1f1;
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 25px;
 }
 
-.confirmUserStyle{
-  background-color:#f0f1f1;
-  margin:2rem;
-  border-radius:25px;
-  padding:2rem;
-     padding-top:2rem;
- }
- .imageUploadUserStyle{
-     background-color:#f0f1f1;
-     margin:2rem;
-     border-radius:25px;
-     padding:2rem;
-        padding-top:2rem;
+.displayNameStyle {
+  padding-top: 2rem;
+  background-color: #f0f1f1;
+  margin: 2rem;
+  border-radius: 25px;
+  padding: 2rem;
+  padding-top: 2rem;
+}
 
- }
- .deleteSpotDiv{
+.confirmUserStyle {
+  background-color: #f0f1f1;
+  margin: 2rem;
+  border-radius: 25px;
+  padding: 2rem;
+  padding-top: 2rem;
+}
+.imageUploadUserStyle {
+  background-color: #f0f1f1;
+  margin: 2rem;
+  border-radius: 25px;
+  padding: 2rem;
+  padding-top: 2rem;
+}
+.deleteSpotDiv {
+  background-color: #f0f1f1;
+  margin: 2rem;
+  border-radius: 25px;
+  padding: 2rem;
+  padding-top: 2rem;
+}
+.deleteImageDiv {
+  background-color: #f0f1f1;
+  margin: 2rem;
+  border-radius: 25px;
+  padding: 2rem;
+  padding-top: 2rem;
+}
 
+.userPage {
+  background-color: #f0f1f1;
+  margin: auto;
+  border-radius: 25px;
+  padding: 2rem;
+  padding-top: 2rem;
+  width: 100%;
+}
+.userPageContainer {
+  background-color: #f0f1f1;
+  margin: auto;
+  margin-top: 2rem;
+  border-radius: 25px;
+  padding: 2rem;
+  padding-top: 2rem;
+  width: 80%;
+  max-width: 800px;
+}
 
-     background-color:#f0f1f1;
-     margin:2rem;
-     border-radius:25px;
-     padding:2rem;
-        padding-top:2rem;
+.userPicture {
+  width: 100%;
+  border-radius: 25px;
+  max-width: 400px;
+}
 
- }
- .deleteImageDiv{
-
-
-     background-color:#f0f1f1;
-     margin:2rem;
-     border-radius:25px;
-     padding:2rem;
-        padding-top:2rem;
-
- }
-
- .userPage{
-     background-color:#f0f1f1;
-     margin:auto;
-     border-radius:25px;
-     padding:2rem;
-        padding-top:2rem;
-        width:100%;
- }
- .userPageContainer {
-     background-color:#f0f1f1;
-     margin:auto;
-     margin-top:2rem;
-     border-radius:25px;
-     padding:2rem;
-        padding-top:2rem;
-        width:80%;
-        max-width:800px;
- }
-
- .userPicture {
-     width: 100%;
-     border-radius: 25px;
-     max-width:400px;
-   }
-
-   .dashboardStyle{
-    background-color:#f0f1f1;
-   margin:auto;
-    border-radius:25px;
-    padding:2rem;
-       padding-top:2rem;
-       width:90%;
-   }
-   .spotsView{   background-color:#f0f1f1;
-    margin:auto;
-     border-radius:25px;
-     padding:2rem;
-        padding-top:2rem;
-        width:90%;
-        margin-top:2rem;
-
-   }
+.dashboardStyle {
+  background-color: #f0f1f1;
+  margin: auto;
+  border-radius: 25px;
+  padding: 2rem;
+  padding-top: 2rem;
+  width: 90%;
+}
+.spotsView {
+  background-color: #f0f1f1;
+  margin: auto;
+  border-radius: 25px;
+  padding: 2rem;
+  padding-top: 2rem;
+  width: 90%;
+  margin-top: 2rem;
+}

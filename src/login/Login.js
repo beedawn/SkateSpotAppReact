@@ -6,7 +6,6 @@ import AuthContext from "../context/AuthContext";
 import Loading from "../graphics/Loading";
 import LoginForm from "./LoginForm";
 
-
 import EditProfile from "../User/EditProfile";
 export default function Login() {
   const { user, setUser } = useContext(AuthContext);

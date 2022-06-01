@@ -14,7 +14,6 @@ import {
   DropdownMenu,
 } from "reactstrap";
 
-
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
@@ -42,26 +41,27 @@ export default function NavBar() {
             <NavItem>
               <NavLink href="/addspot">
                 <Button color="primary">Add Spot</Button>
-              </NavLink></NavItem>
-              <UncontrolledDropdown nav inNavbar >
-                <DropdownToggle nav caret>
-                  Spots
-                </DropdownToggle>
-                <DropdownMenu style={{backgroundColor: '#292b2c'}}>
-                  <DropdownItem>
+              </NavLink>
+            </NavItem>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Spots
+              </DropdownToggle>
+              <DropdownMenu style={{ backgroundColor: "#292b2c" }}>
+                <DropdownItem>
                   <NavLink href="/spots">All Spots</NavLink>
-                  </DropdownItem>
-                  <DropdownItem>
-                    <NavLink href="/spots/my">My Spots</NavLink>
-                  </DropdownItem>
-                  <DropdownItem>
-                    <NavLink href="/spots/liked">Liked Spots</NavLink>
-                  </DropdownItem>
-                  <DropdownItem>
-                    <NavLink href="/spots/shared">Spots Shared with Me</NavLink>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+                </DropdownItem>
+                <DropdownItem>
+                  <NavLink href="/spots/my">My Spots</NavLink>
+                </DropdownItem>
+                <DropdownItem>
+                  <NavLink href="/spots/liked">Liked Spots</NavLink>
+                </DropdownItem>
+                <DropdownItem>
+                  <NavLink href="/spots/shared">Spots Shared with Me</NavLink>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
             <NavItem>
               <NavLink href="/account">Account</NavLink>
             </NavItem>

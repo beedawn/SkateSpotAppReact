@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
 
-
 export default function ImageUploadConfirm() {
   const { spot, id } = useParams();
   const { user } = useContext(AuthContext);
@@ -37,7 +36,7 @@ export default function ImageUploadConfirm() {
     const date = new Date(Date.now());
     array.push({
       displayName: user.displayName,
-      email:user.email,
+      email: user.email,
       id: id,
       spot: spot,
       url: imageList[imageList.length - 1],
@@ -58,7 +57,7 @@ export default function ImageUploadConfirm() {
     const docRef = doc(db, "spots", id);
     const date = new Date(Date.now());
     const payload = {
-  ...filteredSpot[0],
+      ...filteredSpot[0],
       images: imageArrayHandler(filteredSpot),
       time: date.toString(),
     };
@@ -67,31 +66,35 @@ export default function ImageUploadConfirm() {
   };
 
   if (filteredSpot.length === 0) {
-    return <div><Loading /></div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   return (
     <div className="imageUploadSpot">
-      <div >
+      <div>
         <h2>Confirm Image Upload</h2>
       </div>
       {filteredSpot.map((spot) => (
         <div style={{ padding: "1rem 0" }} key={spot.id}>
-            <h4>{spot.name}</h4>
+          <h4>{spot.name}</h4>
+          <div>
+            <img
+              alt={imageList[imageList.length - 1]}
+              src={imageList[imageList.length - 1]}
+              style={{ height: "200px" }}
+            />
+          </div>
+          <div>
             <div>
-              <img
-                alt={imageList[imageList.length - 1]}
-                src={imageList[imageList.length - 1]}
-                style={{ height: "200px" }}
-              />
+              <Button color="primary" onClick={() => handleEdit(spot.id)}>
+                {" "}
+                Confirm Upload{" "}
+              </Button>
             </div>
-            <div>
-              <div>
-                <Button color="primary" onClick={() => handleEdit(spot.id)}>
-                  {" "}
-                  Confirm Upload{" "}
-                </Button>
-              </div>
-            </div>
+          </div>
         </div>
       ))}
       <div>

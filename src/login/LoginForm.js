@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword, sendPasswordResetEmail
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { Button, Link } from "reactstrap";
@@ -29,17 +30,17 @@ export default function LoginForm() {
     await sendPasswordResetEmail(auth, loginEmail)
       .then(() => {
         // Password reset email sent!
-        console.log("password email sent")
+        console.log("password email sent");
         setPassReset(false);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode)
-        console.log(errorMessage)
-        setError(errorMessage)
+        console.log(errorCode);
+        console.log(errorMessage);
+        setError(errorMessage);
       });
-  }
+  };
 
   const login = async () => {
     try {
@@ -72,35 +73,67 @@ export default function LoginForm() {
               setLoginPassword(event.target.value);
             }}
           />
-          <div style={{ color: "red" }}> {error ? (<>{error}</>):(<></>)}
-          </div> <div className="loginButtonContainer">
+          <div style={{ color: "red" }}> {error ? <>{error}</> : <></>}</div>{" "}
+          <div className="loginButtonContainer">
             <div className="loginButtonSignUp">
-            <a href="#!"> <div onClick={register}>
-             Sign Up
-            </div></a></div>
-            <div className="loginButtonLogin">
-            <a href="#!"><div onClick={login}>
-              {" "}
-              Login{" "}
-            </div></a>
+              <a href="#!">
+                {" "}
+                <div onClick={register}>Sign Up</div>
+              </a>
             </div>
-          </div><div className="loginButtonPassword"> <a href="#!"><div onClick={() => (setPassReset(true))}>Reset Password</div></a></div>
+            <div className="loginButtonLogin">
+              <a href="#!">
+                <div onClick={login}> Login </div>
+              </a>
+            </div>
+          </div>
+          <div className="loginButtonPassword">
+            {" "}
+            <a href="#!">
+              <div onClick={() => setPassReset(true)}>Reset Password</div>
+            </a>
+          </div>
         </div>
       </div>
     );
-  } if (passReset) {
-    return (<div>  <h2>Reset Password</h2>  <div><input
-      editable="true"
-      placeholder="Email"
-      onChange={(event) => setLoginEmail(event.target.value)}
-    /></div>
-    <div style={{ color: "red" }}> {error === "Firebase: Error (auth/missing-email)." ? (<>Please enter your email.</>) : (<></>)}</div>
-      <div style={{ color: "red" }}> {error === "Firebase: Error (auth/user-not-found)." ? (<>Email not found. Have you signed up yet?</>) : (<></>)}
-      </div>
+  }
+  if (passReset) {
+    return (
       <div>
-            <Button color="primary" onClick={() => (setPassReset(false))}>Back</Button><Button color="success" onClick={passwordReset}>Submit</Button>
+        {" "}
+        <h2>Reset Password</h2>{" "}
+        <div>
+          <input
+            editable="true"
+            placeholder="Email"
+            onChange={(event) => setLoginEmail(event.target.value)}
+          />
+        </div>
+        <div style={{ color: "red" }}>
+          {" "}
+          {error === "Firebase: Error (auth/missing-email)." ? (
+            <>Please enter your email.</>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div style={{ color: "red" }}>
+          {" "}
+          {error === "Firebase: Error (auth/user-not-found)." ? (
+            <>Email not found. Have you signed up yet?</>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div>
+          <Button color="primary" onClick={() => setPassReset(false)}>
+            Back
+          </Button>
+          <Button color="success" onClick={passwordReset}>
+            Submit
+          </Button>
+        </div>
       </div>
-    </div>)
+    );
   }
 }
-

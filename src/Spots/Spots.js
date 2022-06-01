@@ -31,7 +31,7 @@ export default function Spots(props) {
     onSnapshot(collection(db, "users"), (snapshot) => {
       setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
-     onSnapshot(collection(db, "comments"), (snapshot) => {
+    onSnapshot(collection(db, "comments"), (snapshot) => {
       setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
 
@@ -42,78 +42,94 @@ export default function Spots(props) {
     return unsub;
   }, []);
 
-if (spots.length !== 0) {
-  const userArrayFiltered=userArray.filter((userItem)=>{return(userItem.id===user.photoURL)})
+  if (spots.length !== 0) {
+    const userArrayFiltered = userArray.filter((userItem) => {
+      return userItem.id === user.photoURL;
+    });
 
-const filterMySpots=spots.filter((spot)=>{return(user.email===spot.admin.email)});
+    const filterMySpots = spots.filter((spot) => {
+      return user.email === spot.admin.email;
+    });
 
-
-const filterSharedSpots=spots.filter((spot)=>{
-  for(let i=0; i < spot.users.length;i++){
-  if( spot.users[i].email===user.email){
-    return spot
-  } 
- }});
- const publicSpots=filterSharedSpots.concat(spots.filter((spot)=>{return(spot.private===false)}));
-
-
-const filteredLikedSpots=spots.filter((spot)=>{  
-
-  for(let i =0; i<userArrayFiltered[0].likedSpots.length;i++) {
-  if(userArrayFiltered[0].likedSpots[i]===spot.id){
-
-    return spot
-  }
-}})
-
-
-if(likedSpot && filteredLikedSpots.length !==0){
-  return(
-    <div className="globalTopMargin">
-    {/* <h2>My Liked Spots</h2> */}
-    <SpotsRender spots={filteredLikedSpots} />
-</div>
-  )
-}
-if(likedSpot && filteredLikedSpots.length ===0){
-  return(
-    <div className="spotsView">
-    <h2>My Liked Spots</h2>
-    <div>No liked spots. Click on the small heart underneath a spot on one of the other pages to like it.</div>
-</div>
-  )
-}
-  if(mySpot&& filterMySpots.length !==0){
-    return(
-
-      
-      <SpotsRender spots={filterMySpots} my={true} />
-
-  )}
-  if(mySpot&& filterMySpots.length ===0){
-    
-   
-    return(<div className="spotsView"><h2>My Posted Spots</h2><div>You haven't posted any spots yet. Click "Add Spot" at the top of the page to add a spot.</div></div>)
-  }
-    
-if(sharedSpot && filterSharedSpots.length !== 0){
-  return (
-    <div className="globalTopMargin">
-      <h2>Spots Shared with Me</h2>
-      <SpotsRender spots={filterSharedSpots} shared={true}/>
- </div>
-  )
-}if(sharedSpot && filterSharedSpots.length === 0){
-  return(<div className="spotsView"> <h2>Spots Shared with me.</h2><div>No one has shared a private spot with you yet. :( </div></div>)
-}
-  else {
-    return (
-        <div className="globalTopMargin">
-         
-          <SpotsRender spots={publicSpots} spotPublic={true} />
-      </div>
+    const filterSharedSpots = spots.filter((spot) => {
+      for (let i = 0; i < spot.users.length; i++) {
+        if (spot.users[i].email === user.email) {
+          return spot;
+        }
+      }
+    });
+    const publicSpots = filterSharedSpots.concat(
+      spots.filter((spot) => {
+        return spot.private === false;
+      })
     );
-  }} else {
+
+    const filteredLikedSpots = spots.filter((spot) => {
+      for (let i = 0; i < userArrayFiltered[0].likedSpots.length; i++) {
+        if (userArrayFiltered[0].likedSpots[i] === spot.id) {
+          return spot;
+        }
+      }
+    });
+
+    if (likedSpot && filteredLikedSpots.length !== 0) {
+      return (
+        <div className="globalTopMargin">
+          {/* <h2>My Liked Spots</h2> */}
+          <SpotsRender spots={filteredLikedSpots} />
+        </div>
+      );
+    }
+    if (likedSpot && filteredLikedSpots.length === 0) {
+      return (
+        <div className="spotsView">
+          <h2>My Liked Spots</h2>
+          <div>
+            No liked spots. Click on the small heart underneath a spot on one of
+            the other pages to like it.
+          </div>
+        </div>
+      );
+    }
+    if (mySpot && filterMySpots.length !== 0) {
+      return <SpotsRender spots={filterMySpots} my={true} />;
+    }
+    if (mySpot && filterMySpots.length === 0) {
+      return (
+        <div className="spotsView">
+          <h2>My Posted Spots</h2>
+          <div>
+            You haven't posted any spots yet. Click "Add Spot" at the top of the
+            page to add a spot.
+          </div>
+        </div>
+      );
+    }
+
+    if (sharedSpot && filterSharedSpots.length !== 0) {
+      return (
+        <div className="globalTopMargin">
+          <h2>Spots Shared with Me</h2>
+          <SpotsRender spots={filterSharedSpots} shared={true} />
+        </div>
+      );
+    }
+    if (sharedSpot && filterSharedSpots.length === 0) {
+      return (
+        <div className="spotsView">
+          {" "}
+          <h2>Spots Shared with me.</h2>
+          <div>No one has shared a private spot with you yet. :( </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="globalTopMargin">
+          <SpotsRender spots={publicSpots} spotPublic={true} />
+        </div>
+      );
+    }
+  } else {
     return (
       <div style={{ padding: "1rem 0" }}>
         <h2>Spots</h2>

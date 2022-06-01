@@ -33,7 +33,6 @@ export default function ImageUploadUser(props) {
   return (
     <div className="imageUploadUserStyle">
       <div style={{ marginTop: "1rem" }}>
-        
         <h3>Profile Picture Upload</h3>
         <Input
           type="file"
@@ -48,7 +47,7 @@ export default function ImageUploadUser(props) {
         <Button color="primary" onClick={skipImageUpload}>
           Skip
         </Button>
-        <Button color="success" onClick={()=>handleUpload(imageUpload)}>
+        <Button color="success" onClick={() => handleUpload(imageUpload)}>
           Upload
         </Button>
       </div>

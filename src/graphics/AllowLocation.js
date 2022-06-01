@@ -6,7 +6,7 @@ export default function Help() {
       <div>
         <a href={allowLocation}>
           <img
-            style={{ width: "100%", maxWidth:"300px", borderRadius: "15px" }}
+            style={{ width: "100%", maxWidth: "300px", borderRadius: "15px" }}
             src={allowLocation}
             alt="HelpImg"
           />

@@ -1,4 +1,4 @@
-import React, { useState,  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "reactstrap";
 import { db, storage } from "../firebase-config";
 import { onSnapshot, collection } from "firebase/firestore";
@@ -34,7 +34,6 @@ export default function ImageUpload() {
   }, []);
 
   const handleUpload = () => {
-
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/spots/${spot}/${vkey}`);
     uploadBytes(imageRef, imageUpload).then(() => {
@@ -46,7 +45,6 @@ export default function ImageUpload() {
   });
   return (
     <div className="imageUploadSpot">
-
       <div style={{ marginTop: "1rem" }}>
         <h3> Image Upload</h3>
         <Input
@@ -57,9 +55,8 @@ export default function ImageUpload() {
           }}
         />
       </div>
-      
+
       <div style={{ marginTop: "1rem" }}>
-     
         <Button color="primary" onClick={handleUpload}>
           Submit
         </Button>

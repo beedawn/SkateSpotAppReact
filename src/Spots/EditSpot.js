@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import { db } from "../firebase-config";
 import { useParams } from "react-router-dom";
 import { Form, Input, FormGroup, Label, Tooltip, Row, Col } from "reactstrap";
-import {FaQuestionCircle} from 'react-icons/fa';
+import { FaQuestionCircle } from "react-icons/fa";
 
 import "../styles/style.css";
 import SpotPics from "./SpotComponents/SpotPics";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
 import Maps from "../maps/Maps";
-import Select from 'react-select';
+import Select from "react-select";
 import Geocode from "react-geocode";
 import useGeolocation from "react-hook-geolocation";
 
@@ -23,55 +23,55 @@ export default function EditSpot() {
   Geocode.setRegion("es");
   const geolocation = useGeolocation();
   const { spot } = useParams();
-  const [tooltip, setTooltip]= useState(false);
+  const [tooltip, setTooltip] = useState(false);
   const [userArray, setUserArray] = useState([]);
   const [toggleState, setToggleState] = useState(false);
   const [spotName, setSpotName] = useState("");
   const [spotAddress, setSpotAddress] = useState("");
   const [spotCity, setSpotCity] = useState("");
-  const [spotCountry, setSpotCountry ] = useState();
+  const [spotCountry, setSpotCountry] = useState();
   const [spotState, setSpotState] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
   const [spotDescription, setSpotDescription] = useState("");
   const [spots, setSpots] = useState([]);
   const [gps, setGps] = useState();
-  const [sharedUsers,setSharedUsers]= useState([]);
-  const [load, isLoad]= useState(false);
-  
+  const [sharedUsers, setSharedUsers] = useState([]);
+  const [load, isLoad] = useState(false);
+
   useEffect(async () => {
     onSnapshot(collection(db, "users"), (snapshot) => {
       setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
-   onSnapshot(collection(db, "spots"), (snapshot) => {
+    onSnapshot(collection(db, "spots"), (snapshot) => {
       setSpots(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-
     });
 
-if(filteredSpots[0]!==undefined)
-{
-  setSpotName(filteredSpots[0].name)
-  setSpotDescription(filteredSpots[0].description)
-  setSharedUsers(filteredSpots[0].users)
- 
-
-}
-
-
-  },[load]);
+    if (filteredSpots[0] !== undefined) {
+      setSpotName(filteredSpots[0].name);
+      setSpotDescription(filteredSpots[0].description);
+      setSharedUsers(filteredSpots[0].users);
+    }
+  }, [load]);
 
   const filteredSpots = spots.filter(function (el) {
     return el.id === spot;
   });
-  
-
 
   function fetchLocation(lat, long) {
     Geocode.fromLatLng(lat, long).then(
       (response) => {
         const address = response.results[0].formatted_address;
         let city, state, country;
-        for (let i = 0; i < response.results[0].address_components.length; i++) {
-          for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
+        for (
+          let i = 0;
+          i < response.results[0].address_components.length;
+          i++
+        ) {
+          for (
+            let j = 0;
+            j < response.results[0].address_components[i].types.length;
+            j++
+          ) {
             switch (response.results[0].address_components[i].types[j]) {
               case "locality":
                 city = response.results[0].address_components[i].long_name;
@@ -86,9 +86,9 @@ if(filteredSpots[0]!==undefined)
           }
         }
         console.log(city, state, country);
-        setSpotCity(city)
-        setSpotAddress(address)
-        setSpotCountry(country)
+        setSpotCity(city);
+        setSpotAddress(address);
+        setSpotCountry(country);
         setSpotState(state);
         setIsLoaded(true);
         console.log(address);
@@ -99,12 +99,9 @@ if(filteredSpots[0]!==undefined)
     );
   }
 
-  if(!gps){
-    fetchLocation( geolocation.latitude,
-      geolocation.longitude);}
-
-
-
+  if (!gps) {
+    fetchLocation(geolocation.latitude, geolocation.longitude);
+  }
 
   const handleEdit = async (id) => {
     if (gps) {
@@ -116,14 +113,14 @@ if(filteredSpots[0]!==undefined)
         location: spotAddress,
         city: spotCity,
         country: spotCountry,
-        state:spotState,
+        state: spotState,
         description: spotDescription,
         time: date.toString(),
         edited: true,
         lat: gps.lat,
         long: gps.long,
-        users:sharedUsers,
-        private:toggleState
+        users: sharedUsers,
+        private: toggleState,
       };
       await setDoc(docRef, payload);
       refreshPage();
@@ -136,12 +133,12 @@ if(filteredSpots[0]!==undefined)
         location: spotAddress,
         city: spotCity,
         country: spotCountry,
-        state:spotState,
+        state: spotState,
         description: spotDescription,
         time: date.toString(),
         edited: true,
-        users:sharedUsers,
-        private:toggleState
+        users: sharedUsers,
+        private: toggleState,
       };
       await setDoc(docRef, payload);
       refreshPage();
@@ -155,7 +152,6 @@ if(filteredSpots[0]!==undefined)
   }
 
   if (filteredSpots.length === 0) {
-  
     return (
       <div>
         {" "}
@@ -163,14 +159,29 @@ if(filteredSpots[0]!==undefined)
       </div>
     );
   } else {
-    const anotherArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
-    const filteredUserArray = anotherArray.filter((user)=>{return user.name !== undefined})
+    const anotherArray = userArray.map((user) => {
+      return {
+        value: user.id,
+        email: user.email,
+        name: user.name,
+        label: `${user.name} -  ${user.email}`,
+      };
+    });
+    const filteredUserArray = anotherArray.filter((user) => {
+      return user.name !== undefined;
+    });
     return (
-      <div onMouseOver={()=>isLoad(true)}>
-      
+      <div onMouseOver={() => isLoad(true)}>
         {gps ? (
           <Maps
-            spot={[{edit:true, lat: gps.lat, long: gps.long, id: filteredSpots[0].id }]}
+            spot={[
+              {
+                edit: true,
+                lat: gps.lat,
+                long: gps.long,
+                id: filteredSpots[0].id,
+              },
+            ]}
             spots={spots}
             handleDrag={handleDrag}
             drag={true}
@@ -180,7 +191,7 @@ if(filteredSpots[0]!==undefined)
           <Maps
             spot={[
               {
-                edit:true,
+                edit: true,
                 lat: filteredSpots[0].lat,
                 long: filteredSpots[0].long,
                 id: filteredSpots[0].id,
@@ -192,102 +203,124 @@ if(filteredSpots[0]!==undefined)
             singleView={true}
           />
         )}
-  <h2>Edit a Spot</h2>
+        <h2>Edit a Spot</h2>
 
-    <Row>
-        <SpotPics edit={true}/>
+        <Row>
+          <SpotPics edit={true} />
         </Row>
- 
+
         <div className="spotEditDiv">
-        {filteredSpots.map((spot) => (
-          <div className="globalTopMargin" key={spot.id} >
-           <label>Spot Name:</label>
-            <Input
-              value={spotName}
-              onChange={(event) => setSpotName(event.target.value)}
-              
-            />
-          </div>
-        ))}
-           {spotName ? (
-          <p></p>
-        ) : (
-          <span className="errorSpan">Please update Spotname</span>
-        )}
+          {filteredSpots.map((spot) => (
+            <div className="globalTopMargin" key={spot.id}>
+              <label>Spot Name:</label>
+              <Input
+                value={spotName}
+                onChange={(event) => setSpotName(event.target.value)}
+              />
+            </div>
+          ))}
+          {spotName ? (
+            <p></p>
+          ) : (
+            <span className="errorSpan">Please update Spotname</span>
+          )}
 
-        {filteredSpots.map((spot) => (
-          <div style={{ marginTop: "1rem" }}>
-            <label>Spot Description:</label>
-            <Input
-              editable="true"
-              value={spotDescription}
-              type="textarea"
-              onChange={(event) => setSpotDescription(event.target.value)}
-             
-            />
+          {filteredSpots.map((spot) => (
+            <div style={{ marginTop: "1rem" }}>
+              <label>Spot Description:</label>
+              <Input
+                editable="true"
+                value={spotDescription}
+                type="textarea"
+                onChange={(event) => setSpotDescription(event.target.value)}
+              />
               {spotDescription ? (
-          <p></p>
-        ) : (
-          <span className="errorSpan">Please update Description</span>
-        )}
+                <p></p>
+              ) : (
+                <span className="errorSpan">Please update Description</span>
+              )}
 
-<div><label>If this is a private spot, select users to share with. (You can add more than 1.)</label><Select isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))} value={sharedUsers}/></div>
+              <div>
+                <label>
+                  If this is a private spot, select users to share with. (You
+                  can add more than 1.)
+                </label>
+                <Select
+                  isMulti
+                  options={filteredUserArray}
+                  onChange={(e) => setSharedUsers(e)}
+                  value={sharedUsers}
+                />
+              </div>
 
-<div></div>
-        <Form>
-    <FormGroup switch="true" style={{width:"175px", margin:"auto"}}>
-  
-        <Input
-      type="switch"
-     onChange={()=>setToggleState(!toggleState)}
-    />
-  
-    <Label switch="true" >Private Spot?</Label>  <Tooltip isOpen={tooltip} target="PrivateTooltip" toggle={()=>setTooltip(!tooltip)}>
-         Check this slider to the right(turns blue), to set this as a private spot. If left unchecked, this will be a public spot available to all users.
-        </Tooltip> <FaQuestionCircle id="PrivateTooltip" />
-  </FormGroup>
-  </Form>
+              <div></div>
+              <Form>
+                <FormGroup
+                  switch="true"
+                  style={{ width: "175px", margin: "auto" }}
+                >
+                  <Input
+                    type="switch"
+                    onChange={() => setToggleState(!toggleState)}
+                  />
+                  <Label switch="true">Private Spot?</Label>{" "}
+                  <Tooltip
+                    isOpen={tooltip}
+                    target="PrivateTooltip"
+                    toggle={() => setTooltip(!tooltip)}
+                  >
+                    Check this slider to the right(turns blue), to set this as a
+                    private spot. If left unchecked, this will be a public spot
+                    available to all users.
+                  </Tooltip>{" "}
+                  <FaQuestionCircle id="PrivateTooltip" />
+                </FormGroup>
+              </Form>
+            </div>
+          ))}
 
-
-</div>
-        ))}
-
-        <div style={{ marginTop: "1rem" }}>
-        { isLoaded ?  (<>{spotCity} {spotAddress}</>):(<>Loading Address...</>)}
-       
-          <div>
-          {spotName && spotDescription ? (
-              <Button color="primary" onClick={() => handleEdit(spot)}>
-                Submit
-              </Button>
+          <div style={{ marginTop: "1rem" }}>
+            {isLoaded ? (
+              <>
+                {spotCity} {spotAddress}
+              </>
             ) : (
-              <p>
-                Once you complete the required forms a submit button will appear
-                here
-              </p>
+              <>Loading Address...</>
             )}
-          </div>
-          <div>
-            <Button
-              color="primary"
-              onClick={() => {
-                refreshPage();
-              }}
-            >
-              {" "}
-              Cancel{" "}
-            </Button>
-            <Link to={"/spot/" + spot + "/delete"}>
+
+            <div>
+              {spotName && spotDescription ? (
+                <Button color="primary" onClick={() => handleEdit(spot)}>
+                  Submit
+                </Button>
+              ) : (
+                <p>
+                  Once you complete the required forms a submit button will
+                  appear here
+                </p>
+              )}
+            </div>
+            <div>
               <Button
-                color="danger"
-                className="adminButtonsEach"
-                onClick={() => {}}
+                color="primary"
+                onClick={() => {
+                  refreshPage();
+                }}
               >
-                Delete
+                {" "}
+                Cancel{" "}
               </Button>
-            </Link>
+              <Link to={"/spot/" + spot + "/delete"}>
+                <Button
+                  color="danger"
+                  className="adminButtonsEach"
+                  onClick={() => {}}
+                >
+                  Delete
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     );

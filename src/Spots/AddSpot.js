@@ -11,35 +11,32 @@ import Maps from "../maps/Maps";
 import Geocode from "react-geocode";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
-import Select from 'react-select';
+import Select from "react-select";
 import { Form, Input, FormGroup, Label, Tooltip } from "reactstrap";
-import {FaQuestionCircle} from 'react-icons/fa';
-
-
+import { FaQuestionCircle } from "react-icons/fa";
 
 export default function AddSpot() {
   const spotId = v4();
   const geolocation = useGeolocation();
-console.log(geolocation)
+  console.log(geolocation);
   const { user } = useContext(AuthContext);
   const [gps, setGps] = useState();
 
   const [spotAddress, setSpotAddress] = useState("");
   const [spotCity, setSpotCity] = useState("");
-  const [spotCountry, setSpotCountry ] = useState();
+  const [spotCountry, setSpotCountry] = useState();
   const [spotName, setSpotName] = useState("");
 
   const [spotDescription, setSpotDescription] = useState("");
   const [userArray, setUserArray] = useState([]);
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS;
   const [spots, setSpots] = useState([]);
-  const [tooltip, setTooltip]= useState(false);
-  const [sharedUsers,setSharedUsers]= useState([]);
+  const [tooltip, setTooltip] = useState(false);
+  const [sharedUsers, setSharedUsers] = useState([]);
   const [toggleState, setToggleState] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [spotState, setSpotState] = useState();
   useEffect(() => {
-
     onSnapshot(collection(db, "users"), (snapshot) => {
       setUserArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -59,8 +56,16 @@ console.log(geolocation)
       (response) => {
         const address = response.results[0].formatted_address;
         let city, state, country;
-        for (let i = 0; i < response.results[0].address_components.length; i++) {
-          for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
+        for (
+          let i = 0;
+          i < response.results[0].address_components.length;
+          i++
+        ) {
+          for (
+            let j = 0;
+            j < response.results[0].address_components[i].types.length;
+            j++
+          ) {
             switch (response.results[0].address_components[i].types[j]) {
               case "locality":
                 city = response.results[0].address_components[i].long_name;
@@ -71,77 +76,74 @@ console.log(geolocation)
               case "country":
                 country = response.results[0].address_components[i].long_name;
                 break;
-              
             }
           }
         }
-        setSpotCity(city)
-        setSpotAddress(address)
-        setSpotCountry(country)
+        setSpotCity(city);
+        setSpotAddress(address);
+        setSpotCountry(country);
         setSpotState(state);
         setIsLoaded(true);
-        console.log(geolocation.lattitude)
+        console.log(geolocation.lattitude);
       },
       (error) => {
         console.error(error);
-        
       }
     );
   }
-if(!gps){
-  fetchLocation(geolocation.latitude,
-    geolocation.longitude);}
+  if (!gps) {
+    fetchLocation(geolocation.latitude, geolocation.longitude);
+  }
 
   const handleNewSpot = async () => {
     const collectionRef = collection(db, "spots");
     const date = new Date(Date.now());
 
-    if(gps){
-  fetchLocation( gps.lat, gps.long);
-    const payload = {
-      name: spotName,
-      location: spotAddress,
-      city: spotCity,
-      country: spotCountry,
-      state:spotState,
-      description: spotDescription,
-      admin: { email: user.email, name: user.displayName, id:user.photoURL },
-      images: [],
-      time: date.toString(),
-      timePosted: date.toString(),
-      lat: gps.lat,
-      long: gps.long,
-      edited: false,
-      users:[...sharedUsers],
-      private:toggleState
-    };
-    console.log(payload)
-    await addDoc(collectionRef, payload);
-    refreshPage();
-  }else{
-  fetchLocation(geolocation.latitude,
-    geolocation.longitude);
-    const payload = {
-      name: spotName,
-      location: spotAddress,
-      city: spotCity,
-      country: spotCountry,
-      state:spotState,
-      description: spotDescription,
-      admin: { email: user.email, name: user.displayName, id:user.photoURL },
-      images: [],
-      time: date.toString(),
-      timePosted: date.toString(),
-      lat: geolocation.latitude,
-                long: geolocation.longitude,
-      edited: false,
-      users:[...sharedUsers],
-      private:toggleState
-    };
-    console.log(payload)
-    await addDoc(collectionRef, payload);
-    refreshPage();
-  }
+    if (gps) {
+      fetchLocation(gps.lat, gps.long);
+      const payload = {
+        name: spotName,
+        location: spotAddress,
+        city: spotCity,
+        country: spotCountry,
+        state: spotState,
+        description: spotDescription,
+        admin: { email: user.email, name: user.displayName, id: user.photoURL },
+        images: [],
+        time: date.toString(),
+        timePosted: date.toString(),
+        lat: gps.lat,
+        long: gps.long,
+        edited: false,
+        users: [...sharedUsers],
+        private: toggleState,
+      };
+      console.log(payload);
+      await addDoc(collectionRef, payload);
+      refreshPage();
+    } else {
+      fetchLocation(geolocation.latitude, geolocation.longitude);
+      const payload = {
+        name: spotName,
+        location: spotAddress,
+        city: spotCity,
+        country: spotCountry,
+        state: spotState,
+        description: spotDescription,
+        admin: { email: user.email, name: user.displayName, id: user.photoURL },
+        images: [],
+        time: date.toString(),
+        timePosted: date.toString(),
+        lat: geolocation.latitude,
+        long: geolocation.longitude,
+        edited: false,
+        users: [...sharedUsers],
+        private: toggleState,
+      };
+      console.log(payload);
+      await addDoc(collectionRef, payload);
+      refreshPage();
+    }
   };
 
   //Handle Drag is Passed to Maps Component
@@ -150,16 +152,24 @@ if(!gps){
     fetchLocation(e.latLng.lat(), e.latLng.lng());
   }
 
-  if (spots.length !== 0 ||spots!==[] )  {
-    const anotherArray = userArray.map((user)=>{return({value:user.id, email: user.email, name:user.name, label:`${user.name} -  ${user.email}`})});
-    const filteredUserArray = anotherArray.filter((user)=>{return user.name !== undefined})
+  if (spots.length !== 0 || spots !== []) {
+    const anotherArray = userArray.map((user) => {
+      return {
+        value: user.id,
+        email: user.email,
+        name: user.name,
+        label: `${user.name} -  ${user.email}`,
+      };
+    });
+    const filteredUserArray = anotherArray.filter((user) => {
+      return user.name !== undefined;
+    });
     console.log(anotherArray);
-    console.log(filteredUserArray)
-    console.log(sharedUsers)
+    console.log(filteredUserArray);
+    console.log(sharedUsers);
     return (
-    // <div className="addSpotUpperContainer">
+      // <div className="addSpotUpperContainer">
       <div className="addSpotContainer">
-       
         {gps ? (
           <Maps
             spot={[{ lat: gps.lat, long: gps.long, id: spotId }]}
@@ -183,7 +193,7 @@ if(!gps){
           />
         )}
 
-         <h2>Add a Spot</h2>
+        <h2>Add a Spot</h2>
         <div>
           <Input
             editable="true"
@@ -211,24 +221,45 @@ if(!gps){
           <span className="errorSpan">Please enter Description</span>
         )}
 
-{toggleState ? (<Select placeholder="Add users you want to share this spot with" isMulti options={filteredUserArray} onChange={(e)=>(setSharedUsers(e))}/>):(<></>)}
+        {toggleState ? (
+          <Select
+            placeholder="Add users you want to share this spot with"
+            isMulti
+            options={filteredUserArray}
+            onChange={(e) => setSharedUsers(e)}
+          />
+        ) : (
+          <></>
+        )}
         <div></div>
         <Form>
-    <FormGroup switch="true" style={{width:"175px", margin:"auto"}}>
-  
-        <Input
-      type="switch"
-     onChange={()=>setToggleState(!toggleState)}
-    />
-  
-    <Label switch="true" >Private Spot?</Label>  <Tooltip isOpen={tooltip} target="PrivateTooltip" toggle={()=>setTooltip(!tooltip)}>
-         Check this slider to the right(turns blue), to set this as a private spot. If left unchecked, this will be a public spot available to all users.
-        </Tooltip> <FaQuestionCircle id="PrivateTooltip" />
-  </FormGroup>
-  </Form>
+          <FormGroup switch="true" style={{ width: "175px", margin: "auto" }}>
+            <Input
+              type="switch"
+              onChange={() => setToggleState(!toggleState)}
+            />
+            <Label switch="true">Private Spot?</Label>{" "}
+            <Tooltip
+              isOpen={tooltip}
+              target="PrivateTooltip"
+              toggle={() => setTooltip(!tooltip)}
+            >
+              Check this slider to the right(turns blue), to set this as a
+              private spot. If left unchecked, this will be a public spot
+              available to all users.
+            </Tooltip>{" "}
+            <FaQuestionCircle id="PrivateTooltip" />
+          </FormGroup>
+        </Form>
 
         <div style={{ marginTop: "1rem" }}>
-          { isLoaded ?  (<>{spotCity} {spotAddress}</>):(<>Loading Address...</>)}
+          {isLoaded ? (
+            <>
+              {spotCity} {spotAddress}
+            </>
+          ) : (
+            <>Loading Address...</>
+          )}
           <div>
             {spotName && spotDescription ? (
               <Button color="primary" onClick={handleNewSpot}>

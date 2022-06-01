@@ -1,11 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button } from "reactstrap";
-import {
-  doc,
-  onSnapshot,
-  collection,
-  deleteDoc,
-} from "firebase/firestore";
+import { doc, onSnapshot, collection, deleteDoc } from "firebase/firestore";
 import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
@@ -13,19 +8,16 @@ import { Input } from "reactstrap";
 import "../styles/style.css";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
-import {
-  ref,
-  deleteObject,
-} from "firebase/storage";
+import { ref, deleteObject } from "firebase/storage";
 
 export default function DeleteComment() {
   const { spot } = useParams();
   const { user } = useContext(AuthContext);
   const [agree, setAgree] = useState("");
-const [comments,setComments]=useState([]);
+  const [comments, setComments] = useState([]);
   const [spots, setSpots] = useState([]);
   useEffect(() => {
-     onSnapshot(collection(db, "comments"), (snapshot) => {
+    onSnapshot(collection(db, "comments"), (snapshot) => {
       setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
     const unsub = onSnapshot(collection(db, "spots"), (snapshot) => {
@@ -42,29 +34,37 @@ const [comments,setComments]=useState([]);
 
   const handleDelete = async (id) => {
     const docRef = doc(db, "spots", id);
-   
+
     await deleteDoc(docRef);
-    
-    for(let i = 0; i < filteredComments.length;i++){
+
+    for (let i = 0; i < filteredComments.length; i++) {
       const docRef2 = doc(db, "comments", filteredComments[i].id);
       await deleteDoc(docRef2);
     }
 
-    for(let i = 0; i < filteredSpots[0].images.length;i++){
-      const imageRef = ref(storage, `images/spots/${spot}/${filteredSpots[0].images[i].id}`);
-    deleteObject(imageRef)
-    .then(() => {
-      console.log(imageRef)
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+    for (let i = 0; i < filteredSpots[0].images.length; i++) {
+      const imageRef = ref(
+        storage,
+        `images/spots/${spot}/${filteredSpots[0].images[i].id}`
+      );
+      deleteObject(imageRef)
+        .then(() => {
+          console.log(imageRef);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     refreshPage();
   };
 
   if (filteredSpots.length === 0) {
-    return <div> <Loading /></div>;
+    return (
+      <div>
+        {" "}
+        <Loading />
+      </div>
+    );
   } else {
     return (
       <div className="deleteSpotDiv">
