@@ -100,7 +100,7 @@ export default function EditSpot() {
   }
 
   if (!gps && filteredSpots[0]!== undefined) {
-    fetchLocation(filteredSpots[0].latitude, filteredSpots[0].longitude);
+    fetchLocation(filteredSpots[0].lat, filteredSpots[0].long);
   }
 
   const handleEdit = async (id) => {
