@@ -99,8 +99,8 @@ export default function EditSpot() {
     );
   }
 
-  if (!gps) {
-    fetchLocation(geolocation.latitude, geolocation.longitude);
+  if (!gps && filteredSpots[0]!== undefined) {
+    fetchLocation(filteredSpots[0].latitude, filteredSpots[0].longitude);
   }
 
   const handleEdit = async (id) => {
