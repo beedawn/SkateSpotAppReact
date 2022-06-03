@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -6,26 +6,14 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { Button, Link } from "reactstrap";
+import { useParams } from "react-router";
 import "../styles/style.css";
-export default function LoginForm(props) {
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+export default function LoginForm2() {
+  const [loginEmail, setLoginEmail] = useState("guest@g.com");
+  const [loginPassword, setLoginPassword] = useState("guest0");
   const [passReset, setPassReset] = useState(false);
   const [error, setError] = useState("");
-  const guestQuery = props.guestQuery;
-console.log(guestQuery);
-  useEffect(()=>{
-    if(guestQuery!==undefined){
-      console.log("1")
-    if(guestQuery.length===2){
-      console.log(guestQuery[1
-      ], guestQuery[2])
-      setLoginEmail(guestQuery[0]);
-      setLoginPassword(guestQuery[1]);
-      console.log(loginEmail)
-      console.log(loginPassword)
-    }}
-  },[loginEmail])
+
   const register = async () => {
     try {
       const user = await createUserWithEmailAndPassword(
@@ -72,7 +60,6 @@ console.log(guestQuery);
       <div className="login">
         <div>
           <input
-          value={loginEmail}  
             editable="true"
             placeholder="Email"
             onChange={(event) => setLoginEmail(event.target.value)}
@@ -80,7 +67,6 @@ console.log(guestQuery);
         </div>
         <div className="globalTopMargin">
           <input
-          value={loginPassword}  
             editable="true"
             type="password"
             placeholder="Password"
@@ -119,7 +105,7 @@ console.log(guestQuery);
         <h2>Reset Password</h2>{" "}
         <div>
           <input
-          editable="true"
+            editable="true"
             placeholder="Email"
             onChange={(event) => setLoginEmail(event.target.value)}
           />

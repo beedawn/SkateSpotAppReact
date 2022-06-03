@@ -5,15 +5,19 @@ import Home from "../HomeRouter";
 import AuthContext from "../context/AuthContext";
 import Loading from "../graphics/Loading";
 import LoginForm from "./LoginForm";
-
+import LoginForm2 from "./LoginForm2";
 import EditProfile from "../User/EditProfile";
-export default function Login() {
+export default function Login(props) {
   const { user, setUser } = useContext(AuthContext);
-
+  const guestQuery = props.queryString;
+console.log(guestQuery)
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
-
+  if (user === null && guestQuery.length === 2) {
+    //returns Login Form to prompt user to sign in, checks if user is null if you use !user to check the logic breaks
+    return <LoginForm guestQuery={guestQuery} />;
+  }
   if (user === null) {
     //returns Login Form to prompt user to sign in, checks if user is null if you use !user to check the logic breaks
     return <LoginForm />;
