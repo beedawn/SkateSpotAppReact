@@ -194,8 +194,9 @@ export default function AddSpot() {
         )}
 
         <h2>Add a Spot</h2>
+        <Form>
         <div>
-          <Input
+          <Input required
             editable="true"
             placeholder="Spot Name"
             onChange={(event) => setSpotName(event.target.value)}
@@ -209,10 +210,11 @@ export default function AddSpot() {
 
         <div style={{ marginTop: "1rem" }}>
           <Input
+          required
             editable="true"
             placeholder="Description"
             type="textarea"
-            onChange={(event) => setSpotDescription(event.target.value)}
+            onChange={(event) => setSpotDescription(event.target.value)} required
           />
         </div>
         {spotDescription ? (
@@ -231,8 +233,8 @@ export default function AddSpot() {
         ) : (
           <></>
         )}
-        <div></div>
-        <Form>
+     
+       
           <FormGroup switch="true" style={{ width: "175px", margin: "auto" }}>
             <Input
               type="switch"

@@ -227,6 +227,7 @@ export default function EditSpot() {
 
           {filteredSpots.map((spot) => (
             <div style={{ marginTop: "1rem" }}>
+              <Form>
               <label>Spot Description:</label>
               <Input
                 editable="true"
@@ -253,8 +254,8 @@ export default function EditSpot() {
                 />
               </div>
 
-              <div></div>
-              <Form>
+       
+            
                 <FormGroup
                   switch="true"
                   style={{ width: "175px", margin: "auto" }}
