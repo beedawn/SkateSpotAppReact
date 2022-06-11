@@ -112,9 +112,7 @@ a.like:hover {
   object-fit: cover;
 }
 .imgDelete {
-  position: relative;
-  top: 2rem;
-  left: 10%;
+padding:1rem;
   opacity: 0.9;
 }
 .spotPictureDelete {

@@ -109,6 +109,17 @@ export default function SpotPics(props) {
                     ) : (
                       <div className="spotPicContainerNoEdit" key={image.id}>
                         <LazyLoad>
+                       
+                          <div className="spotPictureRenderContainer">
+                            <a href="#!">
+                              <img
+                                src={image.url}
+                                className="spotPictureRender"
+                                onClick={() => imagePage(image.url)}
+                                alt="Delete"
+                              />
+                            </a>
+                          </div>
                           <div className="imgDelete">
                             {image.email === user.email ? (
                               <Link
@@ -140,16 +151,6 @@ export default function SpotPics(props) {
                             ) : (
                               <></>
                             )}
-                          </div>
-                          <div className="spotPictureRenderContainer">
-                            <a href="#!">
-                              <img
-                                src={image.url}
-                                className="spotPictureRender"
-                                onClick={() => imagePage(image.url)}
-                                alt="Delete"
-                              />
-                            </a>
                           </div>
 
                           <div className="imagePosted">

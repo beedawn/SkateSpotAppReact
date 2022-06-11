@@ -89,8 +89,8 @@ export default function ImageUploadConfirmUser(props) {
     );
   } else
     return (
-      <div>
-        <div style={{ padding: "1rem" }}>
+      <div class="imageUploadSpot">
+        <div >
           <h2>Confirm Profile Picture Upload</h2>
         </div>
 
@@ -100,7 +100,7 @@ export default function ImageUploadConfirmUser(props) {
               <img
                 alt={imageList[imageList.length - 1]}
                 src={imageList[imageList.length - 1]}
-                style={{ height: "200px" }}
+                style={{ width: "200px", paddingBottom:"20px", maxHeight:"800px" }}
               />
             </div>
             <div>

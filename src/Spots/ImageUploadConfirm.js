@@ -84,7 +84,7 @@ export default function ImageUploadConfirm() {
             <img
               alt={imageList[imageList.length - 1]}
               src={imageList[imageList.length - 1]}
-              style={{ height: "200px" }}
+              style={{ width: "80%", maxHeight:"800px", paddingBottom:"20px" }}
             />
           </div>
           <div>
