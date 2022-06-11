@@ -20,6 +20,7 @@ import EditProfile from "./User/EditProfile";
 import ImageUploadConfirmUser from "./User/ImageUploadConfirmUser";
 import UserPage from "./User/UserPage";
 
+
 export default function Home() {
   return (
     <div>
