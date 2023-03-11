@@ -126,14 +126,14 @@ export default function SingleSpot() {
                   </div>
                 </div>
 
-                <div className="singleSpotLL">
+               {spot.lat!==''&&spot.long!==''? <div className="singleSpotLL">
                   <div className="singleSpotLLInner">
                     <h4>Spot Coordinates</h4>
                     <p>
                       {spot.lat}, {spot.long}
                     </p>
                   </div>
-                </div>
+                </div>:<div></div>}
               </Col>
 
               <Col xxl="3" lg="6">
