@@ -112,9 +112,7 @@ a.like:hover {
   object-fit: cover;
 }
 .imgDelete {
-  position: relative;
-  top: 2rem;
-  left: 10%;
+padding:1rem;
   opacity: 0.9;
 }
 .spotPictureDelete {
@@ -199,13 +197,7 @@ a.like:hover {
   border-radius: 25px;
   font-size: 14px;
 }
-.loading {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 25px;
-  width: 400px;
-  margin: auto;
-}
+
 .login {
   background-color: #f0f1f1;
   border-radius: 25px;
@@ -407,9 +399,4 @@ a.like:hover {
   padding-top: 2rem;
   width: 90%;
   margin-top: 2rem;
-}
-
-.slantyardVersionAccount{
-  color:#656565;
-  margin:30px;
 }

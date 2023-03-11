@@ -4,5 +4,5 @@ export const refreshPage = async (page) => {
 };
 
 export const imagePage = async (page) => {
-  window.location.replace(`${page}`);
+  window.open(`${page}`);
 };
