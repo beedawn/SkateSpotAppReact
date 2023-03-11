@@ -8,7 +8,7 @@ export default function Main() {
   console.log(queryString);
 
   return (
-    <div className="mainDiv">
+    <div className="mainDiv loginBackgroundContainer">
       <Login queryString={queryString} />
       
     </div>

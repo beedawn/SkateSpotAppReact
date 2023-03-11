@@ -27,6 +27,8 @@ export default function Dashboard() {
           <Col lg="7">
             <div className="dashboardStyle">
               <div>Welcome {user.displayName}, to Slantyard!</div>{' '}
+
+              <div className="strongUser"> When you first sign in and go to "All Spots" it will center the map on your GPS location. If you do not see any markers on the map you may need to zoom out to see them. Thanks!</div>
               <div>
                 <Help />
                 Here is an image with some helpful tips on how to nagivate
@@ -113,6 +115,17 @@ export default function Dashboard() {
 
           <Col lg="4">
             <div className="confirmUserStyle">Updates</div>
+
+            <div className="confirmUserStyle updates">
+              <p>3/11/2023</p>
+              <p>Hello, we've moved to version 0.1.2</p>
+
+              <p>
+                I've added some fun background images. I also fixed the add and edit spots to once again allow users to move markers on the map and save the spots, since the geolocation was disabled from google, this also needed fixed.
+                If you enable location services, the maps should work in Firefox/Safari, I haven't tried Edge. If you do not enable location services the maps will not work at all, however, you should still be able to add spots, you just can't mark where they are. Hopefully we can fix this in a future version.
+              </p>
+
+            </div>
             <div className="confirmUserStyle updates">
               <p>3/10/2023</p>
               <p>Hello, we've moved to version 0.1.1</p>

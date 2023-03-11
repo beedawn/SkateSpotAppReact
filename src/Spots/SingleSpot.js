@@ -68,7 +68,7 @@ export default function SingleSpot() {
               </Col>
             </Row>
             <Row>
-              <Col xxl="3" lg="6">
+              <Col lg="6">
                 <div className="spotCardParent">
                   <div className="spotCard">
                     <Row>
@@ -118,7 +118,7 @@ export default function SingleSpot() {
                   </div>
                 </div>
               </Col>
-              <Col xxl="3" lg="6">
+              <Col lg="6">
                 <div className="singleSpotDescription">
                   <div className="singleSpotDescriptionInner">
                     <h4>Spot Description</h4>
@@ -136,7 +136,7 @@ export default function SingleSpot() {
                 </div>:<div></div>}
               </Col>
 
-              <Col xxl="3" lg="6">
+              <Col lg="6">
                 <div className="singleSpotPics">
                   <div className="singleSpotPicsInner">
                     {filteredSpot[0].images.length === 0 ? (
@@ -151,7 +151,7 @@ export default function SingleSpot() {
                   </div>
                 </div>
               </Col>
-              <Col xxl="3" lg="6">
+              <Col lg="6">
                 <div className="commentCard">
                   {" "}
                   <Comment close={true} />

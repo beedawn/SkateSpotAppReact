@@ -1,4 +1,6 @@
 import React, { useState,useEffect } from "react";
+
+import { Helmet } from "react-helmet";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -6,7 +8,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { Button, Link } from "reactstrap";
-import "../styles/style.css";
+// import "../styles/style.css";
+import"../styles/loginstyle.css";
 export default function LoginForm(props) {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -69,8 +72,29 @@ console.log(guestQuery);
   };
   if (!passReset) {
     return (
-      <div className="login">
-        <div>
+      
+    <div>
+<Helmet>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet" />
+ 
+</Helmet>
+
+
+
+
+
+
+<div>
+  <div class="slantyardDisplayContainer">
+    <div class="slantyardDisplay">
+      <div id="S" class="slantTextClass">S</div><div id="l" class="slantTextClass">l</div><div id="a" class="slantTextClass">a</div><div id="n" class="slantTextClass">n</div><div id="t" class="slantTextClass">t</div><div id="y" class="slantTextClass">y</div><div id="a" class="slantTextClass">a</div><div id="r" class="slantTextClass">r</div><div id="d" class="slantTextClass">d</div>
+    </div>
+  
+    <div className="loginInputNew" >
+    <div>
           <input
           value={loginEmail}  
             editable="true"
@@ -109,6 +133,22 @@ console.log(guestQuery);
             </a>
           </div>
         </div>
+      </div>    </div>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div>
     );
   }

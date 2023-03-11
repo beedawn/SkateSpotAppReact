@@ -109,7 +109,7 @@ export default function Spots(props) {
     if (sharedSpot && filterSharedSpots.length !== 0) {
       return (
         <div className="globalTopMargin">
-          <h2>Spots Shared with Me</h2>
+        
           <SpotsRender spots={filterSharedSpots} shared={true} />
         </div>
       );

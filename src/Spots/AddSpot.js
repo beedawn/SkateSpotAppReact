@@ -112,10 +112,10 @@ export default function AddSpot() {
       fetchLocation(gps.lat, gps.long);
       const payload = {
         name: spotName,
-        location: spotAddress,
-        city: spotCity,
-        country: spotCountry,
-        state: spotState,
+        location: spotAddress?spotAddress:'',
+        city: spotCity?spotCity:'',
+        country: spotCountry?spotCountry:'',
+        state: spotState?spotState:'',
         description: spotDescription,
         admin: { email: user.email, name: user.displayName, id: user.photoURL },
         images: [],
@@ -223,7 +223,7 @@ export default function AddSpot() {
             editable="true"
             placeholder="Description"
             type="textarea"
-            onChange={(event) => setSpotDescription(event.target.value)} required
+            onChange={(event) => setSpotDescription(event.target.value)} 
           />
         </div>
         {spotDescription ? (

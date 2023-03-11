@@ -43,12 +43,14 @@ export default function SpotsRender(props) {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col><div className="titleSpots">
             {" "}
             {spotPublic !== undefined ? <h2>Spots</h2> : <></>}{" "}
             {shared !== undefined ? <h2>Spots Shared with Me</h2> : <></>}{" "}
             {my !== undefined ? <h2>My Posted Spots</h2> : <></>}
+            </div>
           </Col>
+          
         </Row>
       </div>
       <Row>

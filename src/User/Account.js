@@ -58,7 +58,7 @@ export default function Account() {
               </p>
               <Link to="/edit">Edit Profile</Link>
               <div className="slantyardVersionAccount">
-              <p>Slantyard Version 0.1.1</p></div>
+              <p>Slantyard Version 0.1.2</p></div>
             </div>
           </div>
         </Col>

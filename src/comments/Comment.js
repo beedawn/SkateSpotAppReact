@@ -34,17 +34,19 @@ export default function Comment(props) {
       return (
         <div>
           <div className="globalTopMargin"> </div>
-          <h4>Comments</h4>
+          <div className="commentSingleSpot">
+          <h4 >Comments</h4>
 
           {/* <Link to={"/spot/" + spot + "/addComment/"}> */}
           <Button onClick={() => setOpenComment(true)}>Comment</Button>
           {/* </Link> */}
-          <div style={{ width: "400px", margin: "0 auto" }}>
+          <div >
             {filteredComments.filter((cmt) => cmt.spot === spot).length > 0 ? (
               `${comments.filter((cmt) => cmt.spot === spot).length} Comments`
             ) : (
               <></>
             )}
+            </div>
             {filteredComments.map((comment) => (
               <div className="commentRender" key={comment.id}>
                 <LazyLoad height={200}>
