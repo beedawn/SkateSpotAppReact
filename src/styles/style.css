@@ -478,3 +478,17 @@ a.like:hover {
     text-shadow: 0.25em 0 0 black, 0.5em 0 0 black;
   }
 }
+
+.loginFormInfo{
+  background-color:rgb(240, 237, 237);
+  padding:20px;
+  width:30vw;
+  margin:auto;
+  border-radius: 10px;
+  font-size:14px;
+}
+
+.loginBrowserInfo{
+  font-weight:bold;
+  padding:20px;
+}

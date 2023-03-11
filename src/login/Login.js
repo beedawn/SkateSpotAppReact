@@ -20,7 +20,7 @@ console.log(guestQuery)
   }
   if (user === null) {
     //returns Login Form to prompt user to sign in, checks if user is null if you use !user to check the logic breaks
-    return <LoginForm />;
+    return (<div><LoginForm /><p className="loginBrowserInfo">Firefox/Safari is recommended.</p><p className="loginFormInfo"> To sign up, enter your desired username and password and hit "sign up". If you have an account, select "Forgot Password" and enter the email you tried to sign in with, it should email you with a non discript email from google about a password reset. Follow the steps and use the password here.</p></div>);
   }
   if (user.displayName) {
     //Takes user to Dashboard
