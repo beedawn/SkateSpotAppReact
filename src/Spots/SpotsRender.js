@@ -92,12 +92,14 @@ export default function SpotsRender(props) {
                     <Link to={"/spot/" + spot.id}>
                       <h5>{spot.name}</h5>
                     </Link>
+                    {spot.city!==''&&spot.state!==''?
                     <div>
                       {spot.city}, {spot.state}
-                    </div>
+                    </div>:<div></div>}
+                    {spot.lat!==''&&spot.long!==''?
                     <div>
                       {spot.lat}, {spot.long}
-                    </div>
+                    </div>:<div></div>}
                   </div>
 
                   <div className="globalMarginTop">

@@ -341,6 +341,9 @@ a.like:hover {
   padding: 2rem;
   padding-top: 2rem;
 }
+.confirmUserStyle.updates {
+ font-size:12px;
+}
 .imageUploadUserStyle {
   background-color: #f0f1f1;
   margin: 2rem;
@@ -404,4 +407,9 @@ a.like:hover {
   padding-top: 2rem;
   width: 90%;
   margin-top: 2rem;
+}
+
+.slantyardVersionAccount{
+  color:#656565;
+  margin:30px;
 }

@@ -52,6 +52,7 @@ export default function AddSpot() {
   Geocode.setRegion("es");
 
   function fetchLocation(lat, long) {
+    try{
     Geocode.fromLatLng(lat, long).then(
       (response) => {
         const address = response.results[0].formatted_address;
@@ -66,6 +67,7 @@ export default function AddSpot() {
             j < response.results[0].address_components[i].types.length;
             j++
           ) {
+            // eslint-disable-next-line default-case
             switch (response.results[0].address_components[i].types[j]) {
               case "locality":
                 city = response.results[0].address_components[i].long_name;
@@ -89,7 +91,14 @@ export default function AddSpot() {
       (error) => {
         console.error(error);
       }
-    );
+    );}
+    catch{
+      setSpotCity("Unknown");
+      setSpotAddress("Unknown");
+      setSpotCountry("Unknown");
+      setSpotState("Unknown");
+      setIsLoaded(true);
+    }
   }
   if (!gps) {
     fetchLocation(geolocation.latitude, geolocation.longitude);
@@ -125,17 +134,17 @@ export default function AddSpot() {
       fetchLocation(geolocation.latitude, geolocation.longitude);
       const payload = {
         name: spotName,
-        location: spotAddress,
-        city: spotCity,
-        country: spotCountry,
-        state: spotState,
+        location: spotAddress?spotAddress:'',
+        city: spotCity?spotCity:'',
+        country: spotCountry?spotCountry:'',
+        state: spotState?spotState:'',
         description: spotDescription,
         admin: { email: user.email, name: user.displayName, id: user.photoURL },
         images: [],
         time: date.toString(),
         timePosted: date.toString(),
-        lat: geolocation.latitude,
-        long: geolocation.longitude,
+        lat: geolocation.latitude?geolocation.latitude:'',
+        long: geolocation.longitude?geolocation.longitude:'',
         edited: false,
         users: [...sharedUsers],
         private: toggleState,
