@@ -34,6 +34,11 @@
 
 
 }
+.loginError{
+  color:red;
+  font-weight:bold;
+  background-color:rgba(42, 42, 42, 0.8);
+}
 /* .spotCardHeader:hover{background-color:#e0dede} */
 .spotCard:hover {
   opacity: 0.95;

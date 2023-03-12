@@ -16,7 +16,11 @@ export default function LoginForm(props) {
   const [passReset, setPassReset] = useState(false);
   const [error, setError] = useState("");
   const guestQuery = props.guestQuery;
-console.log(guestQuery);
+
+
+  let mediumPassword = new RegExp("^(?=.*?[a-zA-Z])(?=.*?[0-9]).{8,}$");
+
+
   useEffect(()=>{
     if(guestQuery!==undefined){
       console.log("1")
@@ -28,7 +32,15 @@ console.log(guestQuery);
       console.log(loginEmail)
       console.log(loginPassword)
     }}
-  },[loginEmail])
+    console.log(mediumPassword.test(loginPassword))
+    console.log(loginPassword.length)
+    if(!mediumPassword.test(loginPassword)&&loginPassword.length>0){
+setError("Password does not meet complexity requirements, must be 8 characters long, have upper and lower case, a number, and a special character.")
+    } if(mediumPassword.test(loginPassword)||loginPassword.length===0){
+      setError("");
+    }
+
+  },[loginEmail,loginPassword])
   const register = async () => {
     try {
       const user = await createUserWithEmailAndPassword(
@@ -112,7 +124,7 @@ console.log(guestQuery);
               setLoginPassword(event.target.value);
             }}
           />
-          <div style={{ color: "red" }}> {error ? <>{error}</> : <></>}</div>{" "}
+          <div className="loginError"> {error ? <>{error}</> : <></>}</div>{" "}
           <div className="loginButtonContainer">
             <div className="loginButtonSignUp">
               <a href="#!">

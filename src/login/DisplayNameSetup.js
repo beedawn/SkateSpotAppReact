@@ -64,7 +64,7 @@ export default function DisplayNameSetup(props) {
           />
         </div>
         <div>{image}</div>
-        <div>
+        <div>{displayName.length>0?
           <Button
             color="primary"
             onClick={() => {
@@ -72,7 +72,7 @@ export default function DisplayNameSetup(props) {
             }}
           >
             Submit
-          </Button>
+          </Button>:<p>Please enter a display name.</p>}
         </div>
       </div>
     );

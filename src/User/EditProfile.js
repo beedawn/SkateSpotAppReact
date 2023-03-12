@@ -37,6 +37,7 @@ export default function EditProfile(props) {
   });
   const signedIn = props.signedIn;
   const [addDb, setAddDb] = useState(false);
+  const[bailout,setBailout]=useState(false);
   const [addImage, setAddImage] = useState(false);
   const [imageConfirm, setImageConfirm] = useState(false);
   const [email, setEmail] = useState();
@@ -138,9 +139,7 @@ export default function EditProfile(props) {
       }
       if (user.emailVerified) {
         if (addDb) {
-          {
-            /* if user is in database, but has no images in there image array, show this */
-          }
+        /* if user is in database, but has no images in there image array, show this */
           return (
             <ImageUploadUser
               handleUpload={handleUpload}
@@ -148,10 +147,17 @@ export default function EditProfile(props) {
             />
           );
         }
-      } else {
-        {
-          console.log(user);
-        }
+      } 
+      else if(bailout){
+        return (
+          <ImageUploadUser
+            handleUpload={handleUpload}
+            skipImageUpload={skipImageUpload}
+          />
+        );
+      }
+      else {
+       console.log(addDb)
         emailVerify();
         return (
           <div>
@@ -162,6 +168,7 @@ export default function EditProfile(props) {
               <Button onClick={() => window.location.reload(true)}>
                 Click Here After Verification
               </Button>
+              <Button onClick={()=>{setBailout(true)}}>Stuck</Button>
             </div>
           </div>
         );
