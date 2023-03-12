@@ -42,6 +42,8 @@ font-family: 'Shrikhand', cursive;
 flex-basis:75%;
 flex-grow:1;
 min-width:400px;
+max-width:600px;
+margin:auto;
 text-align:center;
 font-size:72px;
 color:white;
@@ -73,10 +75,10 @@ color:black;
 .slantyardDisplayContainer{
 height:100vh;
 
-display:inline-flex;
+display:block-flex;
  justify-content:center;
 align-items:center;
-flex-wrap:no-wrap;
+/* flex-wrap:no-wrap; */
 
 width:80%;
 margin-left:10%;
@@ -174,5 +176,5 @@ opacity:0;}
 
 
     .loginInputNew{
-        width:50vw;
+        margin-top:20px;
     }
