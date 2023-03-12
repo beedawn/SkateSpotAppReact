@@ -122,7 +122,7 @@ export default function Dashboard() {
 
               <p>
                 I've added some fun background images. I also fixed the add and edit spots to once again allow users to move markers on the map and save the spots, since the geolocation was disabled from google, this also needed fixed.
-                If you enable location services, the maps should work in Firefox/Safari, I haven't tried Edge. If you do not enable location services the maps will not work at all, however, you should still be able to add spots, you just can't mark where they are. Hopefully we can fix this in a future version.
+                If you enable location services, the maps should work. If you do not enable location services the maps will not work at all, however, you should still be able to add spots, you just can't mark where they are. Hopefully we can fix this in a future version.
               </p>
 
             </div>
