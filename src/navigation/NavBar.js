@@ -34,7 +34,7 @@ export default function NavBar() {
   return (
     <div>
       <Navbar color="dark" dark expand="md" fixed="top">
-        <NavbarBrand href="/">Slantyard</NavbarBrand>
+        <NavbarBrand href="/spots">Slantyard</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
@@ -60,10 +60,15 @@ export default function NavBar() {
                 <DropdownItem>
                   <NavLink href="/spots/shared">Spots Shared with Me</NavLink>
                 </DropdownItem>
+                
               </DropdownMenu>
             </UncontrolledDropdown>
             <NavItem>
               <NavLink href="/account">Account</NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink href="/">Help</NavLink>
             </NavItem>
           </Nav>
           <Nav navbar>
