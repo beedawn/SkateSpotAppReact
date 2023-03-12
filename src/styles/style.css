@@ -31,8 +31,8 @@
   padding-bottom: 1rem;
 }
 .spotCardHeader {
-  background-color: rgb(240, 240, 240);
-  border-radius: 50px 50px 0px 0px;
+
+
 }
 /* .spotCardHeader:hover{background-color:#e0dede} */
 .spotCard:hover {
@@ -47,7 +47,7 @@
   width: 5rem;
   padding: 1rem;
   text-align: center;
-  color: white;
+  color: rgba(240, 241, 241, 0.9);
   font-weight: 500;
 }
 .public {
@@ -56,7 +56,7 @@
   width: 5rem;
   padding: 1rem;
   text-align: center;
-  color: white;
+  color: rgba(240, 241, 241, 0.9);
   font-weight: 500;
 }
 .like {
@@ -66,7 +66,7 @@ a.like:hover {
   color: rgb(89, 199, 122);
 }
 .spotCard {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   border-radius: 50px;
   padding: 1rem;
   margin: auto;
@@ -79,7 +79,7 @@ a.like:hover {
   margin: auto;
 }
 .allSpotsToggle {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   border-radius: 0px 0px 15px 15px;
 }
 .singleSpotDescription {
@@ -88,7 +88,7 @@ a.like:hover {
   margin: auto;
 }
 .singleSpotDescriptionInner {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   border-radius: 50px;
   padding: 1rem;
   width: 100%;
@@ -99,7 +99,7 @@ a.like:hover {
   margin: auto;
 }
 .singleSpotPicsInner {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   border-radius: 50px;
   padding: 1rem;
   margin: auto;
@@ -121,7 +121,7 @@ a.like:hover {
 }
 
 .accountInfo {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: auto;
   width: 90%;
   max-width: 400px;
@@ -133,7 +133,7 @@ a.like:hover {
   font-size: 12px;
 }
 .spotPicContainer {
-  background-color: #ffffff;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: 1rem;
   margin-top: 2rem;
   padding: 2rem;
@@ -142,7 +142,7 @@ a.like:hover {
   display: inline-block;
 }
 .spotPicContainerNoEdit {
-  background-color: #ffffff;
+  background-color:rgba(240, 241, 241, 0.9);
   margin: 0rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -170,7 +170,7 @@ a.like:hover {
 }
 
 .spotEditDiv {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   width: 80%;
   margin: auto;
   margin-top: 3rem;
@@ -178,7 +178,7 @@ a.like:hover {
   border-radius: 25px;
 }
 .editCommentDiv {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   width: 80%;
   margin: auto;
   margin-top: 1rem;
@@ -186,7 +186,7 @@ a.like:hover {
   padding: 2rem;
 }
 .commentRender {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   padding: 2rem;
   border-radius: 25px;
   margin: 2rem;
@@ -199,7 +199,7 @@ a.like:hover {
 }
 
 .login {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   border-radius: 25px;
   margin: auto;
   width: 400px;
@@ -246,7 +246,7 @@ a.like:hover {
   text-decoration: none;
 }
 .addSpotContainer {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   padding: 2rem;
   margin: auto;
   width: 80%;
@@ -258,7 +258,7 @@ a.like:hover {
   padding-bottom: 3rem;
 }
 .imageUploadSpot {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   padding: 1rem;
   border-radius: 25px;
   width: 80%;
@@ -272,14 +272,14 @@ a.like:hover {
   margin: auto;
 }
 .singleSpotLLInner {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   border-radius: 50px;
   padding: 1rem;
   width: 100%;
 }
 
 .spotNameDiv {
-  background-color: rgba(248, 248, 248, 0.8);
+  background-color: rgba(240, 241, 241, 0.9);
   padding: 1rem;
   width: 90%;
 
@@ -301,8 +301,8 @@ a.like:hover {
   font-style: italic;
   font-weight: bold;
   margin-bottom: 0;
-  color:#def10d;
-  background-color:rgba(0,0,0,0.3)
+  color: #def10d;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .viewIcon {
@@ -312,7 +312,7 @@ a.like:hover {
   color: rgb(180, 180, 180);
 }
 .deleteComment {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   padding: 2rem;
   margin: 2rem;
   border-radius: 25px;
@@ -320,7 +320,7 @@ a.like:hover {
 
 .displayNameStyle {
   padding-top: 2rem;
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: 2rem;
   border-radius: 25px;
   padding: 2rem;
@@ -328,7 +328,7 @@ a.like:hover {
 }
 
 .confirmUserStyle {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: 2rem;
   border-radius: 25px;
   padding: 2rem;
@@ -338,21 +338,21 @@ a.like:hover {
   font-size: 12px;
 }
 .imageUploadUserStyle {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: 2rem;
   border-radius: 25px;
   padding: 2rem;
   padding-top: 2rem;
 }
 .deleteSpotDiv {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: 2rem;
   border-radius: 25px;
   padding: 2rem;
   padding-top: 2rem;
 }
 .deleteImageDiv {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: 2rem;
   border-radius: 25px;
   padding: 2rem;
@@ -360,7 +360,7 @@ a.like:hover {
 }
 
 .userPage {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: auto;
   border-radius: 25px;
   padding: 2rem;
@@ -368,7 +368,7 @@ a.like:hover {
   width: 100%;
 }
 .userPageContainer {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: auto;
   margin-top: 2rem;
   border-radius: 25px;
@@ -385,7 +385,7 @@ a.like:hover {
 }
 
 .dashboardStyle {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: auto;
   border-radius: 25px;
   padding: 2rem;
@@ -393,7 +393,7 @@ a.like:hover {
   width: 90%;
 }
 .spotsView {
-  background-color: #f0f1f1;
+  background-color: rgba(240, 241, 241, 0.9);
   margin: auto;
   border-radius: 25px;
   padding: 2rem;
@@ -408,7 +408,7 @@ a.like:hover {
 }
 .loader-container {
   text-align: center;
-  background-color: #ffffff;
+  background-color: rgba(240, 241, 241, 0.9);
   padding: 2rem;
   border-radius: 25px;
   width: 80vw;
@@ -482,34 +482,35 @@ a.like:hover {
   }
 }
 
-.loginFormInfo{
-  background-color:rgb(240, 237, 237);
-  padding:20px;
-  width:30vw;
-  margin:auto;
+.loginFormInfo {
+  background-color: rgba(240, 241, 241, 0.9);
+  padding: 20px;
+  width: 30vw;
+  margin: auto;
   border-radius: 10px;
-  font-size:14px;
+  font-size: 14px;
 }
 
-.loginBrowserInfo{
-  font-weight:bold;
-  padding:20px;
-  background-color:rgba(255,255,255,0.6);
+.loginBrowserInfo {
+  font-weight: bold;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
-.titleSpots, .commentSingleSpot{
-  background-color: rgb(255, 255, 255);
-  width:80%;
-  margin:auto;
-  padding:2px;
-  border-radius:10px;
+.titleSpots,
+.commentSingleSpot {
+  background-color: rgba(240, 241, 241, 0.9);
+  width: 80%;
+  margin: auto;
+  padding: 2px;
+  border-radius: 10px;
 }
 
-.titleSpots{
-  width:20vw;
+.titleSpots {
+  width: 20vw;
 }
 
-.strongUser{
-  color:red;
-  font-weight:bold;
+.strongUser {
+  color: red;
+  font-weight: bold;
 }
