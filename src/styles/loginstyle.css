@@ -41,7 +41,7 @@ background: linear-gradient(156deg, rgba(119,244,156,1) 0%, rgba(27,191,165,1) 3
 font-family: 'Shrikhand', cursive;
 flex-basis:75%;
 flex-grow:1;
-min-width:400px;
+min-width:200px;
 max-width:600px;
 margin:auto;
 text-align:center;
@@ -49,7 +49,30 @@ font-size:72px;
 color:white;
 animation: fade .25s ease-out;
 }
-
+@media screen and (max-width: 600px) {
+    .slantyardDisplay{
+        background: rgb(119,244,156);
+        background: linear-gradient(156deg, rgba(119,244,156,1) 0%, rgba(27,191,165,1) 34%, rgba(93,251,255,0.7119048302914917) 55%, rgba(167,255,137,1) 85%) no-repeat center center fixed; 
+        font-family: 'Shrikhand', cursive;
+        flex-basis:75%;
+        flex-grow:1;
+        min-width:200px;
+        max-width:600px;
+        margin:auto;
+        text-align:center;
+        font-size:48px;
+        color:white;
+        animation: fade .25s ease-out;
+        }
+        .loginFormInfo{
+            background-color:rgb(240, 237, 237);
+            padding:20px;
+            width:100vw;
+            margin:auto;
+            border-radius: 10px;
+            font-size:14px;
+          }
+  }
 .loginForm{
 width:75%;
 min-width:200px;
@@ -73,7 +96,7 @@ color:black;
 }
 
 .slantyardDisplayContainer{
-height:100vh;
+height:75vh;
 
 display:block-flex;
  justify-content:center;
