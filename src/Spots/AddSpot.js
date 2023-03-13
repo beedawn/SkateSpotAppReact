@@ -104,6 +104,13 @@ export default function AddSpot() {
     fetchLocation(geolocation.latitude, geolocation.longitude);
   }
 
+  const onEnterPress = (e) => {
+    if(e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
+      handleNewSpot();
+    }
+  }
+
   const handleNewSpot = async () => {
     const collectionRef = collection(db, "spots");
     const date = new Date(Date.now());
@@ -223,6 +230,7 @@ export default function AddSpot() {
             editable="true"
             placeholder="Description"
             type="textarea"
+            onKeyDown={onEnterPress}
             onChange={(event) => setSpotDescription(event.target.value)} 
           />
         </div>

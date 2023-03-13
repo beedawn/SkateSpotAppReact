@@ -18,9 +18,17 @@ export default function AddComment(props) {
   const [userComment, setUserComment] = useState("");
   const [userTitle, setUserTitle] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
+
+  const onEnterPress = (e) => {
+    if(e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault(); handleNewComment();
+    }
+  }
   const handleNewComment = async () => {
     const collectionRef = collection(db, "comments");
     const date = new Date(Date.now());
+
+  
     const payload = {
       spot: spot,
       name: user.displayName,
@@ -76,6 +84,7 @@ export default function AddComment(props) {
           editable="true"
           placeholder="Comment"
           type="textarea"
+          onKeyDown={onEnterPress}
           onChange={(event) => setUserComment(event.target.value)}
         />
       </div>

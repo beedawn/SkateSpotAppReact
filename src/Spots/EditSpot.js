@@ -145,6 +145,12 @@ export default function EditSpot() {
     }
   };
 
+  const onEnterPress = (e) => {
+    if(e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault(); handleEdit(spot);
+    }
+  }
+
   //Handle Drag is Passed to Maps Component
   function handleDrag(e) {
     setGps({ lat: e.latLng.lat(), long: e.latLng.lng() });
@@ -233,6 +239,7 @@ export default function EditSpot() {
                 editable="true"
                 value={spotDescription}
                 type="textarea"
+                onKeyDown={onEnterPress}
                 onChange={(event) => setSpotDescription(event.target.value)}
               />
               {spotDescription ? (

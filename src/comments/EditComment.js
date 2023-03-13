@@ -32,6 +32,12 @@ export default function EditComment() {
     return el.id === id;
   });
 
+  const onEnterPress = (e) => {
+    if(e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault(); handleEdit(id);
+    }
+  }
+
   const handleEdit = async (id) => {
     const docRef = doc(db, "comments", id);
     const date = new Date(Date.now());
@@ -55,7 +61,7 @@ export default function EditComment() {
     );
   } else {
     return (
-      <div className="globalTopMargin" onMouseOver={() => setLoad(true)}>
+      <div className="globalTopMargin editCommentDiv" onMouseOver={() => setLoad(true)}>
         <h2>Edit a Comment</h2>
         <Form onSubmit={(event) => {event.preventDefault();handleEdit(id);}}>
         {filteredSpots.map((id) => (
@@ -79,6 +85,7 @@ export default function EditComment() {
               value={userComment}
               // defaultValue={id.comment}
               type="textarea"
+              onKeyDown={onEnterPress}
               onChange={(event) => setUserComment(event.target.value)}
             />
          
