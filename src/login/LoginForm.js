@@ -106,7 +106,7 @@ setError("Password does not meet complexity requirements, must be 8 characters l
     </div>
   
     <div className="loginInputNew" >
-      <form onSubmit={login}>
+      <form onSubmit={((event)=>{event.preventDefault(); login();})}>
     <div>
           <input
           value={loginEmail}  
