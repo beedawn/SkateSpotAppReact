@@ -4,7 +4,7 @@ import { doc, onSnapshot, collection, deleteDoc } from "firebase/firestore";
 import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
-import { Input } from "reactstrap";
+import { Input, Form } from "reactstrap";
 import "../styles/style.css";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
@@ -69,6 +69,7 @@ export default function DeleteComment() {
     return (
       <div className="deleteSpotDiv">
         <h2>Delete a Spot</h2>
+        <Form>
         {filteredSpots.map((spot) => (
           <div className="globalTopMargin">
             <h3>Spot Title:</h3>
@@ -78,6 +79,7 @@ export default function DeleteComment() {
           </div>
         ))}
         <div className="globalTopMargin">
+          
           <Input
             placeholder="Are you sure? (yes)"
             onChange={(event) => setAgree(event.target.value)}
@@ -86,7 +88,7 @@ export default function DeleteComment() {
         <div style={{ marginTop: "1rem" }}>
           <div>
             {agree ? (
-              <Button color="danger" onClick={() => handleDelete(spot)}>
+              <Button type="submit" color="danger" onClick={(event) => {event.preventDefault(); handleDelete(spot);}}>
                 Delete
               </Button>
             ) : (
@@ -108,6 +110,7 @@ export default function DeleteComment() {
             </Button>
           </div>
         </div>
+        </Form>
       </div>
     );
   }

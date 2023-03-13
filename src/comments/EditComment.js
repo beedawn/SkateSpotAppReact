@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
-import { Input } from "reactstrap";
+import { Input, Form } from "reactstrap";
 import "../styles/style.css";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
@@ -57,6 +57,7 @@ export default function EditComment() {
     return (
       <div className="globalTopMargin" onMouseOver={() => setLoad(true)}>
         <h2>Edit a Comment</h2>
+        <Form onSubmit={(event) => {event.preventDefault();handleEdit(id);}}>
         {filteredSpots.map((id) => (
           <div className="globalTopMargin">
             <Input
@@ -80,11 +81,7 @@ export default function EditComment() {
               type="textarea"
               onChange={(event) => setUserComment(event.target.value)}
             />
-            <div>
-              <Link to={"/spot/" + spot + "/Comments/" + id.id + "/delete"}>
-                <Button color="danger"> Delete </Button>
-              </Link>
-            </div>
+         
           </div>
         ))}
         {userComment ? (
@@ -95,7 +92,7 @@ export default function EditComment() {
         <div style={{ marginTop: "1rem" }}>
           <div>
             {userTitle && userComment ? (
-              <Button color="primary" onClick={() => handleEdit(id)}>
+              <Button type="submit" color="primary" onClick={(event) => {event.preventDefault();handleEdit(id);}}>
                 Submit
               </Button>
             ) : (
@@ -116,7 +113,19 @@ export default function EditComment() {
               Cancel{" "}
             </Button>
           </div>
+
+          {filteredSpots.map((id) => (
+          <div className="globalTopMargin">
+         
+            <div>
+              <Link to={"/spot/" + spot + "/Comments/" + id.id + "/delete"}>
+                <Button color="danger"> Delete </Button>
+              </Link>
+            </div>
+          </div>
+        ))}
         </div>
+        </Form>
       </div>
     );
   }

@@ -203,7 +203,7 @@ export default function AddSpot() {
         )}
 
         <h2>Add a Spot</h2>
-        <Form>
+        <Form onSubmit={(event)=>{event.preventDefault(); handleNewSpot();}}> 
         <div>
           <Input required
             editable="true"
@@ -273,7 +273,7 @@ export default function AddSpot() {
           )}
           <div>
             {spotName && spotDescription ? (
-              <Button color="primary" onClick={handleNewSpot}>
+              <Button type="submit" color="primary" onClick={(event)=>{event.preventDefault();handleNewSpot();}}>
                 Submit
               </Button>
             ) : (

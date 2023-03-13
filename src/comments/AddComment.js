@@ -6,7 +6,7 @@ import AuthContext from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import "../styles/style.css";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { Input } from "reactstrap";
+import { Input, Form } from "reactstrap";
 import { refreshPage } from "../functions/Refresh";
 
 export default function AddComment(props) {
@@ -58,7 +58,7 @@ export default function AddComment(props) {
           </Button>
         )}
       </div>
-
+<Form onSubmit={(event)=>{event.preventDefault();handleNewComment();}}>
       <div>
         <Input
           editable="true"
@@ -88,7 +88,7 @@ export default function AddComment(props) {
         <div>
           {" "}
           {userComment && userTitle ? (
-            <Button color="primary" onClick={handleNewComment}>
+            <Button type="submit" color="primary" onClick={(event)=>{event.preventDefault();handleNewComment();}}>
               Submit
             </Button>
           ) : (
@@ -99,6 +99,7 @@ export default function AddComment(props) {
           )}
         </div>
       </div>
+      </Form>
     </div>
   );
 }

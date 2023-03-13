@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 import { doc, onSnapshot, collection, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { useParams } from "react-router-dom";
-import { Input } from "reactstrap";
+import { Input, Form } from "reactstrap";
 import "../styles/style.css";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
@@ -40,6 +40,7 @@ export default function DeleteComment() {
     return (
       <div className="deleteComment">
         <h2>Delete a Comment</h2>
+        <Form onSubmit={(event) => {event.preventDefault();handleDelete(id);}}>
         {filteredProduct.map((id) => (
           <div className="globalTopMargin">
             <h3>Comment Title:</h3>
@@ -63,7 +64,7 @@ export default function DeleteComment() {
         <div style={{ marginTop: "1rem" }}>
           <div>
             {agree ? (
-              <Button color="danger" onClick={() => handleDelete(id)}>
+              <Button type="submit" color="danger" onClick={(event) => {event.preventDefault();handleDelete(id);}}>
                 Delete
               </Button>
             ) : (
@@ -85,6 +86,7 @@ export default function DeleteComment() {
             </Button>
           </div>
         </div>
+        </Form>
       </div>
     );
   }

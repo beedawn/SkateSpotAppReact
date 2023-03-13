@@ -208,7 +208,7 @@ export default function EditSpot() {
         <Row>
           <SpotPics edit={true} />
         </Row>
-
+        <Form onSubmit={(event)=>{event.preventDefault();handleEdit(spot);}}>
         <div className="spotEditDiv">
           {filteredSpots.map((spot) => (
             <div className="globalTopMargin" key={spot.id}>
@@ -227,7 +227,7 @@ export default function EditSpot() {
 
           {filteredSpots.map((spot) => (
             <div style={{ marginTop: "1rem" }}>
-              <Form>
+            
               <label>Spot Description:</label>
               <Input
                 editable="true"
@@ -276,7 +276,7 @@ export default function EditSpot() {
                   </Tooltip>{" "}
                   <FaQuestionCircle id="PrivateTooltip" />
                 </FormGroup>
-              </Form>
+             
             </div>
           ))}
 
@@ -291,7 +291,7 @@ export default function EditSpot() {
 
             <div>
               {spotName && spotDescription ? (
-                <Button color="primary" onClick={() => handleEdit(spot)}>
+                <Button type="submit" color="primary" onClick={(event) =>{event.preventDefault(); handleEdit(spot);}}>
                   Submit
                 </Button>
               ) : (
@@ -323,6 +323,7 @@ export default function EditSpot() {
             </div>
           </div>
         </div>
+        </Form>
       </div>
     );
   }
