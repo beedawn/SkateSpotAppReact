@@ -12,6 +12,9 @@
 .adminButtonsEach {
   margin: 5px;
 }
+.profilePic{
+  border-radius:50%;
+}
 /* Text for Posted Edited Font */
 .PostedEditedText {
   font-size: 12px;

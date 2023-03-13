@@ -40,7 +40,7 @@ export default function Account() {
                       ].url
                     }
                   >
-                    <img
+                    <img className="profilePic"
                       src={
                         filteredUsers[0].images[
                           filteredUsers[0].images.length - 1
