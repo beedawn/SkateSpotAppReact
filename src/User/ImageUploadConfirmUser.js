@@ -3,7 +3,7 @@ import AuthContext from "../context/AuthContext";
 import { db, storage } from "../firebase-config";
 import { ref, listAll, getDownloadURL, deleteObject } from "firebase/storage";
 import { doc, setDoc, onSnapshot, collection } from "firebase/firestore";
-import { Button } from "reactstrap";
+import { Button, Form } from "reactstrap";
 import { useParams } from "react-router-dom";
 import { refreshPage } from "../functions/Refresh";
 import Loading from "../graphics/Loading";
@@ -90,6 +90,7 @@ export default function ImageUploadConfirmUser(props) {
   } else
     return (
       <div class="imageUploadSpot">
+        <Form>
         <div >
           <h2>Confirm Profile Picture Upload</h2>
         </div>
@@ -118,6 +119,7 @@ export default function ImageUploadConfirmUser(props) {
         </div>
 
         <div></div>
+        </Form>
       </div>
     );
 }

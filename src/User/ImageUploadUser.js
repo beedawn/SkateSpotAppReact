@@ -4,7 +4,7 @@ import { db, storage } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
 import { onSnapshot, collection } from "firebase/firestore";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
-import { Input } from "reactstrap";
+import { Input, Form } from "reactstrap";
 import "../styles/style.css";
 
 export default function ImageUploadUser(props) {
@@ -32,6 +32,7 @@ export default function ImageUploadUser(props) {
   }, []);
   return (
     <div className="imageUploadUserStyle">
+      <Form>
       <div style={{ marginTop: "1rem" }}>
         <h3>Profile Picture Upload</h3>
         <Input
@@ -47,10 +48,11 @@ export default function ImageUploadUser(props) {
         <Button color="primary" onClick={skipImageUpload}>
           Skip
         </Button>
-        <Button color="success" onClick={() => handleUpload(imageUpload)}>
+        <Button type="submit" color="success" onClick={() => handleUpload(imageUpload)}>
           Upload
         </Button>
       </div>
+      </Form>
     </div>
   );
 }

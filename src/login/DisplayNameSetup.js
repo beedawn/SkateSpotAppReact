@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase-config";
 import { onAuthStateChanged, updateProfile, signOut } from "firebase/auth";
-import { Button } from "reactstrap";
+import { Button, Form } from "reactstrap";
 import { doc, setDoc, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase-config";
 import AuthContext from "../context/AuthContext";
@@ -53,6 +53,7 @@ export default function DisplayNameSetup(props) {
     return (
       <div className="displayNameStyle">
         Display name setup:
+        <Form onSubmit={(event)=>{event.preventDefault(); refreshPage();}}>
         <div>
           <input
             editable="true"
@@ -67,6 +68,7 @@ export default function DisplayNameSetup(props) {
         <div>{displayName.length>0?
           <Button
             color="primary"
+            type="submit"
             onClick={() => {
               refreshPage();
             }}
@@ -74,6 +76,7 @@ export default function DisplayNameSetup(props) {
             Submit
           </Button>:<p>Please enter a display name.</p>}
         </div>
+        </Form>
       </div>
     );
   } else {
