@@ -113,8 +113,11 @@ min-width:200px;
 font-size:14px;
 background-color:rgba(100,100,125,0.8);
 color:white;
-border:none;
-decoration:none;}
+border:none;}
+.loginInputNew input::placeholder{
+
+	color:rgb(231, 231, 231);
+	border:none;}
 .loginInputNew input:focus{
 min-width:200px;
 font-size:20px;

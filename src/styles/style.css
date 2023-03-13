@@ -237,6 +237,7 @@ a.like:hover {
   margin: 10px;
   border-radius: 5px;
   padding: 0.25rem;
+  border:none;
 }
 .loginButtonLogin a {
   color: white;
