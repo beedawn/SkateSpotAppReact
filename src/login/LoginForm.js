@@ -127,26 +127,35 @@ setError("Password does not meet complexity requirements, must be 8 characters l
           />
           <div className="loginError"> {error ? <>{error}</> : <></>}</div>{" "}
           <div className="loginButtonContainer">
-            <div className="loginButtonSignUp">
-              <a href="#!">
-                {" "}
-                <div onClick={register}>Sign Up</div>
-              </a>
-            </div>
+          
             <div >
               <a href="#!">
                 <button className="loginButtonLogin" type="submit" onClick={login}> Login </button>
               </a>
             </div>
           </div>
+
+       
+          <div className="loginButtonContainer">
+          <div className="loginButtonSignUp">
+              <a href="#!">
+                {" "}
+                <div onClick={register}>Sign Up</div>
+              </a>
+            </div>
+            </div>
+<div className="resetPasswordButtonContainer">
+            <div className="loginButtonContainer">
           <div className="loginButtonPassword">
             {" "}
             <a href="#!">
               <div onClick={() => setPassReset(true)}>Reset Password</div>
             </a>
           </div>
-          
+          </div>
+          </div>
         </div>
+        
         </form></div>    </div>
   </div>
   

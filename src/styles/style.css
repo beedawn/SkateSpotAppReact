@@ -214,24 +214,28 @@ a.like:hover {
   margin-top: 1rem;
   display: inline-block;
 }
+.resetPasswordButtonContainer{
+  display:block;
+}
 .loginButtonSignUp {
-  background-color: #9673c8;
-  color: white;
+  background-color: #aaaaaa;
+  color: rgb(0, 0, 0);
   width: 6rem;
-  border-radius: 15px;
+  margin:10px;
+  border-radius: 5px;
   padding: 0.25rem;
   display: inline-block;
 }
 .loginButtonSignUp a {
-  color: white;
+  color: black;
   text-decoration: none;
 }
 .loginButtonLogin {
   background-color: #1a5aef;
   color: white;
   width: 7rem;
-  margin: auto;
-  border-radius: 15px;
+  margin: 10px;
+  border-radius: 5px;
   padding: 0.25rem;
 }
 .loginButtonLogin a {
@@ -239,11 +243,11 @@ a.like:hover {
   text-decoration: none;
 }
 .loginButtonPassword {
-  background-color: #24930e;
+  background-color: #303030;
   color: white;
   width: 7rem;
   margin: auto;
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 0.25rem;
 }
 .loginButtonPassword a {
