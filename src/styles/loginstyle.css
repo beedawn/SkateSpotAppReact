@@ -107,15 +107,15 @@ width:80%;
 margin-left:10%;
 margin-right:10%;
 }
-input{
+.loginInputNew input{
 padding:10px;
 min-width:200px;
-font-size:20px;
+font-size:14px;
 background-color:rgba(100,100,125,0.8);
 color:white;
 border:none;
 decoration:none;}
-input:focus{
+.loginInputNew input:focus{
 min-width:200px;
 font-size:20px;
 background-color:rgba(100,100,125,0.8);

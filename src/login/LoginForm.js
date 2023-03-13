@@ -106,6 +106,7 @@ setError("Password does not meet complexity requirements, must be 8 characters l
     </div>
   
     <div className="loginInputNew" >
+      <form onSubmit={login}>
     <div>
           <input
           value={loginEmail}  
@@ -132,9 +133,9 @@ setError("Password does not meet complexity requirements, must be 8 characters l
                 <div onClick={register}>Sign Up</div>
               </a>
             </div>
-            <div className="loginButtonLogin">
+            <div >
               <a href="#!">
-                <div onClick={login}> Login </div>
+                <button className="loginButtonLogin" type="submit" onClick={login}> Login </button>
               </a>
             </div>
           </div>
@@ -144,8 +145,9 @@ setError("Password does not meet complexity requirements, must be 8 characters l
               <div onClick={() => setPassReset(true)}>Reset Password</div>
             </a>
           </div>
+          
         </div>
-      </div>    </div>
+        </form></div>    </div>
   </div>
   
 
